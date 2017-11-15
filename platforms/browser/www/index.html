@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Your app title -->
+    <title>RV</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal" id="RVSidebar">
+        <div class="content-block">
+            <!-- <p>Left panel content goes here</p> -->
+           <div class="content-block-title"><img src="image/images.jpg" width="34" height="34"></div>
+                <div class="list-block accordion-list">
+                    <ul>
+                        <li class="accordion-item"><a href="#" class="item-content item-link">
+                            <div class="item-inner">
+                              <div class="item-title">Why RupeeVest</div>
+                            </div></a>
+                          <div class="accordion-item-content">
+                            <!-- <div class="content-block"> -->
+                                <a href="#" class="item-content item-link">
+                                    How It Works
+                                </a>
+                                <a href="#" class="item-content item-link">
+                                    Security
+                                </a>
+                                <a href="about.html" class="item-content item-link">
+                                    About Us
+                                </a>
+                                <a href="#" class="item-content item-link">
+                                    Blog
+                                </a>
+                            <!-- </div> -->
+                          </div>
+                        </li>
+                        
+                        <li class="accordion-item"><a href="#" class="item-content item-link">
+                            <div class="item-inner">
+                              <div class="item-title">What We Offer</div>
+                            </div></a>
+                          <div class="accordion-item-content">
+                            <!-- <div class="content-block"> -->
+                                <a href="#" class="item-content item-link">
+                                    Investment Solutions
+                                </a>
+                                <a href="#" class="item-content item-link">
+                                    Mutual Funds
+                                </a>
+                                <a href="about.html" class="item-content item-link">
+                                    Fixed Deposits
+                                </a>
+                                <a href="#" class="item-content item-link">
+                                    NRI Services
+                                </a>
+                            <!-- </div> -->
+                          </div>
+                        </li>
+
+                        <li class="accordion-item"><a href="#" class="item-content item-link">
+                            <div class="item-inner">
+                              <div class="item-title">Tools</div>
+                            </div></a>
+                          <div class="accordion-item-content">
+                            <!-- <div class="content-block"> -->
+                                <a href="#" class="item-content item-link">
+                                   MF Screener
+                                </a>
+                                <a href="#" class="item-content item-link">
+                                   MF Comparison
+                                </a>
+                                <a href="about.html" class="item-content item-link">
+                                   MF Rolling Return
+                                </a>
+                                <a href="#" class="item-content item-link">
+                                   MF SIP Return
+                                </a>
+                                <a href="#" class="item-content item-link">
+                                   Stocks Held by MFs
+                                </a>
+                                <ul>
+                                    <li class="accordion-item">
+                                        <a href="#" class="item-content item-link">
+                                          <div class="item-inner">
+                                            <div class="item-title">Finalcial Planning</div>
+                                            </div>
+                                        </a>
+                                         <div class="accordion-item-content">
+                                            <!-- <div class="content-block"> -->
+                                                <a href="#" class="item-content item-link">
+                                                   Power Of Compounding
+                                                </a>
+                                                <a href="#" class="item-content item-link">
+                                                   Save Tax
+                                                </a>
+                                            <!-- </div> -->
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                 <ul>
+                                    <li class="accordion-item">
+                                        <a href="#" class="item-content item-link">
+                                          <div class="item-inner">
+                                            <div class="item-title">Calculators</div>
+                                            </div>
+                                        </a>
+                                         <div class="accordion-item-content">
+                                            <!-- <div class="content-block"> -->
+                                                <a href="#" class="item-content item-link">
+                                                   SIP Calculator
+                                                </a>
+                                                <a href="#" class="item-content item-link">
+                                                   FD Calculator
+                                                </a>
+                                                <a href="#" class="item-content item-link">
+                                                   CAGR Calculator
+                                                </a>
+                                            <!-- </div> -->
+                                        </div>
+                                    </li>
+                                </ul>  
+                            <!-- </div> -->
+                          </div>
+                        </li>
+
+                    </ul>
+                </div>
+        </div>
+    </div>
+    <div id="RVNavbar">
+        <div class="navbar">
+          <div class="navbar-inner">
+              <div class="right">                  
+                  <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+              </div>
+              <div class="center sliding">RupeeVest</div>
+             
+          </div>
+        </div>
+    </div>
+
+   
+    <div class="views">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+           
+            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, "data-page" contains page name -->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <div class="">
+
+<div id="investment_solution">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1>RupeeVest Investment Solutions </h1> 
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="row FullDoc">
+          <div class="col-xs-12 text-center" id="AssetABP">            
+              <a href="/Mutual-Funds/Asset-Allocation-Portfolios">
+                <div class="invSolBody">
+                  <div class="invSolBodyP1">
+                    <h3>Asset Allocation based Portfolios</h3>
+                  </div>
+                  <div class="invSolBodyP2">                   
+                    <div class="d_inline_f">
+                      <div class="carousel slide carousel-fade" data-ride="carousel">                        
+                        <div class="carousel-inner" role="listbox">
+                          <div class="item active">
+                            <img src="img/invSolution/AABPEquity9010.png" alt="Growth">
+                          </div>
+                          <div class="item">
+                            <img src="img/invSolution/AABPBalanced6040.png" alt="Balanced">
+                          </div>
+                          <div class="item">
+                            <img src="img/invSolution/AABPConservative2080.png" alt="Conservative">
+                          </div>                         
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="invSolBodyP3">
+                      <p>We have outlined the key historical statistics of various combinations of equity and debt market performance of India, so you can select a portfolio which represents your return expectations and risk tolerance.</p>
+                  </div>
+                </div>
+              </a>            
+          </div>
+          <div class="col-xs-12 text-center" id="GoalBP">            
+              <a href="/Mutual-Funds/Goal-Based-Portfolios">
+                <div class="invSolBody">
+                  <div class="invSolBodyP1">
+                    <h3>Goal based Portfolios</h3>
+                  </div>                
+                  <div class="invSolBodyP2">
+                    <div class="d_inline_f">
+                      <div class="carousel slide" data-ride="carousel">                        
+                        <div class="carousel-inner" role="listbox">
+                          <div class="item active">
+                            <img src="img/invSolution/GBPWealth.png" alt="Wealth Creation">
+                          </div>
+                          <div class="item">
+                            <img src="img/invSolution/GBPBank.png" alt="Beat Bank FDs">
+                          </div>
+                          <div class="item">
+                            <img src="img/invSolution/GBPChild.png" alt="Child Education">
+                          </div>
+                          <div class="item">
+                            <img src="img/invSolution/GBPTax.png" alt="Tax Saving">
+                          </div>
+                          <div class="item">
+                            <img src="img/invSolution/GBPPark.png" alt="Park Surplus Cash">
+                          </div>
+                          <div class="item">
+                            <img src="img/invSolution/GBPCapital.png" alt="Capital Preservation">
+                          </div>
+                          <div class="item">
+                            <img src="img/invSolution/GBPGold.png" alt="Gold">
+                          </div>
+                          <div class="item">
+                            <img src="img/invSolution/GBPSectoral.png" alt="Sectoral Play">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>     
+                  <div class="invSolBodyP3">
+                      <p>We help you invest into the right portfolio of mutual funds, without the complexity and noise. You can choose from a variety of goals like wealth creation, tax saving, child's education, etc. based on your preferences.</p>
+                  </div>
+                </div>
+              </a>            
+          </div>
+        </div>
+    </div>
+</div>
+
+<div id="innovative_tools_scroll">
+  <div id="innovative_tools">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+            <h2>Innovative Tools</h2>
+        </div>
+      </div>
+      <div class="row text-center toolsP1"> 
+          
+          <div class="col-xs-12">
+              <a href="/Mutual-Funds-India/Screener"><img src="img/home/innovative_tools_screener3.png" alt="Mutual Fund Screener"><h6>Mutual Fund<br>Screener</h6></a>
+          </div>
+          <div class="col-xs-12">
+              <a href="/Mutual-Fund-Comparison/716-4457"><img src="img/home/innovative_tools_comparison.png" alt="Mutual Fund Comparison"><h6>Mutual Fund<br>Comparison</h6></a>
+          </div>
+          <div class="col-xs-12">
+              <a href="/Mutual-Funds/Rolling-Return/4457-716"><img src="img/home/innovative_tools_rolling.png" alt="Mutual Fund Mutual Fund Rolling Return"><h6>Mutual Fund<br>Rolling Return</h6></a>
+          </div>
+          <div class="col-xs-12">
+              <a href="/Mutual-Fund-Calculator/Sip-Return"><img src="img/home/innovative_tools_sip3.png" alt="Mutual Funds SIP Return"><h6>Mutual Fund<br>SIP Return</h6></a>
+          </div>
+          <div class="col-xs-12">
+              <a href="/Mutual-Fund-Holdings"><img src="img/home/innovative_tools_stocks3b.png" alt="Stocks held by Mutual Funds"><h6>Stocks held by<br>Mutual Funds</h6></a>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<a href="about.html">About app</a>
+
+                            <p>Page content goes here</p>
+                            <!-- Link to another page -->
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Toolbar-->
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <!-- Toolbar links -->
+                    <a href="#" class="link">Link 1</a>
+                    <a href="#" class="link">Link 2</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+</body>
+
+</html>

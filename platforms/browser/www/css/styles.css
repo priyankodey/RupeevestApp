@@ -1,0 +1,391 @@
+/*
+   statusbar-overlay sets the background color for the overlay. Black text is the default when the statusbar plugin is not added. When the
+   statusbar plugin is added, it also adds default setting to make the content white via:
+
+       <preference name="StatusBarStyle" value="lightcontent"/>
+
+   Setting the background color to black will allow the default light content (white text/icons) to show on it. The statusbar plugin is included
+   in the config.xml file and will be added by the CLI when you build locally.
+
+   See https://github.com/apache/cordova-plugin-statusbar
+*/
+
+.statusbar-overlay {
+    background: #000000;
+}
+
+
+@charset "utf-8";
+
+/********************************************************/
+/* Base Styles                                          */
+/********************************************************/
+
+/* Fixes IE 10 viewport issue, as specified in Bootstrap docs.
+ * See here > http://getbootstrap.com/getting-started/#support-ie-compatibility-modes. */
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+html {
+  width: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#ascrail2000 {
+  display: none !important;
+}
+#ascrail2001 {
+  display: none !important;
+}
+body {
+  font-family: verdana, arial, helvetica, sans-serif;
+  background-color: #FFF;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 18px;
+  font-weight: 400;
+  color: #5f6469;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3, h4, h5, h6, p, span, blockquote, hr {
+  position: relative;
+  font-family: verdana, arial, helvetica, sans-serif;
+}
+h1 {
+  letter-spacing: -1px;
+  font-size: 24px;
+  color: #3b3f42;
+}
+h2 {
+  letter-spacing: -1px;
+  font-size: 22px;
+  color: #3b3f42;
+}
+h3 {
+  letter-spacing: -1px;
+  font-size: 20px;
+  color: #3b3f42;
+}
+h4 {
+  color: #3b3f42;
+  letter-spacing: -1px;
+}
+p {
+  font-style: normal;
+  font-weight: 400;
+  text-align: justify;
+  margin: 0 0 10px;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 24px;
+  color: #5f6469;
+}
+p a {
+  font-style: italic;
+  text-decoration: underline;
+  line-height: 24px;
+}
+a {
+  color: #6d9f00;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-decoration: none;
+  text-transform: none;
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease .3s;
+  -o-transition: all ease .3s;
+  transition: all ease .3s;
+}
+a:hover, a:focus {
+  color: #7fb800;
+}
+ul li, ol li {
+  font-size: 14px;
+  line-height: 24px;
+}
+hr {
+  border-top: 1px solid #c8cbcd;
+}
+.vr_left {
+  border-left: 1px solid #c8cbcd;
+}
+img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+/* *************************************** 
+                Navbar
+  **************************************** */
+#RVNavbar .navbar {
+  margin-bottom: 0;
+  border: 0;
+}
+.navbar-fixed .page-content, .navbar-through .page-content {
+    padding-top: 0;
+}
+#RVSidebar {
+  margin-top: 50px;
+}
+/*body.with-panel-left-reveal .views{
+  transform: translate3d(0px, 0, 0);
+}
+*/
+/*.panel.panel-left.panel-reveal{
+  z-index: 6000;
+}
+*/.list-block .item-inner:after {
+  background: none;
+}
+.list-block ul:before {
+  background: none;
+}
+.item-content.item-link{
+  background: #17406B;
+  color: #fff;
+  border: 1px solid #9999ff;
+}
+
+/*.item-title{
+  color: #fff;
+}*/
+.list-block:not(.media-list) .accordion-item-expanded:not(.media-item)>.item-link .item-inner {
+  background-image: url("/img/fa-minus.png");
+  background-size: 10px 10px;
+}
+.list-block .item-link .item-inner {
+  background-image: url("/img/fa-plus.png");
+  background-size: 10px 10px;
+}
+
+/* *************************************** 
+                   My CSS 
+  **************************************** */
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  outline: 0;
+}
+.btn-primary, .btn-primary.disabled, .btn-primary[disabled], .btn-primary[disabled]:active, .btn-primary[disabled]:hover,
+ .btn-primary:active:focus, .btn-primary:active:hover {
+  background-color: #7fb800;
+  border-color: #7fb800;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {  
+  background-color: #6d9f00;
+  border-color: #6d9f00;
+}
+
+.d_inline { display: inline; }
+.d_inline_b { display: inline-block; }
+.d_inline_f { display: -webkit-inline-flex; display: -ms-inline-flexbox; display: inline-flex; }
+.d_none {display:none;}
+.NoAppearance { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+.area_wrap {overflow-x:auto;}
+.form-control {
+  height: 32px;
+  padding: 3px 6px;
+}
+.cryptedmail:after {
+  content: attr(data-name) "@" attr(data-domain) "." attr(data-tld); 
+}
+
+
+/**************
+    Home page 
+***************/
+
+
+
+/****************
+    About page 
+*****************/
+#about_us h3 {
+  display: inline;
+}
+#about_us img {
+  width: 100px;
+}
+#about_us span {
+  font-size: 14px;
+}
+#about_us .well {
+  padding: 15px;
+  background-color: #f1f2f2;
+  border-radius: 0px;
+}
+#about_us .varun, #about_us .mayank, #about_us .mitul {
+  padding-top: 1em;
+}
+ 
+
+
+/**********************************
+    Investment Solution
+***********************************/
+#investment_solution {
+ background-image: url("../img/invSolution/invbg.png");
+ background-repeat: repeat;
+ /*max-height: 60px;*/
+ border-bottom: 1px solid #ddd;
+}
+#investment_solution .FullDoc img {
+  height: 160px;
+}
+#investment_solution .FullDoc p {
+  margin: 0 0 10px 0;
+  line-height: 20px;
+  /*text-align: left;*/
+  font-size: 12px;
+}
+#investment_solution .FullDoc a:hover, #investment_solution .FullDoc a:focus {
+  text-decoration: none;
+}
+#investment_solution .FullDoc h3 {
+  margin: 0;  
+}
+#investment_solution .invSolBodyP1 {
+  /*background: #f1f2f2;*/
+  padding: 1em 0;
+    border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+#investment_solution .invSolBodyP2 {
+  padding: 3em 0;
+}
+#investment_solution .invSolBodyP2 .carousel {
+  /*display: inline-block;*/
+}
+#investment_solution .invSolBodyP3 {
+  /*background: #f1f2f2;*/
+  border-top: 1px solid #ddd;
+  padding: 1em;
+  height: 100px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+#investment_solution .invSolBodyP31 {
+  /*background: #f1f2f2;*/
+  border-bottom: 1px solid #ddd;
+  padding: 1em 1em 0 1em;
+  min-height: 70px;
+}
+#investment_solution .FullDoc a .invSolBody {
+  border: 1px solid;
+  /*border-top: 7px solid;  */
+  /*margin-top: 2em;*/
+  /*height: 50vh;*/
+  -webkit-transition: all 0.65s;
+  -moz-transition: all 0.65s;
+  -ms-transition: all 0.65s;
+  -o-transition: all 0.65s;
+  transition: all 0.65s;
+  -webkit-transform: scale(1.0);
+  -o-transform: scale(1.0);
+  -ms-transform: scale(1.0);
+  transform: scale(1.0);
+}
+#investment_solution .FullDoc a .invSolBody:hover {
+  -webkit-transform: scale(1.02);
+  -o-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  transform: scale(1.02);
+}
+#investment_solution #AssetABP .invSolBodyP1 {
+  background: #fff; 
+  border-bottom: 1px solid #ddd; 
+}
+#investment_solution #AssetABP .invSolBodyP1 h3 {
+  color: #0099ff;  
+}
+#investment_solution #AssetABP .invSolBody {
+  border-color: #0089e5;
+  border-radius: 4px;
+}
+#investment_solution #AssetABP .invSolBody:hover .invSolBodyP1 {
+  background: #0099ff;
+  -webkit-transition: all 0.65s;
+  -moz-transition: all 0.65s;
+  -ms-transition: all 0.65s;
+  -o-transition: all 0.65s;
+  transition: all 0.65s;
+}
+#investment_solution #AssetABP .invSolBody:hover .invSolBodyP1 h3 {
+  color: #fff;
+}
+#investment_solution #AssetABP .invSolBodyP2 {
+  background-image: url("../img/invSolution/InvSolBGAssetAlloc.png");
+  background-repeat: repeat;
+}
+#investment_solution #AssetABP .invSolBody:hover .invSolBodyP3 {
+  border-bottom: 15px solid #0099ff;
+  -webkit-transition: all 0.65s;
+  -moz-transition: all 0.65s;
+  -ms-transition: all 0.65s;
+  -o-transition: all 0.65s;
+  transition: all 0.65s;
+}
+#investment_solution #GoalBP .invSolBodyP1 {
+  background: #fff;  
+  border-bottom: 1px solid #ddd;
+}
+#investment_solution #GoalBP .invSolBodyP1 h3 {
+  color: #90bf6c;  
+}
+#investment_solution #GoalBP .invSolBody {
+  border-color: #90bf6c;
+  border-radius: 4px;
+}
+#investment_solution #GoalBP .invSolBody:hover .invSolBodyP1 {
+  background: #93cf66;
+    -webkit-transition: all 0.65s;
+  -moz-transition: all 0.65s;
+  -ms-transition: all 0.65s;
+  -o-transition: all 0.65s;
+  transition: all 0.65s;
+}
+#investment_solution #GoalBP .invSolBody:hover .invSolBodyP1 h3 {
+  color: #fff;
+}
+#investment_solution #GoalBP .invSolBodyP2 {
+  background-image: url("../img/invSolution/InvSolBGGoal.png");
+  background-repeat: repeat;
+}
+#investment_solution #GoalBP .invSolBody:hover .invSolBodyP3 {
+  border-bottom: 15px solid #93cf66;
+  -webkit-transition: all 0.65s;
+  -moz-transition: all 0.65s;
+  -ms-transition: all 0.65s;
+  -o-transition: all 0.65s;
+  transition: all 0.65s;
+}
+#investment_solution .carousel-fade .carousel-inner .item {
+  opacity: 0;
+ -moz-transition: opacity ease-in-out .70s;
+  -o-transition: opacity ease-in-out .70s;
+  -webkit-transition: opacity ease-in-out .70s;
+  transition: opacity ease-in-out .70s;
+}
+#investment_solution .carousel-fade .carousel-inner .active {
+  opacity: 1;
+}
+#investment_solution .carousel-fade .carousel-inner .active.left,
+#investment_solution .carousel-fade .carousel-inner .active.right {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+#investment_solution .carousel-fade .carousel-inner .next.left,
+#investment_solution .carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+#investment_solution .carousel-fade .carousel-control {
+  z-index: 2;
+}
+
+
+
