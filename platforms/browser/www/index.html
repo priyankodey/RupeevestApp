@@ -10,7 +10,11 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+  <!--   <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src 'self' http://192.168.1.22:3000">
+
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://192.168.1.22:3000"> -->
+
 
     <!-- Required meta tags-->
     <meta charset="utf-8">
@@ -30,6 +34,7 @@
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/datepicker.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -43,7 +48,7 @@
     <div class="panel panel-left panel-reveal" id="RVSidebar">
         <div class="content-block">
             <!-- <p>Left panel content goes here</p> -->
-           <div class="content-block-title"><img src="image/images.jpg" width="34" height="34"></div>
+           <div class="content-block-title"></div>
                 <div class="list-block accordion-list">
                     <ul>
                         <li class="accordion-item"><a href="#" class="item-content item-link">
@@ -52,10 +57,10 @@
                             </div></a>
                           <div class="accordion-item-content">
                             <!-- <div class="content-block"> -->
-                                <a href="#" class="item-content item-link">
+                                <a href="login.html" class="item-content item-link">
                                     How It Works
                                 </a>
-                                <a href="#" class="item-content item-link">
+                                <a href="fund_details.html?scheme_code=716" class="item-content item-link">
                                     Security
                                 </a>
                                 <a href="about.html" class="item-content item-link">
@@ -74,10 +79,10 @@
                             </div></a>
                           <div class="accordion-item-content">
                             <!-- <div class="content-block"> -->
-                                <a href="#" class="item-content item-link">
+                                <a href="is_investment_solution.html" class="item-content item-link">
                                     Investment Solutions
                                 </a>
-                                <a href="#" class="item-content item-link">
+                                <a href="mutualfund.html" class="item-content item-link">
                                     Mutual Funds
                                 </a>
                                 <a href="about.html" class="item-content item-link">
@@ -325,10 +330,15 @@
     </div>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
+    <script type="text/javascript" src="js/highstock.js"></script>
+    <script type="text/javascript" src="js/chart.js"></script>
+
 </body>
 
 </html>

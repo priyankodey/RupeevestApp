@@ -154,12 +154,14 @@ img {
 /*.item-title{
   color: #fff;
 }*/
-.list-block:not(.media-list) .accordion-item-expanded:not(.media-item)>.item-link .item-inner {
-  background-image: url("/img/fa-minus.png");
+#RVSidebar .list-block:not(.media-list) .accordion-item-expanded:not(.media-item)>.item-link .item-inner {
+  background-image: url("../img/fa-minus.png");
   background-size: 10px 10px;
+
+
 }
-.list-block .item-link .item-inner {
-  background-image: url("/img/fa-plus.png");
+#RVSidebar .list-block .item-link .item-inner {
+  background-image: url("../img/fa-plus.png");
   background-size: 10px 10px;
 }
 
@@ -225,14 +227,126 @@ img {
 
 
 /**********************************
+    Mutual Fund Home
+***********************************/
+
+#mfund_home table thead th .glyphicon {
+  color: #fff;
+}
+#mfund_home table tbody tr td {
+  padding: 8px 0;
+}
+#mfund_home .part2 .RV5star {
+  display: block;
+}
+#mfund_home .part2 table thead tr th {
+  font-size: 13px;
+  background: #1689e5;
+  color: #fff;
+  text-align: center;
+}
+#mfund_home .part2 .nav-pills li a {
+  color: #5f6469;
+}
+#mfund_home .part2 .nav-pills>li.active>a {
+  color: #FFF;
+}
+#mfund_home .part2 .list-inline {
+  margin: 0;
+}
+#mfund_home .part2 .list-inline>li {
+  width: 32.5%;
+  padding: 0;
+}
+#mfund_home .part2 .list-inline>li.active .EquityTopMFcircle {
+  color: #fff;
+  background: #1689e5;
+}
+#mfund_home .part2 .list-inline>li.active .DebtTopMFcircle {
+  color: #fff;
+  background: #99C733;
+}
+#mfund_home .part2 .list-inline>li.active .HybridTopMFcircle {
+  color: #fff;
+  background: #00C78C;
+}
+#mfund_home .part2 .TopMFcircle {
+  padding: 5px;
+  color: #3b3f42;
+  font-size: 16px;
+  text-align: center;
+}
+#mfund_home .part2 .li_space {
+  margin-right: 0;
+}
+#mfund_home .part2 ul li .EquityTopMFcircle {
+  background: #f1f2f2;
+  border: 3px solid #1689e5;
+}
+#mfund_home .part2 .DebtTopMFcircle {
+  background: #f1f2f2;
+  border: 3px solid #99C733;
+}
+#mfund_home .part2 .HybridTopMFcircle {
+  background: #f1f2f2;
+  border: 3px solid #00C78C;
+}
+#mfund_home .part2 ul li a:hover, #mfund_home .part2 ul li a:focus {
+  text-decoration: none;
+}
+#mfund_home .part2 #EquityTab .nav-pills>li.active>a {
+  background: #1689e5;
+}
+#mfund_home .part2 #DebtTab .nav-pills>li.active>a {
+  background: #99C733;
+}
+#mfund_home .part2 #HybridTab .nav-pills>li.active>a {
+  background: #00C78C;
+}
+#mfund_home .part2 .MainTabContent {
+  padding-top: 1em;
+}
+#mfund_home .part2 .MainTabContent .nav-pills>li>a {
+  border-radius: 0;
+  padding: 10px 10px;
+}
+#mfund_home .part2 .TopRatedArea ul {
+  border: 1px solid #b0b0b0;
+}
+#mfund_home .part2 .InnerTabContent .table-striped>tbody>tr:nth-child(odd)>td {
+  background-color: #f9f9f9;
+}
+#mfund_home .part2 .InnerTabContent .table-striped>tbody>tr:nth-child(even)>td {
+  background-color: #f1f2f2;
+}
+#mfund_home .part2 .TopRatedInnerArea {
+  border: 1px solid #ccc;
+  margin-top: 1em;
+}
+#mfund_home .part2 .TopRatedInnerArea .table>tbody>tr>td {
+  padding: 5px 10px;
+  vertical-align: middle;
+  border-top: none;
+}
+#mfund_home .part2 .TopRatedInnerArea .table>tbody>tr>td:nth-child(2) {
+  text-align: right;
+}
+#mfund_home .part2 .TopRatedInnerArea .table {
+  margin-bottom: 0;  
+}
+#mfund_home .mf_as_on {
+  position: absolute;
+  right: 25px;
+}
+
+
+
+
+
+/**********************************
     Investment Solution
 ***********************************/
-#investment_solution {
- background-image: url("../img/invSolution/invbg.png");
- background-repeat: repeat;
- /*max-height: 60px;*/
- border-bottom: 1px solid #ddd;
-}
+
 #investment_solution .FullDoc img {
   height: 160px;
 }
