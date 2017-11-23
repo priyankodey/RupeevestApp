@@ -10,8 +10,13 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-  <!--   <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src 'self' http://192.168.1.22:3000">
+  <!--   
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+
+   <!--  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src 'self' http://192.168.1.22:3000">
+ -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * gap: ws: https://ssl.gstatic.com;style-src * 'unsafe-inline' 'self' data: blob:;script-src * 'unsafe-inline' 'unsafe-eval' data: blob:;img-src * data: 'unsafe-inline' 'self' content:;">
+
 
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://192.168.1.22:3000"> -->
 
@@ -33,9 +38,11 @@
 
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">  
     <link rel="stylesheet" href="css/datepicker.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    
 </head>
 
 <body>
@@ -101,7 +108,7 @@
                             </div></a>
                           <div class="accordion-item-content">
                             <!-- <div class="content-block"> -->
-                                <a href="#" class="item-content item-link">
+                                <a href="screener.html" class="item-content item-link">
                                    MF Screener
                                 </a>
                                 <a href="#" class="item-content item-link">
@@ -145,7 +152,7 @@
                                         </a>
                                          <div class="accordion-item-content">
                                             <!-- <div class="content-block"> -->
-                                                <a href="#" class="item-content item-link">
+                                                <a href="calculatorSIP.html" class="item-content item-link">
                                                    SIP Calculator
                                                 </a>
                                                 <a href="#" class="item-content item-link">
@@ -187,134 +194,21 @@
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
             <div class="pages navbar-through toolbar-through">
                 <!-- Page, "data-page" contains page name -->
-                <div data-page="index" class="page">
+                <div data-page="index" class="page" id="home">
                     <!-- Scrollable page content -->
                     <div class="page-content">
-                        <div class="">
 
-<div id="investment_solution">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <h1>RupeeVest Investment Solutions </h1> 
-        </div>
-      </div>
-    </div>
-    <div class="container">
-        <div class="row FullDoc">
-          <div class="col-xs-12 text-center" id="AssetABP">            
-              <a href="/Mutual-Funds/Asset-Allocation-Portfolios">
-                <div class="invSolBody">
-                  <div class="invSolBodyP1">
-                    <h3>Asset Allocation based Portfolios</h3>
-                  </div>
-                  <div class="invSolBodyP2">                   
-                    <div class="d_inline_f">
-                      <div class="carousel slide carousel-fade" data-ride="carousel">                        
-                        <div class="carousel-inner" role="listbox">
-                          <div class="item active">
-                            <img src="img/invSolution/AABPEquity9010.png" alt="Growth">
-                          </div>
-                          <div class="item">
-                            <img src="img/invSolution/AABPBalanced6040.png" alt="Balanced">
-                          </div>
-                          <div class="item">
-                            <img src="img/invSolution/AABPConservative2080.png" alt="Conservative">
-                          </div>                         
+                        <div class="container">
+                            <div class="row HomeTop">
+                                <div class="col-xs-12 text-center">
+                                    <h1>Investment Solutions for a Brighter Financial Future</h1>
+                                </div>
+                            </div>                      
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="invSolBodyP3">
-                      <p>We have outlined the key historical statistics of various combinations of equity and debt market performance of India, so you can select a portfolio which represents your return expectations and risk tolerance.</p>
-                  </div>
-                </div>
-              </a>            
-          </div>
-          <div class="col-xs-12 text-center" id="GoalBP">            
-              <a href="/Mutual-Funds/Goal-Based-Portfolios">
-                <div class="invSolBody">
-                  <div class="invSolBodyP1">
-                    <h3>Goal based Portfolios</h3>
-                  </div>                
-                  <div class="invSolBodyP2">
-                    <div class="d_inline_f">
-                      <div class="carousel slide" data-ride="carousel">                        
-                        <div class="carousel-inner" role="listbox">
-                          <div class="item active">
-                            <img src="img/invSolution/GBPWealth.png" alt="Wealth Creation">
-                          </div>
-                          <div class="item">
-                            <img src="img/invSolution/GBPBank.png" alt="Beat Bank FDs">
-                          </div>
-                          <div class="item">
-                            <img src="img/invSolution/GBPChild.png" alt="Child Education">
-                          </div>
-                          <div class="item">
-                            <img src="img/invSolution/GBPTax.png" alt="Tax Saving">
-                          </div>
-                          <div class="item">
-                            <img src="img/invSolution/GBPPark.png" alt="Park Surplus Cash">
-                          </div>
-                          <div class="item">
-                            <img src="img/invSolution/GBPCapital.png" alt="Capital Preservation">
-                          </div>
-                          <div class="item">
-                            <img src="img/invSolution/GBPGold.png" alt="Gold">
-                          </div>
-                          <div class="item">
-                            <img src="img/invSolution/GBPSectoral.png" alt="Sectoral Play">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>     
-                  <div class="invSolBodyP3">
-                      <p>We help you invest into the right portfolio of mutual funds, without the complexity and noise. You can choose from a variety of goals like wealth creation, tax saving, child's education, etc. based on your preferences.</p>
-                  </div>
-                </div>
-              </a>            
-          </div>
-        </div>
-    </div>
-</div>
 
-<div id="innovative_tools_scroll">
-  <div id="innovative_tools">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-            <h2>Innovative Tools</h2>
-        </div>
-      </div>
-      <div class="row text-center toolsP1"> 
-          
-          <div class="col-xs-12">
-              <a href="/Mutual-Funds-India/Screener"><img src="img/home/innovative_tools_screener3.png" alt="Mutual Fund Screener"><h6>Mutual Fund<br>Screener</h6></a>
-          </div>
-          <div class="col-xs-12">
-              <a href="/Mutual-Fund-Comparison/716-4457"><img src="img/home/innovative_tools_comparison.png" alt="Mutual Fund Comparison"><h6>Mutual Fund<br>Comparison</h6></a>
-          </div>
-          <div class="col-xs-12">
-              <a href="/Mutual-Funds/Rolling-Return/4457-716"><img src="img/home/innovative_tools_rolling.png" alt="Mutual Fund Mutual Fund Rolling Return"><h6>Mutual Fund<br>Rolling Return</h6></a>
-          </div>
-          <div class="col-xs-12">
-              <a href="/Mutual-Fund-Calculator/Sip-Return"><img src="img/home/innovative_tools_sip3.png" alt="Mutual Funds SIP Return"><h6>Mutual Fund<br>SIP Return</h6></a>
-          </div>
-          <div class="col-xs-12">
-              <a href="/Mutual-Fund-Holdings"><img src="img/home/innovative_tools_stocks3b.png" alt="Stocks held by Mutual Funds"><h6>Stocks held by<br>Mutual Funds</h6></a>
-          </div>
-          
-      </div>
-    </div>
-  </div>
-</div>
-<a href="about.html">About app</a>
 
-                            <p>Page content goes here</p>
-                            <!-- Link to another page -->
-                            
-                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -329,15 +223,24 @@
         </div>
     </div>
 
+
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/my-app.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="js/sortable.js"></script>
+    <script type="text/javascript" src="js/moment.js"></script>
     <script type="text/javascript" src="js/highstock.js"></script>
-    <script type="text/javascript" src="js/chart.js"></script>
+    <script type="text/javascript" src="js/chart.js"></script> 
+    <script type="text/javascript" src="js/landing.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+
+
+
+
 
 </body>
 

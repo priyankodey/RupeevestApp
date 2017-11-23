@@ -13,6 +13,22 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+function commaSeparateNumber(val)
+    {
+       x=val.toString();
+        var afterPoint = '';
+        if(x.indexOf('.') > 0)
+           afterPoint = x.substring(x.indexOf('.'),x.length);
+        x = Math.floor(x);
+        x=x.toString();
+        var lastThree = x.substring(x.length-3);
+        var otherNumbers = x.substring(0,x.length-3);
+        if(otherNumbers != '')
+            lastThree = ',' + lastThree;
+        var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree + afterPoint;  
+        return res;
+}
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     // console.log("Device is ready!");
@@ -74,35 +90,317 @@ $$(document).on('pageInit', function (e) {
         var query = $$.parseUrlQuery(page.url);
         //console.log(query);
         var scheme_code=query.scheme_code;
-        $$.get(curr_ip+'functionalities/get_fund_info', {schemecode: +scheme_code},function (data) 
+        $$.get(curr_ip+'app_services/get_fund_info', {schemecode: +scheme_code},function (data) 
         {
             //console.log(data);
-            var myObj = JSON.parse(data);
-            //console.log(myObj.CLient[0].s_name);
-            $$('#schemename').val(myObj.CLient[0].s_name);
-            $$('#schemclassification').val(myObj.CLient[0].classification);
-            x=2;
-            if(x==1){
-                console.log("11111111111111");
+            var scheme_data = JSON.parse(data);
+            console.log(scheme_data);
+
+            // Web Site Code start
+
+            var scheme_item = scheme_data.schemedata[0];
+            var min_sip_inv = "-"
+
+            if(scheme_data.sip_min_investment[0]!=undefined)
+            {
+             if(scheme_data.sip_min_investment[0].sipmininvest!=null || scheme_data.sip_min_investment[0].sipmininvest!='')
+                 {
+                            min_sip_inv = scheme_data.sip_min_investment[0].sipmininvest;
+                            min_sip_inv = commaSeparateNumber(min_sip_inv);
+                  }
             }
-            else{
-                console.log("222222222222222");
+            var s_name = scheme_item.s_name;
+            var fund_manager = scheme_item.fund_manager;
+            var navdate = "Nav as on " + moment(scheme_item.navdate).format('DD-MMM-YY');
+            var navrs = parseFloat(scheme_item.navrs).toFixed(2);
+            // console.log(navdate);
+            if (typeof scheme_item.navchange === 'undefined' || scheme_item.navchange === null)
+             {
+                var navchange = "-" ;
+             }
+             else
+             {
+                var navchange = parseFloat(scheme_item.navchange) + "%";    
+             }
+
+             // console.log(navchange);
+             var inception_date = moment(scheme_item.inception_date).format('DD-MMM-YY');
+            var inception_return;
+            
+            if(scheme_item.inception_return==null || scheme_item.inception_return=="undefined")
+            {
+                inception_return = "-";
             }
-            test_graph(myObj.CLient[0].s_name,scheme_code);
+            else
+            {
+                inception_return = scheme_item.inception_return;
+                inception_return =inception_return+" %";
+            }
+            
+
+            var exitload;
+           
+            if(scheme_item.exitload==null || scheme_item.exitload=="undefined")
+            {
+                exitload = "-";
+            }
+            else
+            {
+                exitload = scheme_item.exitload;
+                exitload=exitload+" %";
+            }
+
+            
+            var expenceratio;
+             
+            if(scheme_item.expenceratio==null || scheme_item.expenceratio=="undefined") 
+            {
+                 expenceratio = "-";
+            }
+            else
+            {
+                expenceratio = scheme_item.expenceratio;
+                expenceratio = expenceratio+" %";
+            }
+
+
+            var turnover_ratio;
+            
+
+            if (parseInt(scheme_item.turnover_ratio)==0 || scheme_item.turnover_ratio==null || scheme_item.turnover_ratio=='undefined')
+              {
+                    turnover_ratio = "-";
+              }
+              else
+              {
+                 turnover_ratio = scheme_item.turnover_ratio+" %";      
+              }
+            
+            var minimum_investment;
+           
+             if(scheme_item.minimum_investment==0 || scheme_item.minimum_investment==null ||  scheme_item.minimum_investment=='undefined' )
+             {
+                 minimum_investment = "-";
+             }
+             else
+             {
+                minimum_investment = scheme_item.minimum_investment;
+                minimum_investment = commaSeparateNumber(minimum_investment);
+             }
+                
+            var lockperiod;
+
+           if(scheme_item.lockperiod==null)
+           {
+              lockperiod="-"; 
+           }
+           else
+           {
+             if(parseInt(scheme_item.lockperiod) > 0)
+             {
+                lockperiod = scheme_item.lockperiod+" Years";
+             }
+             else
+             {
+                lockperiod = scheme_item.lockperiod;
+             }
+             
+           }
+           // var index_name = scheme_item.index_name;
+                var redemption_period = scheme_item.redemption_period;
+                
+                var aumtotal;
+
+                if(scheme_item.aumtotal==null || scheme_item.aumtotal=='undefined')
+                {
+                    aumtotal = "-";
+                }
+                else
+                {
+                    aumtotal = (parseFloat(scheme_item.aumtotal)).toFixed(1);
+                    aumtotal = commaSeparateNumber(aumtotal);
+                }
+                
+                var aumdate;
+             
+               // alert(scheme_item.aumdate);
+                if(aumtotal=="-")
+                {
+                    aumdate = "AUM Not Available";
+                }
+                else
+                {
+                    aumdate = "AUM as on "+ moment(scheme_item.aumdate).format('DD-MMM-YY');
+                }
+
+                var portfolio_attributes = scheme_item.portfolio_attributes;
+                var cost_factor = scheme_item.cost_factor;
+                var risk = scheme_item.risk;
+                var consistency_of_return = scheme_item.consistency_of_return;
+                var total_return = scheme_item.total_return;
+                var fund_house = scheme_item.fund_house;
+                var index_name = scheme_item.index_name;
+                var classification = scheme_item.classification;
+                var navrs_gp = scheme_item.navrs_gp;
+                var type = scheme_item.type;   
+
+                 if(type=="Open ended scheme")
+                  {
+                        type="Open Ended";
+                  }
+                  else if(type=="Close ended scheme")
+                  {
+                        type="Closed Ended";
+                  }
+                  else
+                  {
+                       type="Interval Fund";
+                  }
+              
+
+                var rating = scheme_item.rupeevest_rating;
+                var exitloadremarks = scheme_item.exitload_remarks;
+        var rr , rr_ico;
+        if (rating)
+        {
+            rr = rating;
+            if(rr == 5){
+                rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
+            }
+            else if (rr == 4){
+                rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
+            }
+            else if (rr == 3){
+                rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"             
+            }
+            else if (rr == 2){
+                rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>" 
+            }
+            else if (rr == 1){
+                rr_ico = "<span class = 'glyphicon glyphicon-star'></span>"
+            }
+            else if (rr == "Unrated"){
+                rr_ico = "Unrated"
+            }
+        }
+        else
+        {
+            rr = "-";
+        }
+
+
+                $("#s_name").html(s_name);
+                $("#rv_rating").html("<span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span>");
+                $("#fund_manager").html(fund_manager);
+                $("#navrs").html(navrs);
+
+                $("#navchange").html(navchange);
+                
+
+                
+
+                if(parseFloat(scheme_item.navchange)>=0)
+                {
+                        
+                        $("#navchange").css("color", "#6d9f00");
+
+                }
+                else
+                {     
+                        $("#navchange").css("color", "#ff0000");
+                }
+                $("#navdate").html(navdate);
+                $("#inception_date").html(inception_date);
+                $("#inception_return").html(inception_return);
+                $("#exitload").html(exitload);
+
+                $("#expenceratio").html(expenceratio);
+
+                $("#turnover_ratio").html(turnover_ratio);
+                $("#minimum_investment").html(minimum_investment+" / "+min_sip_inv);
+                $("#index_name").html(index_name);
+                $("#lockperiod").html(lockperiod);
+                $("#redemption_period").html(redemption_period);
+                $("#portfolio_attributes").html(portfolio_attributes);
+                $("#cost_factor").html(cost_factor);
+                $("#risk").html(risk);
+                $("#consistency_of_return").html(consistency_of_return);
+                $("#total_return").html(total_return);
+                $("#aumtotal").html(aumtotal);
+                $("#aumdate").html(aumdate);
+                $("#fund_house").html(fund_house);
+                // $("#index_name").html(index_name);
+                $("#classification").html(classification);
+                $("#growth").html(navrs_gp);
+                $("#type").html(type);
+                $("#exitload-modal").html(exitloadremarks);
+
+                // get_growth_plan(schemecode);
+                // get_return_data(schemecode);
+
+                // get_peer_comparision(schemecode);
+
+                // get_portfolio_holdings(schemecode);
+                // get_dividend_data(schemecode);
+                // get_hold_asset(schemecode);
+
+                // get_status(schemecode);
+                // get_objectives(schemecode);
+
+                // get_fund_manager(schemecode);
+
+                // get_rt_info(schemecode);
+                // get_amc_info(schemecode);
+                
+                // get_indexe_name(schemecode);
+                // get_related_funds(classification);
+                
+
+
+
+
+
+
+
+
+
+
+            // Web site Code end
+
+
+
+
+
+
+
+
+            // $$('#schemename').html(myObj.CLient[0].s_name);
+            // $$('#schemclassification').html(myObj.CLient[0].classification);
+            // var scheme_star=5;
+            // var scheme_star_html="<span class='glyphicon glyphicon-star' aria-hidden='true'></span>";
+            // var scheme_star_html_final="";
+            // for (var j=1; j<=scheme_star;j++){
+            //     scheme_star_html_final=scheme_star_html_final+scheme_star_html;
+            // }
+            // console.log(scheme_star_html_final);
+            // $$('#schemestar').html(scheme_star_html_final);
+            // test_graph(myObj.CLient[0].s_name,scheme_code);
         });
-        // chart_1();
+        
     }
 
+    
 
-   if(page.name==='mutualfund')
+
+    if(page.name==='mutualfund')
     {
-        console.log("MF");
-        $$.get(curr_ip+'home/mf_home_for_app', {schemecode: +scheme_code},function (data) 
+        // console.log("MF");
+        $$.get(curr_ip+'app_services/mf_home_for_app',function (data) 
         {
             var myObj = JSON.parse(data);
-            console.log(myObj);
-            console.log(myObj.equity_lc[0].s_name);
-            console.log(myObj.equity_mc[0].s_name);
+            // console.log(myObj);
+            // console.log(myObj.equity_lc[0].s_name);
+            // console.log(myObj.equity_mc[0].s_name);
     
            var i;
            var table_data_equity_lc="";
@@ -124,76 +422,92 @@ $$(document).on('pageInit', function (e) {
             {
                 table_data_equity_msc=table_data_equity_msc+"<tr><td><a href=fund_details.html?scheme_code="+myObj.equity_msc[i].schemecode+">"+myObj.equity_msc[i].s_name+"</a></td></tr>";
             }
-             $$('#Emidsmall1 tbody').html(table_data_equity_msc);
+            $$('#Emidsmall1 tbody').html(table_data_equity_msc);
 
             var table_data_equity_elss="";
             for (i = 0; i < myObj.elss.length; i++) 
             {
                 table_data_equity_elss=table_data_equity_elss+"<tr><td><a href=fund_details.html?scheme_code="+myObj.elss[i].schemecode+">"+myObj.elss[i].s_name+"</a></td></tr>";
             }
-             $$('#Eelss1 tbody').html(table_data_equity_elss);
+            $$('#Eelss1 tbody').html(table_data_equity_elss);
 
             var table_data_debt_liq="";
             for (i = 0; i < myObj.debt_liq.length; i++) 
             {
                 table_data_debt_liq=table_data_debt_liq+"<tr><td><a href=fund_details.html?scheme_code="+myObj.debt_liq[i].schemecode+">"+myObj.debt_liq[i].s_name+"</a></td></tr>";
             }
-             $$('#DebtLiquid tbody').html(table_data_debt_liq);
+            $$('#DebtLiquid tbody').html(table_data_debt_liq);
 
             var table_data_debt_ust="";
             for (i = 0; i < myObj.debt_ust.length; i++) 
             {
                 table_data_debt_ust=table_data_debt_ust+"<tr><td><a href=fund_details.html?scheme_code="+myObj.debt_ust[i].schemecode+">"+myObj.debt_ust[i].s_name+"</a></td></tr>";
             }
-             $$('#DebtUltraShortTerm tbody').html(table_data_debt_ust);
+            $$('#DebtUltraShortTerm tbody').html(table_data_debt_ust);
 
             var table_data_debt_st="";
             for (i = 0; i < myObj.debt_st.length; i++) 
             {
                 table_data_debt_st=table_data_debt_st+"<tr><td><a href=fund_details.html?scheme_code="+myObj.debt_st[i].schemecode+">"+myObj.debt_st[i].s_name+"</a></td></tr>";
-                //console.log(myObj.debt_ust.length);
             }
-             $$('#DebtShortTermGILT tbody').html(table_data_debt_st);
+            $$('#DebtShortTermGILT tbody').html(table_data_debt_st);
 
             var table_data_debt_m_lt="";
             for (i = 0; i < myObj.debt_m_lt.length; i++) 
             {
                 table_data_debt_m_lt=table_data_debt_m_lt+"<tr><td><a href=fund_details.html?scheme_code="+myObj.debt_m_lt[i].schemecode+">"+myObj.debt_m_lt[i].s_name+"</a></td></tr>";
-                //console.log(myObj.debt_ust.length);
             }
-             $$('#DebtMediumLongTermGILT tbody').html(table_data_debt_m_lt);
+            $$('#DebtMediumLongTermGILT tbody').html(table_data_debt_m_lt);
 
             var table_data_hybrid_eo="";
             for (i = 0; i < myObj.hybrid_eo.length; i++) 
             {
                 table_data_hybrid_eo=table_data_hybrid_eo+"<tr><td><a href=fund_details.html?scheme_code="+myObj.hybrid_eo[i].schemecode+">"+myObj.hybrid_eo[i].s_name+"</a></td></tr>";
-                //console.log(myObj.debt_ust.length);
             }
-             $$('#HybridBalancedEquityOriented tbody').html(table_data_hybrid_eo);
+            $$('#HybridBalancedEquityOriented tbody').html(table_data_hybrid_eo);
 
             var table_data_hybrid_do="";
             for (i = 0; i < myObj.hybrid_do.length; i++) 
             {
                 table_data_hybrid_do=table_data_hybrid_do+"<tr><td><a href=fund_details.html?scheme_code="+myObj.hybrid_do[i].schemecode+">"+myObj.hybrid_do[i].s_name+"</a></td></tr>";
-                //console.log(myObj.debt_ust.length);
             }
-             $$('#HybridBalancedDebtOriented tbody').html(table_data_hybrid_do);
+            $$('#HybridBalancedDebtOriented tbody').html(table_data_hybrid_do);
 
             var table_data_hybrid_arb="";
             for (i = 0; i < myObj.hybrid_arb.length; i++) 
             {
                 table_data_hybrid_arb=table_data_hybrid_arb+"<tr><td><a href=fund_details.html?scheme_code="+myObj.hybrid_arb[i].schemecode+">"+myObj.hybrid_arb[i].s_name+"</a></td></tr>";
-                //console.log(myObj.debt_ust.length);
             }
-             $$('#HybridArbitrage tbody').html(table_data_hybrid_arb);
+            $$('#HybridArbitrage tbody').html(table_data_hybrid_arb);
 
              $$('#EquityLargeCap .mf_as_on h6, #EquityMultiCap .mf_as_on h6, #EquityMidSmallCap .mf_as_on h6, #DebtLiquid .mf_as_on h6, #DebtUltraShortTerm .mf_as_on h6, #DebtShortTermGILT .mf_as_on h6, #DebtMediumLongTermGILT .mf_as_on h6, #HybridBalancedEquityOriented .mf_as_on h6, #HybridBalancedDebtOriented .mf_as_on h6, #HybridArbitrage .mf_as_on h6').html("As on 01 Oct 2017");
              $$('#EquityTaxSavingELSS .mf_as_on h6').html("As on 01 Apr 2017");
 
         });
-
-
     }
+
+    if(page.name==='screener')
+    {
+        //console.log("Screener1111111111111111");
+
+        $.getScript("js/screener.js");
+        //start_loading();
+
+        $(".dropbox_close").click(function(){
+            $(".tab-wrapper .tab-content").find(".active").removeClass("active").addClass("fade");
+            $("#main-tabs li").removeClass("tab-active");
+             $('.ptp_show').prop("disabled",false)
+                 $('#error_msg').html("");
+                 $('#from_date').val("");
+                 $('#to_date').val("");
+
+         });
+
+        
+
+        
+    }
+
 
 
 })

@@ -57,17 +57,18 @@ h1, h2, h3, h4, h5, h6, p, span, blockquote, hr {
 }
 h1 {
   letter-spacing: -1px;
-  font-size: 24px;
-  color: #3b3f42;
+  font-size: 22px;
+  color: #FFF;
+  margin-top: 10px;
 }
 h2 {
   letter-spacing: -1px;
-  font-size: 22px;
+  font-size: 20px;
   color: #3b3f42;
 }
 h3 {
   letter-spacing: -1px;
-  font-size: 20px;
+  font-size: 18px;
   color: #3b3f42;
 }
 h4 {
@@ -125,12 +126,18 @@ img {
 #RVNavbar .navbar {
   margin-bottom: 0;
   border: 0;
+  min-height: 44px;
+  color: #fff;
+  background: #17406B;
 }
+#RVNavbar .navbar .center {
+  font-weight: 500;
+} 
 .navbar-fixed .page-content, .navbar-through .page-content {
-    padding-top: 0;
+  padding-top: 0;
 }
 #RVSidebar {
-  margin-top: 50px;
+  margin-top: 44px;
 }
 /*body.with-panel-left-reveal .views{
   transform: translate3d(0px, 0, 0);
@@ -154,6 +161,32 @@ img {
 /*.item-title{
   color: #fff;
 }*/
+#RVSidebar .content-block {
+  margin: 0;
+  padding: 0;
+}
+#RVSidebar .content-block-title {
+  margin: 0;
+}
+#RVSidebar .content-block-title+.list-block {
+  margin-top: 0;
+}
+#RVSidebar .accordion-item .item-content.item-link{
+ background: #17406B;
+ color: #fff;
+ border: 1px solid #9999ff;
+}
+#RVSidebar .accordion-item-content .item-content.item-link{
+ background: #456688;
+ color: #fff;
+ border: 1px solid #9999ff;
+}
+#RVSidebar .accordion-item-content .accordion-item-content .item-content.item-link{
+ background: #738ca6;
+ color: #fff;
+ border: 1px solid #9999ff;
+}
+
 #RVSidebar .list-block:not(.media-list) .accordion-item-expanded:not(.media-item)>.item-link .item-inner {
   background-image: url("../img/fa-minus.png");
   background-size: 10px 10px;
@@ -195,14 +228,21 @@ img {
 .cryptedmail:after {
   content: attr(data-name) "@" attr(data-domain) "." attr(data-tld); 
 }
-
+.HeadTop {
+  background: #0099ff;
+}
 
 /**************
     Home page 
 ***************/
 
-
-
+#home .HomeTop {
+  background: #2f5378;
+  height: 12em;
+}
+#home h1 {
+  margin-top: 2em;
+}
 /****************
     About page 
 *****************/
@@ -339,6 +379,193 @@ img {
   right: 25px;
 }
 
+
+
+/**********************************
+    Screener
+***********************************/
+
+#mf_screener #main-tabs li {
+    width: 25%;
+}
+#mf_screener #main-tabs .nav-menu a {
+  font-size: 11px;
+  padding: 5px 5px;
+  border: 2px solid #2d94e7;
+  background-color: transparent;
+  color: #3b3f42;
+  word-spacing: 0px;
+  min-height: 4em;
+}
+#mf_screener #main-tabs .nav-menu.tab-active a {
+  background-color: #2d94e7;
+  color: #fff;
+}
+#mf_screener #home .outer_wrapper_fund .ineer_wrapper_fund, #mf_screener #home .outer_wrapper_fund .ineer_wrapper_fund_last {
+  border: 1px solid #555555;
+  background-color: #fff;
+  margin: 5px 0px;
+  display: inline-block;
+  padding: 0;
+  width: 100%;
+  height: 160px;
+  overflow-y: auto;
+}
+#mf_screener #home label {
+  display: block;
+  max-width: 100%;
+  margin-bottom: 0;
+  font-weight: 400;
+  padding: 2px 10px;
+}
+#mf_screener #home label:nth-child(odd) {
+  background: #fff;
+}
+#mf_screener #home label:nth-child(even) {
+  background: #f1f2f2;
+}
+#mf_screener #home .outer_wrapper_fund {
+  border: 1px solid #555555;
+  background-color: #f2f2f2;
+  margin-top: 3px;
+  width: 100%;
+  padding: 10px;
+  height: 450px;
+}
+#mf_screener #home .outer_wrapper_fund .selector_head {
+  display: inline-block;
+  margin: 0.2em 0;
+  padding: 0.5em 0.5em;
+  min-width: 12em;
+}
+
+#mf_screener #menu2 .outer_wrapper_rating .fund_head {
+  display: inline-block;
+  margin: 0.2em 0;
+  padding: 0.5em 0.5em;
+  min-width: 12em;
+}
+#mf_screener #menu2 .outer_wrapper_fund .fund_head {
+  display: inline-block;
+  margin: 0.2em 0;
+  padding: 0.5em 0.5em;
+  min-width: 12em;
+}
+#mf_screener #menu2 .outer_wrapper_rating {
+  border: 1px solid #555555;
+  background-color: #f2f2f2;
+  margin-top: 3px;
+  width: 100%;
+  padding: 10px;
+  height: 220px;
+}
+#mf_screener #menu2 .outer_wrapper_fund {
+  border: 1px solid #555555;
+  background-color: #f2f2f2;
+  margin-top: 3px;
+  width: 100%;
+  padding: 10px;
+  height: 220px;
+}
+#mf_screener #menu2 .outer_wrapper_fund .ineer_wrapper_fund {
+  border: 1px solid #555555;
+  background-color: #fff;
+  margin: 5px 0;
+  display: inline-block;
+  padding: 0;
+  width: 100%;
+  height: 150px;
+  overflow-y: auto;
+}
+#mf_screener #menu2 .outer_wrapper_fund .ineer_wrapper_fund_last {
+  border: 1px solid #555555;
+  background-color: #fff;
+  margin: 8px 0px;
+  display: inline-block;
+  padding: 0;
+  width: 100%;
+  height: 125px;
+  overflow-y: auto;
+}
+#mf_screener #menu2 label {
+  display: block;
+  max-width: 100%;
+  margin-bottom: 0;
+  font-weight: 100;
+  padding: 2px 10px;
+}
+#mf_screener #menu2 label:nth-child(odd) {
+  background: #fff;
+}
+#mf_screener #menu2 label:nth-child(even) {
+  background: #f1f2f2;
+}
+#mf_screener #menu3 .outer_wrapper_fund .ineer_wrapper_fund, #mf_screener #menu3 .outer_wrapper_fund .ineer_wrapper_fund_last {
+  border: 1px solid #555555;
+  background-color: #fff;
+  margin: 5px 0px;
+  display: inline-block;
+  padding: 0;
+  width: 100%;
+  height: 160px;
+  overflow-y: auto;
+}
+#mf_screener #menu3 label{
+  display: block;
+  max-width: 100%;
+  margin-bottom: 0;
+  font-weight: 400;
+  padding: 2px 10px;
+}
+#mf_screener #menu3 .outer_wrapper_fund {
+  border: 1px solid #555555;
+  background-color: #f2f2f2;
+  margin-top: 3px;
+  width: 100%;
+  padding: 10px;
+  height: 410px;
+}
+#mf_screener #menu3 .outer_wrapper_fund .columns_head {
+  display: inline-block;
+  margin: 0.2em 0;
+  padding: 0.5em 0.5em;
+  min-width: 12em;
+}
+#mf_screener #menu3 label:nth-child(odd) {
+  background: #fff;
+}
+#mf_screener #menu3 label:nth-child(even) {
+  background: #f1f2f2;
+}
+#mf_screener #menu4 .outer_wrapper_fund {
+  border: 1px solid #555555;
+  background-color: #f2f2f2;
+  margin-top: 3px;
+  width: 100%;
+  padding: 10px;
+  height: 310px;
+}
+#mf_screener .shda .snaphist button {
+  font-size: 14px;
+  border: 0;
+  border-bottom: 2px solid #f1f2f2;
+  border-radius: 4px 4px 0 0;
+  color: #3b3f42;
+  background: #f1f2f2;
+  text-shadow: none;
+  padding: 6px 12px;
+  outline: none;
+}
+#mf_screener .shda .snaphist button.active{
+  border: 0;
+  border-bottom: 5px solid #2d94e7;
+  background-color: #a2d2f7;
+  font-weight: 600;
+  text-shadow: none;
+}
+#mf_screener .shda .btn_hist {
+  width: 48.7%;
+}
 
 
 
@@ -503,3 +730,114 @@ img {
 
 
 
+
+
+
+
+
+
+
+
+
+
+/*.ui-widget-content {
+    border: 1px solid #cab858;
+    background: #FDE76F;
+}
+.ui-state-default, .ui-state-focus {
+    border: 8px solid #978a42;
+    background: #978a42;
+    outline: 0;
+}
+*/
+
+#sip_calculator {
+  
+}
+#sip_calculator .sip_fill {
+  padding-top: 1.5em;
+  border: 2px solid #f1f2f2;
+}
+#sip_calculator label {
+    font-weight: 400;
+    font-size: 14px;
+    color: #3b3f42;
+    margin-top: 5px;
+}
+#sip_calculator label h6 {
+    margin: 0;
+    color: #787979;
+}
+#sip_calculator .btn-default {
+    border: 2px solid #7fb800;
+    background: #f1f2f2;
+    text-shadow: none;
+    padding: 3px 6px;
+    margin: 0 5px;
+}
+#sip_cal_bg {
+   background-image: url("../assets/mf/tree.png");
+   background-repeat: no-repeat;
+   -webkit-background-size: 100%;
+   -moz-background-size: 100%;
+   -o-background-size: 100%;
+   background-size: 100%;
+   min-height: 400px;
+}
+#sip_cal_tp2 .btn {
+  padding: 0 8px;
+  color: #3b3f42;
+  font-weight: 900;
+  margin-bottom: -4px;
+}
+#sip_cal_bg .table>tbody>tr>td{
+  border-top: 0;
+}
+#sip_cal_overlap {
+  background: #2e5379;
+  height: 320px;
+  opacity: 0.9;
+  cursor: pointer;
+}
+#sip_cal_overlap_text {
+  padding-top: 15%;
+}
+#sip_cal_overlap_text h4 {
+  color: #fff;
+}
+#sip_cal_t2 {
+  background: #44a0ea;
+  font-size: 16px;
+  color: #fff;
+}
+#sip_cal_t4 {
+  background: #98c632;
+  font-size: 16px;
+  color: #fff;
+}
+#sip_cal_t5 {
+  font-size: 20px;
+  color: #17406B;
+}
+@media screen and (max-width: 1199px) {
+  #sip_cal_bg {
+    background-image: none;
+    padding-bottom: 1em;
+  }
+}
+@media screen and (max-width: 767px) {
+  #sip_calculator .sip_pad {
+    padding-top: 0.6em;
+  }
+  #sip_calculator #sip_cal_t3 tbody tr td:first-child {
+    width: 130px;
+  }
+  #sip_calculator #sip_cal_t3 tbody tr td:nth-child(3) {
+    width: 70px;
+  }
+}
+@media screen and (max-width: 400px) {
+#sip_calculator label {
+    font-size: 15px;
+  }
+}

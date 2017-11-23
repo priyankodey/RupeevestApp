@@ -15,6 +15,8 @@
 
 //         });
 // }
+
+// console.log("qqqqqqqqqqqqqqqqqqqqqqqq");
 var curr_ip='http://192.168.1.22:3000/'
 
 function test_graph(scheme_name,schemecode)
@@ -215,9 +217,9 @@ function test_graph(scheme_name,schemecode)
 
         // apply the date pickers
         setTimeout(function () {
-        	console.log("333333333333333333333");
+        	
             $('input.highcharts-range-selector', $(chart.container).parent()).datepicker();
-             console.log("333333333333333333333");  
+             
         }, 0);
     });
 
