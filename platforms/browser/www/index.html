@@ -38,6 +38,7 @@
 
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="img/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">  
     <link rel="stylesheet" href="css/datepicker.min.css">
@@ -56,137 +57,169 @@
         <div class="content-block">
             <!-- <p>Left panel content goes here</p> -->
            <div class="content-block-title"></div>
-                <div class="list-block accordion-list">
+                <div class="list-block">
+                    <div id="sidepanel_head">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <img id="sidepanel_head_img" src="img/icons/logo.png" alt="RupeeVest" />
+                            </div>
+                            <div class="col-xs-6"><span id="sidepanel_user_name">Hello Guest</span></div>
+                            <div class="col-xs-6"><span id="sidepanel_log_flag" class="pull-right">Login</span></div>
+                        </div>
+                    </div>
                     <ul>
-                        <li class="accordion-item"><a href="#" class="item-content item-link">
-                            <div class="item-inner">
-                              <div class="item-title">Why RupeeVest</div>
-                            </div></a>
-                          <div class="accordion-item-content">
-                            <!-- <div class="content-block"> -->
-                                <a href="login.html" class="item-content item-link">
-                                    How It Works
-                                </a>
-                                <a href="fund_details.html?scheme_code=716" class="item-content item-link">
-                                    Security
-                                </a>
-                                <a href="about.html" class="item-content item-link">
-                                    About Us
-                                </a>
-                                <a href="#" class="item-content item-link">
-                                    Blog
-                                </a>
-                            <!-- </div> -->
-                          </div>
+                        <li class="">
+                            <a href="index.html" class="item-content item-link">
+                              <div class="item-title"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></div></a>
                         </li>
-                        
-                        <li class="accordion-item"><a href="#" class="item-content item-link">
-                            <div class="item-inner">
-                              <div class="item-title">What We Offer</div>
-                            </div></a>
-                          <div class="accordion-item-content">
-                            <!-- <div class="content-block"> -->
-                                <a href="is_investment_solution.html" class="item-content item-link">
-                                    Investment Solutions
-                                </a>
-                                <a href="mutualfund.html" class="item-content item-link">
-                                    Mutual Funds
-                                </a>
-                                <a href="about.html" class="item-content item-link">
-                                    Fixed Deposits
-                                </a>
-                                <a href="#" class="item-content item-link">
-                                    NRI Services
-                                </a>
-                            <!-- </div> -->
-                          </div>
+                        <li class="">
+                            <a href="index.html" class="item-content item-link">
+                              <div class="item-title"><i class="fa fa-user" aria-hidden="true"></i><span>Dashboard</span></div></a>
+                        </li>
+                        <li class="">
+                            <a href="about.html" class="item-content item-link">
+                              <div class="item-title">
+                                <i class="fa fa-question" aria-hidden="true"></i><span>Why RupeeVest</span>
+                              </div>
+                            </a>
                         </li>
 
-                        <li class="accordion-item"><a href="#" class="item-content item-link">
-                            <div class="item-inner">
-                              <div class="item-title">Tools</div>
-                            </div></a>
-                          <div class="accordion-item-content">
-                            <!-- <div class="content-block"> -->
-                                <a href="screener.html" class="item-content item-link">
-                                   MF Screener
-                                </a>
-                                <a href="#" class="item-content item-link">
-                                   MF Comparison
-                                </a>
-                                <a href="about.html" class="item-content item-link">
-                                   MF Rolling Return
-                                </a>
-                                <a href="#" class="item-content item-link">
-                                   MF SIP Return
-                                </a>
-                                <a href="#" class="item-content item-link">
-                                   Stocks Held by MFs
-                                </a>
-                                <ul>
-                                    <li class="accordion-item">
-                                        <a href="#" class="item-content item-link">
-                                          <div class="item-inner">
-                                            <div class="item-title">Finalcial Planning</div>
-                                            </div>
-                                        </a>
-                                         <div class="accordion-item-content">
-                                            <!-- <div class="content-block"> -->
-                                                <a href="#" class="item-content item-link">
-                                                   Power Of Compounding
-                                                </a>
-                                                <a href="#" class="item-content item-link">
-                                                   Save Tax
-                                                </a>
-                                            <!-- </div> -->
-                                        </div>
-                                    </li>
-                                </ul>
+                        <li class="accordion-item">
+                            <a href="#" class="item-content item-link ">
+                              <div class="item-title"><i class="fa fa-steam" aria-hidden="true"></i><span>What We Offer</span><i class="fa fa-plus pull-right"></i></div>
+                            </a>
+                            <ul class="accordion-item-content">
+                                <li><a href="OfferInvestmentSolution.html" class="item-content item-link">
+                                      <div class="item-title"><i class="fa fa-car" aria-hidden="true"></i><span>Investment Solutions</span></div></a>
+                                </li>
+                                <li><a href="OfferMutualFund.html" class="item-content item-link">
+                                      <div class="item-title"><i class="fa fa-binoculars" aria-hidden="true"></i><span>Mutual funds</span></div></a>
+                                </li>
+                                <li><a href="OfferFixedDeposit.html" class="item-content item-link">
+                                      <div class="item-title"><i class="fa fa-bolt" aria-hidden="true"></i><span>Fixed Deposits</span></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-                                 <ul>
-                                    <li class="accordion-item">
-                                        <a href="#" class="item-content item-link">
-                                          <div class="item-inner">
-                                            <div class="item-title">Calculators</div>
-                                            </div>
-                                        </a>
-                                         <div class="accordion-item-content">
-                                            <!-- <div class="content-block"> -->
-                                                <a href="calculatorSIP.html" class="item-content item-link">
-                                                   SIP Calculator
-                                                </a>
-                                                <a href="#" class="item-content item-link">
-                                                   FD Calculator
-                                                </a>
-                                                <a href="#" class="item-content item-link">
-                                                   CAGR Calculator
-                                                </a>
-                                            <!-- </div> -->
-                                        </div>
-                                    </li>
-                                </ul>  
-                            <!-- </div> -->
-                          </div>
+                        <li class="accordion-item">
+                            <a href="#" class="item-content item-link">
+                              <div class="item-title"><i class="fa fa-wrench" aria-hidden="true"></i><span>Tools</span><i class="fa fa-plus pull-right"></i></div>
+                            </a>                            
+                            <ul class="accordion-item-content">
+                              <li>
+                                <a href="ToolsScreener.html" class="item-content item-link">
+                                    <div class="item-title">
+                                      <i class="fa fa-desktop" aria-hidden="true"></i>
+                                      <span>MF Screener</span>
+                                    </div>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="ToolsComparison.html" class="item-content item-link">
+                                    <div class="item-title">
+                                      <i class="fa fa-th-large" aria-hidden="true"></i>
+                                      <span>MF Comparison</span>
+                                    </div>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="ToolsRollingReturn.html" class="item-content item-link">
+                                    <div class="item-title">
+                                      <i class="fa fa-compass" aria-hidden="true"></i>
+                                      <span>MF Rolling Return</span>
+                                    </div>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="ToolsSIPReturn.html" class="item-content item-link">
+                                    <div class="item-title">
+                                      <i class="fa fa-code" aria-hidden="true"></i>
+                                      <span>MF Sip Return</span>
+                                    </div>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="ToolsStocksHeld.html" class="item-content item-link">
+                                    <div class="item-title">
+                                      <i class="fa fa-cubes" aria-hidden="true"></i>
+                                      <span>Stock Held by MFs</span>
+                                    </div>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="ToolsCalculatorSIP.html" class="item-content item-link">
+                                    <div class="item-title">
+                                      <i class="fa fa-line-chart" aria-hidden="true"></i>
+                                      <span>SIP Calculator</span>
+                                    </div>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="ToolsCalculatorFD.html" class="item-content item-link">
+                                    <div class="item-title">
+                                      <i class="fa fa-flag" aria-hidden="true"></i>
+                                      <span>FD Calculator</span>
+                                    </div>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="ToolsCalculatorCAGR.html" class="item-content item-link">
+                                    <div class="item-title">
+                                      <i class="fa fa-folder-open" aria-hidden="true"></i>
+                                      <span>CAGR Calculator</span>
+                                    </div>
+                                </a>
+                              </li>
+                          </ul>
+                        </li>
+
+                        <li class="">
+                            <a href="index.html" class="item-content item-link">
+                              <div class="item-title"><i class="fa fa-info" aria-hidden="true"></i><span>FAQs</span></div></a>
+                        </li>
+                        <li class="">
+                            <a href="index.html" class="item-content item-link">
+                              <div class="item-title"><i class="fa fa-share-square-o" aria-hidden="true"></i><span>Share this App</span></div></a>
+                        </li>
+                        <li class="">
+                            <a href="index.html" class="item-content item-link">
+                              <div class="item-title"><i class="fa fa-phone" aria-hidden="true"></i><span>Contact Us &amp; Help</span></div></a>
+                        </li>
+                        <li class="">
+                            <a href="index.html" class="item-content item-link">
+                              <div class="item-title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><span>Disclaimer</span></div></a>
                         </li>
 
                     </ul>
+                    
                 </div>
         </div>
     </div>
-    <div id="RVNavbar">
-        <div class="navbar">
-          <div class="navbar-inner">
-              <div class="right">                  
-                  <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
-              </div>
-              <div class="center sliding">RupeeVest</div>
-             
-          </div>
-        </div>
-    </div>
+    
 
    
     <div class="views">
+        <div id="RVNavbar">
+            <div class="navbar">
+              <div class="navbar-inner">
+                  <div class="left">                  
+                      <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                  </div>
+                  <div class="center">
+                    <span id="navbar_info_span">RupeeVest</span>
+                    <input type="text" id="fund_names" class="form-control  ui-autocomplete-input" placeholder="Search mutual funds here..." autocomplete="off">
+                  </div>
+                 <div class="right">
+                    <a href="#" class="" id="navbar_search_btn"><i class="fa fa-search" aria-hidden="true"></i></a>
+                    <a href="#" class="" id="navbar_close_btn"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </div>
+                 
+              </div>
+            </div>
+        </div>
+
+
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
             <!-- Top Navbar-->
@@ -194,16 +227,100 @@
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
             <div class="pages navbar-through toolbar-through">
                 <!-- Page, "data-page" contains page name -->
-                <div data-page="index" class="page" id="home">
+                <div data-page="index" class="page" id="IndexHome">
                     <!-- Scrollable page content -->
                     <div class="page-content">
 
                         <div class="container">
-                            <div class="row HomeTop">
-                                <div class="col-xs-12 text-center">
+                            <div class="row">
+                                <div class="col-xs-12 HomeTop text-center">
                                     <h1>Investment Solutions for a Brighter Financial Future</h1>
                                 </div>
-                            </div>                      
+                            </div> 
+                            <div class="row text-center MFFD">
+                                <div class="col-xs-6 mf">
+                                    <a href="OfferMutualFund.html">
+                                        <img src="img/home/HomeMutualFund.png" alt="Mutual Fund">
+                                        <h5>Mutual Funds</h5>
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 fd">
+                                    <a href="OfferFixedDeposit.html">
+                                        <img src="img/home/HomeFixedDeposit.png" alt="Fixed Deposit">
+                                        <h5>Fixed Deposits</h5>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row text-center invSol">
+                                <div class="col-xs-12 invSolTop">
+                                    <h3>Investment Solutions</h3>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="#">
+                                        <img src="img/home/HomeISAABPEquity9010.png" alt="Asset Allocation based Portfolios">
+                                        <h6>Asset Allocation based Portfolios</h6>
+                                    </a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="#">
+                                        <img src="img/home/HomeISGoalWealthCreation.png" alt="Goal based Portfolios">
+                                        <h6>Goal based Portfolios</h6>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row text-center innoTools">
+                                <div class="col-xs-12 innoToolsTop">
+                                    <h3>Innovative Tools</h3>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="ToolsScreener.html">
+                                        <img src="img/home/HomeInnoToolsScreener.png" alt="MF Screener">
+                                        <h6>MF Screener</h6>
+                                    </a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="ToolsComparison.html">
+                                        <img src="img/home/HomeInnoToolsComparison.png" alt="MF Comparison">
+                                        <h6>MF Comparison</h6>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="ToolsRollingReturn.html">
+                                        <img src="img/home/HomeInnoToolsRolling.png" alt="MF Rolling Return">
+                                        <h6>MF Rolling Return</h6>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="ToolsSIPReturn.html">
+                                        <img src="img/home/HomeInnoToolsSIP.png" alt="MF SIP Return">
+                                        <h6>MF SIP Return</h6>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="ToolsStocksHeld.html">
+                                        <img src="img/home/HomeInnoToolsStocks.png" alt="Stocks held by MFs">
+                                        <h6>Stocks held by MFs</h6>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="ToolsCalculatorSIP.html">
+                                        <img src="img/home/HomeCalculatorSIP.png" alt="SIP Calculator">
+                                        <h6>SIP Calculator</h6>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="ToolsCalculatorFD.html">
+                                        <img src="img/home/HomeCalculatorFD.png" alt="FD Calculator">
+                                        <h6>FD Calculator</h6>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="ToolsCalculatorCAGR.html">
+                                        <img src="img/home/HomeCalculatorCAGR.png" alt="CAGR Calculator">
+                                        <h6>CAGR Calculator</h6>
+                                    </a>
+                                </div>
+                            </div>                     
                         </div>
 
 
@@ -213,13 +330,12 @@
                 </div>
             </div>
             <!-- Bottom Toolbar-->
-            <div class="toolbar">
+            <!-- <div class="toolbar">
                 <div class="toolbar-inner">
-                    <!-- Toolbar links -->
                     <a href="#" class="link">Link 1</a>
                     <a href="#" class="link">Link 2</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 

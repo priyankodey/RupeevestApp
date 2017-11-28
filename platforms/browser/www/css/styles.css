@@ -46,55 +46,45 @@ body {
   font-size: 12px;
   font-style: normal;
   line-height: 18px;
-  font-weight: 400;
-  color: #5f6469;
+  font-weight: 300;
+  color: #333;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 h1, h2, h3, h4, h5, h6, p, span, blockquote, hr {
   position: relative;
   font-family: verdana, arial, helvetica, sans-serif;
+  font-weight: 300;
 }
 h1 {
-  letter-spacing: -1px;
   font-size: 22px;
   color: #FFF;
   margin-top: 10px;
 }
 h2 {
-  letter-spacing: -1px;
   font-size: 20px;
   color: #3b3f42;
+  margin-top: 10px;
 }
 h3 {
-  letter-spacing: -1px;
   font-size: 18px;
   color: #3b3f42;
+  margin-top: 10px;
 }
 h4 {
   color: #3b3f42;
-  letter-spacing: -1px;
+  font-size: 16px;
 }
 p {
   font-style: normal;
-  font-weight: 400;
   text-align: justify;
-  margin: 0 0 10px;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 24px;
-  color: #5f6469;
 }
 p a {
   font-style: italic;
   text-decoration: underline;
-  line-height: 24px;
 }
 a {
   color: #6d9f00;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0;
   text-decoration: none;
   text-transform: none;
   -webkit-transition: all ease 0.3s;
@@ -104,10 +94,6 @@ a {
 }
 a:hover, a:focus {
   color: #7fb800;
-}
-ul li, ol li {
-  font-size: 14px;
-  line-height: 24px;
 }
 hr {
   border-top: 1px solid #c8cbcd;
@@ -131,36 +117,35 @@ img {
   background: #17406B;
 }
 #RVNavbar .navbar .center {
-  font-weight: 500;
+  font-weight: 300;
+  width: 100%;
 } 
-.navbar-fixed .page-content, .navbar-through .page-content {
+#RVNavbar .navbar-fixed .page-content, .navbar-through .page-content {
   padding-top: 0;
 }
+#RVNavbar #navbar_search_btn {
+  color: #fff;
+}
+#RVNavbar #navbar_close_btn{
+  color: #fff;
+}
 #RVSidebar {
-  margin-top: 44px;
+  margin-top: 0px;
 }
-/*body.with-panel-left-reveal .views{
-  transform: translate3d(0px, 0, 0);
+#RVSidebar .fa {
+  width: 20px;
 }
-*/
-/*.panel.panel-left.panel-reveal{
-  z-index: 6000;
-}
-*/.list-block .item-inner:after {
+#RVSidebar .list-block .item-inner:after {
   background: none;
 }
-.list-block ul:before {
+#RVSidebar .list-block ul:before {
   background: none;
 }
-.item-content.item-link{
+#RVSidebar .item-content.item-link{
   background: #17406B;
   color: #fff;
   border: 1px solid #9999ff;
 }
-
-/*.item-title{
-  color: #fff;
-}*/
 #RVSidebar .content-block {
   margin: 0;
   padding: 0;
@@ -171,32 +156,48 @@ img {
 #RVSidebar .content-block-title+.list-block {
   margin-top: 0;
 }
-#RVSidebar .accordion-item .item-content.item-link{
- background: #17406B;
- color: #fff;
- border: 1px solid #9999ff;
+#RVSidebar .list-block .item-content{
+  min-height: 34px;
+}
+#RVSidebar .item-content.item-link{
+  background: #17406B;
+  color: #fff;
+  border: 1px solid #9999ff;
+  font-size: 12px;
+  padding-left: 10px;
+}
+#RVSidebar .accordion-item .item-content.item-link .item-title{
+  width: 100%;
 }
 #RVSidebar .accordion-item-content .item-content.item-link{
- background: #456688;
- color: #fff;
- border: 1px solid #9999ff;
+  background: #456688;
+  color: #fff;
+  border: 1px solid #9999ff;
+  padding-left: 2em;
 }
 #RVSidebar .accordion-item-content .accordion-item-content .item-content.item-link{
- background: #738ca6;
- color: #fff;
- border: 1px solid #9999ff;
+  background: #738ca6;
+  color: #fff;
+  border: 1px solid #9999ff;
+}
+#RVSidebar #sidepanel_head span{
+  color: #fff;
+}
+#RVSidebar #sidepanel_head #sidepanel_user_name{
+  margin-left: 1em;
+  font-size: 11px;
+}
+#RVSidebar #sidepanel_head #sidepanel_log_flag{
+  margin-right: 1em;
+  font-size: 11px;
+}
+#RVSidebar #sidepanel_head{
+  background: linear-gradient(to right, rgba(18,51,86,1), rgba(38,89,149,1));;
+}
+#RVSidebar #sidepanel_head #sidepanel_head_img{
+  margin:1em 10px;
 }
 
-#RVSidebar .list-block:not(.media-list) .accordion-item-expanded:not(.media-item)>.item-link .item-inner {
-  background-image: url("../img/fa-minus.png");
-  background-size: 10px 10px;
-
-
-}
-#RVSidebar .list-block .item-link .item-inner {
-  background-image: url("../img/fa-plus.png");
-  background-size: 10px 10px;
-}
 
 /* *************************************** 
                    My CSS 
@@ -229,41 +230,107 @@ img {
   content: attr(data-name) "@" attr(data-domain) "." attr(data-tld); 
 }
 .HeadTop {
-  background: #0099ff;
+  background: #2f5378;
 }
 
 /**************
     Home page 
 ***************/
 
-#home .HomeTop {
+#IndexHome .HomeTop {
   background: #2f5378;
   height: 12em;
 }
-#home h1 {
+#IndexHome h1 {
+  font-size: 20px;
   margin-top: 2em;
 }
+#IndexHome h3 {
+  color: #FFF;
+}
+#IndexHome a {
+  color: #333;
+}
+#IndexHome .MFFD img {
+  margin: 1em 0 0 0;
+}
+#IndexHome .mf, #IndexHome .fd {
+  background: #1c4d80;
+  padding-bottom: 1em;
+}
+#IndexHome .mf a, #IndexHome .fd a {
+  color: #fff;
+}
+#IndexHome .invSolTop {
+  background: #2f5378;
+}
+#IndexHome .invSol {
+  padding: 0 0 1em 0;
+}
+#IndexHome .invSol img {
+  margin: 1em 0 0 0;
+}
+#IndexHome .innoToolsTop {
+  background: #2f5378;
+}
+#IndexHome .innoTools {
+  padding: 0 0 1em 0;
+}
+#IndexHome .innoTools img {
+  margin: 1em 0 0 0;
+}
+
 /****************
     About page 
 *****************/
-#about_us h3 {
-  display: inline;
+#why_RV h2 {
+  border-bottom: 1px solid #17406B;
 }
-#about_us img {
+#why_RV p {
+  text-align: left;
+}
+#why_RV .HowItInner, #why_RV .AboutUsInner {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 1px 0px 15px 5px rgba(0,0,0,0.075);
+  height: 100px;
+}
+#why_RV .HowItInner img, #why_RV .AboutUsInner img {
+  background: #17406B;
   width: 100px;
+  padding: 10px;
+  margin: 0 5px 10px 0;
 }
-#about_us span {
-  font-size: 14px;
+#why_RV .HowItInner p, #why_RV .AboutUsInner p {
+  margin-right: 5px;
+  line-height: 16px;
 }
-#about_us .well {
-  padding: 15px;
-  background-color: #f1f2f2;
-  border-radius: 0px;
+#why_RV .HowItInner h5, #why_RV .AboutUsInner h5 {
+  padding-top: 5px;
+  margin: 0;
 }
-#about_us .varun, #about_us .mayank, #about_us .mitul {
-  padding-top: 1em;
+#why_RV .SecurityInner {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 1px 0px 15px 5px rgba(0,0,0,0.075);
+  height: 100px;
+  padding-left: 5px;
 }
- 
+#why_RV .SecurityInner img {
+  background: #17406B;
+  width: 100px;
+  padding: 10px;
+  margin: 0 0 10px 5px;
+}
+#why_RV .SecurityInner p {
+  margin-right: 5px;
+  line-height: 16px;
+}
+#why_RV .SecurityInner h5 {
+  padding-top: 5px;
+  margin: 0;
+}
+
 
 
 /**********************************

@@ -34,14 +34,27 @@ $$(document).on('deviceready', function() {
     // console.log("Device is ready!");
     //  console.log("-------------------------1----------------");
     $$.get('http://192.168.1.22:3000/functionalities/get_user_info', {iin: 5011179660},function (data) {
-        // console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-       // console.log(data);
-        //console.log(data[inv_name]);
-});
+       });
 
-                // $$.getJSON('http://192.168.1.22:3000/functionalities/get_user_info?iin=5011179660', function (data) {
-                //     console.log(data);
-                // });
+            $$('#fund_names').hide();
+            $$('#navbar_close_btn').hide();
+            $$('#navbar_search_btn').on('click', function (e) {
+                    $$('#fund_names').show();
+                    $$('#navbar_info_span').hide();
+                    $$('#navbar_close_btn').show();
+                    $$('#navbar_search_btn').hide();
+            });
+
+            $$('#navbar_close_btn').on('click', function (e) {
+                    $$('#fund_names').hide();
+                    $$('#navbar_info_span').show();
+                    $$('#navbar_close_btn').hide();
+                    $$('#navbar_search_btn').show();
+            });
+            $$('li.accordion-item').on('click', function (e) {
+                $(this.children[0].children[0].children[2]).toggleClass("fa-minus");
+             });
+            
 });
 
 
@@ -392,7 +405,7 @@ $$(document).on('pageInit', function (e) {
     
 
 
-    if(page.name==='mutualfund')
+    if(page.name==='OfferMutualFund')
     {
         // console.log("MF");
         $$.get(curr_ip+'app_services/mf_home_for_app',function (data) 
@@ -486,9 +499,9 @@ $$(document).on('pageInit', function (e) {
         });
     }
 
-    if(page.name==='screener')
+    if(page.name==='ToolsScreener')
     {
-        //console.log("Screener1111111111111111");
+        //console.log("ToolsScreener1111111111111111");
 
         $.getScript("js/screener.js");
         //start_loading();
