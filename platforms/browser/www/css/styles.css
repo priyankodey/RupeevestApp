@@ -131,6 +131,8 @@ img {
 }
 #RVSidebar {
   margin-top: 0px;
+  background: linear-gradient(to right, rgba(18,51,86,1), rgba(38,89,149,1));
+  border-radius: 0;
 }
 #RVSidebar .fa {
   width: 20px;
@@ -140,11 +142,6 @@ img {
 }
 #RVSidebar .list-block ul:before {
   background: none;
-}
-#RVSidebar .item-content.item-link{
-  background: #17406B;
-  color: #fff;
-  border: 1px solid #9999ff;
 }
 #RVSidebar .content-block {
   margin: 0;
@@ -162,7 +159,7 @@ img {
 #RVSidebar .item-content.item-link{
   background: #17406B;
   color: #fff;
-  border: 1px solid #9999ff;
+  border-top: 1px solid #123356;
   font-size: 12px;
   padding-left: 10px;
 }
@@ -172,13 +169,13 @@ img {
 #RVSidebar .accordion-item-content .item-content.item-link{
   background: #456688;
   color: #fff;
-  border: 1px solid #9999ff;
+  border-top: 1px solid #123356;
   padding-left: 2em;
 }
 #RVSidebar .accordion-item-content .accordion-item-content .item-content.item-link{
   background: #738ca6;
   color: #fff;
-  border: 1px solid #9999ff;
+  border-top: 1px solid #123356;
 }
 #RVSidebar #sidepanel_head span{
   color: #fff;

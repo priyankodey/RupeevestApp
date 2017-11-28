@@ -73,6 +73,11 @@ $$(document).on('pageInit', function (e) {
     var page = e.detail.page;
     //console.log(page.url);
 
+    if (page.url.includes('.html')===true){
+        $('#RVSidebar').removeClass("active");
+        $('body').removeClass("with-panel-left-reveal");
+    }
+
     if (page.name === 'about') {
         // Following code will be executed for page with data-page attribute equal to "about"
         //myApp.alert('Here comes About page');
