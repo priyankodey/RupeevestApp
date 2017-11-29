@@ -122,6 +122,7 @@ img {
 } 
 #RVNavbar .navbar-fixed .page-content, .navbar-through .page-content {
   padding-top: 0;
+  padding-bottom: 0;
 }
 #RVNavbar #navbar_search_btn {
   color: #fff;
@@ -222,9 +223,6 @@ img {
 .form-control {
   height: 32px;
   padding: 3px 6px;
-}
-.cryptedmail:after {
-  content: attr(data-name) "@" attr(data-domain) "." attr(data-tld); 
 }
 .HeadTop {
   background: #2f5378;
@@ -793,115 +791,53 @@ img {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-/*.ui-widget-content {
-    border: 1px solid #cab858;
-    background: #FDE76F;
+/************************
+    Contact
+*************************/
+#Contact h2 {
+  margin: 5px 0;
 }
-.ui-state-default, .ui-state-focus {
-    border: 8px solid #978a42;
-    background: #978a42;
-    outline: 0;
+#Contact .ContHead {
+  background: #e4e4e4;
 }
-*/
-
-#sip_calculator {
-  
-}
-#sip_calculator .sip_fill {
-  padding-top: 1.5em;
-  border: 2px solid #f1f2f2;
-}
-#sip_calculator label {
-    font-weight: 400;
-    font-size: 14px;
-    color: #3b3f42;
-    margin-top: 5px;
-}
-#sip_calculator label h6 {
-    margin: 0;
-    color: #787979;
-}
-#sip_calculator .btn-default {
-    border: 2px solid #7fb800;
-    background: #f1f2f2;
-    text-shadow: none;
-    padding: 3px 6px;
-    margin: 0 5px;
-}
-#sip_cal_bg {
-   background-image: url("../assets/mf/tree.png");
-   background-repeat: no-repeat;
-   -webkit-background-size: 100%;
-   -moz-background-size: 100%;
-   -o-background-size: 100%;
-   background-size: 100%;
-   min-height: 400px;
-}
-#sip_cal_tp2 .btn {
-  padding: 0 8px;
-  color: #3b3f42;
-  font-weight: 900;
-  margin-bottom: -4px;
-}
-#sip_cal_bg .table>tbody>tr>td{
-  border-top: 0;
-}
-#sip_cal_overlap {
-  background: #2e5379;
-  height: 320px;
-  opacity: 0.9;
-  cursor: pointer;
-}
-#sip_cal_overlap_text {
-  padding-top: 15%;
-}
-#sip_cal_overlap_text h4 {
-  color: #fff;
-}
-#sip_cal_t2 {
-  background: #44a0ea;
+#Contact p {
   font-size: 16px;
-  color: #fff;
+  margin-top: 10px;
 }
-#sip_cal_t4 {
-  background: #98c632;
+#Contact address {
   font-size: 16px;
-  color: #fff;
+  font-weight: 500;
 }
-#sip_cal_t5 {
-  font-size: 20px;
-  color: #17406B;
+#Contact address .fa {
+  min-width: 1.5em; 
 }
-@media screen and (max-width: 1199px) {
-  #sip_cal_bg {
-    background-image: none;
-    padding-bottom: 1em;
-  }
+#Contact ul {
+  margin-bottom: 0;
 }
-@media screen and (max-width: 767px) {
-  #sip_calculator .sip_pad {
-    padding-top: 0.6em;
-  }
-  #sip_calculator #sip_cal_t3 tbody tr td:first-child {
-    width: 130px;
-  }
-  #sip_calculator #sip_cal_t3 tbody tr td:nth-child(3) {
-    width: 70px;
-  }
+#Contact ul li {
+  border-bottom: 1px solid #ccc;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 5px 15px;
+  font-size: 16px;
+  min-height: 35px;
 }
-@media screen and (max-width: 400px) {
-#sip_calculator label {
-    font-size: 15px;
-  }
+#Contact ul li a {
+  display: block;
+}
+#Contact ul li a .fa {
+  font-size: 24px;
+  width: 1.5em;
+}
+#Contact ul li a .fa-twitter {
+  color: #1b95e0;
+}
+#Contact ul li a .fa-linkedin {
+  color: #0077b5;
+}
+#Contact ul li a .fa-facebook {
+  color: #4267b2;
+}
+#Contact ul li a .fa-google-plus {
+  color: #dd4b39;
 }
