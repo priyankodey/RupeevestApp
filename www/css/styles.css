@@ -94,6 +94,7 @@ a {
 }
 a:hover, a:focus {
   color: #7fb800;
+  text-decoration: none;
 }
 hr {
   border-top: 1px solid #c8cbcd;
@@ -226,6 +227,8 @@ img {
 }
 .HeadTop {
   background: #2f5378;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
 }
 
 /**************
@@ -285,9 +288,10 @@ img {
   text-align: left;
 }
 #why_RV .HowItInner, #why_RV .AboutUsInner {
-  background: #fff;
+  background: #eee;
   border-radius: 6px;
-  box-shadow: 1px 0px 15px 5px rgba(0,0,0,0.075);
+  /*box-shadow: 1px 0px 15px 5px rgba(0,0,0,0.075);*/
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
   height: 100px;
 }
 #why_RV .HowItInner img, #why_RV .AboutUsInner img {
@@ -305,9 +309,9 @@ img {
   margin: 0;
 }
 #why_RV .SecurityInner {
-  background: #fff;
+  background: #eee;
   border-radius: 6px;
-  box-shadow: 1px 0px 15px 5px rgba(0,0,0,0.075);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
   height: 100px;
   padding-left: 5px;
 }
@@ -332,7 +336,7 @@ img {
     Mutual Fund Home
 ***********************************/
 
-#mfund_home table thead th .glyphicon {
+/*#mfund_home table thead th .glyphicon {
   color: #fff;
 }
 #mfund_home table tbody tr td {
@@ -440,8 +444,57 @@ img {
   position: absolute;
   right: 25px;
 }
+*/
 
 
+
+
+#mfund_home .sub_navbar_head .button{
+  border: none;
+  border-radius: 0 0 0 0;
+  color: #787979;
+}
+#mfund_home .sub_navbar_head .button.active{
+  background: none;
+  color: #333;
+  border-bottom: 5px solid #17406B;
+}
+#mfund_home .MFHeadTop{
+  background: #eee;
+  border-bottom: 1px solid #ccc;
+}
+#mfund_home .MFHeadSubTop{
+  margin-top: 1em;
+}
+#mfund_home .breadcrumb {
+ padding: 6px 6px;
+ margin: 10px 0 0 0;
+ background-color: #eee;
+ border: 1px solid #ccc;
+ border-radius: 6px;
+ box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+ min-height: 50px;
+}
+#mfund_home .MFHeadSubTop .buttons-row .button{
+  background: #fff;
+  border: 0px;
+  font-size: 12px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+#mfund_home .MFHeadSubTop .buttons-row .button.active{
+  background: #007aff;
+  color: #000000;
+}
+#mfund_home .MFHeadSubTop .mf_name{
+  font-size: 16px;
+}
+#mfund_home .content-block{
+  margin-top: 0px;
+}
+#mfund_home .mf_as_on {
+  float: right;
+}
 
 /**********************************
     Screener
@@ -631,169 +684,66 @@ img {
 
 
 
+/******************** 
+    Fixed deposit 
+*********************/
+
+#FixedDeposit #fd_all_list_head .breadcrumb {
+  padding: 6px 6px;
+  margin: 0 0 0 0;
+  border-bottom: 1px solid #ccc;
+  border-radius: 6px;
+  background: transparent;
+}
+#FixedDeposit #fd_all_list .breadcrumb {
+  padding: 6px 6px;
+  margin: 10px 0 0 0;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+  min-height: 50px;
+}
+#FixedDeposit #fd_all_list .breadcrumb .FDName {
+  font-size: 16px;
+}
+
 
 /**********************************
     Investment Solution
 ***********************************/
+#investment_solution #AssetABP {
+  margin-bottom: 2em;
+}
+#investment_solution #AssetABP .AssetABPInner, #investment_solution #GoalBP .GoalBPInner {
+  padding: 10px;
+  background: #eee;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+}
+#investment_solution #AssetABP .AssetABPInner img, #investment_solution #GoalBP .GoalBPInner img {
+  width: 100px;
+}
 
-#investment_solution .FullDoc img {
-  height: 160px;
+
+
+/*#investment_solution #AssetABP .AssetABPInner p {
+  margin-right: 5px;
+  line-height: 16px;
 }
-#investment_solution .FullDoc p {
-  margin: 0 0 10px 0;
-  line-height: 20px;
-  /*text-align: left;*/
-  font-size: 12px;
-}
-#investment_solution .FullDoc a:hover, #investment_solution .FullDoc a:focus {
-  text-decoration: none;
-}
-#investment_solution .FullDoc h3 {
-  margin: 0;  
-}
-#investment_solution .invSolBodyP1 {
-  /*background: #f1f2f2;*/
-  padding: 1em 0;
-    border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
-}
-#investment_solution .invSolBodyP2 {
-  padding: 3em 0;
-}
-#investment_solution .invSolBodyP2 .carousel {
-  /*display: inline-block;*/
-}
-#investment_solution .invSolBodyP3 {
-  /*background: #f1f2f2;*/
-  border-top: 1px solid #ddd;
-  padding: 1em;
-  height: 100px;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
-#investment_solution .invSolBodyP31 {
-  /*background: #f1f2f2;*/
-  border-bottom: 1px solid #ddd;
-  padding: 1em 1em 0 1em;
-  min-height: 70px;
-}
-#investment_solution .FullDoc a .invSolBody {
-  border: 1px solid;
-  /*border-top: 7px solid;  */
-  /*margin-top: 2em;*/
-  /*height: 50vh;*/
-  -webkit-transition: all 0.65s;
-  -moz-transition: all 0.65s;
-  -ms-transition: all 0.65s;
-  -o-transition: all 0.65s;
-  transition: all 0.65s;
-  -webkit-transform: scale(1.0);
-  -o-transform: scale(1.0);
-  -ms-transform: scale(1.0);
-  transform: scale(1.0);
-}
-#investment_solution .FullDoc a .invSolBody:hover {
-  -webkit-transform: scale(1.02);
-  -o-transform: scale(1.02);
-  -ms-transform: scale(1.02);
-  transform: scale(1.02);
-}
-#investment_solution #AssetABP .invSolBodyP1 {
-  background: #fff; 
-  border-bottom: 1px solid #ddd; 
-}
-#investment_solution #AssetABP .invSolBodyP1 h3 {
-  color: #0099ff;  
-}
-#investment_solution #AssetABP .invSolBody {
-  border-color: #0089e5;
-  border-radius: 4px;
-}
-#investment_solution #AssetABP .invSolBody:hover .invSolBodyP1 {
-  background: #0099ff;
-  -webkit-transition: all 0.65s;
-  -moz-transition: all 0.65s;
-  -ms-transition: all 0.65s;
-  -o-transition: all 0.65s;
-  transition: all 0.65s;
-}
-#investment_solution #AssetABP .invSolBody:hover .invSolBodyP1 h3 {
-  color: #fff;
-}
-#investment_solution #AssetABP .invSolBodyP2 {
-  background-image: url("../img/invSolution/InvSolBGAssetAlloc.png");
-  background-repeat: repeat;
-}
-#investment_solution #AssetABP .invSolBody:hover .invSolBodyP3 {
-  border-bottom: 15px solid #0099ff;
-  -webkit-transition: all 0.65s;
-  -moz-transition: all 0.65s;
-  -ms-transition: all 0.65s;
-  -o-transition: all 0.65s;
-  transition: all 0.65s;
-}
-#investment_solution #GoalBP .invSolBodyP1 {
-  background: #fff;  
-  border-bottom: 1px solid #ddd;
-}
-#investment_solution #GoalBP .invSolBodyP1 h3 {
-  color: #90bf6c;  
-}
-#investment_solution #GoalBP .invSolBody {
-  border-color: #90bf6c;
-  border-radius: 4px;
-}
-#investment_solution #GoalBP .invSolBody:hover .invSolBodyP1 {
-  background: #93cf66;
-    -webkit-transition: all 0.65s;
-  -moz-transition: all 0.65s;
-  -ms-transition: all 0.65s;
-  -o-transition: all 0.65s;
-  transition: all 0.65s;
-}
-#investment_solution #GoalBP .invSolBody:hover .invSolBodyP1 h3 {
-  color: #fff;
-}
-#investment_solution #GoalBP .invSolBodyP2 {
-  background-image: url("../img/invSolution/InvSolBGGoal.png");
-  background-repeat: repeat;
-}
-#investment_solution #GoalBP .invSolBody:hover .invSolBodyP3 {
-  border-bottom: 15px solid #93cf66;
-  -webkit-transition: all 0.65s;
-  -moz-transition: all 0.65s;
-  -ms-transition: all 0.65s;
-  -o-transition: all 0.65s;
-  transition: all 0.65s;
-}
-#investment_solution .carousel-fade .carousel-inner .item {
-  opacity: 0;
- -moz-transition: opacity ease-in-out .70s;
-  -o-transition: opacity ease-in-out .70s;
-  -webkit-transition: opacity ease-in-out .70s;
-  transition: opacity ease-in-out .70s;
-}
-#investment_solution .carousel-fade .carousel-inner .active {
-  opacity: 1;
-}
-#investment_solution .carousel-fade .carousel-inner .active.left,
-#investment_solution .carousel-fade .carousel-inner .active.right {
-  left: 0;
-  opacity: 0;
-  z-index: 1;
-}
-#investment_solution .carousel-fade .carousel-inner .next.left,
-#investment_solution .carousel-fade .carousel-inner .prev.right {
-  opacity: 1;
-}
-#investment_solution .carousel-fade .carousel-control {
-  z-index: 2;
-}
+#investment_solution #AssetABP .AssetABPInner h5 {
+  padding-top: 5px;
+  margin: 0;
+}*/
+
 
 
 /************************
     Contact
 *************************/
+#Contact .HeadTop {
+  margin-bottom: 0;
+}
 #Contact h2 {
   margin: 5px 0;
 }

@@ -1,250 +1,152 @@
 <div data-page="OfferMutualFund" class="page" id="mfund_home">
-    <div class="page-content">                
-        <div class="container">
-        <div class="row HeadTop">
-            <div class="col-xs-12 ">
-                <h1>Mutual Funds</h1>                
+  <div class="page-content">                
+    <div class="container">
+      <div class="row HeadTop">
+        <div class="col-xs-12 ">
+          <h1>Mutual Funds</h1>                
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-xs-12">
+          <span class="RV5star">RupeeVest 5 Star Rated Mutual Funds</span> ( <span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span> )
+        </div>
+      </div> -->
+      <div class="row MFHeadTop">
+        <div class="col-xs-12 ">
+          <div class="sub_navbar_head">
+            <div class="buttons-row">
+              <a href="#equity_tab" class="button active tab-link">Equity</a>
+              <a href="#debt_tab" class="button tab-link">Debt</a>
+              <a href="#hybrid_tab" class="button tab-link">Hybrid</a>
             </div>
+          </div>
         </div>
-        <div class="row">
-                                   
-            <div class="col-xs-12 part2">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><span class="RV5star">RupeeVest 5 Star Rated Mutual Funds</span> ( <span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span> )</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <!--  ***** Tab start *****  -->
-                                <div class="row">
-                                    <div class="col-xs-12">                             
-  
-  <ul class="list-inline" role="tablist">
-    <li role="presentation" class="active li_space"><a href="#EquityTab" aria-controls="EquityTab" role="tab" data-toggle="tab">
-      <div class="TopMFcircle EquityTopMFcircle">
-        Equity
-      </div></a>
-    </li>
-    <li role="presentation" class="li_space"><a href="#DebtTab" aria-controls="DebtTab" role="tab" data-toggle="tab">
-      <div class="TopMFcircle DebtTopMFcircle">
-        Debt
-      </div></a>
-    </li>
-    <li role="presentation" class=""><a href="#HybridTab" aria-controls="HybridTab" role="tab" data-toggle="tab">
-      <div class="TopMFcircle HybridTopMFcircle">
-        Hybrid
-      </div></a>
-    </li>
-  </ul>
+      </div>
 
-  <!-- Tab panes -->
-  <div class="tab-content MainTabContent">
-    <div role="tabpanel" class="tab-pane fade in active" id="EquityTab">
-     <div class="TopRatedArea EquityTriangleUp">
-      <div class="row">
-        <div class="col-xs-12">
-          <ul class="nav nav-pills nav-stacked" role="tablist">
-            <li role="presentation" class="active"><a href="#EquityLargeCap" aria-controls="EquityLargeCap" role="tab" data-toggle="tab">Equity : Large Cap</a></li>
-            <li role="presentation"><a href="#EquityMultiCap" aria-controls="EquityMultiCap" role="tab" data-toggle="tab">Equity : Multi Cap</a></li>
-            <li role="presentation"><a href="#EquityMidSmallCap" aria-controls="EquityMidSmallCap" role="tab" data-toggle="tab">Equity : Mid &amp; Small Cap</a></li>
-            <li role="presentation"><a href="#EquityTaxSavingELSS" aria-controls="EquityTaxSavingELSS" role="tab" data-toggle="tab">Equity : Tax Saving (ELSS)</a></li>
-          </ul> 
-        </div>
-        <div class="col-xs-12">
-          <div class="tab-content InnerTabContent">
-            <div role="tabpanel" class="tab-pane fade in active" id="EquityLargeCap">
-                  <div class="TopRatedInnerArea EquityLargeTriangleLeft">
-                    <table class="table table-striped table-condensed" id="Elargecap1">
-                      <tbody>                        
-                      </tbody>
-                    </table>
-                    <div class="mf_as_on">
-                      <h6></h6>
+   <div class="row MFHeadSubTop">
+    <div class="col-xs-12 ">
+      <div class="tabs-swipeable-wrap">
+        <div class="tabs">
+          <div id="equity_tab" class="page-content tab active">
+           <!--  <div class="content-block"> -->
+              <div class="">
+                <div class="buttons-row">
+                  <a href="#equity_large_tab" class="button active tab-link">Large Cap</a>
+                  <a href="#equity_multi_tab" class="button tab-link">Multi Cap</a>
+                  <a href="#equity_mid_small_tab" class="button tab-link">Mid &amp; Small Cap</a>
+                  <a href="#equity_elss_tab" class="button tab-link">Tax Saving (Elss)</a>
+                </div>
+              </div>
+              <div class="tabs-swipeable-wrap">
+                <div class="tabs">
+                  <div id="equity_large_tab" class="page-content tab active">
+                    <div class="content-block">
+              
+                    </div>
+                    <!-- <h6 class="mf_as_on"></h6> -->
+                  </div>
+                  <div id="equity_multi_tab" class="page-content tab">
+                    <div class="content-block">
+                      ... Equity multi content ...
+                    </div>
+                    <!-- <h6 class="mf_as_on"></h6> -->
+                  </div>
+                  <div id="equity_mid_small_tab" class="page-content tab">
+                    <div class="content-block">
+                      ... Equity mid and small content ...
+                    </div>
+                   <!--  <h6 class="mf_as_on"></h6> -->
+                  </div>
+                  <div id="equity_elss_tab" class="page-content tab">
+                    <div class="content-block">
+                      ... Equity elss content ...
+                    </div>
+                    <!-- <h6 class="mf_as_on"></h6> -->
+                  </div>
+                </div>
+              </div>
+            <!-- </div> -->
+          </div>
+          <div id="debt_tab" class="page-content tab">
+            <!-- <div class="content-block"> -->
+              <div class="">
+                <div class="buttons-row">
+                  <a href="#debt_liquid_tab" class="button active tab-link">Liquid</a>
+                  <a href="#debt_ultra_short_tab" class="button tab-link">Ultra Short</a>
+                  <a href="#debt_short_tab" class="button tab-link">Short</a>
+                  <a href="#debt_medium_long_tab" class="button tab-link">Medium &amp; Long</a>
+                </div>
+              </div>
+              <div class="tabs-swipeable-wrap">
+                <div class="tabs">
+                  <div id="debt_liquid_tab" class="page-content tab active">
+                    <div class="content-block">
+                        ... Debt Liquid content ...
+                    </div>
+                    <!-- <h6 class="mf_as_on"></h6> -->
+                  </div>
+                  <div id="debt_ultra_short_tab" class="page-content tab">
+                    <div class="content-block">
+                      ... Debt Ultra Short content ...
                     </div>
                   </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="EquityMultiCap">
-                <div class="TopRatedInnerArea EquityMultiTriangleLeft">
-                  <table class="table table-striped table-condensed" id="Emulti1">
-                      <tbody>                         
-                      </tbody>
-                  </table> 
-                  <div class="mf_as_on">
-                    <h6></h6>
-                  </div>                 
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="EquityMidSmallCap">
-                <div class="TopRatedInnerArea EquityMidSmallCapTriangleLeft">
-                  <table class="table table-striped table-condensed" id="Emidsmall1">
-                      <tbody>                         
-                      </tbody>
-                  </table>
-                  <div class="mf_as_on">
-                    <h6></h6>
-                  </div>                  
-                </div>              
-            </div>            
-            <div role="tabpanel" class="tab-pane" id="EquityTaxSavingELSS">
-                <div class="TopRatedInnerArea EquityTaxSavingELSSTriangleLeft">
-                  <table class="table table-striped table-condensed" id="Eelss1">
-                      <tbody>                        
-                      </tbody>
-                  </table>
-                  <div class="mf_as_on">
-                    <h6></h6>
+                  <div id="debt_short_tab" class="page-content tab">
+                    <div class="content-block">
+                      ... Debt Short content ...
+                    </div>
+                    <!-- <h6 class="mf_as_on"></h6> -->
                   </div>
-                </div>               
-            </div>            
-          </div>
-        </div>
-      </div>
-     </div>
-    </div>
-
-    <div role="tabpanel" class="tab-pane fade in" id="DebtTab">
-     <div class="TopRatedArea DebtTriangleUp">
-      <div class="row">
-        <div class="col-xs-12">
-          <ul class="nav nav-pills nav-stacked" role="tablist">
-            <li role="presentation" class="active"><a href="#DebtLiquid" aria-controls="DebtLiquid" role="tab" data-toggle="tab">Debt : Liquid</a></li>
-            <li role="presentation"><a href="#DebtUltraShortTerm" aria-controls="DebtUltraShortTerm" role="tab" data-toggle="tab">Debt : Ultra Short Term</a></li>
-            <li role="presentation"><a href="#DebtShortTermGILT" aria-controls="DebtShortTermGILT" role="tab" data-toggle="tab">Debt : Short Term</a></li>
-            <li role="presentation"><a href="#DebtMediumLongTermGILT" aria-controls="DebtMediumLongTermGILT" role="tab" data-toggle="tab">Debt : Medium and Long Term</a></li>
-            <!-- <li role="presentation"><a href="#DebtFTPFMP" aria-controls="DebtFTPFMP" role="tab" data-toggle="tab">Debt: FTP / FMP</a></li> -->
-          </ul> 
-        </div>
-        <div class="col-xs-12">
-          <div class="tab-content InnerTabContent">
-            <div role="tabpanel" class="tab-pane fade in active" id="DebtLiquid">
-              <div class="TopRatedInnerArea DebtLiquidTriangleLeft">
-                  <table class="table table-striped table-condensed">
-                      <tbody>                       
-                      </tbody>
-                  </table>
-                  <div class="mf_as_on">
-                    <h6></h6>
-                  </div>                  
-                </div>                  
-            </div>
-            <div role="tabpanel" class="tab-pane" id="DebtUltraShortTerm">
-                <div class="TopRatedInnerArea DebtUltraShortTermTriangleLeft">
-                  <table class="table table-striped table-condensed">
-                      <tbody>                         
-                      </tbody>
-                  </table> 
-                  <div class="mf_as_on">
-                    <h6></h6>
-                  </div>                 
-                </div> 
-            </div>
-            <div role="tabpanel" class="tab-pane" id="DebtShortTermGILT">
-                <div class="TopRatedInnerArea DebtShortTermGILTTriangleLeft">
-                  <table class="table table-striped table-condensed">
-                      <tbody>                         
-                      </tbody>
-                  </table>
-                  <div class="mf_as_on">
-                    <h6></h6>
-                  </div>                  
+                  <div id="debt_medium_long_tab" class="page-content tab">
+                    <div class="content-block">
+                      ... Debt Medium Long content ...
+                    </div>
+                    <!-- <h6 class="mf_as_on"></h6> -->
+                  </div>
                 </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="DebtMediumLongTermGILT">
-                <div class="TopRatedInnerArea DebtMediumLongTermGILTTriangleLeft">
-                  <table class="table table-striped table-condensed">
-                      <tbody>                        
-                      </tbody>
-                  </table>
-                  <div class="mf_as_on">
-                    <h6></h6>
-                  </div>                  
-                </div>              
-            </div>
+              </div>
+            <!-- </div> -->
+          </div>
+          <div id="hybrid_tab" class="page-content tab">
+            <!-- <div class="content-block"> -->
+              <div class="">
+                <div class="buttons-row">
+                  <a href="#hybrid_equity_tab" class="button active tab-link">Equity Oriented</a>
+                  <a href="#hybrid_debt_tab" class="button tab-link">Debt Oriented</a>
+                  <a href="#hybrid_arbitage_tab" class="button tab-link">Arbitage</a>
+                </div>
+              </div>
+              <div class="tabs-swipeable-wrap">
+                <div class="tabs">
+                  <div id="hybrid_equity_tab" class="page-content tab active">
+                    <div class="content-block">
+                        ... Hybrid Equity content ...
+                    </div>
+                    <!-- <h6 class="mf_as_on"></h6> -->
+                  </div>
+                  <div id="hybrid_debt_tab" class="page-content tab">
+                    <div class="content-block">
+                      ... Hybrid Debt content ...
+                    </div>
+                    <!-- <h6 class="mf_as_on"></h6> -->
+                  </div>
+                  <div id="hybrid_arbitage_tab" class="page-content tab">
+                    <div class="content-block">
+                      ... Hybrid Arbitage content ...
+                    </div>
+                    <!-- <h6 class="mf_as_on"></h6> -->
+                  </div>
+                </div>
+              </div>
+            <!-- </div> -->
           </div>
         </div>
       </div>
-     </div>
-    </div>
-    <div role="tabpanel" class="tab-pane fade in" id="HybridTab">
-      <div class="TopRatedArea HybridTriangleUp">
-        <div class="row">
-          <div class="col-xs-12">
-            <ul class="nav nav-pills nav-stacked" role="tablist">
-              <li role="presentation" class="active"><a href="#HybridBalancedEquityOriented" aria-controls="HybridBalancedEquityOriented" role="tab" data-toggle="tab">Hybrid : Equity Oriented</a></li>
-              <li role="presentation"><a href="#HybridBalancedDebtOriented" aria-controls="HybridBalancedDebtOriented" role="tab" data-toggle="tab">Hybrid : Debt Oriented</a></li>
-              <li role="presentation"><a href="#HybridArbitrage" aria-controls="HybridArbitrage" role="tab" data-toggle="tab">Hybrid : Arbitrage</a></li>
-            </ul> 
-          </div>
-          <div class="col-xs-12">
-            <div class="tab-content InnerTabContent">
-              <div role="tabpanel" class="tab-pane fade in active" id="HybridBalancedEquityOriented">
-                <div class="TopRatedInnerArea HybridBalancedEquityOrientedTriangleLeft">
-                  <table class="table table-striped table-condensed">
-                      <tbody>                        
-                      </tbody>
-                  </table>
-                  <div class="mf_as_on">
-                    <h6></h6>
-                  </div>                  
-                </div>                     
-              </div>
-              <div role="tabpanel" class="tab-pane" id="HybridBalancedDebtOriented">
-                <div class="TopRatedInnerArea HybridBalancedDebtOrientedTriangleLeft">
-                  <table class="table table-striped table-condensed">
-                      <tbody>                         
-                      </tbody>
-                  </table>
-                  <div class="mf_as_on">
-                    <h6></h6>
-                  </div>                  
-                </div>                 
-              </div>
-              <div role="tabpanel" class="tab-pane" id="HybridArbitrage">
-                <div class="TopRatedInnerArea HybridArbitrageTriangleLeft">
-                  <table class="table table-striped table-condensed">
-                      <tbody>                         
-                      </tbody>
-                  </table>
-                  <div class="mf_as_on">
-                    <h6></h6>
-                  </div>                  
-                </div>                 
-              </div>
-            </div>
-          </div>
-      </div>
-     </div>
-    </div>
-    
+</div>
+</div>
 
+
+    </div> 
   </div>
-
-
-                                   </div>
-                                </div>
-
-
-                                <!--  ***** Tab End ***** -->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table> 
-                                                     
-            </div>
-            
-
-        </div>
-
-     
-
-
-
-
-    </div>  <!-- Container end -->
-    </div>
 </div>
             
         
