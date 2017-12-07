@@ -121,6 +121,9 @@ img {
   font-weight: 300;
   width: 100%;
 } 
+#RVNavbar .navbar .right {
+  padding-right: 3px;
+} 
 #RVNavbar .navbar-fixed .page-content, .navbar-through .page-content {
   padding-top: 0;
   padding-bottom: 0;
@@ -130,6 +133,20 @@ img {
 }
 #RVNavbar #navbar_close_btn{
   color: #fff;
+}
+#RVNavbar #fund_names{
+  max-width: 250px;
+  width: 250px;
+}
+.ui-front{
+  z-index: 10000;
+  max-width: 250px !important;
+  width: 250px !important;
+}
+.ui-autocomplete {
+  max-height: 20em;
+  overflow-y: ;
+  overflow-x: hidden;
 }
 #RVSidebar {
   margin-top: 0px;
@@ -229,6 +246,15 @@ img {
   background: #2f5378;
   margin-bottom: 10px;
   box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+}
+.breadcrumb {
+  padding: 6px 6px;
+  margin: 0;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+  min-height: 50px;
 }
 
 /**************
@@ -467,13 +493,7 @@ img {
   margin-top: 1em;
 }
 #mfund_home .breadcrumb {
- padding: 6px 6px;
  margin: 10px 0 0 0;
- background-color: #eee;
- border: 1px solid #ccc;
- border-radius: 6px;
- box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
- min-height: 50px;
 }
 #mfund_home .MFHeadSubTop .buttons-row .button{
   background: #fff;
@@ -689,20 +709,11 @@ img {
 *********************/
 
 #FixedDeposit #fd_all_list_head .breadcrumb {
-  padding: 6px 6px;
-  margin: 0 0 0 0;
-  border-bottom: 1px solid #ccc;
-  border-radius: 6px;
   background: transparent;
+  box-shadow: none;
 }
 #FixedDeposit #fd_all_list .breadcrumb {
-  padding: 6px 6px;
   margin: 10px 0 0 0;
-  background-color: #eee;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
-  min-height: 50px;
 }
 #FixedDeposit #fd_all_list .breadcrumb .FDName {
   font-size: 16px;
@@ -736,6 +747,75 @@ img {
   margin: 0;
 }*/
 
+
+/*************************************************************
+    Investment Solution - Asset Allocation based Portfolios
+**************************************************************/
+
+#ISAssetAllocationBased .AABPTabs .button {
+  font-size: 12px;
+  padding: 0 6px;
+}
+#ISAssetAllocationBased .tabs .list-block {
+  margin: 10px 0;   
+}
+#ISAssetAllocationBased .tabs .breadcrumb {
+  margin: 10px 0 0 0;
+}
+#ISAssetAllocationBased .breadcrumb .fa {
+  font-size: 5em;
+  margin-top: .6em;
+}
+#ISAssetAllocationBased .chartCircleInside {
+  text-align: center;
+  margin-left: 1.2em;
+  margin-top: 0;
+  top: 43px !important;
+  z-index: 0;
+}
+#ISAssetAllocationBased .ChartCIEQ {
+  margin-right: -4px;
+}
+#ISAssetAllocationBased .ChartCIDT {
+  margin-left: -4px;
+}
+#ISAssetAllocationBased .ChartCIP {
+  font-size: 18px;
+}
+#ISAssetAllocationBased .ChartCIT {
+  font-size: 9px;
+}
+/*#ISAssetAllocationBased .ChartCIDT:hover {
+  color: #3b5e00;
+}
+#ISAssetAllocationBased .ChartCIEQ:hover {
+  color: #003467;
+}*/
+#ISAssetAllocationBased .tooltop {
+  padding: 5px;
+}
+#ISAssetAllocationBased .highcharts-container {
+  position: inherit !important;
+}
+#ISAssetAllocationBased .highcharts-tooltip {
+  z-index: 9998;
+}
+#ISAssetAllocationBased .highcharts-tooltip div {
+  background-color: #fff;
+  border:1px solid #c0c1c1;
+}
+#ISAssetAllocationBased .breadcrumb #AssetsChart_1,#ISAssetAllocationBased .breadcrumb #AssetsChart_2,#ISAssetAllocationBased .breadcrumb #AssetsChart_3,#ISAssetAllocationBased .breadcrumb #AssetsChart_4,#ISAssetAllocationBased .breadcrumb #AssetsChart_5,#ISAssetAllocationBased .breadcrumb #AssetsChart_6,#ISAssetAllocationBased .breadcrumb #AssetsChart_7,#ISAssetAllocationBased .breadcrumb #AssetsChart_8,#ISAssetAllocationBased .breadcrumb #AssetsChart_9,#ISAssetAllocationBased .breadcrumb #AssetsChart_10,#ISAssetAllocationBased .breadcrumb #AssetsChart_11 {
+  left:0px; 
+  top:0px;
+  min-width: 100px; 
+  max-width: 140px;
+  height:140px;
+}
+#ISAssetAllocationBased .breadcrumb #addText_1,#ISAssetAllocationBased .breadcrumb #addText_2,#ISAssetAllocationBased .breadcrumb #addText_3,#ISAssetAllocationBased .breadcrumb #addText_4,#ISAssetAllocationBased .breadcrumb #addText_5,#ISAssetAllocationBased .breadcrumb #addText_6,#ISAssetAllocationBased .breadcrumb #addText_7,#ISAssetAllocationBased .breadcrumb #addText_8,#ISAssetAllocationBased .breadcrumb #addText_9,#ISAssetAllocationBased .breadcrumb #addText_10,#ISAssetAllocationBased .breadcrumb #addText_11 {
+  position:absolute; 
+  left:0px; 
+  top:0px;
+}
 
 
 /************************

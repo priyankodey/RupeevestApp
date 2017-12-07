@@ -1044,99 +1044,34 @@ function fundname_search_rolling_return()
 
 function fundname_search()
 {
-	$.ajax({
-		type:'GET',
-		url: '/home/get_search_data',
-		datatype:'json',
-		success:function(searchdata, textStatus, jqXHR) {
-				 
-				
-						 var schemename = [];
-
-						 for(var i =0;i <= searchdata.search_data.length-1;i++)
-						 {
-							var item1 = searchdata.search_data[i];
-							var scheme_code = item1.scheme_code;
-							var s_name = item1.s_name;
-							schemename.push(item1.s_name);
-
-						 }
-                          
-
-
-						 //    $("#fund_names").autocomplete({
-						 //    	maxResults: 10,
-							// 	source: schemename
-							// });
-
-
-
-
-
-							// $.ui.autocomplete.filter = function (array, term) {
-				   //      var matcher = new RegExp("(^| )" + $.ui.autocomplete.escapeRegex(term), "i");
-				   //      return $.grep(array, function (value) {
-				   //          return matcher.test(value.label || value.value || value);
-				   //      });
-				   //  	};
-
-                       
-                        $("#fund_names").autocomplete ( {
-    source: function (requestObj, responseFunc) {
-                var matchArry   = schemename.slice (); //-- Copy the array
-                var srchTerms   = $.trim (requestObj.term).split (/\s+/);
-
-                //--- For each search term, remove non-matches.
-                $.each (srchTerms, function (J, term) {
-                    var regX    = new RegExp (term, "i");
-                    matchArry   = $.map (matchArry, function (item) {
-                        return regX.test (item)  ?  item  : null;
-                    } );
-                } );
-
-                /* New jQuery-UI busts this AND the old highlighting!
-                    //--- For any surviving matches, highlight the terms.
-                    $.each (srchTerms, function (J, term) {
-                        matchArry       = $.map (matchArry, function (item) {
-                            var regX    = new RegExp (term, "ig");
-
-                            return item.replace (regX, '<span class="srchHilite">' + term + '</span>');
-                        } );
-                    } );
-                */
-
-                //--- Return the match results.
-                responseFunc (matchArry);
-            },
-         open: function (event, ui) {
-                /*--- This function provides no hooks to the results list, so we have to trust the
-                    selector, for now.
-                */
-                var resultsList = $("ul.ui-autocomplete > li.ui-menu-item > a");
-                var srchTerm    = $.trim ( $("#fund_names").val () ).split (/\s+/).join ('|');
-
-                //--- Loop through the results list and highlight the terms.
-                resultsList.each ( function () {
-                    var jThis   = $(this);
-                    var regX    = new RegExp ('(' + srchTerm + ')', "ig");
-                    var oldTxt  = jThis.text ();
-
-                    jThis.html (oldTxt.replace (regX, '<span class="srchHilite">$1</span>') );
-                } );
-            }
-        });
-
-
-						//$("#scheme_code").html(scheme_code);
-						//$("#s_name").html(s_name);
-						// console.log(schemename);
-
-		},
-		 error:function(jqXHR, textStatus, errorThrown) {
-		   // alert("AJAX Error:" + textStatus);
-		 }
- })
+	$$.get(curr_ip+'/home/get_search_data',function (data) {
+		var searchdata=JSON.parse(data);
+		var schemename = [];
+		for(var i =0;i <= searchdata.search_data.length-1;i++)
+		{
+			var item1 = searchdata.search_data[i];
+			var scheme_code = item1.scheme_code;
+			var s_name = item1.s_name;
+			schemename.push(item1.s_name);
+		}
+		$( "#fund_names" ).autocomplete({
+      		source: schemename,
+      		select: function (e, ui) {
+		        var schemename= ui.item.value;
+		        $$.post(curr_ip+'/home/index_search',{schemename: schemename},function (data) {
+		        	var scheme_code_new=JSON.parse(data);
+    				if(myApp.getCurrentView().activePage.name==='fund_details'){
+    					mainView.router.reloadPage('fund_details.html?scheme_code='+scheme_code_new.schemecode);
+    				}
+    				else{
+    					mainView.router.loadPage('fund_details.html?scheme_code='+scheme_code_new.schemecode);
+    				}
+		        });
+		    }
+    	});
+       });
 }
+
 function fundname_search_sip_return()
 {
 	$.ajax({

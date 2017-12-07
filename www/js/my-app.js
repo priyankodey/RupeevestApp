@@ -9,7 +9,7 @@ var $$ = Dom7;
 var curr_ip='http://192.168.1.22:3000/'
 
 var RVNav="";
-RVNav ="<div class='navbar'><div class='navbar-inner'><div class='left'><a href='#' class='link icon-only open-panel'><i class='icon icon-bars'></i></a></div><div class='center'><span id='navbar_info_span'>RupeeVest</span><input type='text' id='fund_names' class='form-control ui-autocomplete-input' placeholder='Search mutual funds here...' autocomplete='off'></div><div class='right'><a href='#' class='' id='navbar_search_btn'><i class='fa fa-search' aria-hidden='true'></i></a><a href='#' class='' id='navbar_close_btn'><i class'fa fa-times' aria-hidden='true'></i></a></div></div></div>"
+RVNav ="<div class='navbar'><div class='navbar-inner'><div class='left'><a href='#' class='link icon-only open-panel'><i class='icon icon-bars'></i></a></div><div class='center'><span id='navbar_info_span'>RupeeVest</span><input type='text' id='fund_names' class='form-control ui-autocomplete-input' placeholder='Search mutual funds here...' autocomplete='off'></div><div class='right'><a href='#' class='' id='navbar_search_btn'><i class='fa fa-search' aria-hidden='true'></i></a><a href='#' class='' id='navbar_close_btn'><i class='fa fa-times' aria-hidden='true'></i></a></div></div></div>"
 
 
 // Add view
@@ -37,15 +37,10 @@ function commaSeparateNumber(val)
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     // console.log("Device is ready!");
-
         
     $$('#RVNavbar').html(RVNav);
+    fundname_search();
 
-
-
-
-
-    //  console.log("-------------------------1----------------");
     $$.get('http://192.168.1.22:3000/functionalities/get_user_info', {iin: 5011179660},function (data) {
        });
 
@@ -88,6 +83,22 @@ $$(document).on('pageInit', function (e) {
     //console.log(page.url);
 
     $$('#RVNavbar').html(RVNav);
+    fundname_search();
+    $$('#fund_names').hide();
+    $$('#navbar_close_btn').hide();
+    $$('#navbar_search_btn').on('click', function (e) {
+        $$('#fund_names').show();
+        $$('#navbar_info_span').hide();
+        $$('#navbar_close_btn').show();
+        $$('#navbar_search_btn').hide();
+    });
+
+    $$('#navbar_close_btn').on('click', function (e) {
+        $$('#fund_names').hide();
+        $$('#navbar_info_span').show();
+        $$('#navbar_close_btn').hide();
+        $$('#navbar_search_btn').show();
+    });
 
     if (page.url.includes('.html')===true){
         $('#RVSidebar').removeClass("active");
@@ -534,6 +545,351 @@ $$(document).on('pageInit', function (e) {
              $$('#equity_elss_tab .mf_as_on').html("As on 01 Apr 2017");
 
         });
+    }
+
+    if(page.name==='OfferInvestmentSolution')
+    {
+
+    }
+
+    if(page.name==='OfferISAABP')
+    {       
+       $$.get(curr_ip+'app_services/is_portfolio',function (data) 
+       {
+
+            var myObj = JSON.parse(data);
+                               
+            var total_weightage = myObj.total_weightage;
+            var total_classification = myObj.total_classification;
+            var total_asset_class = myObj.total_asset_class;
+            var total_color = myObj.total_color;
+
+var array_w=[],array_c=[],array_class=[],array_color=[];
+var a="",b="",s=0,s1=0,s2=0;
+
+  for(var i=0;i<total_weightage.length;i++)
+  {
+    if(total_weightage[i]=="[" || total_weightage[i]=="," )
+    {
+      if(total_weightage[i]=="," && s1==0)
+        a=a+";";
+    }
+      else
+      {
+        if(total_weightage[i]=="]")
+          {
+            s1=1;
+            if(a!="")
+            {
+              array_w.push(a);
+            }
+            a="";
+          }
+          else
+          {
+            s1=0;
+            a=a+total_weightage[i];
+          }
+        }
+        
+  }
+  var k=0;
+  for(var i=0;i<total_classification.length;i++)
+  {
+    if(total_classification[i]=="[" || total_classification[i]=="," )
+    {
+      if(total_classification[i]=="," && s==0)
+       {
+        b=b+";";
+        k=1;
+       } 
+    }
+      else
+      {
+        if(total_classification[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_c.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            if(k!=1)
+            {
+              if(b=="" && total_classification[i]==" ")
+              {
+
+              }
+              else
+              {
+              b=b+total_classification[i];
+            }
+            }
+            k=0;
+          }
+        }
+        
+  }
+  b=""
+  s=0
+   for(var i=0;i<total_asset_class.length;i++)
+  {
+    if(total_asset_class[i]=="[" || total_asset_class[i]=="," )
+    {
+      if(total_asset_class[i]=="," && s==0)
+        b=b+";";
+    }
+      else
+      {
+        if(total_asset_class[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_class.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            b=b+total_asset_class[i];
+          }
+        }
+        
+  }
+
+
+  b=""
+   for(var i=0;i<total_color.length;i++)
+  {
+    if(total_color[i]=="[" || total_color[i]=="," )
+    {
+      if(total_color[i]=="," && s2==0)
+        b=b+";";
+    }
+      else
+      {
+        if(total_color[i]=="]")
+          {
+            s2=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_color.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s2=0;
+            b=b+total_color[i];
+          }
+        }
+        
+  }
+
+ var classification=[],color=[];
+ var cfic,we,ass_class,colour;
+ var seriesdate=[];
+ var total_eq=0,total_db=0;
+chart_drawn(0,4);
+chart_drawn(4,7);
+chart_drawn(7,11);
+function chart_drawn(start,end)
+ {
+  for(var i=start;i<end;i++)
+{
+
+  classification=[];
+  seriesdate=[];
+  total_eq=0,total_db=0;
+  cfic=array_c[i].split(";");
+  we=array_w[i].split(";");
+  colour=array_color[i].split(";");
+  ass_class=array_class[i].replace(/ /g, '').split(";");
+
+
+  for(var j=0;j<cfic.length;j++)
+  {
+
+     if(j!=0 && cfic[j-1]==cfic[j] )
+    {
+      for(var k=0;k<seriesdate.length;k++)
+      {
+        var index=seriesdate[k].indexOf(cfic[j])
+        if(index!=-1)
+        {
+          var s=seriesdate[k][1]+parseInt(we[j]);
+          seriesdate[k][1]=s;
+          break;
+        }
+      }
+    }
+    else
+    {
+     classification.push(cfic[j]);
+    classification.push(parseInt(we[j]));
+     color.push(colour[j]);
+    seriesdate.push(classification)
+    }
+    if(ass_class[j]=="Equity")
+    {
+      total_eq=total_eq+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Debt")
+    {
+      total_db=total_db+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Gold")
+    {
+      total_gold=total_gold+parseInt(we[j]);
+    }
+    classification=[];
+   
+
+  }
+  seriesdate=seriesdate.reverse();
+      color=color.reverse();
+
+  
+    var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'AssetsChart_'+(i+1),
+            type: 'pie',
+            margin: [0, 0, 0, 0],
+            backgroundColor: 'transparent'            
+        },
+        credits:{enabled: false},
+        colors:color,
+        title:{text: ''},
+        // subtitle: {text:'60% Equity 40% Debt', style: {
+        //         color: '#0000ff',
+        //         fontWeight: 'bold'
+        //     }
+        //   },
+        plotOptions: {
+            pie: {
+                innerSize: '80%',
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+               point: {
+          events: {
+            mouseOver: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r + 7
+              });
+            },
+            mouseOut: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            }
+          }
+        },
+        states: {
+          hover: {
+            brightness: 0,
+            lineWidth: 0,
+            halo: {
+              size: 0
+            }
+
+          }
+        }
+            }
+            
+        
+        },
+        tooltip: {
+
+          backgroundColor: 'transparent',
+               borderColor: "none",
+              // followPointer: true,
+              shadow: false,
+              useHTML: true,
+              formatter: function () {      
+                   return '<div class="tooltop">'+this.key + '<br>' + '<b>'+this.y+' %</b></div>';
+                }
+                
+        // formatter: function () {
+        //     return this.key +
+        //         ' ' + this.y + '%';
+
+        // }
+    },
+        series:[{
+                            name: ' ',
+                              data: seriesdate
+                            
+                        }]
+    },
+                                     
+    function(chart) { // on complete
+        var textX = chart.plotLeft + (chart.plotWidth  * 0.5);
+        var textY = chart.plotTop  + (chart.plotHeight * 0.5);
+
+
+var span = '<div class="row d_inline_f chartCircleInside" id="pieChartInfoText'+(i+1)+'"style="position:relative;">';
+        
+        span += '<div class="col-xs-6"><div class="ChartCIEQ"><div class="ChartCIP">'+total_eq+'</div><div class="ChartCIT">EQUITY</div></div></div>';
+        span += '<div class="col-xs-6 vr_left"><div class="ChartCIDT"><div class="ChartCIP">'+total_db+'</div><div class="ChartCIT">DEBT</div></div></div>';
+        span += '</div>';
+
+         $("#addText_"+(i+1)).empty();
+
+        $("#addText_"+(i+1)).append(span);
+        span = $('#pieChartInfoText'+(i+1));
+        span.css('left', textX + (span.width() * -0.5));
+        span.css('top', textY + (span.height() * -0.5));
+    });
+}
+}
+
+
+    $("#AABtnGrowth").click(function(){
+      chart_drawn(0,4);
+    });
+    $("#AABtnBalanced").click(function(){
+      chart_drawn(4,7);
+    });
+    $("#AABtnCons").click(function(){
+      chart_drawn(7,11);
+    });
+
+
+
+// $$('.tab').on('swipeLeft', function(){
+//     chart_drawn(0,4);
+//     chart_drawn(4,7);
+//     chart_drawn(7,11);
+// });
+
+
+
+
+// $(window).bind('resize', function() { location.reload(); });
+window.onorientationchange = function()
+{
+   window.location.reload();
+}
+
+
+
+
+
+
+               
+       });
     }
 
 
