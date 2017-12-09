@@ -1,42 +1,76 @@
-<div data-page="OfferISAABP" class="page" id="ISAssetAllocationBased">
+<div data-page="OfferISGBPWealth" class="page GoalBaseInd" id="ISGoalWealth">
     <div class="page-content">                
         <div class="container">
             <div class="row HeadTop">
                 <div class="col-xs-12">
-                    <h1>Asset Allocation based Portfolios</h1>
+                    <h1>Portfolio of Best Mutual Funds to achieve your Goal</h1>
                 </div>                
             </div>
             <div class="row">
                 <div class="col-xs-12">    
-                    <p class="text-center">Select Allocation</p>
-                    <div class="AABPTabs">          
-                      <div class="buttons-row">            
-                        <a href="#TabGrowth" id="AABtnGrowth" class="button active tab-link">Growth</a>           
-                        <a href="#TabBalanced" id="AABtnBalanced" class="button tab-link">Balanced</a>            
-                        <a href="#TabConservative" id="AABtnCons" class="button tab-link">Conservative</a>
-                      </div>
+                    <p class="text-center">Select Time Horizon</p>
+                    <div class="GBITabs">          
+                        <div class="buttons-row">            
+                            <a href="#Tab5Years" id="GBILow" class="button active tab-link">Upto 5 Years</a>           
+                            <a href="#Tab5to10Years" id="GBIMod" class="button tab-link">5 to 10 Years</a>            
+                            <a href="#Tab10Years" id="GBIHigh" class="button tab-link">> 10 Years</a>
+                        </div>
+                        <div class="list-block">
+                            <ul>
+                                <li class="item-content">
+                                  <img src="img/invSolution/goal-wealth-creation-ind.png">
+                                  <div class="item-inner">
+                                    <div class="item-title">Wealth Creation</div>
+                                    <!-- <div class="item-after">Label</div> -->
+                                  </div>
+                                </li>                                    
+                            </ul>
+                        </div>
                     </div>
+                    
       
-                    <!-- Tabs swipeable wrapper, required to switch tabs with swipes -->
                     <div class="tabs-swipeable-wrap">
-                      <!-- Tabs, tabs wrapper -->
+                      
                       <div class="tabs">
-                        <!-- Tab 1, active by default -->
-                        <div id="TabGrowth" class="page-content tab active">
+                        
+                        <div id="Tab5Years" class="page-content tab active">
                           
-                            <div class="list-block">
-                                <ul>
-                                    <li class="item-content">
-                                      <div class=""><img src="img/invSolution/alloc_growth.png"></div>
-                                      <div class="item-inner">
-                                        <div class="item-title">Growth</div>
-                                        <!-- <div class="item-after">Label</div> -->
-                                      </div>
-                                    </li>                                    
-                                </ul>
-                            </div>
+                            
                             <div class="breadcrumb">
                                 <div class="row">
+                                    <div class="col-xs-12">
+                                        <table class="table table-condensed table-bordered table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th colspan="5">Return (%)</th>
+                                              </tr>
+                                              <tr>
+                                                <th>Portfolio Name</th>
+                                                <th>6 Month</th>
+                                                <th>1 Year</th>
+                                                <th>3 Year</th>
+                                                <th>5 Year</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td><%= @name_of_portfolio %></td>
+                                                <td><%= @returns_6month %>%</td>
+                                                <td><%= @returns_1year %>%</td>
+                                                <td><%= @returns_3year %>%</td>
+                                                <td><%= @returns_5year %>%</td>
+                                              </tr>
+                                              <!-- <tr>
+                                                <td>Nifty 50</td>
+                                                <td>54.2%</td>
+                                                <td>10.0%</td>
+                                                <td>11.1%</td>
+                                                <td>1.1%</td>
+                                              </tr>   -->                                
+                                            </tbody>
+                                        </table>
+                                        <h6>Returns greater than 1 year have been annualized.</h6> 
+                                    </div>
                                     <div class="col-xs-7">
                                         <div id="AssetsChart_1"></div>
                                         <div id="addText_1"></div>
@@ -48,60 +82,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="breadcrumb">
-                                <div class="row">
-                                    <div class="col-xs-7">
-                                        <div id="AssetsChart_2"></div>
-                                        <div id="addText_2"></div>
-                                    </div>
-                                    <div class="col-xs-5">
-                                        <a href='OfferISDesign.html?scheme_code=48'>
-                                            <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="breadcrumb">
-                                <div class="row">
-                                    <div class="col-xs-7">
-                                        <div id="AssetsChart_3"></div>
-                                        <div id="addText_3"></div>
-                                    </div>
-                                    <div class="col-xs-5">
-                                        <a href='OfferISDesign.html?scheme_code=49'>
-                                            <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="breadcrumb">
-                                <div class="row">
-                                    <div class="col-xs-7">
-                                        <div id="AssetsChart_4"></div>
-                                        <div id="addText_4"></div>
-                                    </div>
-                                    <div class="col-xs-5">
-                                        <a href='OfferISDesign.html?scheme_code=50'>
-                                            <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                          
+
                         </div>
                         <!-- Tab 2 -->
-                        <div id="TabBalanced" class="page-content tab">
-                            <div class="list-block">
+                        <div id="Tab5to10Years" class="page-content tab">
+                            <!-- <div class="list-block">
                                 <ul>
                                     <li class="item-content">
                                       <div class=""><img src="img/invSolution/alloc_balanced.png"></div>
                                       <div class="item-inner">
                                         <div class="item-title">Balanced</div>
-                                        <!-- <div class="item-after">Label</div> --> 
+                                        
                                       </div>
                                     </li>                                    
                                 </ul>
-                            </div>
+                            </div> -->
                             <div class="breadcrumb">
                                 <div class="row">
                                     <div class="col-xs-7">
@@ -144,18 +139,18 @@
                             
                         </div>
                         <!-- Tab 3 -->
-                        <div id="TabConservative" class="page-content tab">
-                            <div class="list-block">
+                        <div id="Tab10Years" class="page-content tab">
+                            <!-- <div class="list-block">
                                 <ul>
                                     <li class="item-content">
                                       <div class=""><img src="img/invSolution/alloc_conservative.png"></div>
                                       <div class="item-inner">
                                         <div class="item-title">Conservative</div>
-                                        <!-- <div class="item-after">Label</div> -->
+                                        
                                       </div>
                                     </li>                                    
                                 </ul>
-                            </div>
+                            </div> -->
                             <div class="breadcrumb">
                                 <div class="row">
                                     <div class="col-xs-7">

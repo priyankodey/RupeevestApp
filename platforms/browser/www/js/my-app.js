@@ -40,6 +40,20 @@ $$(document).on('deviceready', function() {
         
     $$('#RVNavbar').html(RVNav);
     fundname_search();
+    function myFunction () 
+    {
+       var status = navigator.onLine;
+       if (status) 
+       {            
+           $$('#adv').html("<a href='ContactUs.html' class='link'>Contact Us</a><a href='FAQs.html' class='link'>FAQs</a>");
+       } 
+       else 
+       {
+           $$('#adv').html("<span class='fa fa-exclamation-triangle' aria-hidden='true'></span>No internet connection");
+       }
+   }
+
+   var interval = setInterval(function () { myFunction(); }, 1000);
 
     $$.get('http://192.168.1.22:3000/functionalities/get_user_info', {iin: 5011179660},function (data) {
        });

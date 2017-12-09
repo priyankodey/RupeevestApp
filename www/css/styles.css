@@ -126,7 +126,7 @@ img {
 } 
 #RVNavbar .navbar-fixed .page-content, .navbar-through .page-content {
   padding-top: 0;
-  padding-bottom: 0;
+  padding-bottom: 10em;
 }
 #RVNavbar #navbar_search_btn {
   color: #fff;
@@ -213,7 +213,13 @@ img {
 #RVSidebar #sidepanel_head #sidepanel_head_img{
   margin:1em 10px;
 }
-
+.toolbar .toolbar-inner {
+  background: #17406B;
+  padding: 0 15px;
+}
+.toolbar .toolbar-inner a {
+  color: #fff;
+}
 
 /* *************************************** 
                    My CSS 
@@ -711,9 +717,17 @@ img {
 #FixedDeposit #fd_all_list_head .breadcrumb {
   background: transparent;
   box-shadow: none;
+  border: 0;
+  min-height: 20px;
+  border-radius: 0;
 }
 #FixedDeposit #fd_all_list .breadcrumb {
-  margin: 10px 0 0 0;
+  margin-bottom: 15px;
+  border: 1px solid #17396B;
+  background: linear-gradient(to bottom, rgba(18,51,86,1), rgba(38,89,149,1));
+}
+#FixedDeposit #fd_all_list .breadcrumb a {
+  color: #fff;
 }
 #FixedDeposit #fd_all_list .breadcrumb .FDName {
   font-size: 16px;
@@ -755,9 +769,24 @@ img {
 #ISAssetAllocationBased .AABPTabs .button {
   font-size: 12px;
   padding: 0 6px;
+  color: #333;
+  border-color: #7fb800;
+}
+#ISAssetAllocationBased .AABPTabs .button.active {
+  color: #FFF;
+  background: #7fb800;
+  border-color: #7fb800;
 }
 #ISAssetAllocationBased .tabs .list-block {
-  margin: 10px 0;   
+  margin: 10px 0;  
+  max-height: 50px; 
+}
+#ISAssetAllocationBased .tabs .list-block ul {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+#ISAssetAllocationBased .tabs .list-block ul:before, #ISAssetAllocationBased .tabs .list-block ul:after {
+  background-color: transparent;
 }
 #ISAssetAllocationBased .tabs .breadcrumb {
   margin: 10px 0 0 0;
@@ -815,6 +844,64 @@ img {
   position:absolute; 
   left:0px; 
   top:0px;
+}
+
+
+/*************************************************************
+    Investment Solution - Goal based Portfolios
+**************************************************************/
+
+#ISGoalBased .breadcrumb {
+  color: #fff;
+  margin-bottom: 15px;
+  border: 0;
+  border-bottom: 1px solid #17396B;
+  background: linear-gradient(to bottom, rgba(18,51,86,1), rgba(38,89,149,1));
+  -webkit-box-shadow: 0px 6px 0px #123356, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
+  -moz-box-shadow: 0px 6px 0px #123356, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
+  box-shadow: 0px 6px 0px #123356, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
+}
+/*#ISGoalBased .breadcrumb img {
+  width: 38px;
+}*/
+#ISGoalBased .breadcrumb a {
+  color: #fff;
+}
+
+/*------------ Goal Based Individual Common ----------------- */
+
+.GoalBaseInd .GBITabs .button {
+  font-size: 12px;
+  padding: 0 6px;
+  color: #333;
+  border-color: #7fb800;
+}
+.GoalBaseInd .GBITabs .button.active {
+  color: #FFF;
+  background: #7fb800;
+  border-color: #7fb800;
+}
+.GoalBaseInd .GBITabs .list-block {
+  margin: 10px 0;
+  max-height: 50px;
+}
+.GoalBaseInd .GBITabs .list-block ul {
+  background: linear-gradient(to bottom, rgba(18,51,86,1), rgba(38,89,149,1));
+  color: #fff;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.GoalBaseInd .GBITabs .list-block ul:before, .GoalBaseInd .GBITabs .list-block ul:after {
+  background-color: transparent;
+}
+.GoalBaseInd .GBITabs .list-block .item-content {
+  padding-left: 10px;
+}
+.GoalBaseInd .GBITabs .list-block .item-title {
+  padding-left: 10px;
+}
+.GoalBaseInd .GBITabs .breadcrumb {
+  margin: 10px 0 0 0;
 }
 
 
