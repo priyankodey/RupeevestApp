@@ -1,8 +1,4 @@
-// $(window).load(function(){
-	// alert('mani');schemedata_landing('hai');
 
-// });
-//removing active class from bootstrap nav menu
 
 
 var univ_as_on_date;
@@ -29,8 +25,8 @@ function display_info(schemecode,container_id,rol_ret,startDate,color_arr)
          dataType: 'json',
          success: function(data)
          {
-         	console.log("+++++++++++")
-         	console.log(data)
+         	// console.log("+++++++++++")
+         	// console.log(data)
          	var aumtotal;
          	$("#comparison_fund").show();
           $("#comparison_Chart").show();
@@ -190,16 +186,6 @@ function check_cookie_asset_value()
 
 function schemedata_landing()
 { 
-     // console.log("5 ---Scheme Landing");
-
-	// if(asset_selection.length > 0  )
-	// {
-	// 	query_run();
-	// 	get_landing_returns();
-	// 	// display_check();
-	// }
-	// else
-	// {
 	var f=1;
 	if(refresh==1)
 	{
@@ -212,13 +198,6 @@ function schemedata_landing()
 	datatype:'json',
 	data: {flag:f},
 	success:function(data1, textStatus, jqXHR) {
-
-	console.log(data1);
-	
-	// fill_snapshot_table(data1);
-	// debugger;
-
-	// $('#ui_classification').html(data1.selected_asset_class);
 
             	if(data1.condition=="asset")
             	{
@@ -242,8 +221,7 @@ function schemedata_landing()
 	                document.getElementById("ChkAllCategories").checked = true;
 	                asset_selected_flag2=1;
 	                 print_asset_selection();
-	                // document.getElementById(fund_m_selection[0].replace(/(:| |-|')/g, "").toString()).checked = true;
-	                // tick_checkbox();
+	   
 	             }
 	             else if(data1.condition=="index_name")
 	             {
@@ -257,10 +235,7 @@ function schemedata_landing()
 	             	  document.getElementById("ChkAllCategories").checked = true;
 	             	  asset_selected_flag2=1;
 	             	   print_asset_selection();
-                      // tick_checkbox_2();
 
-	             	   // document.getElementById(""+id).checked = true;
-	             	  // $("#"+id).prop('checked','true');
 	             	
 	             }
 	             else if(data1.condition=="fund_house")
@@ -268,15 +243,13 @@ function schemedata_landing()
 	             	amc_selection.push(data1.selected_asset_class[0].replace(/(')/g, ""))
 	             	
 	             	 print_amc_selection();
-	           
-	             	 // document.getElementById(data1.selected_asset_class[0].replace(/(:| |-|')/g, "")).checked = true;
-	             	 // document.getElementById("ChkAmc").checked = false;
+
                       document.getElementById("fund_index").checked = true;
 	                 document.getElementById("fmanager").checked = true;
 	                 document.getElementById("ChkAllCategories").checked = true;
 	                 asset_selected_flag2=1;
 	                  print_asset_selection();
-	             	  // tick_checkbox_1();
+
 	             }
 	             else
 	             {
@@ -287,8 +260,7 @@ function schemedata_landing()
 	                document.getElementById("fund_index").checked = true;
 	                 document.getElementById("fmanager").checked = true;
 	             }
-	             console.log("000000000");
-	             console.log(data1);
+
 	             if (data1.schemedata.length==0)
                 {
                     var data1="";
@@ -304,16 +276,15 @@ function schemedata_landing()
 
                 get_landing_returns();
 
-	// var sorter = tsorter.create('snapshotTable');
 	},
 	error:function(jqXHR, textStatus, errorThrown) {
-	// alert("AJAX Error:" + textStatus);
+
 	}
 
 	});
-	// }
+
 }
-// }
+
 
 // function fill_snapshot_table(data1)
 // {
@@ -1712,9 +1683,9 @@ function get_dividend_data(schemecode)
 	data :{schemecode:schemecode},
 	datatype:'json',
 	success:function(dividend_data, textStatus, jqXHR) {
-	console.log('response')
+	// console.log('response')
 	var tbldata1="";
-	console.log(dividend_data.dividend_data.length);
+	// console.log(dividend_data.dividend_data.length);
 	var data;
 	if(dividend_data.dividend_data.length==0)
 	{
@@ -1728,7 +1699,7 @@ function get_dividend_data(schemecode)
 	for(var i =0; i<= dividend_data.dividend_data.length-1;i++)
 	{
 	var div_data = dividend_data.dividend_data[i];
-	console.log(div_data)
+	// console.log(div_data)
 	var recorddate = moment(div_data.recorddate).format('DD-MMM-YY');
 	var gross = parseFloat(div_data.gross).toFixed(4);
 	var div_type = div_data.div_type;
@@ -1765,13 +1736,13 @@ function get_recent_updates(schemecode)
             success:function(Recent_updates, textStatus, jqXHR) {
                 
                
-            console.log(Recent_updates.Recent_updates.length);
+            // console.log(Recent_updates.Recent_updates.length);
             var data;
             var th = "<thead><tr> <th></th><th> </th></tr></thead>";
             for(var i =0; i<= Recent_updates.Recent_updates.length-1;i++)
             {
                 var recent_data = Recent_updates.Recent_updates[i];
-                console.log(recent_data)
+                // console.log(recent_data)
                 var headline = recent_data.headline;
                 var date = recent_data.date;
 
@@ -1799,121 +1770,117 @@ function get_recent_updates(schemecode)
 function get_peer_comparision(schemecode)
 {
 	var tbldata;
-	$.ajax({
-	type:'GET',
-	url: '/functionalities/get_peer_comparision',
-	datatype:'json',
-	data :{schemecode:schemecode},
-	success:function(peer_comparision, textStatus, jqXHR) {
-	console.log(peer_comparision);
-	var pc_data;
-	var th = "<thead><tr><th rowspan='2'>Fund</th><th rowspan='2'>Rupeevest<br>Rating</th><th rowspan='2'>AUM<br>(in cr)</th><th rowspan='2'>Expense<br>(%)</th><th class='peertabl_mon' colspan='4'>Return (%)</th></tr><tr><th>6 Mo</th><th>1 Yr</th><th>3 Yr</th><th>5 Yr</th></tr></thead>";
-	for(var i =0;i <= peer_comparision.peer_comparision.length-1;i++)
-	{
-	var pc_data = peer_comparision.peer_comparision[i];
-	var scheme_code = pc_data.schemecode;
-	var s_name = pc_data.s_name;
-	var rupeevest_rating = pc_data.rupeevest_rating;
-	var ytd_returns = "-";
-	if(pc_data.ytd_returns!=null)
-	{
-	ytd_returns = (pc_data.ytd_returns).toFixed(2);;
-	}
-	var returns_1month = "-";
-	if(pc_data.returns_1month!=null)
-	{
-	returns_1month = (pc_data.returns_1month).toFixed(2);;
-	}
-	var returns_3month = "-";
-	 if(pc_data.returns_3month!=null)
-	 {
-	 	returns_3month = (pc_data.returns_3month).toFixed(2);;
-	 }
 
-	var returns_1year = "-";
-	 if(pc_data.returns_1year!=null)
-	 {
-	 	returns_1year = (pc_data.returns_1year).toFixed(2);;
-	 }
-	var returns_3year = "-";
-	  if(pc_data.returns_3year!=null)
-	  {
- 	returns_3year = (pc_data.returns_3year).toFixed(2);;
-	  }
-	var returns_5year = "-"
-	  if(pc_data.returns_5year!=null)
-	  {
-	  	returns_5year = (pc_data.returns_5year).toFixed(2);;
-	  }
-                var returns_6month = "-";
-                  if(pc_data.returns_6month!=null)
-                  {
-                  	returns_6month = (pc_data.returns_6month).toFixed(2);;
-                  }
-                var aumtotal = "-";  
-                 if(pc_data.aumtotal!=null)
-                 {
-                    aumtotal = (parseFloat(pc_data.aumtotal)).toFixed(2); 	
-                    aumtotal = commaSeparateNumber(aumtotal);
-                 }
-	        
-	var expenceratio ="-"
-	if(pc_data.expenceratio!=null)
-	{
-  	expenceratio = (pc_data.expenceratio).toFixed(2);;
+	$$.get(curr_ip+'functionalities/get_peer_comparision', {schemecode: +schemecode},function (peer_comparision_ajax)
+    {
+    	var peer_comparision = JSON.parse(peer_comparision_ajax);
+    	// console.log(peer_comparision);
+		var pc_data;
+		var th = "<thead class='breadcrumb_3'><tr><th rowspan='2'>Fund</th><th rowspan='2'>Rupeevest<br>Rating</th><th rowspan='2'>AUM (in cr)</th><th rowspan='2'>Expense (%)</th><th class='peertabl_mon' colspan='4'>Return (%)</th></tr><tr><th>6 Mo</th><th>1 Yr</th><th>3 Yr</th><th>5 Yr</th></tr></thead>";
+		for(var i =0;i <= peer_comparision.peer_comparision.length-1;i++)
+		{
+		var pc_data = peer_comparision.peer_comparision[i];
+		var scheme_code = pc_data.schemecode;
+		var s_name = pc_data.s_name;
+		var rupeevest_rating = pc_data.rupeevest_rating;
+		var ytd_returns = "-";
+		if(pc_data.ytd_returns!=null)
+		{
+		ytd_returns = (pc_data.ytd_returns).toFixed(2);;
+		}
+		var returns_1month = "-";
+		if(pc_data.returns_1month!=null)
+		{
+		returns_1month = (pc_data.returns_1month).toFixed(2);;
+		}
+		var returns_3month = "-";
+		 if(pc_data.returns_3month!=null)
+		 {
+		 	returns_3month = (pc_data.returns_3month).toFixed(2);;
+		 }
 
-	}
-	 
+		var returns_1year = "-";
+		 if(pc_data.returns_1year!=null)
+		 {
+		 	returns_1year = (pc_data.returns_1year).toFixed(2);;
+		 }
+		var returns_3year = "-";
+		  if(pc_data.returns_3year!=null)
+		  {
+	 	returns_3year = (pc_data.returns_3year).toFixed(2);;
+		  }
+		var returns_5year = "-"
+		  if(pc_data.returns_5year!=null)
+		  {
+		  	returns_5year = (pc_data.returns_5year).toFixed(2);;
+		  }
+	                var returns_6month = "-";
+	                  if(pc_data.returns_6month!=null)
+	                  {
+	                  	returns_6month = (pc_data.returns_6month).toFixed(2);;
+	                  }
+	                var aumtotal = "-";  
+	                 if(pc_data.aumtotal!=null)
+	                 {
+	                    aumtotal = (parseFloat(pc_data.aumtotal)).toFixed(2); 	
+	                    aumtotal = commaSeparateNumber(aumtotal);
+	                 }
+		        
+		var expenceratio ="-"
+		if(pc_data.expenceratio!=null)
+		{
+	  	expenceratio = (pc_data.expenceratio).toFixed(2);;
 
+		}
+		 
+
+		
+
+
+		var rr , rr_ico;
+		if (rupeevest_rating)
+		{
+		rr = rupeevest_rating;
+		if(rr == 5){
+		rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
+		}
+		else if (rr == 4){
+		rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
+		}
+		else if (rr == 3){
+		rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"	
+		}
+		else if (rr == 2){
+		rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"	
+		}
+		else if (rr == 1){
+		rr_ico = "<span class = 'glyphicon glyphicon-star'></span>"
+		}
+		else if (rr == "Unrated"){
+		rr_ico = "Unrated"
+		}
+		}
+		else
+		{
+		rr = "-";
+		}
 	
 
+		if(i == 0)
+		{
+		tblData = th + "<tr><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '> "+s_name+"</a></td><td><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td>"+aumtotal+"</td><td>"+expenceratio+"</td><td>"+returns_6month+"</td><td>"+returns_1year+"</td><td>"+returns_3year+"</td><td>"+returns_5year+"</td></tr>";
+		}
+		else
+		{
+		tblData = tblData + "<tr><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+s_name+"</a></td><td><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td>"+aumtotal+"</td><td>"+expenceratio+"</td><td>"+returns_6month+"</td><td>"+returns_1year+"</td><td>"+returns_3year+"</td><td>"+returns_5year+"</td></tr>";
+		}
+		  }
+		$("#peertabl").html("");
+		$("#peertabl").html(tblData);
+		tbldata="";
 
-	var rr , rr_ico;
-	if (rupeevest_rating)
-	{
-	rr = rupeevest_rating;
-	if(rr == 5){
-	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
-	}
-	else if (rr == 4){
-	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
-	}
-	else if (rr == 3){
-	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"	
-	}
-	else if (rr == 2){
-	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"	
-	}
-	else if (rr == 1){
-	rr_ico = "<span class = 'glyphicon glyphicon-star'></span>"
-	}
-	else if (rr == "Unrated"){
-	rr_ico = "Unrated"
-	}
-	}
-	else
-	{
-	rr = "-";
-	}
-// <a id='"+scheme_code+"' href='#' onclick="setvalue(this.id)">"+s_name+"</a>
 
-	if(i == 0)
-	{
-	tblData = th + "<tr><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '> "+s_name+"</a></td><td><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td>"+aumtotal+"</td><td>"+expenceratio+"</td><td>"+returns_6month+"</td><td>"+returns_1year+"</td><td>"+returns_3year+"</td><td>"+returns_5year+"</td></tr>";
-	}
-	else
-	{
-	tblData = tblData + "<tr><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+s_name+"</a></td><td><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td>"+aumtotal+"</td><td>"+expenceratio+"</td><td>"+returns_6month+"</td><td>"+returns_1year+"</td><td>"+returns_3year+"</td><td>"+returns_5year+"</td></tr>";
-	}
-	  }
-	$("#peertabl").html("");
-	$("#peertabl").html(tblData);
-	tbldata="";
-	},
-	error:function(jqXHR, textStatus, errorThrown) {
-	// alert("AJAX Error:" + textStatus);
-	}
-  })
+   	});
 }
 
 // function get_return_data(schemecode)
@@ -2587,309 +2554,256 @@ function get_peer_comparision(schemecode)
 function get_return_data(schemecode)
 {
 	var tbldata;
-	$.ajax({
-	type:'GET',
-	url: '/functionalities/get_return_data',
-	data :{schemecode:schemecode},
-	datatype:'json',
-	success:function(returns_data, textStatus, jqXHR) {
-	console.log(returns_data);
-	var mf_data;
-	var tblData;
-	// var th = "<thead><tr><th></th><th>1 Month</th><th>3 Month</th><th>6 Month</th><th>1 Year</th><th>3 Year</th><th>5 Year</th><th>10 Year</th></tr></thead>";
-	var th = "<thead><tr><th></th><th>3 Month</th><th>6 Month</th><th>1 Year</th><th>3 Year</th><th>5 Year</th><th>10 Year</th></tr></thead>";
-	for(var i =0;i <= returns_data.returns_data.length-1;i++)
+	$$.get(curr_ip+'functionalities/get_return_data', {schemecode: +schemecode},function (returns_data_ajax) 
 	{
-	mf_data = returns_data.returns_data[i];
-	var scheme_name = mf_data.s_name;
-	    if(scheme_name==null)
-	    {
-	    	scheme_name="-";
-	    }
-	var monthret_1 = mf_data.returns_1month;
-	if(monthret_1==null)
-	    {
-	    	monthret_1="-";
-	    }
-	    else
-	    {
-	    	monthret_1=monthret_1.toFixed(2);
-	    }
-	var monthret_3 = mf_data.returns_3month;
-	   if(monthret_3==null)
-	    {
-	    	monthret_3="-";
-	    }
-	    else
-	    {
-	    	monthret_3=monthret_3.toFixed(2);
-	    }
-	 var monthret_6 = mf_data.returns_6month;
-	    if(monthret_6==null)
-	    {
-	    	monthret_6="-";
-	    }
-	    else
-	    {
-	    	monthret_6=monthret_6.toFixed(2);
-	    }
-
-	var yrret_1 = mf_data.returns_1year;
-	if(yrret_1==null)
-	    {
-	    	yrret_1="-";
-	    }
-	    else
-	    {
-	    	yrret_1=yrret_1.toFixed(2);
-	    }
-	var yearret_3 = mf_data.returns_3year;
-	  if(yearret_3==null)
-	    {
-	    	yearret_3="-";
-	    }
-	     else
-	    {
-	    	yearret_3=yearret_3.toFixed(2);
-	    }
-	var yearret_5 = mf_data.returns_5year;
-	  if(yearret_5==null)
-	    {
-	    	yearret_5="-";
-	    }
-	    else
-	    {
-	    	yearret_5=yearret_5.toFixed(2);
-	    }
-
-	    var yearret_10 = mf_data.returns_10year;
-	  if(yearret_10==null)
-	    {
-	    	yearret_10="-";
-	    }
-	    else
-	    {
-	    	yearret_10=yearret_10.toFixed(2);
-	    }
-
-
-	var fund = "Fund"; 
-	  if(fund==null)
-	    {
-	    	fund="-";
-	    }
-	// var ytd = mf_data.ytd_returns;
-	var index_name = mf_data.index_name; 
-	 if(index_name==null)
-	    {
-	    	index_name="-";
-	    }
-
-	var category_Average = "category Average";
-
-	var Rank =  "Rank Within category";
-	var Number_fund = " Number Of funds in category";
-	// var rank_ytd = mf_data.rank_ytd;
-	var rank_1month = mf_data.rank_1month;
-	  if(rank_1month==null)
-	    {
-	    	rank_1month="-";
-	    }
-
-	  
-	var rank_3month = mf_data.rank_3month; 
-	   if(rank_3month==null)
-	    {
-	    	rank_3month="-";
-	    }
-	 
-	 var rank_6month = mf_data.rank_6month;
-	    if(rank_6month==null)
-	    {
-	    	rank_6month="-";
-	    }
-	  
-
-	var rank_1year = mf_data.rank_1year;
-	   if(rank_1year==null)
-	    {
-	    	rank_1year="-";
-	    }
-	
-
-	var rank_3year = mf_data.rank_3year; 
-
-	    if(rank_3year==null)
-	    {
-	    	rank_3year="-";
-	    }
-	
-
-
-	var rank_5year = mf_data.rank_5year; 
-
-	   if(rank_5year==null)
-	    {
-	    	rank_5year="-";
-	    }
-	var rank_10year = mf_data.rank_10year; 
-
-	   if(rank_10year==null)
-	    {
-	    	rank_10year="-";
-	    }
-
-	// var funds_num_ytd = mf_data.funds_num_ytd;
-	var funds_num_month1 = mf_data.funds_num_month1; 
-	    if(funds_num_month1==null)
-	    {
-	    	funds_num_month1="-";
-	    }
-	var funds_num_month3 = mf_data.funds_num_month3; 
-                    if(funds_num_month3==null)
-	    {
-	    	funds_num_month3="-";
-	    }
-
-	 var funds_num_month6 = mf_data.funds_num_month6; 
-                     if(funds_num_month6==null)
-	    {
-	    	funds_num_month6="-";
-	    }
-
-
-	var funds_num_year1 = mf_data.funds_num_year1; 
-	no_of_funds_year1=mf_data.funds_num_year1;
- 	
- 	if(funds_num_year1==null)
-	    {
-	    	funds_num_year1="-";
-	    }
-
-
-	var funds_num_year3 = mf_data.funds_num_year3; 
- 	
- 	if(funds_num_year3==null)
-	    {
-	    	funds_num_year3="-";
-	    }
-
-	var funds_num_year5 = mf_data.funds_num_year5; 
-
-	    if(funds_num_year5==null)
-	    {
-	    	funds_num_year5="-";
-	    }
-	 var funds_num_year10 = mf_data.funds_num_year10; 
-
-	    if(funds_num_year10==null)
-	    {
-	    	funds_num_year10="-";
-	    }
-
-	// var ytd_avg = mf_data.ytd_avg;
-	var avg_month1 = mf_data.avg_month1; 
-                     
-                   if(avg_month1==null)
-	    {
-	    	avg_month1="-";
-	    }
-	    else
-	    {
-	    	avg_month1 = avg_month1.toFixed(2);
-	    }
-
-
-	var avg_month3 = mf_data.avg_month3; 
-  	  
-  	  if(avg_month3==null)
+		var mf_data;
+		var tblData;
+		 var returns_data = JSON.parse(returns_data_ajax);
+		 // console.log("++++++++++++++++++++++++++++++++")
+		 // console.log(returns_data_ajax);
+		 //  console.log("++++++++++++++++++++++++++++++++")
+		var th = "<thead class='breadcrumb_3'><tr><th></th><th>3 Month</th><th>6 Month</th><th>1 Year</th><th>3 Year</th><th>5 Year</th><th>10 Year</th></tr></thead>";
+		for(var i =0;i <= returns_data.returns_data.length-1;i++)
+		{
+			mf_data = returns_data.returns_data[i];
+			var scheme_name = mf_data.s_name;
+			// console.log(scheme_name);
+		    if(scheme_name==null)
+		    {
+		    	scheme_name="-";
+		    }
+			var monthret_1 = mf_data.returns_1month;
+			if(monthret_1==null)
+		    {
+		    	monthret_1="-";
+		    }
+		    else
+		    {
+		    	monthret_1=monthret_1.toFixed(2);
+		    }
+			var monthret_3 = mf_data.returns_3month;
+		   	if(monthret_3==null)
+		    {
+		    	monthret_3="-";
+		    }
+		    else
+		    {
+		    	monthret_3=monthret_3.toFixed(2);
+		    }
+		 	var monthret_6 = mf_data.returns_6month;
+		    if(monthret_6==null)
+		    {
+		    	monthret_6="-";
+		    }
+		    else
+		    {
+		    	monthret_6=monthret_6.toFixed(2);
+		    }
+			var yrret_1 = mf_data.returns_1year;
+			if(yrret_1==null)
+		    {
+		    	yrret_1="-";
+		    }
+		    else
+		    {
+		    	yrret_1=yrret_1.toFixed(2);
+		    }
+			var yearret_3 = mf_data.returns_3year;
+		  	if(yearret_3==null)
+		    {
+		    	yearret_3="-";
+		    }
+		     else
+		    {
+		    	yearret_3=yearret_3.toFixed(2);
+		    }
+			var yearret_5 = mf_data.returns_5year;
+		  	if(yearret_5==null)
+		    {
+		    	yearret_5="-";
+		    }
+		    else
+		    {
+		    	yearret_5=yearret_5.toFixed(2);
+		    }
+		    var yearret_10 = mf_data.returns_10year;
+		  	if(yearret_10==null)
+		    {
+		    	yearret_10="-";
+		    }
+		    else
+		    {
+		    	yearret_10=yearret_10.toFixed(2);
+		    }
+			var fund = "Fund"; 
+		 	 if(fund==null)
+		    {
+		    	fund="-";
+		    }
+			var index_name = mf_data.index_name; 
+		 	if(index_name==null)
+		    {
+		    	index_name="-";
+		    }
+			var category_Average = "category Average";
+			var Rank =  "Rank Within category";
+			var Number_fund = " Number Of funds in category";
+			var rank_1month = mf_data.rank_1month;
+		  	if(rank_1month==null)
+		    {
+		    	rank_1month="-";
+		    }  
+			var rank_3month = mf_data.rank_3month; 
+		   	if(rank_3month==null)
+		    {
+		    	rank_3month="-";
+		    } 
+		 	var rank_6month = mf_data.rank_6month;
+		    if(rank_6month==null)
+		    {
+		    	rank_6month="-";
+		    }
+			var rank_1year = mf_data.rank_1year;
+		   if(rank_1year==null)
+		    {
+		    	rank_1year="-";
+		    }
+			var rank_3year = mf_data.rank_3year; 
+		    if(rank_3year==null)
+		    {
+		    	rank_3year="-";
+		    }
+			var rank_5year = mf_data.rank_5year; 
+		   	if(rank_5year==null)
+		    {
+		    	rank_5year="-";
+		    }
+			var rank_10year = mf_data.rank_10year; 
+		   	if(rank_10year==null)
+		    {
+		    	rank_10year="-";
+		    }
+			var funds_num_month1 = mf_data.funds_num_month1; 
+		    if(funds_num_month1==null)
+		    {
+		    	funds_num_month1="-";
+		    }
+			var funds_num_month3 = mf_data.funds_num_month3; 
+	        if(funds_num_month3==null)
+		    {
+		    	funds_num_month3="-";
+		    }
+		 	var funds_num_month6 = mf_data.funds_num_month6; 
+			if(funds_num_month6==null)
+		    {
+		    	funds_num_month6="-";
+		    }
+			var funds_num_year1 = mf_data.funds_num_year1; 
+			no_of_funds_year1=mf_data.funds_num_year1;
+	 		if(funds_num_year1==null)
+		    {
+		    	funds_num_year1="-";
+		    }
+			var funds_num_year3 = mf_data.funds_num_year3; 
+	 		if(funds_num_year3==null)
+		    {
+		    	funds_num_year3="-";
+		    }
+			var funds_num_year5 = mf_data.funds_num_year5; 
+		    if(funds_num_year5==null)
+		    {
+		    	funds_num_year5="-";
+		    }
+		 	var funds_num_year10 = mf_data.funds_num_year10; 
+		    if(funds_num_year10==null)
+		    {
+		    	funds_num_year10="-";
+		    }
+			var avg_month1 = mf_data.avg_month1; 
+	                     
+	        if(avg_month1==null)
+		    {
+		    	avg_month1="-";
+		    }
+		    else
+		    {
+		    	avg_month1 = avg_month1.toFixed(2);
+		    }
+			var avg_month3 = mf_data.avg_month3; 
+	  	  	if(avg_month3==null)
+		    {
+		   		avg_month3="-";
+		    }
+		    else
+		    {
+		    	avg_month3 = avg_month3.toFixed(2);
+		    }
+			var avg_month6 = mf_data.avg_month6;
+			if(avg_month6==null)
+		    {
+		    	avg_month6="-";
+		    }
+		    else
+		    {
+		    	avg_month6 = avg_month6.toFixed(2);
+		    }
+			var avg_year1 = mf_data.avg_year1; 
+			if(avg_year1==null)
 	        {
-	    	avg_month3="-";
-	        }
-	         else
-	        {
-	    	 avg_month3 = avg_month3.toFixed(2);
-	        }
-
-
-	 var avg_month6 = mf_data.avg_month6;
-
-	       if(avg_month6==null)
-	        {
-	    	avg_month6="-";
+	    		avg_year1="-";
 	        }
 	        else
 	        {
-	    	 avg_month6 = avg_month6.toFixed(2);
+	    	 	avg_year1 = avg_year1.toFixed(2);
 	        }
-
-	var avg_year1 = mf_data.avg_year1; 
-
-	        if(avg_year1==null)
-	        {
-	    	avg_year1="-";
-	        }
-	        else
-	        {
-	    	 avg_year1 = avg_year1.toFixed(2);
-	        }
-
-	var avg_year3 = mf_data.avg_year3; 
-
+			var avg_year3 = mf_data.avg_year3; 
 	        if(avg_year3==null)
 	        {
-	    	avg_year3="-";
+	    		avg_year3="-";
 	        }
 	        else
 	        {
-	    	 avg_year3 = avg_year3.toFixed(2);
+	    	 	avg_year3 = avg_year3.toFixed(2);
 	        }
-
-	var avg_year5 = mf_data.avg_year5; 
-
-	         if(avg_year5==null)
+			var avg_year5 = mf_data.avg_year5; 
+			if(avg_year5==null)
+			{
+				avg_year5="-";
+			}
+			else
+			{
+				avg_year5 = avg_year5.toFixed(2);
+			}
+		 	var avg_year10 = mf_data.avg_year10; 
+	        if(avg_year10==null)
 	        {
-	    	avg_year5="-";
+	    		avg_year10="-";
 	        }
 	        else
 	        {
-	    	 avg_year5 = avg_year5.toFixed(2);
+	    	 	avg_year10 = avg_year10.toFixed(2);
 	        }
-	 var avg_year10 = mf_data.avg_year10; 
+		 	var monthret_1_bm = mf_data.monthret_1; 
+		    if(monthret_1_bm==null)
+		    {
+		    	monthret_1_bm="-";
+		    }
+		    else
+		    {
+		    	 monthret_1_bm = monthret_1_bm.toFixed(2);
+		    }
 
-	         if(avg_year10==null)
-	        {
-	    	avg_year10="-";
-	        }
-	        else
-	        {
-	    	 avg_year10 = avg_year10.toFixed(2);
-	        }
-
-	// var ytdret = mf_data.ytdret;
-	 var monthret_1_bm = mf_data.monthret_1; 
-	       if(monthret_1_bm==null)
-	        {
-	    	monthret_1_bm="-";
-	        }
-	        else
-	        {
-	    	 monthret_1_bm = monthret_1_bm.toFixed(2);
-	        }
-
-	 var monthret_3_bm = mf_data.monthret_3; 
-	       if(monthret_3_bm==null)
-	        {
-	    	monthret_3_bm="-";
-	        }
-	        else
-	        {
-	    	 monthret_3_bm = monthret_3_bm.toFixed(2);
-	        }
-
-                 var monthret_6_bm = mf_data.monthret_6; 
-
-                       if(monthret_6_bm==null)
+	 		var monthret_3_bm = mf_data.monthret_3; 
+			if(monthret_3_bm==null)
+			{
+			monthret_3_bm="-";
+			}
+			else
+			{
+			 monthret_3_bm = monthret_3_bm.toFixed(2);
+			}
+			var monthret_6_bm = mf_data.monthret_6; 
+			if(monthret_6_bm==null)
 	        {
 	    	monthret_6_bm="-";
 	        }
@@ -2897,80 +2811,68 @@ function get_return_data(schemecode)
 	        {
 	    	 monthret_6_bm = monthret_6_bm.toFixed(2);
 	        }
-
-	var yrret_1_bm = mf_data.yrret_1; 
- 	
- 	  if(yrret_1_bm==null)
+			var yrret_1_bm = mf_data.yrret_1; 
+			if(yrret_1_bm==null)
 	        {
-	    	yrret_1_bm="-";
+	    		yrret_1_bm="-";
 	        }
 	       else
 	        {
-	    	 yrret_1_bm = yrret_1_bm.toFixed(2);
+	    	 	yrret_1_bm = yrret_1_bm.toFixed(2);
 	        }
-
-	var yrret_3 = mf_data.yrret_3; 
- 	
- 	if(yrret_3==null)
+			var yrret_3 = mf_data.yrret_3; 
+ 			if(yrret_3==null)
 	        {
-	    	yrret_3="-";
+	    		yrret_3="-";
 	        }
 	        else
 	        {
-	    	 yrret_3 = yrret_3.toFixed(2);
+	    	 	yrret_3 = yrret_3.toFixed(2);
 	        }
-
-
-	var yrret_5 = mf_data.yrret_5;
-
+			var yrret_5 = mf_data.yrret_5;
 	       	if(yrret_5==null)
 	        {
-	    	yrret_5="-";
+	    		yrret_5="-";
 	        }
 	        else
 	        {
-	    	 yrret_5 = yrret_5.toFixed(2);
+	    	 	yrret_5 = yrret_5.toFixed(2);
 	        }
-	 var yrret_10 = mf_data.yrret_10;
-
+	 		var yrret_10 = mf_data.yrret_10;
 	       	if(yrret_10==null)
 	        {
-	    	yrret_10="-";
+	    		yrret_10="-";
 	        }
 	        else
 	        {
-	    	 yrret_10 = yrret_10.toFixed(2);
+	    	 	yrret_10 = yrret_10.toFixed(2);
 	        }
-	// "<td>"+monthret_6+"</td><td>"+monthret_6_bm+"</td><td>"+avg_month6+"</td><td>"+rank_6month+"</td><td>"+funds_num_month6+"</td>"
-	if(i == 0)
-	{
-	// tblData = th + "<tr><td>"+fund+"</td><td>"+monthret_1+"</td><td>"+monthret_3+"</td><td>"+monthret_6+"</td><td>"+yrret_1+"</td><td>"+yearret_3+"</td><td>"+yearret_5+"</td><td>"+yearret_10+"</td></tr>";
-	// tblData = tblData + "<tr><td>"+index_name+"</td><td>"+monthret_1_bm+"</td><td>"+monthret_3_bm+"</td><td>"+monthret_6_bm+"</td><td>"+yrret_1_bm+"</td><td>"+yrret_3+"</td><td>"+yrret_5+"</td><td>"+yrret_10+"</td></tr>";
-	// tblData = tblData + "<tr><td>"+category_Average+"</td><td>"+avg_month1+"</td><td>"+avg_month3+"</td><td>"+avg_month6+"</td><td>"+avg_year1+"</td><td>"+avg_year3+"</td><td>"+avg_year5+"</td><td>"+avg_year10+"</td></tr>";
-	// tblData = tblData + "<tr><td>"+Rank+"</td><td>"+rank_1month+"</td><td>"+rank_3month+"</td><td>"+rank_6month+"</td><td>"+rank_1year+"</td><td>"+rank_3year+"</td><td>"+rank_5year+"</td><td>"+rank_10year+"</td></tr>";
-	// tblData = tblData + "<tr><td>"+Number_fund+"</td><td>"+funds_num_month1+"</td><td>"+funds_num_month3+"</td><td>"+funds_num_month6+"</td><td>"+funds_num_year1+"</td><td>"+funds_num_year3+"</td><td>"+funds_num_year5+"</td><td>"+funds_num_year10+"</td></tr>";
-	tblData = th + "<tr><td>"+fund+"</td><td>"+monthret_3+"</td><td>"+monthret_6+"</td><td>"+yrret_1+"</td><td>"+yearret_3+"</td><td>"+yearret_5+"</td><td>"+yearret_10+"</td></tr>";
-	tblData = tblData + "<tr><td>"+index_name+"</td><td>"+monthret_3_bm+"</td><td>"+monthret_6_bm+"</td><td>"+yrret_1_bm+"</td><td>"+yrret_3+"</td><td>"+yrret_5+"</td><td>"+yrret_10+"</td></tr>";
-	tblData = tblData + "<tr><td>"+category_Average+"</td><td>"+avg_month3+"</td><td>"+avg_month6+"</td><td>"+avg_year1+"</td><td>"+avg_year3+"</td><td>"+avg_year5+"</td><td>"+avg_year10+"</td></tr>";
-	tblData = tblData + "<tr><td>"+Rank+"</td><td>"+rank_3month+"</td><td>"+rank_6month+"</td><td>"+rank_1year+"</td><td>"+rank_3year+"</td><td>"+rank_5year+"</td><td>"+rank_10year+"</td></tr>";
-	tblData = tblData + "<tr><td>"+Number_fund+"</td><td>"+funds_num_month3+"</td><td>"+funds_num_month6+"</td><td>"+funds_num_year1+"</td><td>"+funds_num_year3+"</td><td>"+funds_num_year5+"</td><td>"+funds_num_year10+"</td></tr>";
-	}
-	else{
-                   // tblData = tblData + "<tr><td>"+fund+"</td><td>"+ytd+"</td><td>"+monthret_1+"</td><td>"+monthret_3+"</td><td>"+yrret_1+"</td><td>"+yearret_3+"</td><td>"+yearret_5+"</td></tr><tr></tr>";
-
-	}
-	}
-
-	$("#return").html("");
-	$("#return").html(tblData);
-	tbldata="";
-	get_risk_measures(schemecode);
-	},
-	error:function(jqXHR, textStatus, errorThrown) {
-	// alert("AJAX Error:" + textStatus);
-	}
-  })
-
+			if(i == 0)
+			{
+				tblData = th + "<tr><td>"+fund+"</td><td>"+monthret_3+"</td><td>"+monthret_6+"</td><td>"+yrret_1+"</td><td>"+yearret_3+"</td><td>"+yearret_5+"</td><td>"+yearret_10+"</td></tr>";
+				tblData = tblData + "<tr><td>"+index_name+"</td><td>"+monthret_3_bm+"</td><td>"+monthret_6_bm+"</td><td>"+yrret_1_bm+"</td><td>"+yrret_3+"</td><td>"+yrret_5+"</td><td>"+yrret_10+"</td></tr>";
+				tblData = tblData + "<tr><td>"+category_Average+"</td><td>"+avg_month3+"</td><td>"+avg_month6+"</td><td>"+avg_year1+"</td><td>"+avg_year3+"</td><td>"+avg_year5+"</td><td>"+avg_year10+"</td></tr>";
+				tblData = tblData + "<tr><td>"+Rank+"</td><td>"+rank_3month+"</td><td>"+rank_6month+"</td><td>"+rank_1year+"</td><td>"+rank_3year+"</td><td>"+rank_5year+"</td><td>"+rank_10year+"</td></tr>";
+				tblData = tblData + "<tr><td>"+Number_fund+"</td><td>"+funds_num_month3+"</td><td>"+funds_num_month6+"</td><td>"+funds_num_year1+"</td><td>"+funds_num_year3+"</td><td>"+funds_num_year5+"</td><td>"+funds_num_year10+"</td></tr>";
+			}
+			else
+			{
+	                
+			}
+		}
+		// console.log("--------------start-----------------");
+		// console.log(tblData);
+		// console.log("---------------end----------------");
+		$("#return").html("");
+		$("#return").html(tblData);
+		tbldata="";
+		//console.log(scheme_name);
+		// test_graph(scheme_name,schemecode);
+		// asect_alloc(schemecode);
+		// get_portfolio_holdings(schemecode);
+		// port_avgcap();
+	});
+	return "True";
 }
 
 function get_risk_measures(schemecode)
@@ -2978,11 +2880,11 @@ function get_risk_measures(schemecode)
 	var tblData="";
 	$.ajax({
 	type:'GET',
-	url: '/functionalities/get_risk_measures',
+	url: curr_ip+'/functionalities/get_risk_measures',
 	datatype:'json',
 	data :{schemecode:schemecode},
 	success:function(risk_data, textStatus, jqXHR) {
-	console.log(risk_data);
+	// console.log(risk_data);
 	var rm_data="";
 	
 	var th = "<thead><tr><th></th><th>Std Dev</th><th>Beta</th><th>Sharpe</th><th>Sortino</th><th>Alpha</th></tr></thead><tbody>";
@@ -3305,62 +3207,56 @@ function get_risk_measures(schemecode)
 }
 function get_portfolio_holdings(schemecode)
 {
+
+
 	$("#portfolio_holdings").html("");
 	$("#holding_table-3").html("");
-	$.ajax({
-	type:'GET',
-	url: '/functionalities/portfolio_holdings',
-	datatype:'json',
-	data :{schemecode:schemecode},
-	success:function(portfolio_holdings, textStatus, jqXHR) {
-	// console.log("Akansha")
-	console.log(portfolio_holdings.portfolio_holdings.length);
-	var tblData="";
-	var th = "<thead class='border-top'><tr><th>Security Name</th><th>Weight (%)</th></tr></thead>";
-	   
-                 if(portfolio_holdings.portfolio_holdings.length > 0)
-                 {
-                 	for(var i =0;i <= portfolio_holdings.portfolio_holdings.length-1;i++)
-	{
-	var ph_data = portfolio_holdings.portfolio_holdings[i];
-	var compname = ph_data.compname;
-	var holdpercentage = ph_data.holdpercentage;
-	if(i == 0)
-	{
-	tblData = th + "<tr class='post'><td>"+compname+"</td><td>"+holdpercentage.toFixed(2)+"</td></tr>";
-	}
-	else
-	{
-	tblData = tblData + "<tr class='post'><td>"+compname+"</td><td>"+holdpercentage.toFixed(2)+"</td></tr>";
-	}
-	  }
-	$("#portfolio_holdings").html("");
-	$("#portfolio_holdings").html(tblData);
-	tbldata="";
-	portfolio_pagination();
-	if( portfolio_holdings.portfolio_holdings.length > 8)
-	        {
-	          $("#pages").removeClass("d_none");
-	        }
-	        else
-	        {
-	          $("#pages").addClass("d_none");
-	        }
-	}
-                 else
-                 {
-	 	$("#portfolio_holdings").html("Portfolio Data Not Available");
-
-	 	$("#holding_table-3").html("Portfolio Data Not Available");
 
 
-	 }
+	$$.get(curr_ip+'functionalities/portfolio_holdings', {schemecode: +schemecode},function (portfolio_holdings_ajax) {
+		var portfolio_holdings = JSON.parse(portfolio_holdings_ajax);
+		// console.log(portfolio_holdings.portfolio_holdings.length);
+		var tblData="";
+		var th = "<thead class='border-top breadcrumb_3'><tr><th>Security Name</th><th>Weight (%)</th></tr></thead>";
+		   
+	    if(portfolio_holdings.portfolio_holdings.length > 0)
+	    {
+	        for(var i =0;i <= portfolio_holdings.portfolio_holdings.length-1;i++)
+		{
+		var ph_data = portfolio_holdings.portfolio_holdings[i];
+		var compname = ph_data.compname;
+		var holdpercentage = ph_data.holdpercentage;
+		if(i == 0)
+		{
+		tblData = th + "<tr class='post'><td>"+compname+"</td><td>"+holdpercentage.toFixed(2)+"</td></tr>";
+		}
+		else
+		{
+		tblData = tblData + "<tr class='post'><td>"+compname+"</td><td>"+holdpercentage.toFixed(2)+"</td></tr>";
+		}
+		  }
+		$("#portfolio_holdings").html("");
+		$("#portfolio_holdings").html(tblData);
 
-	},
-	error:function(jqXHR, textStatus, errorThrown) {
-	// alert("AJAX Error:" + textStatus);
-	}
-  })
+		// $('#portfolio_holdings').DataTable( {
+  //       responsive: true,
+  //       "pageLength": 10
+		// } );
+
+		// console.log("?????????????????????????????????????");
+		// console.log(tblData);
+		// console.log("?????????????????????????????????????");
+		tbldata="";
+		}
+	    else
+	    {
+		 	$("#portfolio_holdings").html("Portfolio Data Not Available");
+		}
+
+
+	});
+
+	return "True";
 }
 
 // function get_hold_asset()
@@ -3500,14 +3396,10 @@ function get_hold_asset(schemecode)
 {
     var fincode_array = [];
 
-	$.ajax({
-	type:'GET',
-	url: '/home/get_holding_asset',
-	data :{schemecode:schemecode},
-	datatype:'json',
-	success:function(sectordata, textStatus, jqXHR) {
-	 // console.log(sectordata);
-	 var tblData_eq="";
+     $$.get(curr_ip+'home/get_holding_asset',{schemecode: +schemecode},function (sectordata_ajax) 
+    {
+    	var sectordata=JSON.parse(sectordata_ajax);
+    	var tblData_eq="";
 	 var tblData_db="";
 	 var tblData="";
 	 var tblData1 ="";
@@ -3528,7 +3420,6 @@ function get_hold_asset(schemecode)
          	   	 fincode_array.push(sectordata.stock_data_search[i].fincode); 
          	   }	
          }
-          // console.log(fincode_array);
 
 	 if(sectordata.hold_eq.length > 0)
 	 {
@@ -3542,15 +3433,12 @@ function get_hold_asset(schemecode)
 	var item1 = sectordata.hold_eq[i];
 	var scheme_code = item1.schemecode;
 	var company = item1.compname;
-	// var sector = item1.sect_name;
 	var rv_sector = item1.rv_sect_name;
 	var holdpercentage = item1.holdpercentage;
 	total_eq = total_eq + holdpercentage;
-	// var previous_quarter  = item1.prev_holdperc;
 
 	var fin_code = item1.fincode;
                         var new_comp_link;
-                         // alert(fin_code);
 
   	if(fincode_array.indexOf(fin_code)!= -1)
   	{
@@ -3582,7 +3470,7 @@ function get_hold_asset(schemecode)
 
 	 if(sectordata.hold_debt.length > 0)
 	 {
-	 	// port_graph_debt();
+
 	 	var as_on_date=moment(sectordata.hold_debt[0].invdate).format('DD-MMM-YY')
 	 	th = "<CAPTION><h4 class='d_inline'>Debt Holdings </h4><h6>&nbsp;&nbsp;(as on "+as_on_date+")</h6></CAPTION><thead><tr><th>Instrument</th><th>Asset Type</th><th>Rating</th><th>Assets %</th></tr></thead>";
 	 	for(var i =0;i <= sectordata.hold_debt.length-1;i++)
@@ -3617,13 +3505,12 @@ function get_hold_asset(schemecode)
 	 	for(var i =0;i <= sectordata.hold_others.length-1;i++)
 	 {
 	var item1 = sectordata.hold_others[i];
-	// var scheme_code = item1.schemecode;
+
 	var company = item1.compname;
-	// var sector = item1.sect_name;
-	// var rv_sector = item1.rv_sect_name;
+
 	var holdpercentage = item1.holdpercentage;
 	total_ot = total_ot + holdpercentage;
-	// var previous_quarter  = item1.prev_holdperc;
+
 	            if(i == 0)
 	               {
 	                tblData = th + "<tr><td>"+company+"</td><td>"+holdpercentage.toFixed(2)+"</td></tr>";
@@ -3645,13 +3532,12 @@ function get_hold_asset(schemecode)
 	 	for(var i =0;i <= sectordata.hold_cash.length-1;i++)
 	 {
 	var item1 = sectordata.hold_cash[i];
-	// var scheme_code = item1.schemecode;
+
 	var company = item1.compname;
-	// var sector = item1.sect_name;
-	// var rv_sector = item1.rv_sect_name;
+
 	var holdpercentage = item1.holdpercentage;
 	total_cash = total_cash + holdpercentage;
-	// var previous_quarter  = item1.prev_holdperc;
+
 	            if(i == 0)
 	               {
 	                tblData = th + "<tr><td>"+company+"</td><td>"+holdpercentage.toFixed(2)+"</td></tr>";
@@ -3670,77 +3556,85 @@ function get_hold_asset(schemecode)
 	 $("#holding_table-3").append("<tr><td>Grand Total</td><td>"+Math.round(total.toFixed(2))+"</td></tr>");
 	 plot_data(total_eq,total_db,tblData_eq,tblData_db,schemecode);
 
+   	});
+
+	// $.ajax({
+	// type:'GET',
+	// url: '/home/get_holding_asset',
+	// data :{schemecode:schemecode},
+	// datatype:'json',
+	// success:function(sectordata, textStatus, jqXHR) {
+
+
 
 	
  
-	},
-	 error:function(jqXHR, textStatus, errorThrown) {
-	   // alert("AJAX Error:" + textStatus);
-	 }
- })
+	// }
+ // })
+return "True";
 }
 
 function plot_data(total_eq,total_db,tblData_eq,tblData_db,schemecode)
 {
 	if(total_eq>total_db)
 	{
-	 $("#holding_table").html("");
-	 $("#holding_table").html(tblData_eq);
-	 $("#holding_table-1").html("");
-	$("#holding_table-1").html(tblData_db);
-	if(tblData_eq!="" && total_eq>15)
-	{
-	port_graph_equity("container-01",schemecode);	
-	}
-	if(tblData_db!="" && total_db>15)
-	{
-	port_graph_debt("container-02",schemecode);	
-	port_characteristics(schemecode,"portfolio_characteristics");
-	}
-	get_portfolio_markettable(schemecode,"portfolio_table");
-	get_portfolio_markettable_avgmcap(schemecode);
-	get_portfolio_markettable_allcapavgs(schemecode);
-	concentration_values(schemecode,"conval");
-	if(total_db!=0)
-	{
-	// alert("debt");
-	// port_characteristics(schemecode,"portfolio_characteristics");
-	}
-	
+		 $("#holding_table").html("");
+		 $("#holding_table").html(tblData_eq);
+		 $("#holding_table-1").html("");
+		$("#holding_table-1").html(tblData_db);
+		if(tblData_eq!="" && total_eq>15)
+		{
+			port_graph_equity("container-01",schemecode);	
+		}
+		if(tblData_db!="" && total_db>15)
+		{
+			port_graph_debt("container-02",schemecode);	
+			port_characteristics(schemecode,"portfolio_characteristics");
+		}
+		get_portfolio_markettable(schemecode,"portfolio_table");
+		// get_portfolio_markettable_avgmcap(schemecode);
+		// get_portfolio_markettable_allcapavgs(schemecode);
+		concentration_values(schemecode,"conval");
+		// if(total_db!=0)
+		// {
+		// 	// alert("debt");
+		// 	// port_characteristics(schemecode,"portfolio_characteristics");
+		// }
+		
 	}
 	else
 	{
-	 $("#holding_table-1").html("");
-	 $("#holding_table-1").html(tblData_eq);
-	 $("#holding_table").html("");
-	$("#holding_table").html(tblData_db);
-	if(tblData_eq!="" && total_eq>15)
-	{
-	port_graph_equity("container-02",schemecode);	
-	get_portfolio_markettable(schemecode,"portfolio_characteristics");
-	get_portfolio_markettable_avgmcap(schemecode);
-	get_portfolio_markettable_allcapavgs(schemecode);
-	concentration_values(schemecode,"conval_2");
-	}
-	if(tblData_db!="" && total_db>15)
-	{
-	port_graph_debt("container-01",schemecode);	
-	port_characteristics(schemecode,"portfolio_table");
+		 $("#holding_table-1").html("");
+		 $("#holding_table-1").html(tblData_eq);
+		 $("#holding_table").html("");
+		$("#holding_table").html(tblData_db);
+		if(tblData_eq!="" && total_eq>15)
+		{
+			port_graph_equity("container-02",schemecode);	
+			get_portfolio_markettable(schemecode,"portfolio_characteristics");
+			// get_portfolio_markettable_avgmcap(schemecode);
+			// get_portfolio_markettable_allcapavgs(schemecode);
+			concentration_values(schemecode,"conval_2");
+		}
+		if(tblData_db!="" && total_db>15)
+		{
+			port_graph_debt("container-01",schemecode);	
+			port_characteristics(schemecode,"portfolio_table");
 
-	}
-	if(total_eq!=0)
-	{
-	// get_portfolio_markettable(schemecode,"portfolio_characteristics");
-	// get_portfolio_markettable_avgmcap(schemecode);
-	// get_portfolio_markettable_allcapavgs(schemecode);
-	// concentration_values(schemecode,"conval_2");
-	}
-	if(total_db>0)
-	{
-	// alert("debt");
-	// port_characteristics(schemecode,"portfolio_table");
-	}
-	
+		}
+		// if(total_eq!=0)
+		// {
+		// 			// get_portfolio_markettable(schemecode,"portfolio_characteristics");
+		// 			// get_portfolio_markettable_avgmcap(schemecode);
+		// 			// get_portfolio_markettable_allcapavgs(schemecode);
+		// 			// concentration_values(schemecode,"conval_2");
+		// }
+		// if(total_db>0)
+		// {
+		// 	// alert("debt");
+		// 	// port_characteristics(schemecode,"portfolio_table");
+		// }
+		
 	}
 }
 
@@ -3763,7 +3657,7 @@ function sector_search()
 	//console.log(fundnames);
 
 	}
-	console.log(fundnames);
+	// console.log(fundnames);
 	   $("#sector_names").autocomplete({
 	source: fundnames
 	});
@@ -3785,7 +3679,7 @@ function get_sector()
 	data :{sectorname:obj},
 	datatype:'json',
 	success:function(sectordata, textStatus, jqXHR) {
-	console.log(sectordata);
+	// console.log(sectordata);
 	var fundname = [];
 	var tblData="";
 	var th = "<thead><tr><th>Fund</th><th>Dec-15</th><th>Sep-15</th><th>Jun-15</th><th>Mar-15</th><th>desc-15</th></tr></thead>";
@@ -3900,13 +3794,19 @@ function stock_data()
 
 function port_avgcap()
 {
-
+	// console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+	// // $$.get(curr_ip+'functionalities/get_protfolio_avgmarketcap', function (sectordata) {
+ // //       console.log(sectordata);
+ // //    });
+	// console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 	$.ajax({
 	type:'GET',
 	url: '/functionalities/get_protfolio_avgmarketcap',
 	datatype:'json',
 	success:function(sectordata, textStatus, jqXHR) {
-	console.log(sectordata);
+	// console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+	// console.log(sectordata);
+	// console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 	var tblData="";
 	var th = "<thead><tr><th>Portfolio Market Cap</th><th>Fund</th><th>Category Average</th></tr></thead>";
 
@@ -3944,15 +3844,13 @@ function concentration_values(schemecode,table_id)
 {
 	$.ajax({
 	type:'GET',
-	url: '/functionalities/get_concentration_value',
+	url: curr_ip+'functionalities/get_concentration_value',
 	data :{schemecode:schemecode},
 	datatype:'json',
 	success:function(scheme_data,textStatus, jqXHR) {
 	  console.log(scheme_data);
-	  var tblData3="";
-         // var as_on_date=moment(scheme_data.hold_others[0].invdate).format('DD-MMM-YY');
-  
-	var th = "<CAPTION class='portcap'><h4 class='d_inline'>Portfolio Summary</h4><h6>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead><tr><th colspan='2'>Concentration &amp; Valuation </th></tr></thead>";
+	  var tblData3=""; 
+	var th = "<CAPTION class='portcap'><h4 class='d_inline'>Portfolio Summary</h4><h6>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th colspan='2'>Concentration &amp; Valuation </th></tr></thead>";
 
 	  for(var i =0;i <= scheme_data.concen_value.length-1;i++)
 	  {
@@ -3970,21 +3868,14 @@ function concentration_values(schemecode,table_id)
 	
 
 	  }
-	// $("#pe").html(pe);
-	// $("#pb").html(pb);
-	// $("#stocks").html(count);
-	// $("#top3").html(top3);
-	// $("#top5").html(top5);
-	// $("#top10").html(top10);
-	// $("#conval").html("");
-	// $("#conval").html(tblData3);
-	//  $("#conval").css("display","table");
 	$("#"+table_id).html("");
 	$("#"+table_id).html(tblData3);
 	 $("#"+table_id).css("display","table");
+	 $("#"+table_id).parent().css("display","block");
+
 	   },
 	  error:function(jqXHR, textStatus, errorThrown) {
-	// alert("AJAX Error:" + textStatus);
+
 	  }
 
 	  })
@@ -4456,13 +4347,13 @@ function get_portfolio_markettable(schemecode,table_id)
 	 var tblData2="";
 	$.ajax({
 	type:'GET',
-	url: '/functionalities/portfolio_markettable',
+	url: curr_ip+'functionalities/portfolio_markettable',
 	data :{schemecode:schemecode},
 	datatype:'json',
 	success:function(port_cap, textStatus, jqXHR) {
 	console.log(port_cap);
 	var tbldata2="";
-	var th = "<CAPTION class='portcap'><h4 class='d_inline'>Portfolio Market Cap</h4><h6>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead><tr><th></th><th>Fund</th><th>Category Avg.</th></tr></thead>";
+	var th = "<CAPTION class='portcap'><h4 class='d_inline'>Portfolio Market Cap</h4><h6>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th></th><th>Fund</th><th>Category Avg.</th></tr></thead>";
 	for(var i =0;i <= port_cap.cap_values.length-1;i++)
 	{
 	var item1 = port_cap.cap_values[i];
@@ -4491,6 +4382,8 @@ function get_portfolio_markettable(schemecode,table_id)
 	$("#"+table_id).html("");
 	$("#"+table_id).html(tblData2);
 	$("#"+table_id).css("display","table");
+	get_portfolio_markettable_avgmcap(schemecode);
+		get_portfolio_markettable_allcapavgs(schemecode);
 	},
 	error:function(jqXHR, textStatus, errorThrown) {
 	  // alert("AJAX Error:" + textStatus);
@@ -4503,7 +4396,7 @@ function get_portfolio_markettable_avgmcap(schemecode)
 {
 	$.ajax({
 	type:'GET',
-	url: '/functionalities/portfolio_markettable_avgmcap',
+	url: curr_ip+'functionalities/portfolio_markettable_avgmcap',
 	data :{schemecode:schemecode},
 	datatype:'json',
 	success:function(data, textStatus, jqXHR) {
@@ -4530,7 +4423,7 @@ function get_portfolio_markettable_allcapavgs(schemecode)
 {
 	$.ajax({
 	type:'GET',
-	url: '/functionalities/portfolio_markettable_allcapavgs',
+	url: curr_ip+'functionalities/portfolio_markettable_allcapavgs',
 	data :{schemecode:schemecode},
 	datatype:'json',
 	success:function(avg_allcap, textStatus, jqXHR) {
@@ -4557,7 +4450,7 @@ function port_characteristics(schemecode,table_id)
 {
 	$.ajax({
 	type:'GET',
-	url: '/functionalities/portfolio_characteristics',
+	url: curr_ip+'functionalities/portfolio_characteristics',
 	data :{schemecode:schemecode},
 	datatype:'json',
 	success:function(data, textStatus, jqXHR) {
@@ -4569,7 +4462,7 @@ function port_characteristics(schemecode,table_id)
           var as_on_date = moment(data.as_on_date).format('DD-MMM-YY'); 
 
 	  var tblData4="";
-	  var th = "<CAPTION class='portcap'><h4 class='d_inline'>Debt Profile</h4><h6>&nbsp;&nbsp;(as on "+as_on_date+")</h6></CAPTION><thead><tr><th></th><th>Fund</th><th>1 Year High</th><th>1 Year Low</th><th>Cat. Avg.</th></tr></thead>";
+	  var th = "<CAPTION class='portcap'><h4 class='d_inline'>Debt Profile</h4><h6>&nbsp;&nbsp;(as on "+as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th></th><th>Fund</th><th>1 Year High</th><th>1 Year Low</th><th>Cat. Avg.</th></tr></thead>";
 	
 	 var max_avg_maturity;
 	 var min_avg_maturity;	
@@ -4934,7 +4827,7 @@ function get_status(schemecode)
 {
 	$.ajax({
 	type: 'GET',
-	url: '/home/get_status',
+	url: curr_ip+'/home/get_status',
 	data :{schemecode:schemecode},
 	datatype: 'json',
 	success: function (data, textStatus, jqXHR) {
@@ -4972,6 +4865,7 @@ function get_status(schemecode)
       }
 	}
 });
+return "True";
 }
 
 function get_objectives(schemecode)

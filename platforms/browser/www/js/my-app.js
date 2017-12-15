@@ -141,23 +141,18 @@ $$(document).on('pageInit', function (e) {
         }); 
     }
     
-    if(page.name === 'fund_details')
+
+    
+if(page.name === 'fund_details')
     {
-        //console.log(page.url);
         var query = $$.parseUrlQuery(page.url);
-        //console.log(query);
         var scheme_code=query.scheme_code;
         $$.get(curr_ip+'app_services/get_fund_info', {schemecode: +scheme_code},function (data) 
         {
-            //console.log(data);
             var scheme_data = JSON.parse(data);
             console.log(scheme_data);
-
-            // Web Site Code start
-
             var scheme_item = scheme_data.schemedata[0];
             var min_sip_inv = "-"
-
             if(scheme_data.sip_min_investment[0]!=undefined)
             {
              if(scheme_data.sip_min_investment[0].sipmininvest!=null || scheme_data.sip_min_investment[0].sipmininvest!='')
@@ -170,7 +165,6 @@ $$(document).on('pageInit', function (e) {
             var fund_manager = scheme_item.fund_manager;
             var navdate = "Nav as on " + moment(scheme_item.navdate).format('DD-MMM-YY');
             var navrs = parseFloat(scheme_item.navrs).toFixed(2);
-            // console.log(navdate);
             if (typeof scheme_item.navchange === 'undefined' || scheme_item.navchange === null)
              {
                 var navchange = "-" ;
@@ -180,7 +174,6 @@ $$(document).on('pageInit', function (e) {
                 var navchange = parseFloat(scheme_item.navchange) + "%";    
              }
 
-             // console.log(navchange);
              var inception_date = moment(scheme_item.inception_date).format('DD-MMM-YY');
             var inception_return;
             
@@ -263,7 +256,6 @@ $$(document).on('pageInit', function (e) {
              }
              
            }
-           // var index_name = scheme_item.index_name;
                 var redemption_period = scheme_item.redemption_period;
                 
                 var aumtotal;
@@ -393,55 +385,23 @@ $$(document).on('pageInit', function (e) {
                 $("#exitload-modal").html(exitloadremarks);
 
                 // get_growth_plan(schemecode);
-                // get_return_data(schemecode);
-
-                // get_peer_comparision(schemecode);
-
-                // get_portfolio_holdings(schemecode);
-                // get_dividend_data(schemecode);
-                // get_hold_asset(schemecode);
-
-                // get_status(schemecode);
-                // get_objectives(schemecode);
-
-                // get_fund_manager(schemecode);
-
-                // get_rt_info(schemecode);
-                // get_amc_info(schemecode);
-                
-                // get_indexe_name(schemecode);
-                // get_related_funds(classification);
-                
+                var val_1=get_return_data(scheme_code);
+                var val_2=test_graph(s_name,scheme_code);
+                var val_3=asect_alloc(scheme_code);
+                var val_4=get_portfolio_holdings(scheme_code);
+                // port_avgcap();
+                var val_5=get_hold_asset(scheme_code);
 
 
+                 var val_6=get_status(scheme_code);
+
+                if (val_1=='True' && val_2=='True' && val_3=='True' && val_4=='True' && val_5=='True' && val_6=='True')
+                {
+                  $("#fund_details .container").css('display','block');
+                  $("#fund_details .fa.fa-spinner.fa-pulse").css('display','none');
+                }
 
 
-
-
-
-
-
-
-            // Web site Code end
-
-
-
-
-
-
-
-
-            // $$('#schemename').html(myObj.CLient[0].s_name);
-            // $$('#schemclassification').html(myObj.CLient[0].classification);
-            // var scheme_star=5;
-            // var scheme_star_html="<span class='glyphicon glyphicon-star' aria-hidden='true'></span>";
-            // var scheme_star_html_final="";
-            // for (var j=1; j<=scheme_star;j++){
-            //     scheme_star_html_final=scheme_star_html_final+scheme_star_html;
-            // }
-            // console.log(scheme_star_html_final);
-            // $$('#schemestar').html(scheme_star_html_final);
-            // test_graph(myObj.CLient[0].s_name,scheme_code);
         });
         
     }
@@ -451,24 +411,21 @@ $$(document).on('pageInit', function (e) {
        
        $$.get(curr_ip+'app_services/fd_all_data',function (data) 
        {
-               var myObj = JSON.parse(data);
+               var myObj = JSON.parse(data);              
                var i;
                var list_fd = "";               
 
                for (var i = 0; i < myObj.fds.length; i++) { 
                    var ComName = myObj.fds[i].name;
-                   ComName = ComName.replace(/[.\s]/g, '');                   
-
-                   // console.log(ComName);
-                   
-                   list_fd = list_fd + "<div class='breadcrumb'><a href='OfferFD"+ComName+".html'><div class='row'><div class='col-xs-7'><div class='FDName'>"+myObj.fds[i].name+"</div></div><div class='col-xs-5'><span>"+myObj.fds[i].rating+"</span></div></div></a></div>"
-
-               };
+                   ComName = ComName.replace(/[.\s]/g, '');                                     
+                   list_fd = list_fd + "<div class='breadcrumb'><a href='OfferFD"+ComName+".html'><div class='row'><div class='col-xs-6'><div class='FDName'>"+myObj.fds[i].name+"</div></div><div class='col-xs-3'><div class='FDPeriod'>"+myObj.fds[i].period+"</div></div><div class='col-xs-3'><div class='FDInterest'>"+myObj.fds[i].interest+"</div></div></div></a></div>"
+                };
 
             $$('#fd_all_list').html(list_fd);
                
        });
     }
+
 
 
     if(page.name==='OfferMutualFund')
@@ -783,11 +740,6 @@ function chart_drawn(start,end)
         credits:{enabled: false},
         colors:color,
         title:{text: ''},
-        // subtitle: {text:'60% Equity 40% Debt', style: {
-        //         color: '#0000ff',
-        //         fontWeight: 'bold'
-        //     }
-        //   },
         plotOptions: {
             pie: {
                 innerSize: '80%',
@@ -800,7 +752,7 @@ function chart_drawn(start,end)
           events: {
             mouseOver: function() {
               this.graphic.attr({
-                r: this.shapeArgs.r + 7
+                r: this.shapeArgs.r
               });
             },
             mouseOut: function() {
@@ -826,26 +778,20 @@ function chart_drawn(start,end)
         },
         tooltip: {
 
-          backgroundColor: 'transparent',
-               borderColor: "none",
-              // followPointer: true,
+              backgroundColor: 'transparent',
+              borderColor: "none",
               shadow: false,
               useHTML: true,
               formatter: function () {      
                    return '<div class="tooltop">'+this.key + '<br>' + '<b>'+this.y+' %</b></div>';
                 }
                 
-        // formatter: function () {
-        //     return this.key +
-        //         ' ' + this.y + '%';
-
-        // }
     },
         series:[{
-                            name: ' ',
-                              data: seriesdate
-                            
-                        }]
+                    name: ' ',
+                      data: seriesdate
+                    
+                }]
     },
                                      
     function(chart) { // on complete
@@ -905,6 +851,2611 @@ window.onorientationchange = function()
                
        });
     }
+
+
+/************************************ Wealth Creation START ******************************** */ 
+
+    if(page.name==='OfferISGBPWealth')
+    {
+        $$.get(curr_ip+'app_services/is_goal_wealth',function (data) 
+       {
+                var myObj = JSON.parse(data);               
+              
+    $$('#Tab5Years .table tbody').html("<tr><td>"+myObj.portfolio_name[0]+"</td><td>"+myObj.year_1[0]+"</td><td>"+myObj.year_3[0]+"</td><td>"+myObj.year_5[0]+"</td></tr>");
+    $$('#Tab5to10Years .table tbody').html("<tr><td>"+myObj.portfolio_name[1]+"</td><td>"+myObj.year_1[1]+"</td><td>"+myObj.year_3[1]+"</td><td>"+myObj.year_5[1]+"</td></tr>");
+    $$('#Tab10Years .table tbody').html("<tr><td>"+myObj.portfolio_name[2]+"</td><td>"+myObj.year_1[2]+"</td><td>"+myObj.year_3[2]+"</td><td>"+myObj.year_5[2]+"</td></tr>");
+
+    var total_weightage = myObj.total_weightage;
+    var total_classification =  myObj.total_classification;
+    var total_asset_class =  myObj.total_asset_class;
+    var total_color =  myObj.total_color;
+
+    var chart ;
+
+    var array_w=[],array_c=[],array_class=[],array_col=[];
+    var a="",b="",s=0,s1=0;
+
+  
+  for(var i=0;i<total_weightage.length;i++)
+  {
+    if(total_weightage[i]=="[" || total_weightage[i]=="," )
+    {
+      if(total_weightage[i]=="," && s1==0)
+        a=a+";";
+    }
+      else
+      {
+        if(total_weightage[i]=="]")
+          {
+            s1=1;
+            if(a!="")
+            {
+              array_w.push(a);
+            }
+            a="";
+          }
+          else
+          {
+            s1=0;
+            a=a+total_weightage[i];
+          }
+        }
+        
+  }
+
+  var k=0;
+  for(var i=0;i<total_classification.length;i++)
+  {
+    if(total_classification[i]=="[" || total_classification[i]=="," )
+    {
+      if(total_classification[i]=="," && s==0)
+       {
+        b=b+";";
+        k=1;
+       } 
+    }
+      else
+      {
+        if(total_classification[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_c.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            if(k!=1)
+            {
+              if(b=="" && total_classification[i]==" ")
+              {
+
+              }
+              else
+              {
+              b=b+total_classification[i];
+            }
+            }
+            k=0;
+          }
+        }
+        
+  }
+
+
+  var k=0;
+  b="";
+  s=0;
+  for(var i=0;i<total_color.length;i++)
+  {
+    if(total_color[i]=="[" || total_color[i]=="," )
+    {
+      if(total_color[i]=="," && s==0)
+       {
+        b=b+";";
+       } 
+    }
+      else
+      {
+        if(total_color[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_col.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            
+              b=b+total_color[i];
+           
+          }
+        }
+        
+  }
+
+
+  
+  b=""
+   for(var i=0;i<total_asset_class.length;i++)
+  {
+    if(total_asset_class[i]=="[" || total_asset_class[i]=="," )
+    {
+      if(total_asset_class[i]=="," && s==0)
+        b=b+";";
+    }
+      else
+      {
+        if(total_asset_class[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_class.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            b=b+total_asset_class[i];
+          }
+        }
+        
+  }
+  
+ 
+ var classification=[],color=[];
+ var cfic,we,ass_class,colour;
+ var seriesdate=[];
+ var total_eq=0,total_db=0,total_gold=0;
+
+chart_drawn(0,1);
+chart_drawn(1,2);
+chart_drawn(2,3);
+
+function chart_drawn(start,end)
+{
+
+// ################### Chart ##########################
+for(var i=start;i<end;i++)
+{
+  color=[];
+  classification=[];
+  seriesdate=[];
+  total_eq=0,total_db=0,total_gold=0;
+  cfic=array_c[i].split(";");
+  we=array_w[i].replace(/ /g, '').split(";");
+  colour=array_col[i].replace(/ /g, '').split(";");
+  ass_class=array_class[i].replace(/ /g, '').split(";");
+  for(var j=0;j<cfic.length;j++)
+  {
+    if(j!=0 && cfic[j-1]==cfic[j] )
+    {
+     // var s=seriesdate[j-1][1]+parseInt(we[j]);
+      // var s=parseInt(we[j-1])+parseInt(we[j]);
+      for(var k=0;k<seriesdate.length;k++)
+      {
+        var index=seriesdate[k].indexOf(cfic[j])
+        if(index!=-1)
+        {
+          var s=seriesdate[k][1]+parseInt(we[j]);
+          seriesdate[k][1]=s;
+          break;
+        }
+      }
+      // seriesdate[j-1][1]=s;
+    }
+    else
+    {
+     classification.push(cfic[j]);
+    classification.push(parseInt(we[j]));
+    color.push(colour[j]);
+    seriesdate.push(classification)
+    }
+   //  debugger;
+    if(ass_class[j]=="Equity")
+    {
+      total_eq=total_eq+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Debt")
+    {
+      total_db=total_db+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Gold")
+    {
+      total_gold=total_gold+parseInt(we[j]);
+    }
+    classification=[];
+   
+
+  }
+   seriesdate=seriesdate.reverse();
+      color=color.reverse();
+      
+
+     chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'GoalIndiC'+(i+1),
+            type: 'pie',
+            margin: [0, 0, 0, 0],
+            backgroundColor: 'transparent'
+            
+        },
+        credits:{enabled: false},
+        colors:color,
+        title:{text: ''},
+        // subtitle: {text:'60% Equity 40% Debt', style: {
+        //         color: '#0000ff',
+        //         fontWeight: 'bold'
+        //     }
+        //   },
+        plotOptions: {
+            pie: {
+                innerSize: '80%',
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+               point: {
+          events: {
+            mouseOver: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            },
+            mouseOut: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            }
+          }
+        },
+        states: {
+          hover: {
+            brightness: 0,
+            lineWidth: 0,
+            halo: {
+              size: 0
+            }
+
+          }
+        }
+            }
+            
+        
+        },
+        tooltip: {
+          backgroundColor: 'transparent',
+               borderColor: "none",
+              // followPointer: true,
+              shadow: false,
+              useHTML: true,
+              formatter: function () {      
+                   return '<div class="tooltop">'+this.key + '<br>' + '<b>'+this.y+' %</b></div>';
+                }
+    },
+        series: [{
+                            name: ' ',
+                              data: seriesdate
+                            
+                        }]
+    },
+                                     
+    function(chart) { // on complete
+      // alert(i);
+        var textX = chart.plotLeft + (chart.plotWidth  * 0.5);
+        var textY = chart.plotTop  + (chart.plotHeight * 0.5);
+        // for(var k=0;k<cfic.length;k++)
+        // {
+
+        // }
+        var span = '<div class="row d_inline_f chartCircleInside" id="pieChartInfoTextC'+(i+1)+'"style="position:relative;">';
+        span += '<div class="col-xs-6"><div class="ChartCIEQ"><div class="ChartCIP">'+total_eq+'</div><div class="ChartCIT">EQUITY</div></div></div>';
+        span += '<div class="col-xs-6 vr_left"><div class="ChartCIDT"><div class="ChartCIP">'+total_db+'</div><div class="ChartCIT">DEBT</div></div></div>';
+        span += '</div>';
+        $("#addTextC"+(i+1)).empty();
+        $("#addTextC"+(i+1)).append(span);
+        span = $('#pieChartInfoTextC'+(i+1));
+        span.css('left', textX + (span.width() * -0.5));
+        span.css('top', textY + (span.height() * -0.5));
+    });
+}
+
+
+}
+ 
+
+    $("#GBILow").click(function(){
+      chart_drawn(0,1);
+    });
+    $("#GBIMod").click(function(){
+      chart_drawn(1,2);
+    });
+    $("#GBIHigh").click(function(){
+      chart_drawn(2,3);
+    });
+
+
+window.onorientationchange = function()
+{
+   window.location.reload();
+}
+                      
+       });
+    }
+
+/************************************ Wealth Creation END ******************************** */ 
+
+/************************************ Beat Bank FDs START ******************************** */  
+
+if(page.name==='OfferISGBPBank')
+{
+  $$.get(curr_ip+'app_services/is_goal_bankFD',function (data) 
+  {
+    var myObj = JSON.parse(data);
+              
+$$('#BankFDReturn .table tbody').html("<tr><td>"+myObj.portfolio_name[0]+"</td><td>"+myObj.year_1[0]+"</td><td>"+myObj.year_3[0]+"</td><td>"+myObj.year_5[0]+"</td></tr>");
+
+var total_weightage = myObj.total_weightage;
+var total_classification =  myObj.total_classification;
+var total_asset_class =  myObj.total_asset_class;
+var total_color =  myObj.total_color;
+
+var array_w=[],array_c=[],array_class=[],array_col=[];
+var a="",b="",s=0,s1=0;
+  
+  for(var i=0;i<total_weightage.length;i++)
+  {
+    if(total_weightage[i]=="[" || total_weightage[i]=="," )
+    {
+      if(total_weightage[i]=="," && s1==0)
+        a=a+";";
+    }
+      else
+      {
+        if(total_weightage[i]=="]")
+          {
+            s1=1;
+            if(a!="")
+            {
+              array_w.push(a);
+            }
+            a="";
+          }
+          else
+          {
+            s1=0;
+            a=a+total_weightage[i];
+          }
+        }
+        
+  }
+
+  var k=0;
+  for(var i=0;i<total_classification.length;i++)
+  {
+    if(total_classification[i]=="[" || total_classification[i]=="," )
+    {
+      if(total_classification[i]=="," && s==0)
+       {
+        b=b+";";
+        k=1;
+       } 
+    }
+      else
+      {
+        if(total_classification[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_c.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            if(k!=1)
+            {
+              if(b=="" && total_classification[i]==" ")
+              {
+
+              }
+              else
+              {
+              b=b+total_classification[i];
+            }
+            }
+            k=0;
+          }
+        }
+        
+  }
+
+  var k=0;
+  b="";
+  s=0;
+  for(var i=0;i<total_color.length;i++)
+  {
+    if(total_color[i]=="[" || total_color[i]=="," )
+    {
+      if(total_color[i]=="," && s==0)
+       {
+        b=b+";";
+       } 
+    }
+      else
+      {
+        if(total_color[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_col.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            
+              b=b+total_color[i];
+           
+          }
+        }
+        
+  }
+
+ 
+  b=""
+   for(var i=0;i<total_asset_class.length;i++)
+  {
+    if(total_asset_class[i]=="[" || total_asset_class[i]=="," )
+    {
+      if(total_asset_class[i]=="," && s==0)
+        b=b+";";
+    }
+      else
+      {
+        if(total_asset_class[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_class.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            b=b+total_asset_class[i];
+          }
+        }
+        
+  }
+  
+ 
+ var classification=[],color=[];
+ var cfic,we,ass_class,colour;
+ var seriesdate=[];
+ var total_eq=0,total_db=0,total_gold=0;
+
+
+
+$(function() {
+
+for(var i=0;i<1;i++)
+{
+  color=[];
+  classification=[];
+  seriesdate=[];
+  total_eq=0,total_db=0,total_gold=0;
+  cfic=array_c[i].split(";");
+  we=array_w[i].replace(/ /g, '').split(";");
+  colour=array_col[i].replace(/ /g, '').split(";");
+  ass_class=array_class[i].replace(/ /g, '').split(";");
+
+  for(var j=0;j<cfic.length;j++)
+  {
+    if(j!=0 && cfic[j-1]==cfic[j] )
+    {
+      for(var k=0;k<seriesdate.length;k++)
+      {
+        var index=seriesdate[k].indexOf(cfic[j])
+        if(index!=-1)
+        {
+          var s=seriesdate[k][1]+parseInt(we[j]);
+          seriesdate[k][1]=s;
+          break;
+        }
+      }
+    }
+    else
+    {
+     classification.push(cfic[j]);
+    classification.push(parseInt(we[j]));
+    color.push(colour[j]);
+    seriesdate.push(classification)
+    }
+     
+    if(ass_class[j]=="Equity")
+    {
+      total_eq=total_eq+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Debt")
+    {
+      total_db=total_db+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Gold")
+    {
+      total_gold=total_gold+parseInt(we[j]);
+    }
+    classification=[];
+   
+
+  }
+   seriesdate=seriesdate.reverse();
+      color=color.reverse();
+      
+
+ var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'GoalIndiC'+(i+1),
+            type: 'pie',
+            margin: [0, 0, 0, 0],
+            backgroundColor: null
+            
+        },
+        credits:{enabled: false},
+        colors:color,
+        title:{text: ''},
+        plotOptions: {
+            pie: {
+                innerSize: '80%',
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+               point: {
+          events: {
+            mouseOver: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            },
+            mouseOut: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            }
+          }
+        },
+        states: {
+          hover: {
+            brightness: 0,
+            lineWidth: 0,
+            halo: {
+              size: 0
+            }
+
+          }
+        }
+            }
+            
+        
+        },
+        tooltip: {
+              backgroundColor: 'transparent',
+              borderColor: "none",
+              shadow: false,
+              useHTML: true,
+              formatter: function () {      
+                   return '<div class="tooltop">'+this.key + '<br>' + '<b>'+this.y+' %</b></div>';
+                }
+    },
+        series: [{
+                    name: ' ',
+                    data: seriesdate
+                    
+                }]
+    },
+                                     
+    function(chart) { 
+        var textX = chart.plotLeft + (chart.plotWidth  * 0.5);
+        var textY = chart.plotTop  + (chart.plotHeight * 0.5);
+        for(var k=0;k<cfic.length;k++)
+        {
+
+        }
+        var span = '<div class="row d_inline_f chartCircleInside" id="pieChartInfoTextC'+(i+1)+'"style="position:relative;">';
+        span += '<div class="col-xs-6"><div class="ChartCIEQ"><div class="ChartCIP">'+total_eq+'</div><div class="ChartCIT">EQUITY</div></div></div>';
+        span += '<div class="col-xs-6 vr_left"><div class="ChartCIDT"><div class="ChartCIP">'+total_db+'</div><div class="ChartCIT">DEBT</div></div></div>';
+        span += '</div>';
+
+        $("#addTextC"+(i+1)).append(span);
+        span = $('#pieChartInfoTextC'+(i+1));
+        span.css('left', textX + (span.width() * -0.5));
+        span.css('top', textY + (span.height() * -0.5));
+    });
+}
+});
+
+
+window.onorientationchange = function()
+{
+   window.location.reload();
+}
+
+
+
+
+  });
+}
+
+/************************************ Beat Bank FDs END ******************************** */ 
+
+/************************************ Child Education START ****************************** */
+
+if(page.name==='OfferISGBPChild')
+{
+  $$.get(curr_ip+'app_services/is_goal_child',function (data) 
+  {
+    var myObj = JSON.parse(data);
+              
+    $$('#Tab5Years .table tbody').html("<tr><td>"+myObj.portfolio_name[0]+"</td><td>"+myObj.year_1[0]+"</td><td>"+myObj.year_3[0]+"</td><td>"+myObj.year_5[0]+"</td></tr>");
+    $$('#Tab5to10Years .table tbody').html("<tr><td>"+myObj.portfolio_name[1]+"</td><td>"+myObj.year_1[1]+"</td><td>"+myObj.year_3[1]+"</td><td>"+myObj.year_5[1]+"</td></tr>");
+    $$('#Tab10Years .table tbody').html("<tr><td>"+myObj.portfolio_name[2]+"</td><td>"+myObj.year_1[2]+"</td><td>"+myObj.year_3[2]+"</td><td>"+myObj.year_5[2]+"</td></tr>");
+
+
+var total_weightage = myObj.total_weightage;
+var total_classification =  myObj.total_classification;
+var total_asset_class =  myObj.total_asset_class;
+var total_color =  myObj.total_color;
+
+var array_w=[],array_c=[],array_class=[],array_col=[];
+var a="",b="",s=0,s1=0;
+
+  for(var i=0;i<total_weightage.length;i++)
+  {
+    if(total_weightage[i]=="[" || total_weightage[i]=="," )
+    {
+      if(total_weightage[i]=="," && s1==0)
+        a=a+";";
+    }
+      else
+      {
+        if(total_weightage[i]=="]")
+          {
+            s1=1;
+            if(a!="")
+            {
+              array_w.push(a);
+            }
+            a="";
+          }
+          else
+          {
+            s1=0;
+            a=a+total_weightage[i];
+          }
+        }
+        
+  }
+
+  var k=0;
+  for(var i=0;i<total_classification.length;i++)
+  {
+    if(total_classification[i]=="[" || total_classification[i]=="," )
+    {
+      if(total_classification[i]=="," && s==0)
+       {
+        b=b+";";
+        k=1;
+       } 
+    }
+      else
+      {
+        if(total_classification[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_c.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            if(k!=1)
+            {
+              if(b=="" && total_classification[i]==" ")
+              {
+
+              }
+              else
+              {
+              b=b+total_classification[i];
+            }
+            }
+            k=0;
+          }
+        }
+        
+  }
+
+  var k=0;
+  b="";
+  s=0;
+  for(var i=0;i<total_color.length;i++)
+  {
+    if(total_color[i]=="[" || total_color[i]=="," )
+    {
+      if(total_color[i]=="," && s==0)
+       {
+        b=b+";";
+       } 
+    }
+      else
+      {
+        if(total_color[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_col.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            
+              b=b+total_color[i];
+           
+          }
+        }
+        
+  }
+
+
+  b=""
+   for(var i=0;i<total_asset_class.length;i++)
+  {
+    if(total_asset_class[i]=="[" || total_asset_class[i]=="," )
+    {
+      if(total_asset_class[i]=="," && s==0)
+        b=b+";";
+    }
+      else
+      {
+        if(total_asset_class[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_class.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            b=b+total_asset_class[i];
+          }
+        }
+        
+  }
+  
+ 
+ var classification=[],color=[];
+ var cfic,we,ass_class,colour;
+ var seriesdate=[];
+ var total_eq=0,total_db=0,total_gold=0;
+
+chart_drawn(0,1)
+chart_drawn(1,2);
+chart_drawn(2,3);
+;
+
+function chart_drawn(start,end)
+{
+
+for(var i=start;i<end;i++)
+{
+  color=[];
+  classification=[];
+  seriesdate=[];
+  total_eq=0,total_db=0,total_gold=0;
+  cfic=array_c[i].split(";");
+  we=array_w[i].replace(/ /g, '').split(";");
+  colour=array_col[i].replace(/ /g, '').split(";");
+  ass_class=array_class[i].replace(/ /g, '').split(";");
+  for(var j=0;j<cfic.length;j++)
+  {
+    if(j!=0 && cfic[j-1]==cfic[j] )
+    {
+     // var s=seriesdate[j-1][1]+parseInt(we[j]);
+      // var s=parseInt(we[j-1])+parseInt(we[j]);
+      for(var k=0;k<seriesdate.length;k++)
+      {
+        var index=seriesdate[k].indexOf(cfic[j])
+        if(index!=-1)
+        {
+          var s=seriesdate[k][1]+parseInt(we[j]);
+          seriesdate[k][1]=s;
+          break;
+        }
+      }
+      // seriesdate[j-1][1]=s;
+    }
+    else
+    {
+    classification.push(cfic[j]);
+    classification.push(parseInt(we[j]));
+    color.push(colour[j]);
+    seriesdate.push(classification)
+    }
+     
+    if(ass_class[j]=="Equity")
+    {
+      total_eq=total_eq+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Debt")
+    {
+      total_db=total_db+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Gold")
+    {
+      total_gold=total_gold+parseInt(we[j]);
+    }
+    classification=[];
+   
+
+  }
+    seriesdate=seriesdate.reverse();
+    color=color.reverse();
+
+ var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'GoalIndiC'+(i+1),
+            type: 'pie',
+            margin: [0, 0, 0, 0],
+            backgroundColor: null
+            
+        },
+        credits:{enabled: false},
+        colors:color,
+        title:{text: ''},
+        // subtitle: {text:'60% Equity 40% Debt', style: {
+        //         color: '#0000ff',
+        //         fontWeight: 'bold'
+        //     }
+        //   },
+        plotOptions: {
+            pie: {
+                innerSize: '80%',
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+               point: {
+          events: {
+            mouseOver: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            },
+            mouseOut: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            }
+          }
+        },
+        states: {
+          hover: {
+            brightness: 0,
+            lineWidth: 0,
+            halo: {
+              size: 0
+            }
+
+          }
+        }
+            }
+            
+        
+        },
+        tooltip: {
+               backgroundColor: 'transparent',
+               borderColor: "none",
+              // followPointer: true,
+              shadow: false,
+              useHTML: true,
+              formatter: function () {      
+                   return '<div class="tooltop">'+this.key + '<br>' + '<b>'+this.y+' %</b></div>';
+                }
+    },
+        series: [{
+                            name: ' ',
+                              data: seriesdate
+                            
+                        }]
+    },
+                                     
+    function(chart) { // on complete
+        var textX = chart.plotLeft + (chart.plotWidth  * 0.5);
+        var textY = chart.plotTop  + (chart.plotHeight * 0.5);
+        for(var k=0;k<cfic.length;k++)
+        {
+
+        }
+        var span = '<div class="row d_inline_f chartCircleInside" id="pieChartInfoTextC'+(i+1)+'"style="position:relative;">';
+        span += '<div class="col-xs-6"><div class="ChartCIEQ"><div class="ChartCIP">'+total_eq+'</div><div class="ChartCIT">EQUITY</div></div></div>';
+        span += '<div class="col-xs-6 vr_left"><div class="ChartCIDT"><div class="ChartCIP">'+total_db+'</div><div class="ChartCIT">DEBT</div></div></div>';
+        span += '</div>';
+        $("#addTextC"+(i+1)).empty();
+        $("#addTextC"+(i+1)).append(span);
+        span = $('#pieChartInfoTextC'+(i+1));
+        span.css('left', textX + (span.width() * -0.5));
+        span.css('top', textY + (span.height() * -0.5));
+    });
+}
+}
+
+
+
+    $("#GBILow").click(function(){      
+      chart_drawn(0,1);
+    });
+    $("#GBIMod").click(function(){     
+      chart_drawn(1,2);
+    });
+    $("#GBIHigh").click(function(){      
+      chart_drawn(2,3);
+    });
+ 
+
+
+
+
+window.onorientationchange = function()
+{
+   window.location.reload();
+}
+
+
+
+  });
+}
+
+
+
+/************************************ Child Education END ******************************** */
+
+/************************************ Tax START ****************************** */
+
+if(page.name==='OfferISGBPTax')
+{
+  $$.get(curr_ip+'app_services/is_goal_tax',function (data) 
+  {
+    var myObj = JSON.parse(data);
+              
+    $$('#TaxReturn .table tbody').html("<tr><td>"+myObj.portfolio_name[0]+"</td><td>"+myObj.year_1[0]+"</td><td>"+myObj.year_3[0]+"</td><td>"+myObj.year_5[0]+"</td></tr>");
+    
+    var total_weightage = myObj.total_weightage;
+    var total_classification =  myObj.total_classification;
+    var total_asset_class =  myObj.total_asset_class;
+    var total_color =  myObj.total_color;
+
+
+var array_w=[],array_c=[],array_class=[],array_col=[];
+var a="",b="",s=0,s1=0;
+
+  for(var i=0;i<total_weightage.length;i++)
+  {
+    if(total_weightage[i]=="[" || total_weightage[i]=="," )
+    {
+      if(total_weightage[i]=="," && s1==0)
+        a=a+";";
+    }
+      else
+      {
+        if(total_weightage[i]=="]")
+          {
+            s1=1;
+            if(a!="")
+            {
+              array_w.push(a);
+            }
+            a="";
+          }
+          else
+          {
+            s1=0;
+            a=a+total_weightage[i];
+          }
+        }
+        
+  }
+
+  var k=0;
+  for(var i=0;i<total_classification.length;i++)
+  {
+    if(total_classification[i]=="[" || total_classification[i]=="," )
+    {
+      if(total_classification[i]=="," && s==0)
+       {
+        b=b+";";
+        k=1;
+       } 
+    }
+      else
+      {
+        if(total_classification[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_c.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            if(k!=1)
+            {
+              if(b=="" && total_classification[i]==" ")
+              {
+
+              }
+              else
+              {
+              b=b+total_classification[i];
+            }
+            }
+            k=0;
+          }
+        }
+        
+  }
+
+  var k=0;
+  b="";
+  s=0;
+  for(var i=0;i<total_color.length;i++)
+  {
+    if(total_color[i]=="[" || total_color[i]=="," )
+    {
+      if(total_color[i]=="," && s==0)
+       {
+        b=b+";";
+       } 
+    }
+      else
+      {
+        if(total_color[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_col.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            
+              b=b+total_color[i];
+           
+          }
+        }
+        
+  }
+
+
+  
+  b=""
+   for(var i=0;i<total_asset_class.length;i++)
+  {
+    if(total_asset_class[i]=="[" || total_asset_class[i]=="," )
+    {
+      if(total_asset_class[i]=="," && s==0)
+        b=b+";";
+    }
+      else
+      {
+        if(total_asset_class[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              // b=b+";"
+              array_class.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            b=b+total_asset_class[i];
+          }
+        }
+        
+  }
+  
+ 
+ var classification=[],color=[];
+ var cfic,we,ass_class,colour;
+ var seriesdate=[];
+ var total_eq=0,total_db=0,total_gold=0;
+
+$(function() {
+
+for(var i=0;i<1;i++)
+{
+  color=[];
+  classification=[];
+  seriesdate=[];
+  total_eq=0,total_db=0,total_gold=0;
+  cfic=array_c[i].split(";");
+  we=array_w[i].replace(/ /g, '').split(";");
+  colour=array_col[i].replace(/ /g, '').split(";");
+  ass_class=array_class[i].replace(/ /g, '').split(";");
+  for(var j=0;j<cfic.length;j++)
+  {
+    if(j!=0 && cfic[j-1]==cfic[j] )
+    {
+     // var s=seriesdate[j-1][1]+parseInt(we[j]);
+      // var s=parseInt(we[j-1])+parseInt(we[j]);
+      for(var k=0;k<seriesdate.length;k++)
+      {
+        var index=seriesdate[k].indexOf(cfic[j])
+        if(index!=-1)
+        {
+          var s=seriesdate[k][1]+parseInt(we[j]);
+          seriesdate[k][1]=s;
+          break;
+        }
+      }
+      // seriesdate[j-1][1]=s;
+    }
+    else
+    {
+     classification.push(cfic[j]);
+    classification.push(parseInt(we[j]));
+    color.push(colour[j]);
+    seriesdate.push(classification)
+    }
+     
+    if(ass_class[j]=="Equity")
+    {
+      total_eq=total_eq+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Debt")
+    {
+      total_db=total_db+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Gold")
+    {
+      total_gold=total_gold+parseInt(we[j]);
+    }
+    classification=[];
+   
+
+  }
+   seriesdate=seriesdate.reverse();
+      color=color.reverse();
+      
+
+ var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'GoalIndiC'+(i+1),
+            type: 'pie',
+            margin: [0, 0, 0, 0],
+            backgroundColor: null
+            
+        },
+        credits:{enabled: false},
+        colors:color,
+        title:{text: ''},
+        // subtitle: {text:'60% Equity 40% Debt', style: {
+        //         color: '#0000ff',
+        //         fontWeight: 'bold'
+        //     }
+        //   },
+        plotOptions: {
+            pie: {
+                innerSize: '80%',
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+               point: {
+          events: {
+            mouseOver: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            },
+            mouseOut: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            }
+          }
+        },
+        states: {
+          hover: {
+            brightness: 0,
+            lineWidth: 0,
+            halo: {
+              size: 0
+            }
+
+          }
+        }
+            }
+            
+        
+        },
+        tooltip: {
+              backgroundColor: 'transparent',
+               borderColor: "none",
+              // followPointer: true,
+              shadow: false,
+              useHTML: true,
+              formatter: function () {      
+                   return '<div class="tooltop">'+this.key + '<br>' + '<b>'+this.y+' %</b></div>';
+                }
+    },
+        series: [{
+                            name: ' ',
+                              data: seriesdate
+                            
+                        }]
+    },
+                                     
+    function(chart) { // on complete
+        var textX = chart.plotLeft + (chart.plotWidth  * 0.5);
+        var textY = chart.plotTop  + (chart.plotHeight * 0.5);
+        for(var k=0;k<cfic.length;k++)
+        {
+
+        }
+        var span = '<div class="row d_inline_f chartCircleInside" id="pieChartInfoTextC'+(i+1)+'"style="position:relative;">';
+        span += '<div class="col-xs-6"><div class="ChartCIEQ"><div class="ChartCIP">'+total_eq+'</div><div class="ChartCIT">EQUITY</div></div></div>';
+        span += '<div class="col-xs-6 vr_left"><div class="ChartCIDT"><div class="ChartCIP">'+total_db+'</div><div class="ChartCIT">DEBT</div></div></div>';
+        span += '</div>';
+
+        $("#addTextC"+(i+1)).append(span);
+        span = $('#pieChartInfoTextC'+(i+1));
+        span.css('left', textX + (span.width() * -0.5));
+        span.css('top', textY + (span.height() * -0.5));
+    });
+}
+});
+
+
+window.onorientationchange = function()
+{
+   window.location.reload();
+}
+
+
+  });
+}
+
+
+/************************************ Tax END ******************************** */ 
+
+/************************************ Park Surplus Cash START ****************************** */ 
+
+if(page.name==='OfferISGBPCash')
+{
+  $$.get(curr_ip+'app_services/is_goal_cash',function (data) 
+  {
+    var myObj = JSON.parse(data);
+              
+    $$('#CashReturn .table tbody').html("<tr><td>"+myObj.portfolio_name+"</td><td>"+myObj.year_1[0]+"</td><td>"+myObj.year_3[0]+"</td><td>"+myObj.year_5[0]+"</td></tr>");
+    
+    var total_weightage = myObj.total_weightage;
+    var total_classification =  myObj.total_classification;
+    var total_asset_class =  myObj.total_asset_class;
+    var total_color =  myObj.total_color;
+
+var array_w=[],array_c=[],array_class=[],array_col=[];
+var a="",b="",s=0,s1=0;
+
+  for(var i=0;i<total_weightage.length;i++)
+  {
+    if(total_weightage[i]=="[" || total_weightage[i]=="," )
+    {
+      if(total_weightage[i]=="," && s1==0)
+        a=a+";";
+    }
+      else
+      {
+        if(total_weightage[i]=="]")
+          {
+            s1=1;
+            if(a!="")
+            {
+              array_w.push(a);
+            }
+            a="";
+          }
+          else
+          {
+            s1=0;
+            a=a+total_weightage[i];
+          }
+        }
+        
+  }
+
+  var k=0;
+  for(var i=0;i<total_classification.length;i++)
+  {
+    if(total_classification[i]=="[" || total_classification[i]=="," )
+    {
+      if(total_classification[i]=="," && s==0)
+       {
+        b=b+";";
+        k=1;
+       } 
+    }
+      else
+      {
+        if(total_classification[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_c.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            if(k!=1)
+            {
+              if(b=="" && total_classification[i]==" ")
+              {
+
+              }
+              else
+              {
+              b=b+total_classification[i];
+            }
+            }
+            k=0;
+          }
+        }
+        
+  }
+
+  var k=0;
+  b="";
+  s=0;
+  for(var i=0;i<total_color.length;i++)
+  {
+    if(total_color[i]=="[" || total_color[i]=="," )
+    {
+      if(total_color[i]=="," && s==0)
+       {
+        b=b+";";
+       } 
+    }
+      else
+      {
+        if(total_color[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_col.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            
+              b=b+total_color[i];
+           
+          }
+        }
+        
+  }
+
+
+  b=""
+   for(var i=0;i<total_asset_class.length;i++)
+  {
+    if(total_asset_class[i]=="[" || total_asset_class[i]=="," )
+    {
+      if(total_asset_class[i]=="," && s==0)
+        b=b+";";
+    }
+      else
+      {
+        if(total_asset_class[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_class.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            b=b+total_asset_class[i];
+          }
+        }
+        
+  }
+  
+ 
+ var classification=[],color=[];
+ var cfic,we,ass_class,colour;
+ var seriesdate=[];
+ var total_eq=0,total_db=0,total_gold=0;
+
+$(function() {
+
+for(var i=0;i<1;i++)
+{
+  color=[];
+  classification=[];
+  seriesdate=[];
+  total_eq=0,total_db=0,total_gold=0;
+  cfic=array_c[i].split(";");
+  we=array_w[i].replace(/ /g, '').split(";");
+  colour=array_col[i].replace(/ /g, '').split(";");
+  ass_class=array_class[i].replace(/ /g, '').split(";");
+  for(var j=0;j<cfic.length;j++)
+  {
+    if(j!=0 && cfic[j-1]==cfic[j] )
+    {
+     
+      for(var k=0;k<seriesdate.length;k++)
+      {
+        var index=seriesdate[k].indexOf(cfic[j])
+        if(index!=-1)
+        {
+          var s=seriesdate[k][1]+parseInt(we[j]);
+          seriesdate[k][1]=s;
+          break;
+        }
+      }
+      
+    }
+    else
+    {
+     classification.push(cfic[j]);
+    classification.push(parseInt(we[j]));
+    color.push(colour[j]);
+    seriesdate.push(classification)
+    }
+     
+    if(ass_class[j]=="Equity")
+    {
+      total_eq=total_eq+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Debt")
+    {
+      total_db=total_db+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Gold")
+    {
+      total_gold=total_gold+parseInt(we[j]);
+    }
+    classification=[];
+   
+
+  }
+   seriesdate=seriesdate.reverse();
+   color=color.reverse();
+
+ var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'GoalIndiC'+(i+1),
+            type: 'pie',
+            margin: [0, 0, 0, 0],
+            backgroundColor: null
+            
+        },
+        credits:{enabled: false},
+        colors:color,
+        title:{text: ''},
+        plotOptions: {
+            pie: {
+                innerSize: '80%',
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+               point: {
+          events: {
+            mouseOver: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            },
+            mouseOut: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            }
+          }
+        },
+        states: {
+          hover: {
+            brightness: 0,
+            lineWidth: 0,
+            halo: {
+              size: 0
+            }
+
+          }
+        }
+            }
+            
+        
+        },
+        tooltip: {
+               backgroundColor: 'transparent',
+               borderColor: "none",
+               shadow: false,
+               useHTML: true,
+               formatter: function () {      
+                   return '<div class="tooltop">'+this.key + '<br>' + '<b>'+this.y+' %</b></div>';
+                }
+    },
+        series: [{
+                    name: ' ',
+                    data: seriesdate
+                    
+                }]
+    },
+                                     
+    function(chart) {
+        var textX = chart.plotLeft + (chart.plotWidth  * 0.5);
+        var textY = chart.plotTop  + (chart.plotHeight * 0.5);
+        for(var k=0;k<cfic.length;k++)
+        {
+
+        }
+        var span = '<div class="row d_inline_f chartCircleInside" id="pieChartInfoTextC'+(i+1)+'"style="position:relative;">';
+        span += '<div class="col-xs-6"><div class="ChartCIEQ"><div class="ChartCIP">'+total_eq+'</div><div class="ChartCIT">EQUITY</div></div></div>';
+        span += '<div class="col-xs-6 vr_left"><div class="ChartCIDT"><div class="ChartCIP">'+total_db+'</div><div class="ChartCIT">DEBT</div></div></div>';
+        span += '</div>';
+
+        $("#addTextC"+(i+1)).append(span);
+        span = $('#pieChartInfoTextC'+(i+1));
+        span.css('left', textX + (span.width() * -0.5));
+        span.css('top', textY + (span.height() * -0.5));
+    });
+}
+});
+
+
+window.onorientationchange = function()
+{
+   window.location.reload();
+}
+
+
+
+
+  });
+}
+
+
+/************************************ Park Surplus Cash END ******************************** */ 
+
+
+/************************************ Capital Preservation START ****************************** */ 
+
+    if(page.name==='OfferISGBPCapital')
+    {
+        $$.get(curr_ip+'app_services/is_goal_capital',function (data) 
+       {
+          var myObj = JSON.parse(data);               
+              
+    $$('#Tab5Years .table tbody').html("<tr><td>"+myObj.portfolio_name[0]+"</td><td>"+myObj.year_1[0]+"</td><td>"+myObj.year_3[0]+"</td><td>"+myObj.year_5[0]+"</td></tr>");
+    $$('#Tab5to10Years .table tbody').html("<tr><td>"+myObj.portfolio_name[1]+"</td><td>"+myObj.year_1[1]+"</td><td>"+myObj.year_3[1]+"</td><td>"+myObj.year_5[1]+"</td></tr>");
+    $$('#Tab10Years .table tbody').html("<tr><td>"+myObj.portfolio_name[2]+"</td><td>"+myObj.year_1[2]+"</td><td>"+myObj.year_3[2]+"</td><td>"+myObj.year_5[2]+"</td></tr>");
+
+    var total_weightage = myObj.total_weightage;
+    var total_classification =  myObj.total_classification;
+    var total_asset_class =  myObj.total_asset_class;
+    var total_color =  myObj.total_color;
+
+var array_w=[],array_c=[],array_class=[],array_col=[];
+var a="",b="",s=0,s1=0;
+
+  for(var i=0;i<total_weightage.length;i++)
+  {
+    if(total_weightage[i]=="[" || total_weightage[i]=="," )
+    {
+      if(total_weightage[i]=="," && s1==0)
+        a=a+";";
+    }
+      else
+      {
+        if(total_weightage[i]=="]")
+          {
+            s1=1;
+            if(a!="")
+            {
+              array_w.push(a);
+            }
+            a="";
+          }
+          else
+          {
+            s1=0;
+            a=a+total_weightage[i];
+          }
+        }
+        
+  }
+
+  var k=0;
+  for(var i=0;i<total_classification.length;i++)
+  {
+    if(total_classification[i]=="[" || total_classification[i]=="," )
+    {
+      if(total_classification[i]=="," && s==0)
+       {
+        b=b+";";
+        k=1;
+       } 
+    }
+      else
+      {
+        if(total_classification[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_c.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            if(k!=1)
+            {
+              if(b=="" && total_classification[i]==" ")
+              {
+
+              }
+              else
+              {
+              b=b+total_classification[i];
+            }
+            }
+            k=0;
+          }
+        }
+        
+  }
+
+  var k=0;
+  b="";
+  s=0;
+  for(var i=0;i<total_color.length;i++)
+  {
+    if(total_color[i]=="[" || total_color[i]=="," )
+    {
+      if(total_color[i]=="," && s==0)
+       {
+        b=b+";";
+       } 
+    }
+      else
+      {
+        if(total_color[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_col.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            
+              b=b+total_color[i];
+           
+          }
+        }
+        
+  }
+
+
+  b=""
+   for(var i=0;i<total_asset_class.length;i++)
+  {
+    if(total_asset_class[i]=="[" || total_asset_class[i]=="," )
+    {
+      if(total_asset_class[i]=="," && s==0)
+        b=b+";";
+    }
+      else
+      {
+        if(total_asset_class[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_class.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            b=b+total_asset_class[i];
+          }
+        }
+        
+  }
+  
+
+ var classification=[],color=[];
+ var cfic,we,ass_class,colour;
+ var seriesdate=[];
+ var total_eq=0,total_db=0,total_gold=0;
+
+chart_drawn(0,1);
+chart_drawn(1,2);
+chart_drawn(2,3);
+
+function chart_drawn(start,end)
+{
+
+for(var i=start;i<end;i++)
+{
+  color=[];
+  classification=[];
+  seriesdate=[];
+  total_eq=0,total_db=0,total_gold=0;
+  cfic=array_c[i].split(";");
+  we=array_w[i].replace(/ /g, '').split(";");
+  colour=array_col[i].replace(/ /g, '').split(";");
+  ass_class=array_class[i].replace(/ /g, '').split(";");
+  for(var j=0;j<cfic.length;j++)
+  {
+    if(j!=0 && cfic[j-1]==cfic[j] )
+    {
+     
+      for(var k=0;k<seriesdate.length;k++)
+      {
+        var index=seriesdate[k].indexOf(cfic[j])
+        if(index!=-1)
+        {
+          var s=seriesdate[k][1]+parseInt(we[j]);
+          seriesdate[k][1]=s;
+          break;
+        }
+      }
+      
+    }
+    else
+    {
+     classification.push(cfic[j]);
+    classification.push(parseInt(we[j]));
+    color.push(colour[j]);
+    seriesdate.push(classification)
+    }
+     
+    if(ass_class[j]=="Equity")
+    {
+      total_eq=total_eq+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Debt")
+    {
+      total_db=total_db+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Gold")
+    {
+      total_gold=total_gold+parseInt(we[j]);
+    }
+    classification=[];
+   
+
+  }
+   seriesdate=seriesdate.reverse();
+   color=color.reverse();
+      
+
+ var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'GoalIndiC'+(i+1),
+            type: 'pie',
+            margin: [0, 0, 0, 0],
+            backgroundColor: null
+            
+        },
+        credits:{enabled: false},
+        colors:color,
+        title:{text: ''},
+        plotOptions: {
+            pie: {
+                innerSize: '80%',
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+               point: {
+          events: {
+            mouseOver: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r + 10
+              });
+            },
+            mouseOut: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            }
+          }
+        },
+        states: {
+          hover: {
+            brightness: 0,
+            lineWidth: 0,
+            halo: {
+              size: 0
+            }
+
+          }
+        }
+            }
+            
+        
+        },
+        tooltip: {
+              backgroundColor: 'transparent',
+              borderColor: "none",
+              shadow: false,
+              useHTML: true,
+              formatter: function () {      
+                   return '<div class="tooltop">'+this.key + '<br>' + '<b>'+this.y+' %</b></div>';
+                }
+    },
+        series: [{
+                    name: ' ',
+                    data: seriesdate
+                    
+                }]
+    },
+                                     
+    function(chart) { 
+        var textX = chart.plotLeft + (chart.plotWidth  * 0.5);
+        var textY = chart.plotTop  + (chart.plotHeight * 0.5);
+        for(var k=0;k<cfic.length;k++)
+        {
+
+        }
+        var span = '<div class="row d_inline_f chartCircleInside" id="pieChartInfoTextC'+(i+1)+'"style="position:relative;">';
+        span += '<div class="col-xs-6"><div class="ChartCIEQ"><div class="ChartCIP">'+total_eq+'</div><div class="ChartCIT">EQUITY</div></div></div>';
+        span += '<div class="col-xs-6 vr_left"><div class="ChartCIDT"><div class="ChartCIP">'+total_db+'</div><div class="ChartCIT">DEBT</div></div></div>';
+        span += '</div>';
+        $("#addTextC"+(i+1)).empty();
+        $("#addTextC"+(i+1)).append(span);
+        span = $('#pieChartInfoTextC'+(i+1));
+        span.css('left', textX + (span.width() * -0.5));
+        span.css('top', textY + (span.height() * -0.5));
+    });
+}
+
+
+
+}
+
+
+    $("#GBILow").click(function(){
+      chart_drawn(0,1);
+    });
+    $("#GBIMod").click(function(){
+      chart_drawn(1,2);
+    });
+    $("#GBIHigh").click(function(){
+      chart_drawn(2,3);
+    });
+    
+
+
+window.onorientationchange = function()
+{
+   window.location.reload();
+}
+
+                      
+       });
+    }
+
+/************************************ Capital Preservation END ******************************** */ 
+
+
+/************************************ Gold START ****************************** */ 
+
+if(page.name==='OfferISGBPGold')
+{
+  $$.get(curr_ip+'app_services/is_goal_gold',function (data) 
+  {
+    var myObj = JSON.parse(data);
+              
+    $$('#GoldReturn .table tbody').html("<tr><td>"+myObj.portfolio_name[0]+"</td><td>"+myObj.year_1[0]+"</td><td>"+myObj.year_3[0]+"</td><td>"+myObj.year_5[0]+"</td></tr>");
+    
+    var total_weightage = myObj.total_weightage;
+    var total_classification =  myObj.total_classification;
+    var total_asset_class =  myObj.total_asset_class;
+    var total_color =  myObj.total_color;
+
+var array_w=[],array_c=[],array_class=[],array_col=[];
+var a="",b="",s=0,s1=0;
+
+  for(var i=0;i<total_weightage.length;i++)
+  {
+    if(total_weightage[i]=="[" || total_weightage[i]=="," )
+    {
+      if(total_weightage[i]=="," && s1==0)
+        a=a+";";
+    }
+      else
+      {
+        if(total_weightage[i]=="]")
+          {
+            s1=1;
+            if(a!="")
+            {
+              array_w.push(a);
+            }
+            a="";
+          }
+          else
+          {
+            s1=0;
+            a=a+total_weightage[i];
+          }
+        }
+        
+  }
+
+  var k=0;
+  for(var i=0;i<total_classification.length;i++)
+  {
+    if(total_classification[i]=="[" || total_classification[i]=="," )
+    {
+      if(total_classification[i]=="," && s==0)
+       {
+        b=b+";";
+        k=1;
+       } 
+    }
+      else
+      {
+        if(total_classification[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_c.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            if(k!=1)
+            {
+              if(b=="" && total_classification[i]==" ")
+              {
+
+              }
+              else
+              {
+              b=b+total_classification[i];
+            }
+            }
+            k=0;
+          }
+        }
+        
+  }
+
+  var k=0;
+  b="";
+  s=0;
+  for(var i=0;i<total_color.length;i++)
+  {
+    if(total_color[i]=="[" || total_color[i]=="," )
+    {
+      if(total_color[i]=="," && s==0)
+       {
+        b=b+";";
+       } 
+    }
+      else
+      {
+        if(total_color[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_col.push(b);
+            }
+            b="";
+          }
+          else
+            {
+              s=0;
+              b=b+total_color[i];
+            }
+          }
+        
+  }
+
+  b=""
+   for(var i=0;i<total_asset_class.length;i++)
+  {
+    if(total_asset_class[i]=="[" || total_asset_class[i]=="," )
+    {
+      if(total_asset_class[i]=="," && s==0)
+        b=b+";";
+    }
+      else
+      {
+        if(total_asset_class[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_class.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            b=b+total_asset_class[i];
+          }
+        }
+        
+  }
+  
+ 
+ var classification=[],color=[];
+ var cfic,we,ass_class,colour;
+ var seriesdate=[];
+ var total_eq=0,total_db=0,total_gold=0;
+
+$(function() {
+
+for(var i=0;i<1;i++)
+{
+  color=[];
+  classification=[];
+  seriesdate=[];
+  total_eq=0,total_db=0,total_gold=0;
+  cfic=array_c[i].split(";");
+  we=array_w[i].replace(/ /g, '').split(";");
+  colour=array_col[i].replace(/ /g, '').split(";");
+  ass_class=array_class[i].replace(/ /g, '').split(";");
+  for(var j=0;j<cfic.length;j++)
+  {
+    if(j!=0 && cfic[j-1]==cfic[j] )
+    {
+     
+      for(var k=0;k<seriesdate.length;k++)
+      {
+        var index=seriesdate[k].indexOf(cfic[j])
+        if(index!=-1)
+        {
+          var s=seriesdate[k][1]+parseInt(we[j]);
+          seriesdate[k][1]=s;
+          break;
+        }
+      }
+  
+    }
+    else
+    {
+    classification.push(cfic[j]);
+    classification.push(parseInt(we[j]));
+    color.push(colour[j]);
+    seriesdate.push(classification)
+    }
+     
+    if(ass_class[j]=="Equity")
+    {
+      total_eq=total_eq+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Debt")
+    {
+      total_db=total_db+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Gold")
+    {
+      total_gold=total_gold+parseInt(we[j]);
+    }
+    classification=[];
+   
+
+  }
+    seriesdate=seriesdate.reverse();
+    color=color.reverse();
+
+ var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'GoalIndiC'+(i+1),
+            type: 'pie',
+            margin: [0, 0, 0, 0],
+            backgroundColor: null
+            
+        },
+        credits:{enabled: false},
+        colors:color,
+        title:{text: ''},
+        plotOptions: {
+            pie: {
+                innerSize: '80%',
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+               point: {
+          events: {
+            mouseOver: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            },
+            mouseOut: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            }
+          }
+        },
+        states: {
+          hover: {
+            brightness: 0,
+            lineWidth: 0,
+            halo: {
+              size: 0
+            }
+
+          }
+        }
+            }
+            
+        
+        },
+        tooltip: {
+              backgroundColor: 'transparent',
+              borderColor: "none",
+              shadow: false,
+              useHTML: true,
+              formatter: function () {      
+                   return '<div class="tooltop">'+this.key + '<br>' + '<b>'+this.y+' %</b></div>';
+                }
+    },
+        series: [{
+                    name: ' ',
+                    data: seriesdate
+                    
+                }]
+    },
+                                     
+    function(chart) {
+        var textX = chart.plotLeft + (chart.plotWidth  * 0.5);
+        var textY = chart.plotTop  + (chart.plotHeight * 0.5);
+        for(var k=0;k<cfic.length;k++)
+        {
+
+        }
+        var span = '<div class="row d_inline_f chartCircleInside" id="pieChartInfoTextC'+(i+1)+'"style="position:relative;">';
+        span += '<div class="col-xs-12"><div class="ChartCIEQ"><div class="ChartCIP">'+total_gold+'</div><div class="ChartCIT">GOLD</div></div></div>';
+        // span += '<div class="col-xs-6 vr_left"><div class="ChartCIDT"><div class="ChartCIP">'+total_db+'</div><div class="ChartCIT">DEBT</div></div></div>';
+        span += '</div>';
+
+        $("#addTextC"+(i+1)).append(span);
+        span = $('#pieChartInfoTextC'+(i+1));
+        span.css('left', textX + (span.width() * -0.5));
+        span.css('top', textY + (span.height() * -0.5));
+    });
+}
+});
+
+window.onorientationchange = function()
+{
+   window.location.reload();
+}
+
+
+
+
+  });
+}
+
+
+/************************************ Gold END ******************************** */ 
+
+
+/************************************ Sectoral Play START ****************************** */ 
+
+if(page.name==='OfferISGBPSectoral')
+{
+  $$.get(curr_ip+'app_services/is_goal_sectoral',function (data) 
+  {
+    var myObj = JSON.parse(data);
+              
+    $$('#TabPharma .table tbody').html("<tr><td>"+myObj.portfolio_name[0]+"</td><td>"+myObj.year_1[0]+"</td><td>"+myObj.year_3[0]+"</td><td>"+myObj.year_5[0]+"</td></tr>");
+    $$('#TabFinancial .table tbody').html("<tr><td>"+myObj.portfolio_name[1]+"</td><td>"+myObj.year_1[1]+"</td><td>"+myObj.year_3[1]+"</td><td>"+myObj.year_5[1]+"</td></tr>");
+    $$('#TabIT .table tbody').html("<tr><td>"+myObj.portfolio_name[2]+"</td><td>"+myObj.year_1[2]+"</td><td>"+myObj.year_3[2]+"</td><td>"+myObj.year_5[2]+"</td></tr>");
+    $$('#TabInfra .table tbody').html("<tr><td>"+myObj.portfolio_name[3]+"</td><td>"+myObj.year_1[3]+"</td><td>"+myObj.year_3[3]+"</td><td>"+myObj.year_5[3]+"</td></tr>");
+ 
+    var total_weightage = myObj.total_weightage;
+    var total_classification =  myObj.total_classification;
+    var total_asset_class =  myObj.total_asset_class;
+    var total_color =  myObj.total_color;
+
+var array_w=[],array_c=[],array_class=[],array_col=[];
+var a="",b="",s=0,s1=0;
+
+  for(var i=0;i<total_weightage.length;i++)
+  {
+    if(total_weightage[i]=="[" || total_weightage[i]=="," )
+    {
+      if(total_weightage[i]=="," && s1==0)
+        a=a+";";
+    }
+      else
+      {
+        if(total_weightage[i]=="]")
+          {
+            s1=1;
+            if(a!="")
+            {
+              array_w.push(a);
+            }
+            a="";
+          }
+          else
+          {
+            s1=0;
+            a=a+total_weightage[i];
+          }
+        }
+        
+  }
+
+  var k=0;
+  for(var i=0;i<total_classification.length;i++)
+  {
+    if(total_classification[i]=="[" || total_classification[i]=="," )
+    {
+      if(total_classification[i]=="," && s==0)
+       {
+        b=b+";";
+        k=1;
+       } 
+    }
+      else
+      {
+        if(total_classification[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_c.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            if(k!=1)
+            {
+              if(b=="" && total_classification[i]==" ")
+              {
+
+              }
+              else
+              {
+              b=b+total_classification[i];
+            }
+            }
+            k=0;
+          }
+        }
+        
+  }
+
+  var k=0;
+  b="";
+  s=0;
+  for(var i=0;i<total_color.length;i++)
+  {
+    if(total_color[i]=="[" || total_color[i]=="," )
+    {
+      if(total_color[i]=="," && s==0)
+       {
+        b=b+";";
+       } 
+    }
+      else
+      {
+        if(total_color[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_col.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            
+              b=b+total_color[i];
+           
+          }
+        }
+        
+  }
+
+
+  
+  b=""
+   for(var i=0;i<total_asset_class.length;i++)
+  {
+    if(total_asset_class[i]=="[" || total_asset_class[i]=="," )
+    {
+      if(total_asset_class[i]=="," && s==0)
+        b=b+";";
+    }
+      else
+      {
+        if(total_asset_class[i]=="]")
+          {
+            s=1;
+            if(b!="")
+            {
+              array_class.push(b);
+            }
+            b="";
+          }
+          else
+          {
+            s=0;
+            b=b+total_asset_class[i];
+          }
+        }
+        
+  }
+  
+ 
+ var classification=[],color=[];
+ var cfic,we,ass_class,colour;
+ var seriesdate=[];
+ var total_eq=0,total_db=0,total_gold=0;
+
+chart_drawn(0,1);
+chart_drawn(1,2);
+chart_drawn(2,3);
+chart_drawn(3,4);
+
+function chart_drawn(start,end)
+{
+
+for(var i=start;i<end;i++)
+{
+  color=[];
+  classification=[];
+  seriesdate=[];
+  total_eq=0,total_db=0,total_gold=0;
+  cfic=array_c[i].split(";");
+  we=array_w[i].replace(/ /g, '').split(";");
+  colour=array_col[i].replace(/ /g, '').split(";");
+  ass_class=array_class[i].replace(/ /g, '').split(";");
+  for(var j=0;j<cfic.length;j++)
+  {
+    if(j!=0 && cfic[j-1]==cfic[j] )
+    {
+     
+      for(var k=0;k<seriesdate.length;k++)
+      {
+        var index=seriesdate[k].indexOf(cfic[j])
+        if(index!=-1)
+        {
+          var s=seriesdate[k][1]+parseInt(we[j]);
+          seriesdate[k][1]=s;
+          break;
+        }
+      }
+     
+    }
+    else
+    {
+     classification.push(cfic[j]);
+    classification.push(parseInt(we[j]));
+    color.push(colour[j]);
+    seriesdate.push(classification)
+    }
+     
+    if(ass_class[j]=="Equity")
+    {
+      total_eq=total_eq+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Debt")
+    {
+      total_db=total_db+parseInt(we[j]);
+    }
+    else if(ass_class[j]=="Gold")
+    {
+      total_gold=total_gold+parseInt(we[j]);
+    }
+    classification=[];
+   
+
+  }
+    seriesdate=seriesdate.reverse();
+    color=color.reverse();
+
+ var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'GoalIndiC'+(i+1),
+            type: 'pie',
+            margin: [0, 0, 0, 0],
+            backgroundColor: null
+            
+        },
+        credits:{enabled: false},
+        colors:color,
+        title:{text: ''},
+        plotOptions: {
+            pie: {
+                innerSize: '80%',
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+               point: {
+          events: {
+            mouseOver: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            },
+            mouseOut: function() {
+              this.graphic.attr({
+                r: this.shapeArgs.r
+              });
+            }
+          }
+        },
+        states: {
+          hover: {
+            brightness: 0,
+            lineWidth: 0,
+            halo: {
+              size: 0
+            }
+
+          }
+        }
+            }
+            
+        
+        },
+        tooltip: {
+              backgroundColor: 'transparent',
+              borderColor: "none",
+              shadow: false,
+              useHTML: true,
+              formatter: function () {      
+                   return '<div class="tooltop">'+this.key + '<br>' + '<b>'+this.y+' %</b></div>';
+                }
+    },
+        series: [{
+                    name: ' ',
+                    data: seriesdate                    
+                }]
+    },
+                                     
+    function(chart) { 
+        var textX = chart.plotLeft + (chart.plotWidth  * 0.5);
+        var textY = chart.plotTop  + (chart.plotHeight * 0.5);
+        for(var k=0;k<cfic.length;k++)
+        {
+
+        }
+        var span = '<div class="row d_inline_f chartCircleInside" id="pieChartInfoTextC'+(i+1)+'"style="position:relative;">';
+        span += '<div class="col-xs-6"><div class="ChartCIEQ"><div class="ChartCIP">'+total_eq+'</div><div class="ChartCIT">EQUITY</div></div></div>';
+        span += '<div class="col-xs-6 vr_left"><div class="ChartCIDT"><div class="ChartCIP">'+total_db+'</div><div class="ChartCIT">DEBT</div></div></div>';
+        span += '</div>';
+        $("#addTextC"+(i+1)).empty();
+        $("#addTextC"+(i+1)).append(span);
+        span = $('#pieChartInfoTextC'+(i+1));
+        span.css('left', textX + (span.width() * -0.5));
+        span.css('top', textY + (span.height() * -0.5));
+    });
+}
+
+
+}
+
+
+    $("#GBIPharm").click(function(){
+      chart_drawn(0,1);
+    });
+    $("#GBIFin").click(function(){
+      chart_drawn(1,2);
+    });
+    $("#GBIIT").click(function(){
+      chart_drawn(2,3);
+    });
+    $("#GBIInfra").click(function(){
+      chart_drawn(3,4);
+    });
+
+
+window.onorientationchange = function()
+{
+   window.location.reload();
+}
+
+
+  });
+}
+
+
+/************************************ Sectoral Play END ******************************** */ 
+
 
 
 
