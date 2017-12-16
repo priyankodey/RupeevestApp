@@ -124,6 +124,10 @@ $$(document).on('pageInit', function (e) {
         
     }
 
+    if(page.name==='FAQs'){
+      
+    }
+
     if (page.url === 'login.html') {
         
         $$('.form-to-data').on('click', function(){

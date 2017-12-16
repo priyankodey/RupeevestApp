@@ -355,6 +355,7 @@ $(document).ready(function()
 
                     $(this).removeClass('tab-active');
                     $(contentDiv).removeClass('active').addClass('fade');
+                    $(".tab-wrapper .tab-content").find(".active").removeClass("active").addClass("fade");
                     return false;
                      }
 

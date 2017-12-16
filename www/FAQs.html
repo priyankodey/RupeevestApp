@@ -6,18 +6,1376 @@
                     <h1>FAQs</h1>
                 </div>                
             </div>
-            <div class="row">
-                <div class="col-xs-12">
+            <div class="row MFHeadTop">
+                <div class="col-xs-12 ">
+                    <div class="sub_navbar_head">
+                        <div class="buttons-row">
+                          <a href="#faq_general_tab" class="button active tab-link">General</a>
+                          <a href="#faq_mf_tab" class="button tab-link">Mutual Fund</a>
+                          <a href="#faq_fd_tab" class="button tab-link">Fixed Deposit</a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="row MFHeadSubTop">
+                <div class="col-xs-12 ">
+                    <div class="tabs-swipeable-wrap">
+                        <div class="tabs">
+                            <div id="faq_general_tab" class="page-content tab active">
+                                <div class="content-block">
+                                    <ol class="faq_general_list">
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseGeneralQ1" aria-expanded="false" aria-controls="collapseGeneralQ1">How do I open an account with RupeeVest? What are the required documents?</a> 
+                                        </li>
+                                        <div class="collapse" id="collapseGeneralQ1">
+                                            Test
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseGeneralQ2" aria-expanded="false" aria-controls="collapseGeneralQ2">Do I need to be KYC compliant to open an account with RupeeVest?</a>
+                                        </li>
+                                        <div class="collapse" id="collapseGeneralQ2">
+                                            <p class="faq_1">No, you do not need to be KYC compliant to open an account with RupeeVest. However, you need to be KYC compliant to start investing. If you are not KYC compliant, we can process this for you as soon as you sign up and send us the required documents.</p>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseGeneralQ3" aria-expanded="false" aria-controls="collapseGeneralQ3">How can I check if I am KYC compliant?</a>
+                                        </li>
+                                        <div class="collapse" id="collapseGeneralQ3">
+                                            <p class="faq_1">You can check whether or not you are KYC compliant on our sign up page or by citing your PAN No. on <a href="https://www.cvlkra.com/kycpaninquiry.aspx" target="_blank">CVL KRA website</a>.</p>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseGeneralQ4" aria-expanded="false" aria-controls="collapseGeneralQ4">I would like to send my documents to RupeeVest to activate my account, what should I do?</a>
+                                        </li>
+                                        <div class="collapse" id="collapseGeneralQ4">
+                                            <p class="faq_1">You can <%= link_to "schedule a pickup", '/dashboards/fedex_form' %> from your dashboard when your documents are ready. We currently have this facility free of charge for pick-ups within India.</p>
+                                            <p class="faq_1">Steps to be taken once the documents are ready:-</p>
+                                                <ul>
+                                                    <li>You need to select a suitable date for the documents to be picked up from your place and schedule a pick-up. Please let us know in case you face any difficulty while doing so.</li>
+                                                    <li>Once the pick-up has been scheduled, we will send you a confirmation email with two Airway Bill copies, one of which will be FedEx Copy (courier person will take it) and the other one will be Consignee Copy (which will be signed by him and given back to you).</li>
+                                                </ul>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseGeneralQ5" aria-expanded="false" aria-controls="collapseGeneralQ5">Can I invest with RupeeVest if I am not registered on your website?</a>
+                                        </li>
+                                        <div class="collapse" id="collapseGeneralQ5">
+                                            <p class="faq_1">No, you cannot invest with us if you are not registered with us. However, our registration process is simple and quick. To register now, <a href="https://rupeevest.com/users/sign_up">click here</a>.</p>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseGeneralQ6" aria-expanded="false" aria-controls="collapseGeneralQ6">I am an NRI, can I invest in Mutual Funds through RupeeVest?</a>
+                                        </li>
+                                        <div class="collapse" id="collapseGeneralQ6">
+                                            <p class="faq_1">Yes, NRIs can invest in all Mutual Funds open for investments through RupeeVest. To know more about NRI services offered by RupeeVest, <a href="/Mutual-Funds-India/NRI">click here</a>.</p>
+                                        </div>
+                                        <!-- <div class="link_body1 collapse" id="collapseShowGeneral"> -->
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseGeneralQ7" aria-expanded="false" aria-controls="collapseGeneralQ7">Can I open a joint account with you? Upto how many members can I add in this account?</a>
+                                            </li>                
+                                            <div class="collapse" id="collapseGeneralQ7">
+                                                <p class="faq_1">Yes, you can open a joint account with us and there can be upto 3 members in this account. All 3 members need to be KYC compliant and registered with us.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseGeneralQ8" aria-expanded="false" aria-controls="collapseGeneralQ8">Can I open multiple accounts under one user? How?</a>
+                                            </li>                
+                                            <div class="collapse" id="collapseGeneralQ8">
+                                                    <p class="faq_1">Yes, you can register multiple accounts under one user. So, the primary user can handle the investments of all the other sub-users.</p>
+                                                    <p class="faq_1">You can avail this feature by selecting “Add New Investor” option on your dashboard.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseGeneralQ9" aria-expanded="false" aria-controls="collapseGeneralQ9">Can I add multiple bank accounts for one investor?</a>
+                                            </li>                
+                                            <div class="collapse" id="collapseGeneralQ9">
+                                                    <p class="faq_1">Yes, you can add upto 5 bank accounts under one investor by selecting the "Add New Bank" option from Investor Profile on your dashboard. For every bank that is added, you will have to sign a bank registration form and send it to us along with a cancelled cheque of the same. Once registered, you can also set a default bank for all your transactions.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseGeneralQ10" aria-expanded="false" aria-controls="collapseGeneralQ10">Which banks offer online investments with you?</a>
+                                            </li>
+                                            <div class="collapse" id="collapseGeneralQ10" class="faq_1">
+                                                <p>Here is the list of banks that offer online investments with us:</p>
+                                                <div class="area_wrap">
+                                                    <table class="table  table-condensed table-bordered table-responsive hidden-lg"> 
+                                                        <thead> 
+                                                            <tr>      
+                                                                <th>Sl.No.</th> 
+                                                                <th>Bank Name</th> 
+                                                            </tr> 
+                                                        </thead> 
+                                                        <% j=1  
+                                                        bank_1= ActiveRecord::Base.connection.select_all("select mb.BANK_CODE, mb.BANK_NAME from mst_banks mb join mst_bill_desk_banks mbd on mbd.BD_BANK_NAME=mb.BANK_NAME where mbd.BANK_CATEGORY='Net Banking' ORDER BY mb.BANK_NAME") %> 
+                                                        <tbody> 
+                                                            <% bank_1.each do |i| %> 
+                                                            <tr> 
+                                                                <td><%= j %></td> 
+                                                                <td><%= i['BANK_NAME'] %></td> 
+                                                            </tr> 
+                                                            <% j=j+1 
+                                                            end %> 
+                                                        </tbody> 
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseGeneralQ11" aria-expanded="false" aria-controls="collapseGeneralQ11">What do I need to do if my personal details (address, contact details, bank account, etc.) have changed?</a>
+                                            </li>                
+                                            <div class="collapse" id="collapseGeneralQ11">
+                                                    <p class="faq_2">If your personal details have changed, you can drop us a mail at <a data-name="care" data-domain="rupeevest" data-tld="com" href="#" class="cryptedmail" onclick="window.location.href = 'mailto:' + this.dataset.name + '@' + this.dataset.domain + '.' + this.dataset.tld"> </a> and we shall process the same for you. You would need to sign and send back the modification form sent by us over e-mail to confirm the change. If your bank details have changed, you need to send us a cancelled cheque as well along with the modification form.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseGeneralQ12" aria-expanded="false" aria-controls="collapseGeneralQ12">Are there any restrictions on maximum or minimum value or quantity for a single order on RupeeVest platform?</a>
+                                            </li>                
+                                            <div class="collapse" id="collapseGeneralQ12">
+                                                <p class="faq_2">The restrictions in terms of minimum amount or maximum amount as specified by AMC shall apply. There are no platform level restrictions.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseGeneralQ13" aria-expanded="false" aria-controls="collapseGeneralQ13">What is FATCA?</a>
+                                            </li>                
+                                            <div class="collapse" id="collapseGeneralQ13">
+                                                <p class="faq_2">FATCA is an acronym for the United States (US) Foreign Account Tax Compliance Act (FATCA), which was introduced by the US Government in October 2009.</p>
+                                                <p class="faq_2">FATCA is aimed at ensuring that US persons with financial assets outside of the US pay US tax. It is a new piece of legislation to help counter tax evasion in the US.</p>
+                                                <p class="faq_2">The purpose of FATCA is to prevent US persons from using banks and other financial institutions outside the US to park their wealth outside US and avoid US taxation on income generated from such wealth. FATCA obliges such banks and financial institutions to report information about US persons having accounts with them.</p>
+                                                <p class="faq_2">FATCA is mandatory for all.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseGeneralQ14" aria-expanded="false" aria-controls="collapseGeneralQ14">What is UBO?</a>
+                                            </li>                
+                                            <div class="collapse" id="collapseGeneralQ14">
+                                                <p class="faq_2">Ultimate Beneficial Ownership (UBO) refers to natural person(s), who ultimately own, control or influence a client and/or persons on whose behalf a transaction is being conducted, and includes a person who exercises ultimate effective control over a legal person or arrangement.</p>
+                                                <p class="faq_2">In other words, UBO is a person who enjoys the benefits of ownership, either directly or indirectly, even though title is in another name.</p>
+                                                <p class="faq_2">UBO information is mandatory for non-individual investors.</p>
+                                            </div>
+                                        <!-- </div>
+                                        <div class="show_link">
+                                             <button class="btn btn-RV btn-block link_toggle1" data-toggle="collapse" href="#collapseShowGeneral" aria-expanded="false" aria-controls="collapseShowGeneral">Show All</button>
+                                        </div> -->
+                                    </ol>
+                                </div>
+                            </div>
+                            <div id="faq_mf_tab" class="page-content tab">
+                                <div class="content-block">
+                                    <ol class="faq_mf_list">
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseMFQ1" aria-expanded="false" aria-controls="collapseMFQ1">What are the various payment options for making investments?</a>
+                                        </li>
+                                        <div class="collapse faq_3" id="collapseMFQ1">                  
+                                            <ul>
+                                                <li><strong><u>Net Banking:</u></strong> Investor can make the payment through our website or choose to pay later through the payment link which will be sent to the registered email.</li>
+                                                <li><strong><u>RTGS / NEFT:</u></strong> Investor needs to register the NSCCL account in his beneficiary list to make the payment.<br>
+                                                RTGS / NEFT beneficiary details:
+                                                    <ul>
+                                                        <li>Beneficiary Name: National Securities Clearing Corporation Ltd</li>
+                                                        <li>Beneficiary Bank Name: HDFC Bank Ltd</li>
+                                                        <li>Account No: 50200009635552</li>
+                                                        <li>IFSC Code: HDFC0000060</li>
+                                                    </ul>
+                                                </li>
+                                                <li><strong><u>One Time Mandate (OTM):</u></strong> Investor can confirm the payment by clicking on the link received on his registered mobile number / email or sending the 4-digit OTP to 561614.</li>
+                                                <li><strong><u>Cheque / DD:</u></strong> Investor will have to send the cheque to RupeeVest to process the transaction. The payment shall be drawn in favor of “National Securities Clearing Corporation Ltd” and made payable at Mumbai.</li>
+                                            </ul>
+                                            <p><u>Note:</u> The online payment link and OTP is valid for 48 hours and on expiry of the same, a fresh transaction needs to be initiated.</p>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseMFQ2" aria-expanded="false" aria-controls="collapseMFQ2">How do I start an SIP investment?</a>
+                                        </li>                
+                                        <div class="collapse faq_3" id="collapseMFQ2">
+                                                <p>You can start an SIP investment by clicking on the “Invest now” option and choosing SIP as your investment option. You can select a date and an amount of your preference as allowed by the AMC.</p>
+                                                <p>An OTM is mandatory for SIP payments. The first instalment can be made through other payment modes if OTM is not active but the subsequent instalments will be paid through OTM.</p>
+                                                <p>If your OTM amount is less than your SIP amount, or you haven’t registered an OTM, you simply need to select “New OTM” to proceed with the transaction.</p>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseMFQ3" aria-expanded="false" aria-controls="collapseMFQ3">I have been asked to sign the One Time Mandate (OTM). Why do I need to do this?</a>
+                                        </li>                
+                                        <div class="collapse faq_3" id="collapseMFQ3">
+                                            <p>OTM (One Time Mandate) is a permission you give your bank to debit the amount of your investment from your bank account. Registering it would enable a smooth, hassle free transaction experience without needing you to execute payments either through Cheque or Payment gateway.</p>
+                                            <p>Please note that this One Time Mandate (OTM) does not lead to any monetary transfer or transaction as no money is deducted or invested from your account without your consent. After your one time mandate is processed and an investment request is made, you will receive a message on your registered mobile for confirmation of payment. Your investment will be initiated only on your confirmation.</p>
+                                            <p>Both Lump sum and SIP investments can be made using one time mandate as your mode of payment. However, it is mandatory for SIP investments. The amount you mention in the mandate will be the maximum amount upto which a single transaction can be done.</p>
+                                            <p>This is a one-time process, with your mandate being valid for life. The mandate registration is expected to get completed within 15 to 30 days.</p>
+                                            <p>This one-time bank mandate form will allow you to set up any number of SIPs with your RupeeVest account and thus, omit the repeated paperwork required to be filled in future.</p>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseMFQ4" aria-expanded="false" aria-controls="collapseMFQ4">Can I increase my OTM amount?</a>
+                                        </li>                
+                                        <div class="collapse faq_3" id="collapseMFQ4">
+                                            <p>No, your OTM amount cannot be changed. You need to register for a new OTM if you want to increase its amount. Once it is activated, you can use any of the registered OTMs for your future transactions.</p>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseMFQ5" aria-expanded="false" aria-controls="collapseMFQ5">Can I make a single payment for multiple transactions?</a>
+                                        </li>                
+                                        <div class="collapse faq_3" id="collapseMFQ5">
+                                            <p>Multiple lump sum or multiple SIP purchase transactions across AMCs for one user can be executed through a single cheque or a single fund transfer.</p>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseMFQ6" aria-expanded="false" aria-controls="collapseMFQ6">How long does it take for my transactions to reflect in my portfolio?</a>
+                                        </li>                
+                                        <div class="collapse faq_3" id="collapseMFQ6">
+                                            <p>For all the transactions initiated on the platform, you can track its status from the transaction status tab in your dashboard. Once a transaction has been successfully processed by the RTA, it should reflect in your portfolio within 2-3 working days of the same.</p>
+                                            <p>In case of any discrepancy, please drop us a mail at <a data-name="care" data-domain="rupeevest" data-tld="com" href="#" class="cryptedmail" onclick="window.location.href = 'mailto:' + this.dataset.name + '@' + this.dataset.domain + '.' + this.dataset.tld"> </a></p>
+                                        </div>
+                                        <!-- <div class="link_body2 collapse" id="collapseShowMF"> -->
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseMFQ7" aria-expanded="false" aria-controls="collapseMFQ7">What are the various redemption and switch options?</a>
+                                            </li>                
+                                            <div class="collapse faq_3" id="collapseMFQ7">
+                                                <ol>
+                                                    <li>Redeem: You can use the “Redeem” option for any fund that you wish to redeem from your dashboard. You can either redeem the fund in part, or in full. Once the redemption request is made, the investor needs to authorize the transaction either by sending the OTP received on his registered mobile number or by confirming in the email.</li>
+                                                    <p>The 4-digit OTP needs to be sent to 561614.</p>
+                                                    <li>Switch: Switch refers to the transfer of whole or part of the fund to another fund of the same AMC. It is a one-time transfer. Once the switch request is made, the investor needs to authorize the transaction by either sending the OTP received on his registered mobile number or by confirming in the email.</li>
+                                                    <p>The 4-digit OTP needs to be sent to 561614.</p>
+                                                    <li>STP or Systematic Transfer Plan: It is an arrangement where a fixed amount of the fund is regularly transferred to another fund within the same AMC at predetermined intervals. The investor will receive an intimation e-mail once the transaction is initiated.</li>
+                                                    <li>SWP or Systematic Withdrawal Plan: It is a method of redemption of mutual fund by withdrawing a fixed amount at pre-determined intervals from the fund. The investor will receive an intimation e-mail once the transaction is initiated.</li>
+                                                </ol>                
+                                                <p>The online redemption link and OTP is valid for 48 hours and on expiry of the same, a fresh transaction is required to be initiated.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseMFQ8" aria-expanded="false" aria-controls="collapseMFQ8">How can I stop a systematic transaction?</a>
+                                            </li>                
+                                            <div class="collapse faq_3" id="collapseMFQ8">
+                                                <p>You can stop your SIP, STP or SWP transactions by choosing the "Cease" option from your dashboard. Once the "Cease" request is placed, you will receive an intimation regarding the same in your registered e-mail and mobile number. </p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseMFQ9" aria-expanded="false" aria-controls="collapseMFQ9">Which AMCs are available for investment through RupeeVest?</a>
+                                            </li>
+                                            <div class="collapse faq_3" id="collapseMFQ9">
+                                                <p>You can currently select funds from 34 AMCs to invest in.</p>
+                                                <p class="faq_5">List of AMCs:</p>
+                                               
+                                                <% amc_name= ActiveRecord::Base.connection.select_all("SELECT distinct(`fund`) as amc, amc_code FROM amc_msts where amc_code not in (400002,400008,400010,400014,400017,400018,400026,400037,400047,400050,400051,400053) order by amc") %>
+
+                                                     <ol> 
+                                                    <% amc_name.each do |amc_name_loop| %> 
+                                                    <li> <%= amc_name_loop['amc'] %> </li>
+                                                    <% end %> 
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseMFQ10" aria-expanded="false" aria-controls="collapseMFQ10">If I redeem my investments, where do I receive my money?</a>
+                                            </li>                
+                                            <div class="collapse faq_4" id="collapseMFQ10">
+                                                <p>When you redeem your investments, the amount will be credited to your registered bank account with RupeeVest. In case of multiple bank accounts, the money will be credited to the bank account selected as default by the investor.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseMFQ11" aria-expanded="false" aria-controls="collapseMFQ11">What is the NAV that I would receive if I make an investment today?</a>
+                                            </li>                
+                                            <div class="collapse faq_4" id="collapseMFQ11">
+                                                <p>The cut-off time for NAV allotment is:</p>
+                                                <div>
+                                                    <p><b>Mode of Payment - RTGS/NEFT</b></p>
+                                                </div>
+                                                <div id="rtgs">
+                                                    <div class="area_wrap">
+                                                        <table class="table table-condensed table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Scheme </th>
+                                                                    <th>Bank </th>
+                                                                    <th>Transaction Cut Off<br> time (T Day) </th>
+                                                                    <th>NAV Applicable </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><b>Liquid</b></td>
+                                                                    <td>All Banks</td>
+                                                                    <td>Before 12 p.m</td>
+                                                                    <td>T Day</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Non-Liquid</b></td>
+                                                                    <td>All Banks</td>
+                                                                    <td>Before 3 p.m</td>
+                                                                    <td>T Day</td>
+                                                                </tr>   
+                                                            </tbody>    
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p><b>Mode of Payment - Net Banking</b></p>
+                                                </div>
+                                                <div id="netbanking">
+                                                    <div class="area_wrap">
+                                                        <table class="table table-condensed table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Scheme </th>
+                                                                    <th>Bank </th>
+                                                                    <th>Transaction Cut Off <br>time (T Day) </th>
+                                                                    <th>NAV Applicable </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td rowspan="2"><b>Liquid</b></td>
+                                                                    <td>HDFC Bank</td>
+                                                                    <td>Before 12 p.m</td>
+                                                                    <td>T Day</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Other Banks</td>
+                                                                    <td>Before 12 p.m</td>
+                                                                    <td>T+1 Day</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td rowspan="2"><b>Non-Liquid</b></td>
+                                                                    <td>HDFC Bank</td>
+                                                                    <td>Before 3 p.m</td>
+                                                                    <td>T Day</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Other Banks </td>
+                                                                    <td>Before 3 p.m</td>
+                                                                    <td>T+1 Day</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <p><b>Mode of Payment - Cheque</b></p>
+                                                </div>
+                                                <div id="cheque">
+                                                    <div class="area_wrap">
+                                                        <table class="table table-condensed table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Scheme </th>
+                                                                    <th>Bank</th>
+                                                                    <th>Order Entry Time<br>(T-Day)</th>
+                                                                    <th>Cheque Deposit Cut off <br>Time (T-day)</th>
+                                                                    <th>NAV Applicable</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td rowspan="2"><b>Liquid</b></td>
+                                                                    <td>HDFC Bank</td>
+                                                                    <td>Before 11:30 a.m</td>
+                                                                    <td>Before 3 p.m</td>
+                                                                    <td>T Day</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Other Banks</td>
+                                                                    <td>Before 3 p.m</td>
+                                                                    <td>Before 5 p.m</td>
+                                                                    <td>T+1 Day</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td rowspan="2"><b>Non-Liquid</b></td>
+                                                                    <td>HDFC Bank</td>
+                                                                    <td>Before 11:30 a.m</td>
+                                                                    <td>Before 12:30 p.m</td>
+                                                                    <td>T Day</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Other Banks</td>
+                                                                    <td>Before 3 p.m</td>
+                                                                    <td>Before 5 p.m</td>
+                                                                    <td>T+1 Day</td>
+                                                                </tr>                                                              
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseMFQ12" aria-expanded="false" aria-controls="collapseMFQ12">How long does it take for the redeemed fund's money to hit my bank accounts?</a>
+                                            </li>                
+                                            <div class="collapse faq_4" id="collapseMFQ12">
+                                                <p>For redemption orders placed through our platform on T-day the funds will be credited as follows:</p>
+                                                <ul>
+                                                    <li>Liquid: T+1 if order placed before 3 pm</li>
+                                                    <li>Non-liquid: T+3 if order placed before 3 pm</li>
+                                                </ul>   
+                                                <p>However, for some funds redemption period may be longer so kindly refer to fund factsheet on AMC’s website for exact details.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseMFQ13" aria-expanded="false" aria-controls="collapseMFQ13">I have existing investments with other advisors, how can I transfer these to RupeeVest?</a>
+                                            </li>                
+                                            <div class="collapse faq_4" id="collapseMFQ13">
+                                                <p>Please write to us on <a data-name="care" data-domain="rupeevest" data-tld="com" href="#" class="cryptedmail" onclick="window.location.href = 'mailto:' + this.dataset.name + '@' + this.dataset.domain + '.' + this.dataset.tld"> </a> and we will get back to you on how the transfer is to be processed.</p>
+                                            </div>
+                                            <li>
+                                                    <a data-toggle="collapse" href="#collapseMFQ14" aria-expanded="false" aria-controls="collapseMFQ14">Why should I invest in an SIP?</a>
+                                            </li>                
+                                            <div class="collapse faq_4" id="collapseMFQ14" >
+                                                <p>SIP has multiple advantages:</p>
+                                                <ul>
+                                                    <li>Rupee Cost Averaging</li>
+                                                    <li>Compounding</li>
+                                                    <li>Disciplined investing</li>
+                                                    <li>Convenience</li>
+                                                </ul> 
+                                                <p>To read about it further, <a href="https://rupeevest.com/Mutual-Funds/SIP" target="_blank">click here</a>.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseMFQ15" aria-expanded="false" aria-controls="collapseMFQ15">What happens if there is insufficient balance in my bank?</a>
+                                            </li>                
+                                            <div class="collapse faq_4" id="collapseMFQ15">
+                                                <p>Failure of an installment payment will not lead to any charges or penalties from us. However, your bank or AMC may deduct charges for any failed payments. If you fail an installment, you can make an investment separately to meet your investment goal.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseMFQ16" aria-expanded="false" aria-controls="collapseMFQ16">Why do the allocation of mutual funds to Large-Cap, Multi-Cap and Mid &amp; Small-Cap categories as provided by RupeeVest differ from what is mentioned in the funds' fact sheets?</a>
+                                            </li>                
+                                            <div class="collapse faq_4" id="collapseMFQ16">
+                                                <p>At RupeeVest, we use a definition of classifying stocks by market capitalization which we believe is dynamic and self-adjusting. We classify large caps as the smallest number of stocks which make up 70% of the total universe market capitalization. It normally stands around 75-100 stocks. Mid-caps are defined as the smallest number of stocks which make up the next 20% of the market capitalization of the universe. It normally stands around 200-250 stocks. Remaining number of stocks are classified as small caps which contribute the remaining 10% of the universe market capitalization. We take last 6 months average market capitalization for calculation purpose.</p>
+
+                                                <p>To summarize:</p>
+                                                <p>Large Caps = Smallest number of stocks equaling 70% of total market capitalization</p>
+                                                <p>Mid-Caps = Next smallest number of stocks equaling 20% of total market capitalization</p>
+                                                <p>Small Caps = Remaining number of stocks equaling 10% of total market capitalization</p>
+
+                                                <p>This method of classification is not affected by the overall market movement as the funds are classified relative to each other. However, as individual funds rise or decline more than the rest of the market, they may move from one category to another over a period of time. Using this classification, the funds are allocated to categories which best reflect their characteristics which is essential for comparison and rating.</p>
+                                            </div>
+                                        <!-- </div>
+                                        <div class="show_link">
+                                             <button class="btn btn-RV btn-block link_toggle2" data-toggle="collapse" href="#collapseShowMF" aria-expanded="false" aria-controls="collapseShowMF">Show All</button>
+                                        </div> -->
+                                    </ol>                                  
+                                </div>
+                            </div>
+                            <div id="faq_fd_tab" class="page-content tab">
+                                <div class="content-block">
+                                    <ol class="faq_fd_list">
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseFDQ1" aria-expanded="false" aria-controls="collapseFDQ1">What is the investment process for Fixed Deposits?</a>
+                                        </li>                
+                                        <div class="collapse faq_3" id="collapseFDQ1">
+                                            <p>Please visit the link below:</p>
+                                            <p><a href="https://rupeevest.com/Fixed-Deposit/How-it-Works" target="_blank">Click here</a></p>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseFDQ2" aria-expanded="false" aria-controls="collapseFDQ2">What are the documents required for investing in FDs?</a>
+                                        </li>
+                                        <div class="collapse faq_3" id="collapseFDQ2"> 
+                                            <p> The documents required for various companies are as follows: </p>
+                                            <div class="hidden-lg">
+                                                <h5><strong>Bajaj Finance Limited</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card, Job Card issued by NREGA</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Job Card issued by NREGA</h6>                
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Certificate of Registration / Incorporation issued by the Registrar of Companies</h6>
+                                                    <h6>2. Memorandum &amp; Articles of Association / Partnership Deed</h6>
+                                                    <h6>3. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the account</h6>
+                                                    <h6>4. Power of Attorney granted to its managers, officers or employees to transact business on its behalf</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Certificate of Registration / Incorporation issued by the Registrar of Companies</h6>
+                                                    <h6>2. Memorandum &amp; Articles of Association / Partnership Deed</h6>
+                                                    <h6>3. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the account</h6>
+                                                    <h6>4. Power of Attorney granted to its managers, officers or employees to transact business on its behalf</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof (Bank Statement preferable)</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof</h6>
+                                                    <h6>3. Photograph</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Certificate of Registration / Incorporation issued by the Registrar of Companies</h6>
+                                                    <h6>2. Memorandum &amp; Articles of Association / Partnership Deed</h6>
+                                                    <h6>3. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the account</h6>
+                                                    <h6>4. Power of Attorney granted to its managers, officers or employees to transact business on its behalf</h6>            
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>1. Certificate of Registration / Incorporation issued by the Registrar of Companies</h6>
+                                                    <h6>2. Memorandum &amp; Articles of Association / Partnership Deed</h6>
+                                                    <h6>3. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the account</h6>
+                                                    <h6>4. Power of Attorney granted to its managers, officers or employees to transact business on its behalf</h6>    
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+
+                                                </br>
+                                                <br>
+                                                <h5><strong>Cent Bank Home Finance Limited</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card, Letter from a Recognized Public Authority or public servant verifying the identity and residence of the customer to the satisfaction of branch</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Letter from any Recognized Public Authority / Letter from Employer (subject to satisfaction of the branch)</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Certificate of Incorporation and Memorandum &amp; Articles of Association</h6>
+                                                    <h6>2. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the account</h6>
+                                                    <h6>3. Power of Attorney granted to its managers, officers, or employees to transact business on its behalf</h6>
+                                                    <h6>4. Copy of PAN allotment letter</h6>
+                                                    <h6>5. Copy of the Telephone Bill</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Registration Certificate, if registered</h6>
+                                                    <h6>2. Partnership Deed</h6>
+                                                    <h6>3. Power of Attorney granted to a partner or an employee of the firm to transact business on its behalf</h6>
+                                                    <h6>4. Any officially valid document identifying the partners and the persons holding the Power of Attorney and their addresses</h6>
+                                                    <h6>5. Telephone Bill in the name of Firm / Partners</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof (Bank Statement preferable)</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof</h6>
+                                                    <h6>3. Photograph</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Certificate of registration, if registered</h6>
+                                                    <h6>2. Power of Attorney granted to transact business on its behalf</h6>
+                                                    <h6>3. Any officially valid document to identify trustees, settlers, beneficiaries and those holding Power of Attorney, founders / managers / directors and their addresses</h6>
+                                                    <h6>4. Resolution of the managing body of the foundation / association</h6>
+                                                    <h6>5. Telephone Bill</h6>    
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>1. Resolution of the Managing Body of such Association</h6>
+                                                    <h6>2. Power of Attorney granted to him to transact on its behalf</h6>
+                                                    <h6>3. An officially valid document in respect of persons holding an attorney to transact on its behalf</h6>
+                                                    <h6>4. Any such other information as Branch may require collectively to establish the legal existence of such association or body of individuals</h6>    
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+
+                                                </br>
+                                                <br>
+                                                <h5><strong>DHFL</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card, Photo Debit / Credit Card </h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Letter from any Recognized Public Authority</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Copy of Memorandum &amp; Articles of Association</h6>
+                                                    <h6>2. Certificate of Incorporation</h6>
+                                                    <h6>3. Copy of Resolution to invest in DHFL's Deposit Scheme</h6>
+                                                    <h6>4. List of Directors and Office Bearers</h6>
+                                                    <h6>5. Operational Mandate &amp; Specimen Signature of Authorised Persons</h6>
+                                                    <h6>6. PAN Card copy of the Company</h6>
+                                                    <h6>7. Any one document [Latest Telephone Bill (Landline phone/Mobile phone), Latest Electricity / Gas Bill, Latest Bank Account Statement, Ration Card, Letter from any Recognized Public Authority, Photo Debit/Credit Card]</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Declaration of Partnership by Partners</h6>
+                                                    <h6>2. Name and Address of Partners</h6>
+                                                    <h6>3. Operational Mandate &amp; Signatures</h6>
+                                                    <h6>4. PAN Card copy of Partners / Partnership</h6>
+                                                    <h6>5. Any one document [Latest Telephone Bill (Landline phone/Mobile phone), Latest Electricity/Gas Bill, Latest Bank Account Statement, Ration Card, Letter from any Recognized Public Authority, Photo Debit/Credit Card]</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof</h6>
+                                                    <h6>3. Photograph</h6>
+                                                    <h6>4. Declaration to invest in DHFL Fixed Deposit along with Co-persons name and relation, HUF Stamp, Karta's Name &amp; Signature</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Copy of Resolution</h6>
+                                                    <h6>2. Copy of Trust Deed</h6>
+                                                    <h6>3. Copy of Power of Attorney granted to operate</h6>
+                                                    <h6>4. Copy of Operating Instructions</h6>
+                                                    <h6>5. Copy of PAN Card of Trust</h6>
+                                                    <h6>6. Any one document [Latest Telephone Bill (Landline phone/Mobile phone), Latest Electricity/Gas Bill, Latest Bank Account Statement, Ration Card, Letter from any Recognized Public Authority, Photo Debit/Credit Card]</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>1. Copy of Passport</h6>
+                                                    <h6>2. Copy of VISA</h6>
+                                                    <h6>3. PAN Card</h6>
+                                                    <h6>4. Passport size photograph</h6>
+                                                    <h6>5. Copy of Civil Identity Card issued by the country where he/she is residing.</h6>
+                                                    <h6>6. Any one document [Latest Telephone Bill (Landline phone/Mobile phone), Latest Electricity/Gas Bill, Latest Bank Account Statement, Ration Card, Letter from any Recognized Public Authority, Photo Debit/Credit Card]</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>1. Name, Address &amp; Photograph of Proprietor</h6>
+                                                    <h6>2. PAN Card copy of Proprietor</h6>
+                                                    <h6>3. Any Certificate / License / Registration of the Proprietory Concern</h6>
+                                                    <h6>4. Any one document [Latest Telephone Bill (Landline phone/Mobile phone), Latest Electricity/Gas Bill, Latest Bank Account Statement, Ration Card, Letter from any Recognized Public Authority, Photo Debit/Credit Card]</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <table class="table table-bordered area_wrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Proof of Identity</th>
+                                                                <th colspan="2">Proof of Address</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="DHFLJointDepositMandate" rowspan="4">Mandate</td>
+                                                                <td>If no mandate given</td>
+                                                                <td>KYC Compliance by 1st depositor as above is sufficient</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Payable to 1st Depositor alone</td>
+                                                                <td>KYC Compliance by 1st depositor as above is sufficient</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Payable to either/anyone/survivor</td>
+                                                                <td>KYC Compliance by 1st depositor is sufficient to open a/c and issue FDR, but subsequently obtain KYC document of others</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Payable to all of them equally or in any specific proportion</td>
+                                                                <td>KYC Compliance by all depositors to be ensured while opening account &amp; issuing FDR.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </br>
+                                                <br>
+                                                <h5><strong>GATI Ltd.</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Copy of PAN Card</h6>
+                                                    <h6>2. Power of Attorney</h6>
+                                                    <h6>3. Board Resolution on authorization</h6>
+                                                    <h6>4. A cheque in favor of "Gati Limited"</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Copy of PAN Card</h6>
+                                                    <h6>2. Power of Attorney</h6>
+                                                    <h6>3. Board Resolution on authorization</h6>
+                                                    <h6>4. A cheque in favor of "Gati Limited"</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. Copy of PAN Card of HUF &amp; Karta</h6>
+                                                    <h6>2. Power of Attorney</h6>
+                                                    <h6>3. Board Resolution on authorization</h6>
+                                                    <h6>4. A cheque in favor of "Gati Limited"</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Copy of PAN Card</h6>
+                                                    <h6>2. Power of Attorney</h6>
+                                                    <h6>3. Board Resolution on authorization</h6>
+                                                    <h6>4. A cheque in favor of "Gati Limited"</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+
+                                                <h5><strong>Gruh Finance</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card, Photo Debit / Credit Card</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Credit Card Account Statement</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Registration Certificate</h6>
+                                                    <h6>2. Partnership Deed</h6>
+                                                    <h6>3. Power of Attorney granted to a partner or an employee of the firm to transact business on its behalf</h6>
+                                                    <h6>4. Any officially valid document identifying the partners and the persons holding the Power of Attorney and their addresses</h6>
+                                                    <h6>5. Telephone Bill in the name of firm / partners</h6>
+                                                    <h6>6. A photo identification and address proof of partner(s) resident outside India, registered with the Indian Consulate in the foreign country where such a partner is residing</h6>
+                                                    <h6>7. Photo identification and address proof of the sleeping partner(s)</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. ID Proof of the Karta of the HUF similar to that applicable for individual customer as mentioned</h6>
+                                                    <h6>2. Address proof that is applicable to the Karta as an individual will be applicable to an HUF</h6>
+                                                    <h6>3. Copy of PAN Card issued to the HUF</h6>
+                                                    <h6>4. Where the account is to be operated by a coparcener or any other authorised person, the identity proof of that individual should be submitted</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Certificate of registration</h6>
+                                                    <h6>2. Power of Attorney granted to any person to transact business on its behalf</h6>
+                                                    <h6>3. Personal identity and address proof of the trustees, founders / managers / directors / settlers and those holding Power of Attorney. The documents to be collected will be similar to that of an individual</h6>
+                                                    <h6>4. Resolution of the managing body of the Foundation / Association / Trust, to open accounts with GRUH. The resolution should also mention the names of the persons authorised to operate the accounts</h6>
+                                                    <h6>5. Telephone bill / electricity bill / municipal (property) tax bill of the Trust, Foundation</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>1. Certificate of registration</h6>
+                                                    <h6>2. Power of Attorney granted to any person to transact business on its behalf</h6>
+                                                    <h6>3. Personal identity and address proof of the trustees, founders / managers / directors / settlers and those holding Power of Attorney. The documents to be collected will be similar to that of an individual.</h6>
+                                                    <h6>4. Resolution of the managing body of the Foundation / Association / Trust, to open accounts with GRUH. The resolution should also mention the names of the persons authorised to operate the accounts.</h6>
+                                                    <h6>5. Telephone bill / electricity bill / municipal (property) tax bill of the Association of Persons.</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+
+                                                <h5><strong>HDFC</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Registered Rent Agreement</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Certificate of Registration / Incorporation issued by the Registrar of Companies</h6>
+                                                    <h6>2. Memorandum &amp; Articles of Association</h6>
+                                                    <h6>3. PAN allotment letter / Card</h6>
+                                                    <h6>4. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the account</h6>
+                                                    <h6>5. Power of Attorney granted to its managers, officers, or employees to transact business on its behalf</h6>
+                                                    <h6>6. Telephone Bill</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Certificate of Registration issued by Registrar of Firms</h6>
+                                                    <h6>2. Partnership Deed</h6>
+                                                    <h6>3. PAN Card</h6>
+                                                    <h6>4. Power of Attorney granted to a partner or an employee of the firm to transact business on its behalf (Telephone Bill in the name of firm / partners)</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof (Bank Statement preferable)</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof (Bank Statement preferable)</h6>
+                                                    <h6>3. One passport / stamp size photograph</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Certificate of Registration issued by Registrar of Co-operative Society (Society)</h6>
+                                                    <h6>2. Resolution passed by the managing committee (Society)</h6>
+                                                    <h6>3. Telephone Bill in the name of the Society (Society)</h6>
+                                                    <h6>4. Rules &amp; Regulations / Bye-Laws (Society)</h6>
+                                                    <h6>5. Certificate of Registration issued by the Charity Commissioner (Trust)</h6>
+                                                    <h6>6. Trust Deed (Trust)</h6>
+                                                    <h6>7. Power of Attorney granted to transact business on its behalf (Trust)</h6>
+                                                    <h6>8. Resolution of the managing body of the Trust (Trust)</h6>
+                                                    <h6>9. Telephone Bill in the name of the Trust (Trust)</h6>
+                                                    <h6>10. Proof of Identity &amp; Residence of Partners, Trustees, Settlers, Beneficiaries, Signatories (Trust)</h6>
+                                                    <h6>11. PAN Card (either case)</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>1. Certificate of registration, if registered</h6>
+                                                    <h6>2. PAN Card</h6>
+                                                    <h6>3. Power of Attorney granted to transact business on its behalf</h6>
+                                                    <h6>4. Any officially valid document identifying the persons holding the Power of Attorney and their addresses</h6>
+                                                    <h6>5. Resolution of the Managing Body of the Association</h6>
+                                                    <h6>6. Telephone Bill in the name of Association</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+
+                                                <h5><strong>HUDCO</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card, Letter from a Recognized Public Authority or public servant verifying the identity and residence of the customer to the satisfaction of HFC</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Letter from any Recognized Public Authority / Letter from Employer (subject to satisfaction of the HFC)</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Certificate of Incorporation and Memorandum &amp; Articles of Association</h6>
+                                                    <h6>2. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the account</h6>
+                                                    <h6>3. Power of Attorney granted to its managers, officers, or employees to transact business on its behalf</h6>
+                                                    <h6>4. Copy of PAN allotment letter</h6>
+                                                    <h6>5. Copy of the Telephone Bill</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Registration Certificate, if registered</h6>
+                                                    <h6>2. Partnership Deed</h6>
+                                                    <h6>3. Power of Attorney granted to a partner or an employee of the firm to transact business on its behalf</h6>
+                                                    <h6>4. Any officially valid document identifying the partners and the persons holding the Power of Attorney and their addresses</h6>
+                                                    <h6>5. Telephone Bill in the name of Firm / Partners</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof</h6>
+                                                    <h6>3. Photograph</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Certificate of registration, if registered</h6>
+                                                    <h6>2. Power of Attorney granted to transact business on its behalf</h6>
+                                                    <h6>3. Any officially valid document to identify trustees, settlers, beneficiaries and those holding Power of Attorney, founders / managers / directors and their addresses</h6>
+                                                    <h6>4. Resolution of the managing body of the foundation / association</h6>
+                                                    <h6>5. Telephone Bill</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+
+                                                <h5><strong>ICICI Home Finance Ltd.</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Letter from employer (subject to satisfaction of the Company) / Latest Rent / Leave &amp; License Agreement</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Certificate of Incorporation and Memorandum &amp; Articles of Association</h6>
+                                                    <h6>2. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the deposit</h6>
+                                                    <h6>3. Power of Attorney granted to its managers, officers, or employees to transact business on its behalf</h6>
+                                                    <h6>4. PAN Card or copy of PAN allotment letter</h6>
+                                                    <h6>5. Any other officially valid document establishing proof of existence and address of the entity to the satisfaction of the Company</h6>
+                                                    <h6>6. Any officially valid document to identify the signatories</h6>
+                                                    <h6>7. Crtificate of Commencement of Business</h6>
+                                                    <h6>8. Identification of Authorised Signatories should be based on photographs and signature Cards duly attested by the company</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Registration Certificate, if registered</h6>
+                                                    <h6>2. Partnership Deed</h6>
+                                                    <h6>3. Power of Attorney granted to a partner or an employee of the firm to transact business on its behalf</h6>
+                                                    <h6>4. Any officially valid document identifying the partners and the persons holding the Power of Attorney and their addresses</h6>
+                                                    <h6>5. Proof of Existence &amp; Proof of Address of the firm</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof (Bank Statement preferable)</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof (Bank Statement preferable)</h6>
+                                                    <h6>3. One passport / stamp size photograph</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Certificate of Registration, if registered</h6>
+                                                    <h6>2. Trust Deed</h6>
+                                                    <h6>3. Power of Attorney granted to transact business on its behalf</h6>
+                                                    <h6>4. Any officially valid document to identify trustees, settlers, beneficiaries and those holding Power of Attorney, founders / managers / directors and their addresses</h6>
+                                                    <h6>5. Resolution of the managing body of the foundation / association</h6>
+                                                    <h6>6. Any officially valid document establishing the proof of existence and proof of address of the entity to the satisfaction of the Company</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+
+                                                <h5><strong>KTDFC</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card, Letter from a Recognized Public Authority or public servant verifying the identity and residence of the customer</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Letter from any Recognized Public Authority / Letter from Employer</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Certificate of Incorporation and Memorandum &amp; Articles of Association</h6>
+                                                    <h6>2. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the deposit</h6>
+                                                    <h6>3. Power of Attorney granted to its managers, officers, or employees to transact business on its behalf</h6>
+                                                    <h6>4. Copy of PAN allotment letter</h6>
+                                                    <h6>5. Copy of the Telephone Bill</h6>            
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Registration Certificate, if registered</h6>
+                                                    <h6>2. Partnership Deed</h6>
+                                                    <h6>3. Power of Attorney granted to a partner or an employee of the firm to transact business on its behalf</h6>
+                                                    <h6>4. Any officially valid document identifying the partners and the persons holding the Power of Attorney and their addresses</h6>
+                                                    <h6>5. Telephone Bill in the name of Firm / Partners</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof</h6>
+                                                    <h6>3. Photograph</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Certificate of registration, if registered</h6>
+                                                    <h6>2. Power of Attorney granted to transact business on its behalf</h6>
+                                                    <h6>3. Any officially valid document to identify trustees, settlers, beneficiaries and those holding Power of Attorney, founders / managers / directors and their addresses</h6>
+                                                    <h6>4. Resolution of the managing body of the foundation / association</h6>
+                                                    <h6>5. Telephone Bill</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+
+                                                <h5><strong>LIC Housing Finance</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Registered Rent Agreement</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Certificate of Registration / Incorporation issued by the Registrar of Companies</h6>
+                                                    <h6>2. Memorandum &amp; Articles of Association</h6>
+                                                    <h6>3. PAN Card</h6>
+                                                    <h6>4. Resolution of the Board of Directors</h6>
+                                                    <h6>5. Telephone Bill</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. PAN Card</h6>
+                                                    <h6>2. Address Proof (Bank Statement, Telephone Bill)</h6>
+                                                    <h6>3. Partnership Deed</h6>
+                                                    <h6>4. Resolution copy</h6>
+                                                    <h6>5. ID &amp; Address Proof of Authorised Signatories</h6>
+                                                    <h6>6. Photograph of the signatories</h6>
+                                                    <h6>7. Cancel cheque leaf for Bank Account verification</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof (Bank Statement preferable)</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof</h6>
+                                                    <h6>3. Photograph</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Certificate of Registration</h6>
+                                                    <h6>2. PAN  Card</h6>
+                                                    <h6>3. Governing Deed and/or Rules &amp; Regulations / Bye-Laws</h6>
+                                                    <h6>4. Resolution of the Managing Committee</h6>
+                                                    <h6>5. Telephone Bill</h6>
+                                                    <h6>6. List of Authorised Signatories</h6>
+                                                    <h6>7. Proof of Identity of Trustees / Beneficiaries / Settlors</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+
+                                                <h5><strong>Mahindra Finance</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card, Job Card issued by NREGA</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. PAN Card</h6>
+                                                    <h6>2. Address Proof (Bank Statement, Telephone Bill)</h6>
+                                                    <h6>3. Certificate of Incorporation</h6>
+                                                    <h6>4. Memorandum of Articles of Association &amp; Latest Board Resolution with specimen signatures</h6>
+                                                    <h6>5. Authorised Signatory List</h6>
+                                                    <h6>6. Photograph of the signatories</h6>
+                                                    <h6>7. Cancel cheque leaf for Bank Account verification</h6>
+                                                    <h6>8. ID &amp; Address Proof of Authorised Signatories</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. PAN Card</h6>
+                                                    <h6>2. Address Proof (Bank Statement, Telephone Bill)</h6>
+                                                    <h6>3. Partnership Deed</h6>
+                                                    <h6>4. Resolution copy</h6>
+                                                    <h6>5. ID &amp; Address Proof of Authorised Signatories</h6>
+                                                    <h6>6. Photograph of the signatories</h6>
+                                                    <h6>7. Cancel cheque leaf for Bank Account verification</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof</h6>
+                                                    <h6>3. Photograph</h6>
+                                                    <h6>4. Cancel cheque leaf for Bank Account verification</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                  <h5>Trusts &amp; Foundations</h5>
+                                                    <h6>1. Name of trustees, settlers, beneficiaries and signatories</h6>
+                                                    <h6>2. Name and addresses of the founder, the managers / directors and the beneficiaries</h6>
+                                                    <h6>3. Telephone / fax numbers</h6>
+                                                  <h5>Charitable Trust / Family Trust</h5>
+                                                    <h6>1. Copy of the Registration Certificate and / or 12(A) Certificate issued by Income Tax Dept.</h6>
+                                                    <h6>2. Acknowledgement of registration application if applied for.</h6>
+                                                    <h6>3. PAN Card copy</h6>
+                                                    <h6>4. Address Proof</h6>
+                                                    <h6>5. List of Signatories</h6>
+                                                    <h6>6. Board Resolution / Consent from Trustees</h6>
+                                                    <h6>7. Individual KYC of all Trustees</h6>
+                                                    <h6>8. Photographs, ID &amp; Address Proof of Signatories</h6>
+                                                    <h6>9. Cancel cheque leaf for Bank account verification</h6>
+                                                    <h6>10. Trust Deed</h6>
+                                                    <h6>Note: Mahindra &amp; Mahindra Financial Services is not registered U/S 11(5) of income tax act, hence Charitable Trust may invest in Mahindra Finance FD at THEIR OWN RISK.</h6>
+                                                  <h5>Clubs, Societies &amp; Associations</h5>
+                                                    <h6>1. Copy of the Registration Certificate, if registered</h6>
+                                                    <h6>2. Acknowledgement of registration application if applied for</h6>
+                                                    <h6>3. PAN Card copy</h6>
+                                                    <h6>4. Address Proof</h6>
+                                                    <h6>5. List of Signatories</h6>
+                                                    <h6>6. MOA &amp; Resolution</h6>
+                                                    <h6>7. Individual KYC of all signatories</h6>
+                                                    <h6>8. Photographs, ID &amp; Address Proof of Signatories</h6>
+                                                    <h6>9. Cancel cheque leaf for Bank account verification</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>1. Passport with valid VISA</h6>
+                                                    <h6>2. Overseas employment letter (optional for confirmation of residential status and overseas address)</h6>
+                                                    <h6>3. A Person of Indian Origin (PIO) Card to establish Indian Origin, if it is a foreign passport</h6>
+                                                    <h6>4. PAN Card</h6>
+                                                    <h6>5. A local address proof if different from the passport address:</h6>
+                                                         <h6>&nbsp;&nbsp;&nbsp;&nbsp;a. Bank account statement or passbook</h6>
+                                                         <h6>&nbsp;&nbsp;&nbsp;&nbsp;b. Local property papers with registration deed</h6>
+                                                         <h6>&nbsp;&nbsp;&nbsp;&nbsp;c. Electricity bill</h6>
+                                                         <h6>&nbsp;&nbsp;&nbsp;&nbsp;d. Voter ID or Driving License</h6>
+                                                    <h6>6. Tax Residency Certificate from the Income Tax department of the country the investor is a resident</h6>
+                                                    <h6>7. Copy of the passport as of the beginning of the current financial year and end of financial year</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>1. PAN Card of Proprietor</h6>
+                                                    <h6>2. Address Proof of Proprietor</h6>
+                                                    <h6>3. Photograph</h6>
+                                                    <h6>4. If the sole proprietorship is in different name, the bank statement, OR registration certificate OR telephone bill</h6>
+                                                    <h6>5. Cancel cheque leaf for Bank Account verification</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+                                                <h5><strong>National Housing Bank</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Partnership Deed</h6>
+                                                    <h6>2. Registration Certificate, if registered</h6>
+                                                    <h6>3. Power of Attorney granted to a partner or any authorised person to place a deposit on behalf of partnership</h6>
+                                                    <h6>4. Proof of Identity of Partners and / or authorised persons along with their addresses</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. Photo PAN Card</h6>
+                                                    <h6>2. Photograph</h6>
+                                                    <h6>3. Driving License</h6>
+                                                    <h6>4. Voter ID</h6>
+                                                    <h6>5. Ration Card</h6>
+                                                    <h6>6. Passport</h6>
+                                                    <h6>7. Latest Telephone Bill</h6>
+                                                    <h6>8. Latest Electricity Bill</h6>
+                                                    <h6>9. Latest Bank Account Statement</h6>
+                                                    <h6>10. Latest Demat Account Statement</h6>
+                                                    <h6>11. Registered Rent Agreement</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Trust Deed or document establishing the foundation</h6>
+                                                    <h6>2. Copy of Certificate of Registration, in case of registered Clubs, Societies &amp; Associations</h6>
+                                                    <h6>3. Resolution of the Trustees / Managing Committee of Foundation to place deposits</h6>
+                                                    <h6>4. power of Attorney in favor of authorised signatories</h6>
+                                                    <h6>5. Proof of Identity of Trustees / or authorised signatories along with their addresses</h6>
+                                                    <h6>6. Copy of the Bye-Laws</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>1. Resolution of the Managing Body of such Association</h6>
+                                                    <h6>2. Power of Attorney granted in favor of authorised signatories to act on behalf of such association</h6>
+                                                    <h6>3. Proof of Identity of authorised signatories along with their addresses</h6>
+                                                    <h6>4. Such information as may be required to establish legal existence of such association</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+                                                <h5><strong>Omaxe</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): >Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. PAN Card of Company</h6>
+                                                    <h6>2. Memorandum of Association</h6>
+                                                    <h6>3. List of Authorised Signatories</h6>
+                                                    <h6>4. Board Resolution</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Trust Deed</h6>
+                                                    <h6>2. Copy of PAN Card</h6>
+                                                    <h6>3.  List of Authorised Signatories</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+                                                <h5><strong>PNB</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Copy of Memorandum &amp; Articles of Association / Bye-Laws</h6>
+                                                    <h6>2. Copy of Resolution of Investment</h6>
+                                                    <h6>3. Specimen Signatures of Authorised Persons</h6>
+                                                    <h6>4. Photograph, PAN Card, Address Proof of Signing Authorities</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Declaration of Partnership by Partners</h6>
+                                                    <h6>2. Name and Address of Partners</h6>
+                                                    <h6>3. Specimen Signatures</h6>
+                                                    <h6>4. PAN Card copy of Firm</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof</h6>
+                                                    <h6>3. One Photograph of Karta</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Trust Deed</h6>
+                                                    <h6>2. Registration Certificate</h6>
+                                                    <h6>3. Copy of Resolution of Investment</h6>
+                                                    <h6>4. Trust's PAN Card Copy</h6>
+                                                    <h6>5. Trust's Address Proof</h6>
+                                                    <h6>6. Specimen Signatures of Authorised Persons</h6>
+                                                    <h6>7. Photograph, PAN Card, Address Proof of Signing Authorities</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>1. Association PAN Card</h6>
+                                                    <h6>2. Association Address Proof</h6>
+                                                    <h6>3. Board Resolution </h6>
+                                                    <h6>4. Authorised Signatory List</h6>
+                                                    <h6>5. Deed Declaration</h6>
+                                                    <h6>6. Directors' PAN Card &amp; Address Proof</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>1. Name and Signatures of the Proprietor</h6>
+                                                    <h6>2. PAN Card of Proprietor</h6>      
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+                                                <h5><strong>SIDBI</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card, Letter from a Recognized Public Authority or public servant verifying the identity and residence of the customer to the satisfaction of Bank / Confirmation letter from the Employer / other bank verifying therein photograph of the person along with other things</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Letter from any Recognized Public Authority / Letter from Employer (subject to satisfaction of the Bank)</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Certificate of Incorporation and Memorandum &amp; Articles of Association</h6>
+                                                    <h6>2. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the account</h6>
+                                                    <h6>3. Identification of authorised signatories should be based on photographs and signature Cards duly attested by the company</h6>
+                                                    <h6>4. Power of Attorney granted to its managers, officers, or employees to transact business on its behalf</h6>
+                                                    <h6>5. Copy of PAN allotment letter</h6>
+                                                    <h6>6. Copy of the Telephone Bill</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Registration Certificate, if registered</h6>
+                                                    <h6>2. Partnership Deed</h6>
+                                                    <h6>3. Power of Attorney granted to a partner or an employee of the firm to transact business on its behalf</h6>
+                                                    <h6>4. Any officially valid document identifying the partners and the persons holding the Power of Attorney and their addresses</h6>
+                                                    <h6>5. Telephone Bill in the name of Firm / Partners</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. Declaration from the Karta</h6>
+                                                    <h6>2. Proof of Identification of Karta</h6>
+                                                    <h6>3. Joint Hindu Family Letter signed by all the adult coparceners</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                  <h5>Trusts &amp; Foundations</h5>
+                                                    <h6>1. Certificate of registration, if registered</h6>
+                                                    <h6>2. Power of Attorney granted to transact business on its behalf</h6>
+                                                    <h6>3. Any officially valid document to identify trustees, settlers, beneficiaries and those holding Power of Attorney, founders / managers / directors and their addresses</h6>
+                                                    <h6>4. Resolution of the managing body of the foundation / association</h6>
+                                                    <h6>5. Photograph of operating Trustees</h6>
+                                                    <h6>6. Telephone / Utility Bill</h6>
+                                                    <h6>7. Identification and address proof document of the person holding an attorney to transact on its behalf</h6>
+                                                  <h5>Clubs, Societies &amp; Associations</h5>
+                                                    <h6>1. Resolution for opening the account</h6>
+                                                    <h6>2. A copy of Bye-Laws</h6>
+                                                    <h6>3. Identity of Authorised Signatories</h6>
+                                                    <h6>4. Copy of Certificate of Registration in case of registered Clubs, Societies &amp; Associations"</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>1. Resolution of the Managing Body of such Association or body of individuals</h6>
+                                                    <h6>2. Power of Attorney granted to him to transact on its behalf</h6>
+                                                    <h6>3. An officially valid document in respect of persons holding an attorney to transact on its behalf</h6>
+                                                    <h6>4. Such information as may be required to establish legal existence of such an association or body of individuals</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+                                                <h5><strong>STFC</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card, Job Card issued by NREGA</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Job Card by NREGA / Property / Municipal Tax Receipt / Pension Payment Order / Accommodation Letter from Employer / Documents by  Foreign Authorities</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Certificate of Incorporation</h6>
+                                                    <h6>2. Memorandum &amp; Articles of Association</h6>
+                                                    <h6>3. A resolution from the Board of Directors and Power of Attorney granted to its Managers, officers or employees to transact on its behalf</h6>
+                                                    <h6>4. PAN copy of the Company</h6>
+                                                    <h6>5. Proof of Identity and address (as per KYC documents mentioned for individuals) of the authorised signatory of the company signing the application</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Registration Certificate</h6>
+                                                    <h6>2. Partnership Deed</h6>
+                                                    <h6>3. Authorised Signatory List</h6>
+                                                    <h6>4. Proof of Identity and address (as per KYC documents mentioned for individuals) of the authorised signatories</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card</h6>
+                                                    <h6>2. HUF Declaration</h6>
+                                                    <h6>3. Proof of Identity and address (as per KYC documents mentioned for individuals) of the Karta</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. Registration Certificate</h6>
+                                                    <h6>2. Trust Deed</h6>
+                                                    <h6>3. Proof of Identity and address (as per KYC documents mentioned for individuals) of the authorised signatory of the Trust / Institution signing the application</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>1. Resolution of the Managing Body of such Association or Body of Individuals</h6>
+                                                    <h6>2. Power of Attorney granted to him to transact on its behalf</h6>
+                                                    <h6>3. Proof of identity and address (as per KYC documents mentioned for individuals) of the person holding the Power of Attorney to transact the business on behalf of the Unincorporated Association or Body of Individual</h6>
+                                                    <h6>4. Such information as may be required to collectively establish the legal existence of such an association or body of individuals</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>1. PAN Card</h6>
+                                                    <h6>2. Passport with valid VISA</h6>
+                                                    <h6>3. NRI Declaration</h6>
+                                                    <h6>4. Tax Residency Certificate for the Income Tax Department of the country of which the investor is a resident</h6>
+                                                    <h6>5. Overseas Employment Letter (optional)</h6>
+                                                    <h6>6. Double Taxation Avoidance Agreement (DTAA) Declaration</h6>
+                                                    <h6>7. A Person of Indian Origin (PIO) Card to establish Indian Origin, if it is a foreign passport</h6>
+                                                    <h6>8. A local address proof, if different from the Passport address</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                </br>
+                                                <br>
+                                                <h5><strong>Sundaram BNP Paribas</strong></h5>
+                                                <h5><em>Individual:</em></h5>
+                                                    <h6>Proof of Identity (POI): Latest Photograph, Passport, PAN Card, Voter ID, Driving License, Aadhaar Card, Ration Card</h6>
+                                                    <h6>Proof of Address (POA): Passport, Driving License, Voter ID, Aadhaar Card, Ration Card, Latest Utility Bill [electricity, telephone, postpaid bill, piped gas, water bill (none of these should be more than two months old)], Latest Bank Pass Book / Bank Account Statement / Demat Account Statement, Letter from any Recognized Public Authority</h6>
+                                                <h5><em>Company:</em></h5>
+                                                    <h6>1. Certificate of Incorporation and Memorandum &amp; Articles of Association</h6>
+                                                    <h6>2. Resolution of the Board of Directors to open an account and identification of those who have authority to operate the account</h6>
+                                                    <h6>3. Power of Attorney granted to its managers, officers or employees to transact business on its behalf</h6>
+                                                    <h6>4. Copy of PAN allotment letter</h6>
+                                                    <h6>5. Copy of the telephone bill</h6>
+                                                <h5><em>Partnership Firm:</em></h5>
+                                                    <h6>1. Registration Certificate, if registered</h6>
+                                                    <h6>2. Partnership Deed</h6>
+                                                    <h6>3. Power of Attorney granted to a partner or an employee of the firm to transact business on its behalf</h6>
+                                                    <h6>4. Any officially valid document identifying the partners and the persons holding the Power of Attorney and their addresses</h6>
+                                                    <h6>5. Telephone bill in the name of firm/partners</h6>
+                                                <h5><em>HUF:</em></h5>
+                                                    <h6>1. HUF PAN Card &amp; Address Proof (Bank Statement preferable)</h6>
+                                                    <h6>2. Karta PAN Card &amp; Address Proof (Bank Statement preferable)</h6>
+                                                    <h6>3. HUF Declaration Letter</h6>
+                                                    <h6>4. One passport / stamp size photograph</h6>
+                                                <h5><em>Trust, Society, Club &amp; Foundation:</em></h5>
+                                                    <h6>1. PAN Card</h6>
+                                                    <h6>2. Certificate of Registration</h6>
+                                                    <h6>3. Trust Deed</h6>
+                                                    <h6>4. Resolution - Authorising Placement of Deposit</h6>
+                                                    <h6>5. List of Authorised Signatories</h6>
+                                                <h5><em>Unincorporated Association or a Body of Individuals:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>NRI:</em></h5>
+                                                    <h6>1. PAN Card</h6>
+                                                    <h6>2. Passport with valid VISA</h6>
+                                                    <h6>3. NRI Declaration</h6>
+                                                    <h6>4. Tax Residency Certificate for the Income Tax Department of the country of which the investor is a resident</h6>
+                                                    <h6>5. Overseas Employment Letter (optional)</h6>
+                                                    <h6>6. Double Taxation Avoidance Agreement (DTAA) Declaration</h6>
+                                                    <h6>7. A Person of Indian Origin (PIO) Card to establish Indian Origin, if it is a foreign passport</h6>
+                                                    <h6>8. A local address proof, if different from the Passport address</h6>
+                                                <h5><em>Proprietor:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <h5><em>Joint Deposit:</em></h5>
+                                                    <h6>They don’t offer fixed deposit under this category</h6>
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseFDQ3" aria-expanded="false" aria-controls="collapseFDQ3">What is the renewal process of FDs?</a>
+                                        </li>                
+                                        <div class="collapse faq_3" id="collapseFDQ3">
+                                            <p>The renewal process of a FD is similar to purchasing a new FD.</p>
+                                            <p>You need to submit:</p>
+                                            <ol>
+                                                <li>Renewal form (same as purchase form but renewal option has to be selected)</li>
+                                                <li>FD certificate with your signature on the backside to renew it</li>
+                                                <li>Any extra document required by the company</li>
+                                            </ol>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseFDQ4" aria-expanded="false" aria-controls="collapseFDQ4">What do FD credit ratings mean to me?</a>
+                                        </li>
+                                        <div class="collapse faq_3" id="collapseFDQ4">
+                                            <p>Credit rating implies the evaluation of the credit worthiness of a company, predicting its ability to pay back the debt. The meanings of rating scales of various agencies are:</p>
+                                            <table class="table  table-condensed table-bordered table-responsive">
+                                                <thead>
+                                                    <tr>     
+                                                        <th></th>               
+                                                        <th>CRISIL</th>
+                                                        <th>ICRA</th>
+                                                        <th>CARE</th>
+                                                        <th>BRICKWORKS</th>
+                                                        <th>FITCH</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Highest Safety</td>  
+                                                        <td>CRISIL FAAA</td>  
+                                                        <td>ICRA MAAA</td>    
+                                                        <td>CARE AAA</td>    
+                                                        <td>BWR FAAA</td> 
+                                                        <td>AAA</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>High Safety</td> 
+                                                        <td>CRISIL FAA</td> 
+                                                        <td>ICRA MAA</td> 
+                                                        <td>CARE AA</td> 
+                                                        <td>BWR FAA</td> 
+                                                        <td>AA</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Adequate Safety</td> 
+                                                        <td>CRISIL FA</td>    
+                                                        <td>ICRA MA</td>  
+                                                        <td>CARE A</td>  
+                                                        <td>BWR FA</td>   
+                                                        <td>A</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Moderate Safety</td> 
+                                                        <td class="faq_6">-</td>  
+                                                        <td class="faq_6">-</td>    
+                                                        <td>CARE BBB</td>    
+                                                        <td>BWR FBBB</td> 
+                                                        <td>BBB</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Moderate Risk</td>   
+                                                        <td class="faq_6">-</td>   
+                                                        <td class="faq_6">-</td>
+                                                        <td>CARE BB</td> 
+                                                        <td>BWR FBB</td>  
+                                                        <td>BB</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>High Risk</td>   
+                                                        <td>CRISIL FB</td>   
+                                                        <td>ICRA MB</td>  
+                                                        <td>CARE B</td>  
+                                                        <td>BWR FB</td>   
+                                                        <td>B</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Substantial Risk</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td>CCC</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Very High Risk</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td>CC</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Exceptionally High Risk</td>
+                                                        <td>CRISIL FC</td>
+                                                        <td>ICRA MC</td>
+                                                        <td>CARE C</td>
+                                                        <td>BWR FC</td>
+                                                        <td>C</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Restricted Default</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td class="faq_6">-</td>
+                                                        <td>RD</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Default</td> 
+                                                        <td>CRISIL FD</td>    
+                                                        <td>ICRA MD</td>  
+                                                        <td>CARE D</td>  
+                                                        <td>BWR FD</td>   
+                                                        <td>D</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseFDQ5" aria-expanded="false" aria-controls="collapseFDQ5">What are the differences between Bank and Company Fixed Deposits?</a>
+                                        </li>                
+                                        <div class="collapse faq_3" id="collapseFDQ5">
+                                            <ul>
+                                                <li><strong>Interest Rates:</strong> Corporate FDs usually offer a higher rate of return v/s Bank FDs.</li> 
+                                                <li><strong>Security &amp; Rating:</strong> Bank FDs don’t have ratings to distinguish riskiness but a sum upto Rs 1 Lac is insured by RBI against insolvency of the bank. In case of corporate deposits, its financials and ratings for fixed deposits should be looked into before making a deposit in them.</li>
+                                            </ul>
+                                        </div>
+                                        <li>
+                                            <a data-toggle="collapse" href="#collapseFDQ6" aria-expanded="false" aria-controls="collapseFDQ6">What are interest payment options?</a>
+                                        </li>                
+                                        <div class="collapse faq_3" id="collapseFDQ6">
+                                            <p>Interest on Corporate FDs is paid monthly / quarterly / half yearly / yearly / on maturity depending on the scheme selected. Interest will be paid to the investor’s registered bank account at intervals as selected by the customer.</p>
+                                        </div>
+                                        <!-- <div class="link_body3 collapse" id="collapseShowFD"> -->
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseFDQ7" aria-expanded="false" aria-controls="collapseFDQ7">What are the guidelines for TDS on interest earned?</a>
+                                            </li>                
+                                            <div class="collapse faq_3" id="collapseFDQ7">
+                                                <p>Tax Deducted at Source (TDS) is deducted if the interest earned on a corporate fixed deposit exceeds Rs. 5,000 in a financial year. If total income from all sources is under permissible non-taxable income levels then, individuals below 65 years should file form 15G and individuals above 65 years should file form 15H. However, individuals whose income from other sources exceeds INR 1 lakh cannot file a 15G form. If no form is filed and the income from Corporate FDs is more than 5000 then the corporate will deduct a 10 % plus 3 % education cess, therefore a total 10.3 % of the interest earned.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseFDQ8" aria-expanded="false" aria-controls="collapseFDQ8">Can the FD be pre-matured?</a>
+                                            </li>                
+                                            <div class="collapse faq_3" id="collapseFDQ8">
+                                                <p>Yes, corporate FDs can be pre-matured, but usually most of them levy a penalty for the same. However, we request you to look at individual company offer documents for the terms of pre-maturing their deposits as this may vary.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseFDQ9" aria-expanded="false" aria-controls="collapseFDQ9">Are there any special categories that get a higher rate of interest?</a>
+                                            </li>                
+                                            <div class="collapse faq_3" id="collapseFDQ9">
+                                                <p>Yes, there are special categories which enable investors to get higher interest rates. Senior citizens in most cases are given a higher rate of return in most corporate FDs. Some companies offer a higher rate of return to women, widows, armed force personnel, its employees, and its various customers (Home Loan/ SME Loan/ Mortgage Loan). Please check the various offerings by different companies and their special categories before finalizing your FD purchase.</p>
+                                            </div>
+                                            <li>
+                                                <a data-toggle="collapse" href="#collapseFDQ10" aria-expanded="false" aria-controls="collapseFDQ10">Will change in interest rates by RBI impact my FD returns?</a>
+                                            </li>                
+                                            <div class="collapse faq_4" id="collapseFDQ10">
+                                                <p>No, interest rate changes by RBI will not have any impact on your current FD returns as they are locked in for a specific period.</p>
+                                            </div>
 
 
+                                        <!-- </div>
+                                        <div class="show_link">
+                                            <button class="btn btn-RV btn-block link_toggle3" data-toggle="collapse" href="#collapseShowFD" aria-expanded="false" aria-controls="collapseShowFD">Show All</button>
+                                        </div> -->
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-
-
-                            
-
-
-                </div>                
-            </div>                     
         </div> 
     </div>
 </div>
