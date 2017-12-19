@@ -1786,50 +1786,50 @@ function get_peer_comparision(schemecode)
 		var ytd_returns = "-";
 		if(pc_data.ytd_returns!=null)
 		{
-		ytd_returns = (pc_data.ytd_returns).toFixed(2);;
+		ytd_returns = (pc_data.ytd_returns).toFixed(1);;
 		}
 		var returns_1month = "-";
 		if(pc_data.returns_1month!=null)
 		{
-		returns_1month = (pc_data.returns_1month).toFixed(2);;
+		returns_1month = (pc_data.returns_1month).toFixed(1);;
 		}
 		var returns_3month = "-";
 		 if(pc_data.returns_3month!=null)
 		 {
-		 	returns_3month = (pc_data.returns_3month).toFixed(2);;
+		 	returns_3month = (pc_data.returns_3month).toFixed(1);;
 		 }
 
 		var returns_1year = "-";
 		 if(pc_data.returns_1year!=null)
 		 {
-		 	returns_1year = (pc_data.returns_1year).toFixed(2);;
+		 	returns_1year = (pc_data.returns_1year).toFixed(1);;
 		 }
 		var returns_3year = "-";
 		  if(pc_data.returns_3year!=null)
 		  {
-	 	returns_3year = (pc_data.returns_3year).toFixed(2);;
+	 	returns_3year = (pc_data.returns_3year).toFixed(1);;
 		  }
 		var returns_5year = "-"
 		  if(pc_data.returns_5year!=null)
 		  {
-		  	returns_5year = (pc_data.returns_5year).toFixed(2);;
+		  	returns_5year = (pc_data.returns_5year).toFixed(1);;
 		  }
 	                var returns_6month = "-";
 	                  if(pc_data.returns_6month!=null)
 	                  {
-	                  	returns_6month = (pc_data.returns_6month).toFixed(2);;
+	                  	returns_6month = (pc_data.returns_6month).toFixed(1);;
 	                  }
 	                var aumtotal = "-";  
 	                 if(pc_data.aumtotal!=null)
 	                 {
-	                    aumtotal = (parseFloat(pc_data.aumtotal)).toFixed(2); 	
+	                    aumtotal = (parseFloat(pc_data.aumtotal)).toFixed(1); 	
 	                    aumtotal = commaSeparateNumber(aumtotal);
 	                 }
 		        
 		var expenceratio ="-"
 		if(pc_data.expenceratio!=null)
 		{
-	  	expenceratio = (pc_data.expenceratio).toFixed(2);;
+	  	expenceratio = (pc_data.expenceratio).toFixed(1);;
 
 		}
 		 
@@ -2579,7 +2579,7 @@ function get_return_data(schemecode)
 		    }
 		    else
 		    {
-		    	monthret_1=monthret_1.toFixed(2);
+		    	monthret_1=monthret_1.toFixed(1);
 		    }
 			var monthret_3 = mf_data.returns_3month;
 		   	if(monthret_3==null)
@@ -2588,7 +2588,7 @@ function get_return_data(schemecode)
 		    }
 		    else
 		    {
-		    	monthret_3=monthret_3.toFixed(2);
+		    	monthret_3=monthret_3.toFixed(1);
 		    }
 		 	var monthret_6 = mf_data.returns_6month;
 		    if(monthret_6==null)
@@ -2597,7 +2597,7 @@ function get_return_data(schemecode)
 		    }
 		    else
 		    {
-		    	monthret_6=monthret_6.toFixed(2);
+		    	monthret_6=monthret_6.toFixed(1);
 		    }
 			var yrret_1 = mf_data.returns_1year;
 			if(yrret_1==null)
@@ -2606,7 +2606,7 @@ function get_return_data(schemecode)
 		    }
 		    else
 		    {
-		    	yrret_1=yrret_1.toFixed(2);
+		    	yrret_1=yrret_1.toFixed(1);
 		    }
 			var yearret_3 = mf_data.returns_3year;
 		  	if(yearret_3==null)
@@ -2615,7 +2615,7 @@ function get_return_data(schemecode)
 		    }
 		     else
 		    {
-		    	yearret_3=yearret_3.toFixed(2);
+		    	yearret_3=yearret_3.toFixed(1);
 		    }
 			var yearret_5 = mf_data.returns_5year;
 		  	if(yearret_5==null)
@@ -2624,7 +2624,7 @@ function get_return_data(schemecode)
 		    }
 		    else
 		    {
-		    	yearret_5=yearret_5.toFixed(2);
+		    	yearret_5=yearret_5.toFixed(1);
 		    }
 		    var yearret_10 = mf_data.returns_10year;
 		  	if(yearret_10==null)
@@ -2633,7 +2633,7 @@ function get_return_data(schemecode)
 		    }
 		    else
 		    {
-		    	yearret_10=yearret_10.toFixed(2);
+		    	yearret_10=yearret_10.toFixed(1);
 		    }
 			var fund = "Fund"; 
 		 	 if(fund==null)
@@ -2727,7 +2727,7 @@ function get_return_data(schemecode)
 		    }
 		    else
 		    {
-		    	avg_month1 = avg_month1.toFixed(2);
+		    	avg_month1 = avg_month1.toFixed(1);
 		    }
 			var avg_month3 = mf_data.avg_month3; 
 	  	  	if(avg_month3==null)
@@ -2736,7 +2736,7 @@ function get_return_data(schemecode)
 		    }
 		    else
 		    {
-		    	avg_month3 = avg_month3.toFixed(2);
+		    	avg_month3 = avg_month3.toFixed(1);
 		    }
 			var avg_month6 = mf_data.avg_month6;
 			if(avg_month6==null)
@@ -2745,7 +2745,7 @@ function get_return_data(schemecode)
 		    }
 		    else
 		    {
-		    	avg_month6 = avg_month6.toFixed(2);
+		    	avg_month6 = avg_month6.toFixed(1);
 		    }
 			var avg_year1 = mf_data.avg_year1; 
 			if(avg_year1==null)
@@ -2754,7 +2754,7 @@ function get_return_data(schemecode)
 	        }
 	        else
 	        {
-	    	 	avg_year1 = avg_year1.toFixed(2);
+	    	 	avg_year1 = avg_year1.toFixed(1);
 	        }
 			var avg_year3 = mf_data.avg_year3; 
 	        if(avg_year3==null)
@@ -2763,7 +2763,7 @@ function get_return_data(schemecode)
 	        }
 	        else
 	        {
-	    	 	avg_year3 = avg_year3.toFixed(2);
+	    	 	avg_year3 = avg_year3.toFixed(1);
 	        }
 			var avg_year5 = mf_data.avg_year5; 
 			if(avg_year5==null)
@@ -2772,7 +2772,7 @@ function get_return_data(schemecode)
 			}
 			else
 			{
-				avg_year5 = avg_year5.toFixed(2);
+				avg_year5 = avg_year5.toFixed(1);
 			}
 		 	var avg_year10 = mf_data.avg_year10; 
 	        if(avg_year10==null)
@@ -2781,7 +2781,7 @@ function get_return_data(schemecode)
 	        }
 	        else
 	        {
-	    	 	avg_year10 = avg_year10.toFixed(2);
+	    	 	avg_year10 = avg_year10.toFixed(1);
 	        }
 		 	var monthret_1_bm = mf_data.monthret_1; 
 		    if(monthret_1_bm==null)
@@ -2790,7 +2790,7 @@ function get_return_data(schemecode)
 		    }
 		    else
 		    {
-		    	 monthret_1_bm = monthret_1_bm.toFixed(2);
+		    	 monthret_1_bm = monthret_1_bm.toFixed(1);
 		    }
 
 	 		var monthret_3_bm = mf_data.monthret_3; 
@@ -2800,7 +2800,7 @@ function get_return_data(schemecode)
 			}
 			else
 			{
-			 monthret_3_bm = monthret_3_bm.toFixed(2);
+			 monthret_3_bm = monthret_3_bm.toFixed(1);
 			}
 			var monthret_6_bm = mf_data.monthret_6; 
 			if(monthret_6_bm==null)
@@ -2809,7 +2809,7 @@ function get_return_data(schemecode)
 	        }
 	        else
 	        {
-	    	 monthret_6_bm = monthret_6_bm.toFixed(2);
+	    	 monthret_6_bm = monthret_6_bm.toFixed(1);
 	        }
 			var yrret_1_bm = mf_data.yrret_1; 
 			if(yrret_1_bm==null)
@@ -2818,7 +2818,7 @@ function get_return_data(schemecode)
 	        }
 	       else
 	        {
-	    	 	yrret_1_bm = yrret_1_bm.toFixed(2);
+	    	 	yrret_1_bm = yrret_1_bm.toFixed(1);
 	        }
 			var yrret_3 = mf_data.yrret_3; 
  			if(yrret_3==null)
@@ -2827,7 +2827,7 @@ function get_return_data(schemecode)
 	        }
 	        else
 	        {
-	    	 	yrret_3 = yrret_3.toFixed(2);
+	    	 	yrret_3 = yrret_3.toFixed(1);
 	        }
 			var yrret_5 = mf_data.yrret_5;
 	       	if(yrret_5==null)
@@ -2836,7 +2836,7 @@ function get_return_data(schemecode)
 	        }
 	        else
 	        {
-	    	 	yrret_5 = yrret_5.toFixed(2);
+	    	 	yrret_5 = yrret_5.toFixed(1);
 	        }
 	 		var yrret_10 = mf_data.yrret_10;
 	       	if(yrret_10==null)
@@ -2845,7 +2845,7 @@ function get_return_data(schemecode)
 	        }
 	        else
 	        {
-	    	 	yrret_10 = yrret_10.toFixed(2);
+	    	 	yrret_10 = yrret_10.toFixed(1);
 	        }
 			if(i == 0)
 			{
@@ -3238,6 +3238,8 @@ function get_portfolio_holdings(schemecode)
 		$("#portfolio_holdings").html("");
 		$("#portfolio_holdings").html(tblData);
 
+
+
 		// $('#portfolio_holdings').DataTable( {
   //       responsive: true,
   //       "pageLength": 10
@@ -3246,7 +3248,17 @@ function get_portfolio_holdings(schemecode)
 		// console.log("?????????????????????????????????????");
 		// console.log(tblData);
 		// console.log("?????????????????????????????????????");
+		// tbldata="";
 		tbldata="";
+								portfolio_pagination();
+								if( portfolio_holdings.portfolio_holdings.length > 8)
+							        {
+							          $("#pages").removeClass("d_none");
+							        }
+							        else
+							        {
+							          $("#pages").addClass("d_none");
+							        }
 		}
 	    else
 	    {
@@ -3850,7 +3862,7 @@ function concentration_values(schemecode,table_id)
 	success:function(scheme_data,textStatus, jqXHR) {
 	  console.log(scheme_data);
 	  var tblData3=""; 
-	var th = "<CAPTION class='portcap'><h4 class='d_inline'>Portfolio Summary</h4><h6>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th colspan='2'>Concentration &amp; Valuation </th></tr></thead>";
+	var th = "<CAPTION class='portcap'><h4 class='d_inline'>Portfolio Summary</h4><h6 class='d_inline'>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th colspan='2'>Concentration &amp; Valuation </th></tr></thead>";
 
 	  for(var i =0;i <= scheme_data.concen_value.length-1;i++)
 	  {
@@ -4353,7 +4365,7 @@ function get_portfolio_markettable(schemecode,table_id)
 	success:function(port_cap, textStatus, jqXHR) {
 	console.log(port_cap);
 	var tbldata2="";
-	var th = "<CAPTION class='portcap'><h4 class='d_inline'>Portfolio Market Cap</h4><h6>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th></th><th>Fund</th><th>Category Avg.</th></tr></thead>";
+	var th = "<CAPTION class='portcap'><h4 class='d_inline'>Portfolio Market Cap</h4><h6 class='d_inline'>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th></th><th>Fund</th><th>Category Avg.</th></tr></thead>";
 	for(var i =0;i <= port_cap.cap_values.length-1;i++)
 	{
 	var item1 = port_cap.cap_values[i];

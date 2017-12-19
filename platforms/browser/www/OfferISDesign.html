@@ -3,9 +3,461 @@
         <div class="container">
             <div class="row HeadTop">
                 <div class="col-xs-12">
-                    <h1>Design</h1>
+                    <!-- <h1>Design</h1> -->
+                     <h1 >Add funds and save your portfolio when done<span class="bar" id="port_subname"></span></h1>
                 </div>                
             </div>
+            <div class="row CPTop">
+              <div class="col-xs-12">
+               
+                    <!-- <h1 id="port_name"><%= @objNew.portfolio_name %>  <span class="bar" id="port_subname"><%= @objNew.portfolio_sub_name %></span></h1> -->
+               
+                   
+                
+                
+
+              </div>
+              
+              <div class="col-xs-12 text-right">
+                 
+
+                  <div class="btn-toolbar" role="toolbar" aria-label="Share save customize portfolio"> 
+                    <div class="btn-group" role="group" aria-label="Share Portfolio" id="capShare" data-toggle="tooltip" data-placement="bottom"> 
+                       <div class="hidden-xs share">
+                            <div class="hidden-sm">
+                              <a class=" dropdown-toggle" data-toggle="dropdown" title="Share Portfolio" aria-haspopup="true" aria-expanded="true"><span class="icon-share comtopicon"></span>
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="capShare">
+                                <li><div id="shareBtnfb1" class="btn btn-xs btn-block"><span class="fa fa-facebook-square fa-2x" aria-hidden="true"></span><span> Facebook</span></div></li>
+
+                                <li><div id="ShareBtnTwitter" class="btn btn-xs btn-block twitter popup"><span class="fa fa-twitter-square fa-2x" aria-hidden="true"></span><span> Twitter</span></div></li>
+                                
+                                <li><div id="sharelinkedin" class="btn btn-xs btn-block"><span class="fa fa-linkedin-square fa-2x" aria-hidden="true"></span><span> LinkedIn</span></div></li>
+                                
+                              </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Save Portfolio" id="btn_imdone" data-toggle="tooltip" data-placement="bottom" >            
+                     <a id="imdone" data-toggle="modal" data-target="#myModal" title="Save Portfolio"><span class="fa fa-bookmark-o comtopicon" aria-hidden="true"></span></a>
+                     <h6 class="hidden-sm hidden-md hidden-lg text-center">Save</h6>
+
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Reset to Default" data-toggle="tooltip" data-placement="bottom">            
+                      <a id="reset" onClick="window.location.reload()" title="Reset to Default"><span class="fa fa-refresh comtopicon" aria-hidden="true"></span></a>
+                      <h6 class="hidden-sm hidden-md hidden-lg text-center">Reset</h6>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Customize" data-toggle="tooltip" data-placement="bottom">                  
+                      <a id="customize" title="Customize" ><span class="fa fa-sliders comtopicon" aria-hidden="true"></span></a>
+                      <h6 class="hidden-sm hidden-md hidden-lg text-center">Customize</h6> 
+                    </div> 
+                    <div class="btn-group" role="group" aria-label="Invest Now" id="InvestNow"> 
+                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Invest Now</button>
+                        <ul class="dropdown-menu">
+                          <li><a id="Lumpsum" >Lump Sum</a></li>
+                          <li><a id="SIP">SIP</a></li>                          
+                        </ul>
+                    </div>                                               
+                  </div>                                     
+
+              </div>
+            </div>
+
+            <div class="row CPBody">
+              <div class="col-xs-12">
+                  <!-- <div class="col-xs-2">
+                    <div class="panel panel-default text-center">
+                      <div class="panel-heading">Min. Investment (Lumpsum)</div>
+                      <div class="panel-body">
+                        <span id="min_invest" class="min_invest"></span>
+                      </div>
+                    </div>
+                    <div class="panel panel-default text-center">
+                      <div class="panel-heading">Min. Investment (SIP)</div>
+                      <div class="panel-body">
+                        <span id="min_invest_sip" class="min_invest"></span>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <h5>Minimum Investment Amount (₹)</h5>
+                        <div class="area_wrap">
+                          <table id="MinInvLumSip" class="table table-condensed table-bordered table-striped table-bordered">
+                             <thead>                      
+                                <tr>
+                                  <th>Lump Sum</th>
+                                  <th>SIP</th>
+                                </tr>
+                             </thead>
+                             <tbody>
+                                <tr>
+                                  <td><span id="min_invest"></span></td>
+                                  <td><span id="min_invest_sip"></span></td>  
+                                </tr>
+                             </tbody>
+                          </table>
+                          <%= hidden_field_tag :refresh,1 %> 
+                        </div> 
+                    </div>
+                    <div class="col-xs-12 AssetAllocReturnTable">
+                      <h5>Portfolio Return (%)</h5>
+                        <div class="area_wrap" >
+                          <table id="return_portfolio" class="table table-condensed table-bordered table-striped table-bordered">
+                           
+                          </table>  
+                        </div>
+                        <h6>Returns greater than 1 year have been annualized.</h6> 
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="row" id="textdescription">
+                          <div class="col-xs-12">
+                            <p>You can change the composition of your portfolio or weight of any fund as per your preference, by simply clicking on the customize button at the top.</p>
+                          </div>
+                        </div>
+                        <div class="row search_area" id="search_field" style="display:none;">
+                            <div class="col-xs-12 col-xs-5">
+                              <div class="input-group">
+                                <input type="text" class="form-control" id="srch-term" placeholder="Add fund">
+                                <span class="input-group-btn">
+                                  <span class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+                                </span>
+                              </div>
+                            </div>
+                            <div class="col-xs-12 hidden-xs">
+                               <button class="btn btn-primary add_button" id="add_btn_search" onclick="add_scheme()" >Add</button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>              
+
+              </div>
+              <div class="col-xs-12 AssetAllocChart">
+                  <div class="text-center">
+                      <h5>Asset Allocation (%)</h5>
+                      <div id="asset_alloc" style="left:0px; top:0px;min-width: 100px; height:180px" ><!-- <p id="no_fund"></p> --></div>
+                      <div id="addText" style="position:absolute; left:0px; top:0px;"></div>
+                     <!-- <div  class="text-center"></div> -->
+                  </div>
+              </div>
+            </div>
+
+            <div class="row CPBot">
+              <div class="col-xs-12 CPBotP1">
+                <h2 class="text-center">Selected Mutual Funds (<span id="ItemCount"><%= @s_code.length %></span>)</h2>
+                <div id="append_scheme">
+                
+                  <!-- start of loop########## -->     
+                  <% i=0 %>             
+                  <% if @s_name.length!=0 %>
+                      <% while i<@s_name.length %>
+                      <div class="panel panel-primary" style="border-color:<%= @colour_code[i] %>">
+                        <div class="panel-heading" style="border-color:<%= @colour_code[i] %>">
+                          <div class="row">
+                            <div class="col-xs-1 hidden-xs">
+                              <div class=""><span  id="<%= @s_code_new[i] %>" class="name_hover"  data-container='body' data-placement='right' data-toggle='popover' data-html='true' aria-hidden="true"><span class="fa fa-magic" aria-hidden="true" style="color:<%= @colour_code[i] %>"></span></span></div>
+                            </div>
+                            <div class="col-xs-10 col-xs-9">
+                             <!--  % if @sip_not_allowed_sch_cd.include?(@s_code_new[i].to_i) %>
+                                     <h4><a target='_blank'  href='/Mutual-Funds-India/<%= @s_code_new[i] %>'><%= @s_name[i]%></a><span class="validation_col">(Sip Not Allowed In this Fund)</span></h4>
+                                      <h6><span><%= @classification[i]%></span></h6>   -->
+
+                                <!--    % else %> -->
+                                      <h4><a target='_blank' href='/Mutual-Funds-India/<%= @s_code_new[i] %>'><%= @s_name[i]%></a></h4>
+                                       <h6><span><%= @classification[i]%></span></h6>  
+
+                               <!--  %end%> -->
+                                <!-- <h4>Mirae Asset India Opportunities</h4> -->
+                            </div>
+                            <div class="col-xs-2 col-xs-1">
+                              <!-- <div class="close close_image1 " style="color:<%= @colour_code[i] %>"><i class="fa fa-times" aria-hidden="true"></i></div> -->
+                              <div class="close close_image1 " ><span class="fa fa-times" aria-hidden="true" ></span></div>
+                            </div> 
+                            
+                          </div>                       
+                        </div>
+
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-xs-7 col-xs-7">
+                              <div class="">
+                                <div class="CPOverviewSlider">
+                                  <input type="range" value="<%= @weightage_new[i] %>" id="rg<%= @s_code_new[i] %>" class="rg">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-xs-5 text-right">
+                                <div class="btn-toolbar" role="toolbar" aria-label="Customize and Invest Now"> 
+                                  <div class="btn-group Rangebtn" role="group" aria-label="First group"> 
+                                     <div class="form-control"><span id="weightage<%= @s_code_new[i] %>" class="wt readonly_div" ><%= @weightage_new[i] %></span> %</div>
+                                  </div> 
+                                  <div class="btn-group Lockbtn" role="group" aria-label="Second group" > 
+                                     <div class="form-control locked " id="lk<%= @s_code_new[i] %>" style="background-color: <%= @colour_code[i] %>"><span class="icon-lock"></span></div>
+                                  </div>                
+                                </div> 
+                            </div>                                                            
+                          </div>
+                        </div>
+                      </div>
+                      <% i=i+1 %>
+                      <% end %>
+                      <!-- % else %> -->
+                     
+                    <% end %>
+      
+                </div>
+                 <div id="rec_m_funds"><p>Please select mutual funds from the search box above.</p></div>
+              </div>
+
+              <div class="col-xs-7 CPBotP2">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li role="presentation" class="active"><a href="#CPOverview" aria-controls="CPOverview" role="tab" data-toggle="tab">Historical Return</a></li>
+                      <li role="presentation"><a href="#CPPortfolio" aria-controls="CPPortfolio" role="tab" data-toggle="tab" id="port_tab">Combined Portfolio</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div role="tabpanel" class="tab-pane active" id="CPOverview" style="opacity: 0.5;">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <div id="wait_2" style="display:block; position: relative; height: 0px; z-index: 2;">
+                                 <div class="spinner"></div>
+                             </div>
+                             <div id="container" class="ChartReflow"  ></div>
+                          </div>                      
+                        </div>                    
+                      </div>
+
+        <div id="append_fund_hover">
+        <% i=0 %>             
+        <% if @s_name[i] !="" %>
+            <% while i<@s_name.length %>
+        <div id="FundHover_<%= @s_code_new[i] %>" class="fundHover d_none"  >
+          <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-12">
+          <h4 class="d_inline" id="s_name_<%= @s_code_new[i] %>">Crompton Greaves Consumer Electricals Ltd </h4><span id="rating_<%= @s_code_new[i] %>"></span>
+                  </div>
+                   <div class="col-xs-12">
+                      <h6>Fund Manager : <span id="fm_<%= @s_code_new[i] %>">R. Janakiraman</span></h6>
+                  </div>
+                </div>
+            </div>
+            <div class="panel-body FHP2">
+              <div class="row">
+                  <div class="col-xs-12">
+                    <p>
+                      <span id="objective_<%= @s_code_new[i] %>"></span><span class="collapse" id="ReadMore_<%= @s_code_new[i] %>"></span>
+                    <a id="more_<%= @s_code_new[i] %>" role="button" data-toggle="collapse" class="read" href="#ReadMore_<%= @s_code_new[i] %>" aria-expanded="false" aria-controls="ReadMore_<%= @s_code_new[i] %>" >Read More</a></p>
+
+                  </div>
+                  <div class="col-xs-6">
+                      <div class="panel panel-default fundChart">
+                        <div class="panel-heading"><h6 class="">NAV Movement</h6></div>
+                        <div class="panel-body">
+                            <div id="dialogmodal_<%= @s_code_new[i] %>" style="left:0px; top:0px;width: 220px; height:137px" ></div>
+                        </div>
+                      </div>                 
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="row">
+                      <div class="col-xs-6">
+                         <div class="panel panel-default fundDetail">
+                            <div class="panel-heading"><h6 class="">AUM</h6></div>
+                            <div class="panel-body">
+                               <h6><span id="aumtotal_<%= @s_code_new[i] %>">36,418.4</span><span> (Cr.)</span></h6>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-xs-6">
+                         <div class="panel panel-default fundDetail">
+                            <div class="panel-heading"><h6 class="">Inception Date</h6></div>
+                            <div class="panel-body">
+                              <h6 id="inception_date_<%= @s_code_new[i] %>">21-Feb-00</h6>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                         <div class="panel panel-default fundDetail">
+                            <div class="panel-heading"><h6 class="">Expense Ratio</h6></div>
+                            <div class="panel-body">
+                               <h6><span id="expenceratio_<%= @s_code_new[i] %>"></span> %</h6>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-xs-6">
+                         <div class="panel panel-default fundDetail">
+                            <div class="panel-heading"><h6 class="">Exit Load</h6></div>
+                            <div class="panel-body">
+                              <h6><span id="exitload_<%= @s_code_new[i] %>"></span> %</h6>
+                            </div>
+                          </div>
+                      </div>
+                    </div>  
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="area_wrap fundDetail">
+                          <table class="table table-condensed table-bordered">
+                            <thead>
+                              <tr>
+                                <th colspan="3">Return (%)</th>
+                              </tr>
+                              <tr>
+                                <th>1 year</th>
+                                <th>3 year</th>
+                                <th>5 year</th>
+                              </tr>
+                            </thead> 
+                            <tbody>
+                              <tr>
+                                <td id="Return1yr_<%= @s_code_new[i] %>"></td>
+                                <td id="Return3yr_<%= @s_code_new[i] %>"></td>
+                                <td id="Return5yr_<%= @s_code_new[i] %>"></td>
+                              </tr>
+                            </tbody>                   
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+               </div>
+            </div>
+          </div>
+        </div>
+        <% i=i+1 %>
+        <% end %>
+        <% end %> 
+        </div>
+
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <div class="row">
+                    <div class="col-xs-10 col-xs-11">
+                      <div class="row">
+                        <div class="col-xs-6">
+                            <h6><strong>Give a name to your portfolio</strong></h6>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="text" id="name_port" class="name_port form-control" value='<%= @save_portfolio_name %>'>
+                        </div>
+                        <div class="col-xs-12">
+                            <h6><span class="validation_col d_inline"><span id="name_port_valid"></span>&nbsp;</span><span class="d_inline pull-right FullCharCont">
+                          <span id="CharacterCount"><% if @save_portfolio_name.present? %><%= @save_portfolio_name.length %><% else %>0<% end %></span> / 50</span></h6>
+                        </div>
+                      </div>                   
+                        
+                        
+                    </div>
+                    <div class="col-xs-2 col-xs-1">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                    </div>
+                  </div>
+                    
+                                  
+                     <!-- <h4 class="modal-title" id="myModalLabel">Modal title</h4> -->
+
+                </div>
+                <div class="modal-body text-center">
+                    <button type="submit" class="btn btn-primary btn-sm" data-dismiss="" id="port_save" onclick="save_portfolio()" >Save Portfolio</button>
+                    <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="without_save_portfolio()">Continue without saving</button> -->
+                 
+                </div>
+                <div class="modal-footer">
+                    <h6>Once a portfolio is saved, you can access it from your dashboard to track or invest anytime.</h6>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+        </div>
+      </div>
+    </div> -->
+    <!-- <div id="main_1" style="opacity: 0.5;"> -->
+    <div id="no_fund"></div>
+                      <div role="tabpanel" class="tab-pane" id="CPPortfolio" style="opacity: 0.5;">
+
+                          <div class="row">
+                            <div class="col-xs-12">
+                             <!-- <div id="wait_3" style="display:block;">
+                                 <div class="spinner"></div>
+                             </div> -->
+                             <div id="wait_3" style="display:block; position: relative; height: 0px; z-index: 2;">
+                                 <div class="spinner"></div>
+                             </div>
+
+                              <div class="CPPortfolioP1SL">                        
+                                <div id="container_equity" class="ChartReflow" ></div> 
+                                <div class="pagination">
+                                  <div class="postings">
+                                 <div class="area_wrap">  
+                                  <table id="equity_port" class="table table-striped table-condensed holding_table_margin" ></table> 
+                                  </div>  
+                                  <div id="pre_nex_eq">
+                                 <!--  <center>
+                                       <div id="pages" class="portfolioPagination d_none">
+                                          <span id="prev" class="previous"><i class="glyphicon glyphicon-triangle-left"></i>&nbsp;&nbsp;Previous</span> |
+                                          <span id="next" class="next">Next&nbsp;&nbsp;<i class="glyphicon glyphicon-triangle-right"></i></span>
+                                       </div>
+                                    </center>  -->
+                                  </div>
+                                   </div>
+                                  </div>                  
+                              </div>
+                              <div class="CPPortfolioP1SL">                        
+                                <div id="container_credit_rating" class="ChartReflow" ></div> 
+                                <div class="pagination1">
+                                  <div class="postings">
+                                <div class="area_wrap"> 
+                                  <table id="debt_port" class="table table-condensed table-striped holding_table_margin" ></table>   
+                                  </div> 
+                                   <div id="pre_nex_de">
+                                 <!--  <center>
+                                       <div id="pagesd" class="portfolioPagination d_none">
+                                          <span id="prevd" class="previous"><i class="glyphicon glyphicon-triangle-left"></i>&nbsp;&nbsp;Previous</span> |
+                                          <span id="nextd" class="next">Next&nbsp;&nbsp;<i class="glyphicon glyphicon-triangle-right"></i></span>
+                                       </div>
+                                    </center> -->
+                                  </div>
+                                   </div>
+                                 </div>               
+                              </div>
+                            </div>                   
+                          </div>
+
+                          <div class="row">
+                            <div class="col-xs-12">
+                              <div class="CPPortfolioP1SL">
+                               
+                                <div class="area_wrap">
+                                                                
+                                   
+                                    <div id="others" style="display:none;">
+                                      <table id="others_port" class="table table-condensed table-striped holding_table_margin" ></table>
+                                    </div>
+                                    <table id="cash_port" class="table table-condensed table-striped holding_table_margin" ></table>
+                                </div>
+                              </div>
+                            </div> 
+                          </div>
+
+                        </div>                      
+                         
+
+
+                    </div>
+                  </div>
+              </div>
+            </div>            
+
             <div class="row">
                 <div class="col-xs-12">
 

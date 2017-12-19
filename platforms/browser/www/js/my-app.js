@@ -9,7 +9,7 @@ var $$ = Dom7;
 var curr_ip='http://192.168.1.22:3000/'
 
 var RVNav="";
-RVNav ="<div class='navbar'><div class='navbar-inner'><div class='left'><a href='#' class='link icon-only open-panel'><i class='icon icon-bars'></i></a></div><div class='center'><span id='navbar_info_span'>RupeeVest</span><input type='text' id='fund_names' class='form-control ui-autocomplete-input' placeholder='Search mutual funds here...' autocomplete='off'></div><div class='right'><a href='#' class='' id='navbar_search_btn'><i class='fa fa-search' aria-hidden='true'></i></a><a href='#' class='' id='navbar_close_btn'><i class='fa fa-times' aria-hidden='true'></i></a></div></div></div>"
+RVNav ="<div class='navbar'><div class='navbar-inner'><div class='left'><a href='#' class='link icon-only open-panel'><i class='icon icon-bars'></i></a></div><div class='center'><span id='navbar_info_span'><a href='index.html'><img src='img/icons/logo.png' alt='RupeeVest'></a></span><input type='text' id='fund_names' class='form-control ui-autocomplete-input' placeholder='Search mutual funds here...' autocomplete='off'></div><div class='right'><a href='#' class='' id='navbar_search_btn'><i class='fa fa-search' aria-hidden='true'></i></a><a href='#' class='' id='navbar_close_btn'><i class='fa fa-times' aria-hidden='true'></i></a></div></div></div>"
 
 
 // Add view
@@ -410,25 +410,7 @@ if(page.name === 'fund_details')
         
     }
 
-    if(page.name==='OfferFixedDeposit')
-    {
-       
-       $$.get(curr_ip+'app_services/fd_all_data',function (data) 
-       {
-               var myObj = JSON.parse(data);              
-               var i;
-               var list_fd = "";               
-
-               for (var i = 0; i < myObj.fds.length; i++) { 
-                   var ComName = myObj.fds[i].name;
-                   ComName = ComName.replace(/[.\s]/g, '');                                     
-                   list_fd = list_fd + "<div class='breadcrumb'><a href='OfferFD"+ComName+".html'><div class='row'><div class='col-xs-6'><div class='FDName'>"+myObj.fds[i].name+"</div></div><div class='col-xs-3'><div class='FDPeriod'>"+myObj.fds[i].period+"</div></div><div class='col-xs-3'><div class='FDInterest'>"+myObj.fds[i].interest+"</div></div></div></a></div>"
-                };
-
-            $$('#fd_all_list').html(list_fd);
-               
-       });
-    }
+    
 
 
 
@@ -521,6 +503,780 @@ if(page.name === 'fund_details')
 
         });
     }
+
+
+     if(page.name==='ToolsStocksHeld')
+    {
+         var global_date_hldr="";
+    var stock_name =[];
+    var map = {};
+  
+
+    $( document ).ready(function() {
+  
+        if($('#load_info').val()=="not_loaded")
+        {
+       
+          Load_stock_data_autocomplete();
+          Load_stock_data_autocomplete_1();
+
+          $('#load_info').val("loaded");
+     
+        } 
+
+    // if($('#company_fincode_param').val()!='' && $('#company_fincode_param').val()!='undefined' )
+    // {
+    //      // var fincode = map[$('#company_name_param').val()] ;
+    //      var fincode = $('#company_fincode_param').val();
+         
+       
+
+    //     load_stock_data(fincode);
+    //     $('#main_content_div').attr("style","display:block;");
+    // }
+
+    
+    //  if($('#company_fincode_param').val()!='' && $('#company_fincode_param').val()!='undefined' )
+    // {
+    //      // var fincode = map[$('#company_name_param').val()] ;
+    //      var fincode = $('#company_fincode_param').val();
+         
+       
+    //     if(fincode!="error")
+    //     {
+    //         $('#msg').attr("style","display:none;");
+    //        load_stock_data(fincode);
+    //       $('#main_content_div').attr("style","display:block;");
+    //     }
+    //     else
+    //     {
+    //        $('#msg').attr("style","display:block;");
+    //        window.history.pushState('','','/Mutual-Fund-Holdings');
+    //     }
+          
+    // }
+
+
+        $("#srch_fund").autocomplete({
+     select: function (a, b) {
+        $(this).val(b.item.value);
+        // $("#fund_click").click();
+
+        // console.log($(this).val(b.item.value));
+        
+       
+
+        var fincode = map[$('#srch_fund').val()] ;
+         
+
+    
+
+        load_stock_data(fincode);
+        $('#main_content_div').attr("style","display:block;");
+
+    }
+         // $('#fund_names').change(function()
+});
+        
+
+       // swal($('#fin_code').val());
+       // load_stock_data($('#fin_code').val());
+         
+
+    });   //end of document-ready
+
+
+        function Load_stock_data_autocomplete()
+   { 
+      
+       $$.get(curr_ip+'app_services/get_search_data_stock',function (data) 
+       
+               {    
+                var myObj = JSON.parse(data);
+                // console.log(data);
+                     stock_name = [];
+                     map = {};
+
+                    for (var i=0; i< myObj.stock_data_search.length ; i++)
+                    {                        
+                         stock_name.push(myObj.stock_data_search[i].stock_search);
+                         map[myObj.stock_data_search[i].stock_search] = myObj.stock_data_search[i].fincode;
+                    }
+                
+                    $("#srch_fund").autocomplete({
+                        maxResults: 10,
+                        source: stock_name
+                    });
+
+
+
+            $.ui.autocomplete.filter = function (array, term) {
+                var matcher = new RegExp("(^| )" + $.ui.autocomplete.escapeRegex(term), "i");
+                return $.grep(array, function (value) {
+                    return matcher.test(value.label || value.value || value);
+                });
+              };
+
+             
+               
+       });
+    }
+
+
+function load_stock_data(fincode_tmp)
+   { 
+    var tblData;
+      var mnth_1_cls="";
+      var mnth_2_cls="";
+      var mnth_3_cls="";
+      var mnth_4_cls="";
+$$.get(curr_ip+'app_services/get_stock_detail',function (data) 
+     
+             {    
+               // data.month_name_4
+
+ var data = JSON.parse(data);
+
+               console.log(data);
+                  
+               if(data.stock_data.length>0)
+               {
+                $("#msg").hide();
+                            var mnth_1 = 0;
+                            var mnth_2 = 0;
+                            var mnth_3 = 0;
+                            var mnth_4 = 0;
+
+                              var mnth_1_chk = 0;
+                              var mnth_2_chk = 0;
+                              var mnth_3_chk = 0;
+                              var mnth_4_chk = 0;
+          
+                           var th = "<table id='stock_ret_data' class='table table-bordered table-striped table-condensed sortable-theme-bootstrap' data-sortable> <thead><tr><th rowspan='2'>Fund Name</th ><th rowspan='2' >Fund Manager</th><th colspan='3'>"+data.month_name_1+"</th><th colspan='1'>"+data.month_name_2+"</th><th colspan='1'>"+data.month_name_3+"</th><th colspan='1'>"+data.month_name_4+"</th></tr><tr><th>AUM (in ₹ cr)</th><th>% of AUM</th><th>No. of Shares</th><th>No. of Shares</th><th>No. of Shares</th><th>No. of Shares</th></tr></thead>";
+                           
+                          $('#mon_1_head').text(data.month_name_1);
+                          $('#mon_2_head').text(data.month_name_2);
+                          $('#mon_3_head').text(data.month_name_3);
+                          $('#mon_4_head').text(data.month_name_4);    
+                 
+
+
+                          var temp_stock;
+                          
+                          $('#comp_name').text(data.comp_data[0].compname);
+                          $('#date_as_on').text(moment(data.first_month_end).format('DD-MMM-YY'));
+                            $('#srch_fund').val(data.comp_data[0].compname);
+                            // console.log(data.stock_data);
+                           
+                          var sect_name = data.stock_data[0].rv_sect_name;
+                          
+                          var nw_comp_name = data.comp_data[0].compname;
+                              nw_comp_name = nw_comp_name.replace( / /g,'-');
+                              nw_comp_name = nw_comp_name.replace( '.','');
+                              nw_comp_name = nw_comp_name.replace( '&','And');
+
+                          var no_of_stock = data.stock_data.length;
+                          var mnth_1_total=0,mnth_2_total=0,mnth_3_total=0,mnth_4_total=0; 
+
+                             window.history.pushState('','','/Mutual-Fund-Holdings/'+nw_comp_name+'/'+fincode_tmp+'');
+
+
+
+                          for(var i=0; i<data.stock_data.length ; i++)
+                          {
+                            mnth_1 = 0;
+                            mnth_2 = 0;
+                            mnth_3 = 0;
+                            mnth_4 = 0;
+
+                              mnth_1_chk = 0;
+                              mnth_2_chk = 0;
+                              mnth_3_chk = 0;
+                              mnth_4_chk = 0;
+
+                             temp_stock = data.stock_data[i];
+                            
+                             var schemecode = temp_stock.schemecode;
+                             var fund_manager = temp_stock.fund_mgr1;
+                            
+                             var fund_manager_1 = fund_manager.replace(' ','_');
+                            
+                             var s_name = temp_stock.s_name;
+                             var fincode = temp_stock.fincode;               
+                             var compname = temp_stock.compname;
+                             
+                             var aum = temp_stock.aum;
+                              
+                             if(aum!=null && aum!='' && aum!='undefined')
+                             {
+                               aum = aum.toFixed(2);
+                               aum =  commaSeparateNumber(aum);
+                             } 
+
+                             mnth_1 = temp_stock.month_name_1;
+                            
+                             if(mnth_1==null)
+                             {
+                              mnth_1=0;
+                             }
+                             else
+                             {
+                              mnth_1_total = mnth_1_total + mnth_1;
+                              mnth_1_chk = mnth_1;
+                              mnth_1 = commaSeparateNumber(mnth_1);
+                              
+                             }
+
+                             mnth_2 = temp_stock.month_name_2;
+                            
+                             if(mnth_2==null)
+                             {
+                              mnth_2=0;
+                             }
+                             else
+                             {
+                              mnth_2_total = mnth_2_total + mnth_2;
+                              mnth_2_chk = mnth_2;
+                              mnth_2 = commaSeparateNumber(mnth_2);
+                             
+                             }
+                             mnth_3 = temp_stock.month_name_3;
+                             
+                             if(mnth_3==null)
+                             {
+                              mnth_3=0;
+                             }
+                             else
+                             {
+                               mnth_3_total = mnth_3_total + mnth_3;
+                                mnth_3_chk = mnth_3;
+                               mnth_3 = commaSeparateNumber(mnth_3);
+                              
+                             }
+                             mnth_4 = temp_stock.month_name_4;
+                             
+                             if(mnth_4==null)
+                             {
+                              mnth_4=0;
+                             }
+                             else
+                             {
+                               mnth_4_total = mnth_4_total + mnth_4;
+                                mnth_4_chk = mnth_4;
+                               mnth_4 = commaSeparateNumber(mnth_4);
+                              
+                             }
+
+                             var prcnt_aum = temp_stock.percent_aum;
+                            
+                             
+
+                              if(prcnt_aum!=null && prcnt_aum!='' && prcnt_aum!='undefined')
+                             {
+                               prcnt_aum = prcnt_aum.toFixed(2);
+                             }
+                             else
+                             {
+                              prcnt_aum="-";
+                             } 
+
+                              mnth_1_cls="no_sign";
+                              mnth_2_cls="no_sign";
+                              mnth_3_cls="no_sign";
+                              mnth_4_cls="nochange";
+             
+
+                                if(mnth_4_chk=="-" && mnth_3!="-" )
+                                 {
+                                   mnth_3_cls="incr";
+                                 }
+                               else if(mnth_3_chk > mnth_4_chk && mnth_3!="-")
+                                 {
+                                    mnth_3_cls="incr";
+                                 }
+                                 else if(mnth_3_chk < mnth_4_chk && mnth_3!="-")
+                                 {
+                                    mnth_3_cls="decr";
+                                 }
+                                 else
+                                 {
+                                    mnth_3_cls="nochange";
+                                 }
+                           
+                               if(mnth_3_chk=="-" && mnth_2!="-")
+                                 {
+                                   mnth_2_cls="incr";
+                                 }
+                                 else if(mnth_2_chk > mnth_3_chk && mnth_2!="-")
+                                 {
+                                    mnth_2_cls="incr";
+                                 }
+                                 else if(mnth_2_chk < mnth_3_chk && mnth_2!="-")
+                                 {
+                                    mnth_2_cls="decr";
+                                 }
+                                 else
+                                 {
+                                    mnth_2_cls="nochange";
+                                 }
+                         
+                                if(mnth_2_chk=="-" && mnth_1!="-")
+                                {
+                                   mnth_1_cls="incr";
+                                }
+                                else if(mnth_1_chk > mnth_2_chk && mnth_1!="-")
+                                 {
+                                    mnth_1_cls="incr";
+                                 }
+                                else if(mnth_1_chk < mnth_2_chk && mnth_1!="-" )
+                                 {
+                                    mnth_1_cls="decr";
+                                 }
+                                else
+                                 {
+                                    mnth_1_cls="nochange";
+                                 }
+                             
+
+                                  
+
+
+
+                             if(i==0)
+                             {
+
+                         
+
+
+
+                              tblData = th + "<tbody><tr>"+"<td>"+"<a target = '_blank' href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"+"</td>"+"<td>"+"<span id='fund_manager' onclick=setvalue_asset_temp('"+fund_manager_1+"','fund_manager')>"+fund_manager+"</span>"+"</td><td>"+aum+"</td>"+"<td>"+prcnt_aum+"</td>"+"<td>"+"<span>"+mnth_1+"</span><span id='mon_1' class='"+mnth_1_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_2+"</span><span id='mon_2' class='"+mnth_2_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_3+"</span><span id='mon_3' class='"+mnth_3_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_4+"</span><span id='mon_4' class='"+mnth_4_cls+"'></span>"+"</td></tr>"
+                     
+
+                              
+
+                             }
+                             else
+                             {
+                            
+                              tblData = tblData + "<tr>"+"<td>"+"<a target = '_blank' href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"+"</td>"+"<td>"+"<span id='fund_manager' onclick=setvalue_asset_temp('"+fund_manager_1+"','fund_manager')>"+fund_manager+"</span>"+"</td><td>"+aum+"</td>"+"<td>"+prcnt_aum+"</td>"+"<td>"+"<span>"+mnth_1+"</span><span id='mon_1' class='"+mnth_1_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_2+"</span> <span id='mon_2' class='"+mnth_2_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_3+"</span><span id='mon_3' class='"+mnth_3_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_4+"</span><span id='mon_4' class='"+mnth_4_cls+"'></span>"+"</td></tr>"
+                             }
+                          }
+                         
+                     
+                          
+                       tblData = tblData+"</tbody></table>"
+                      
+                       
+
+                        $('#stoct_ret_div').html("");
+                        $('#stoct_ret_div').html(tblData); 
+
+                        $('#stock_ret_data').DataTable({
+                    "paging": false,
+                    "ordering": true,
+                    "info": true,
+                    "searching": true,"order": [[ 4, "desc" ]]
+                });
+                                
+                       
+                        if(mnth_4_chk=="-" && mnth_3!="-" )
+                                 {
+                                   mnth_3_cls="incr";
+                                 }
+                               else if(mnth_3_chk > mnth_4_chk && mnth_3!="-")
+                                 {
+                                    mnth_3_cls="incr";
+                                 }
+                                 else if(mnth_3_chk < mnth_4_chk && mnth_3!="-")
+                                 {
+                                    mnth_3_cls="decr";
+                                 }
+                                 else
+                                 {
+                                    mnth_3_cls="nochange";
+                                 }
+
+
+                       var mnth_1_total_tmp=0,mnth_2_total_tmp=0,mnth_3_total_tmp=0,mnth_4_total_tmp=0;
+
+                      
+
+                        mnth_1_total_tmp = data.mnth_1_sum[0].sum_mnth_1;
+                        if(mnth_1_total_tmp==null)
+                        {
+                          mnth_1_total_tmp=0;
+                        }
+                        mnth_2_total_tmp = data.mnth_2_sum[0].sum_mnth_2;
+                        if(mnth_2_total_tmp==null)
+                        {
+                          mnth_2_total_tmp=0;
+                        }
+                        mnth_3_total_tmp = data.mnth_3_sum[0].sum_mnth_3;
+                          if(mnth_3_total_tmp==null)
+                        {
+                          mnth_3_total_tmp=0;
+                        }
+                        mnth_4_total_tmp = data.mnth_4_sum[0].sum_mnth_4;
+
+                          if(mnth_4_total_tmp==null)
+                        {
+                          mnth_4_total_tmp=0;
+                        }
+
+                        mnth_1_total = data.mnth_1_sum[0].sum_mnth_1;
+                          if(mnth_1_total==null)
+                          {
+                            mnth_1_total=0;
+                          }
+                        mnth_2_total = data.mnth_2_sum[0].sum_mnth_2;
+                          if(mnth_2_total==null)
+                          {
+                            mnth_2_total=0;
+                          }
+                        mnth_3_total = data.mnth_3_sum[0].sum_mnth_3;
+                         if(mnth_3_total==null)
+                          {
+                            mnth_3_total=0;
+                          }
+                        mnth_4_total = data.mnth_4_sum[0].sum_mnth_4;
+                        if(mnth_4_total==null)
+                          {
+                            mnth_4_total=0;
+                            }
+
+                        
+
+                        if(mnth_3_total_tmp >  mnth_4_total_tmp)
+                        {
+                            $('#tot_monval_3').attr('class','incr');
+                        }
+                        else if(mnth_3_total_tmp <  mnth_4_total_tmp)
+                        {
+                            $('#tot_monval_3').attr('class','decr');
+                        }
+                        else
+                        {
+                            $('#tot_monval_3').attr('class','nochange');  
+                        }
+
+
+                         if(mnth_2_total_tmp >  mnth_3_total_tmp)
+                        {
+                            $('#tot_monval_2').attr('class','incr');
+                        }
+                        else if(mnth_2_total_tmp <  mnth_3_total_tmp)
+                        {
+                            $('#tot_monval_2').attr('class','decr');
+                        }
+                        else
+                        {
+                            $('#tot_monval_2').attr('class','nochange');  
+                        }  
+
+                         if(mnth_1_total_tmp >  mnth_2_total_tmp)
+                        {
+                            $('#tot_monval_1').attr('class','incr');
+                        }
+                        else if(mnth_1_total_tmp <  mnth_2_total_tmp)
+                        {
+                            $('#tot_monval_1').attr('class','decr');
+                        }
+                        else
+                        {
+                            $('#tot_monval_1').attr('class','nochange');  
+                        }  
+
+                        mnth_1_total = commaSeparateNumber(mnth_1_total);
+                        mnth_2_total = commaSeparateNumber(mnth_2_total);
+                        mnth_3_total = commaSeparateNumber(mnth_3_total);
+                        mnth_4_total = commaSeparateNumber(mnth_4_total);
+
+                        
+                        $('#sec_tor').text(sect_name);
+                        $('#n_o_f').text(no_of_stock);
+                      
+
+
+                        $('#no_o_s_m1').text(mnth_1_total);
+                        $('#no_o_s_m2').text(mnth_2_total);
+                        $('#no_o_s_m3').text(mnth_3_total);
+                        $('#no_o_s_m4').text(mnth_4_total);
+
+               }
+               else
+               {
+                 $("#msg").show();
+              
+                 $('#main_content_div').attr("style","display:none;");
+               }
+
+         
+             });
+   }
+
+
+function Load_stock_data_autocomplete_1()
+   { 
+       $$.get(curr_ip+'app_services/get_compare_data_stock',function (data) 
+     
+             {    
+               // data.month_name_4
+
+ var data = JSON.parse(data);
+
+
+
+        
+                 
+                // console.log(data)
+                 //id = stock_price_compare
+                var th ="<thead><tr><th>Stock Name</th><th>Sector</th><th>Classification</th><th>Month</th><th>Net Qty Bought</th><th>Approx. Buy Value<br>(In ₹ cr)</th></tr></thead><tbody>";
+                     
+                 var stock_name="";
+                 var classification="";
+                 var no_of_share_change=0;
+                 var price_of_share_change=0;     
+                 var tb=" ";
+                 var rv_sector=" ";
+                 var fincode=0;
+                 
+                  var day = new Date(data.stock_compare_data[0].day);
+
+                          var mon_1 = moment(day).format('MMMM-YYYY');
+
+                          
+                          global_date_hldr = moment(day).format('MMM-YY');
+                          $('#stock_att_month_yr').text(global_date_hldr); // set month in this tab
+                          $('#stock_att_month_yr_1').text(global_date_hldr); // set month in this tab
+
+                          // var year_1 = moment(day).format('YYYY');
+                          // var date2 = new Date(); 
+                          // date2 = date2.setMonth(day.getMonth()-1);
+                          // var mon_2 = moment(date2).format('MMMM');
+                  
+                  var tot_count=0;
+                  var total_price=0; 
+
+                
+                  tot_count = data.stock_compare_data.length;
+                     
+                  console.log(data);
+
+
+                   for (var i=0; i< tot_count ; i++)
+                   {
+                          stock_name=" ";
+                          classification=" ";
+                          no_of_share_change=0;
+                          price_of_share_change=0;  
+                          rv_sector=" "; 
+                          fincode=0;
+                         
+                          
+                         
+
+                          stock_name=data.stock_compare_data[i].compname;
+                          classification=data.stock_compare_data[i].classification;
+                          rv_sector = data.stock_compare_data[i].rv_sect_name;
+                          fincode = data.stock_compare_data[i].fincode;
+
+                            if(classification=="M")
+                            {
+                              classification="Mid-Cap";
+                            }
+                            else if(classification=="L")
+                            {
+                              classification="Large-Cap";
+                            }
+                            else if(classification=="S")
+                            {
+                              classification="Small-Cap";
+                            }
+
+                          no_of_share_change=data.stock_compare_data[i].no_of_share_change;
+                          price_of_share_change= (data.stock_compare_data[i].price_of_share_change/10000000).toFixed(2);
+
+                          // no_of_share_change=data.stock_compare_data[i].no_of_share_change; 
+
+                          total_price = parseFloat(total_price) + parseFloat(price_of_share_change);
+
+                        
+
+                          // var day=data.stock_compare_data[i].day;
+                           // "<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"
+                           // "<a href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"
+
+                          if(i==0)
+                          {
+                 tb = th + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
+                          }
+                          else
+                          {
+                             tb = tb + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
+                          }
+
+                       
+                   }
+                         tb=tb+"</tbody>"
+
+                   $('#stock_price_compare').html(tb);
+
+                    $('#stock_price_compare').DataTable({
+                    "paging": false,
+                    "ordering": true,
+                    "info": true,
+                    "searching": true,"order": [[ 5, "desc" ]]
+                });
+
+
+                    $('#tot_price_all').text(commaSeparateNumber(total_price.toFixed(2)));
+                    $('#tot_count_all').text(tot_count);
+                       
+                    
+                      tot_count=0;
+                      total_price=0; 
+
+
+                   
+                      var th_1 ="<thead><tr><th>Stock Name</th><th>Sector</th><th>Classification</th><th>Month</th><th>Net Qty Sold</th><th>Approx. Sell Value<br>(In ₹ cr)</th></tr></thead><tbody>";
+                    tot_count = data.stock_compare_data_1.length;
+                     
+                  // console.log(data);
+
+
+                   for (var i=0; i< tot_count ; i++)
+                   {
+                          stock_name=" ";
+                          classification=" ";
+                          no_of_share_change=0;
+                          price_of_share_change=0;  
+                          rv_sector=" "; 
+                          fincode=0;
+                         
+                          
+                         
+
+                          stock_name=data.stock_compare_data_1[i].compname;
+                          classification=data.stock_compare_data_1[i].classification;
+                          rv_sector = data.stock_compare_data_1[i].rv_sect_name;
+                          fincode = data.stock_compare_data_1[i].fincode;
+
+                            if(classification=="M")
+                            {
+                              classification="Mid-Cap";
+                            }
+                            else if(classification=="L")
+                            {
+                              classification="Large-Cap";
+                            }
+                            else if(classification=="S")
+                            {
+                              classification="Small-Cap";
+                            }
+
+                          no_of_share_change=Math.abs(data.stock_compare_data_1[i].no_of_share_change);
+                          price_of_share_change= Math.abs((data.stock_compare_data_1[i].price_of_share_change/10000000).toFixed(2));
+
+                          // no_of_share_change=data.stock_compare_data[i].no_of_share_change; 
+
+                          total_price = parseFloat(total_price) + parseFloat(price_of_share_change);
+
+                           if(price_of_share_change==0)
+                           {
+                              continue;
+                           }
+
+
+
+
+                          // var day=data.stock_compare_data[i].day;
+                           // "<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"
+                           // "<a href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"
+
+                          if(i==0)
+                          {
+                 tb = th_1 + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
+                          }
+                          else
+                          {
+                             tb = tb + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
+                          }
+
+                       
+                   }
+                         tb=tb+"</tbody>"
+
+                   $('#stock_price_compare_1').html(tb);
+
+                    $('#stock_price_compare_1').DataTable({
+                    "paging": false,
+                    "ordering": true,
+                    "info": true,
+                    "searching": true,"order": [[ 5, "desc" ]]
+                });
+
+
+                    $('#tot_price_all_1').text(commaSeparateNumber(total_price.toFixed(2)));
+                    $('#tot_count_all_1').text(tot_count);
+
+
+              
+              });
+
+
+
+
+   }
+
+
+
+
+}
+
+
+
+    if(page.name==='OfferFixedDeposit')
+    {
+       
+       $$.get(curr_ip+'app_services/fd_all_data',function (data) 
+       {
+               var myObj = JSON.parse(data);              
+               var i;
+               var list_fd = "";               
+
+               for (var i = 0; i < myObj.fds.length; i++) { 
+                   var ComName = myObj.fds[i].name;
+                   ComName = ComName.replace(/[.\s]/g, '');                                     
+                   list_fd = list_fd + "<div class='breadcrumb'><a href='OfferFD"+ComName+".html'><div class='row'><div class='col-xs-6'><div class='FDName'>"+myObj.fds[i].name+"</div></div><div class='col-xs-3'><div class='FDPeriod'>"+myObj.fds[i].period+"</div></div><div class='col-xs-3'><div class='FDInterest'>"+myObj.fds[i].interest+"</div></div></div></a></div>"
+                };
+
+            $$('#fd_all_list').html(list_fd);
+               
+       });
+    }
+
+
+    if(page.name==='OfferFDBajajFinanceLimited')
+    {
+       
+       $$.get(curr_ip+'app_services/fd_all_data',function (data) 
+       {
+               var myObj = JSON.parse(data); 
+               console.log(myObj);             
+               // var i;
+               // var list_fd = "";               
+
+            //    for (var i = 0; i < myObj.fds.length; i++) { 
+            //        var ComName = myObj.fds[i].name;
+            //        ComName = ComName.replace(/[.\s]/g, '');                                     
+            //        list_fd = list_fd + "<div class='breadcrumb'><a href='OfferFD"+ComName+".html'><div class='row'><div class='col-xs-6'><div class='FDName'>"+myObj.fds[i].name+"</div></div><div class='col-xs-3'><div class='FDPeriod'>"+myObj.fds[i].period+"</div></div><div class='col-xs-3'><div class='FDInterest'>"+myObj.fds[i].interest+"</div></div></div></a></div>"
+            //     };
+
+            // $$('#fd_all_list').html(list_fd);
+               
+       });
+    }
+
 
     if(page.name==='OfferInvestmentSolution')
     {
@@ -3460,9 +4216,32 @@ window.onorientationchange = function()
 
 /************************************ Sectoral Play END ******************************** */ 
 
+/**************************** OfferISDesign / Combined MF START ************************* */ 
+
+if(page.name==='OfferISDesign')
+    {
+        var query = $$.parseUrlQuery(page.url);
+        // console.log(query);
+        var s_code=query.scheme_code;
+        // console.log(scheme_code);
+
+        $$.get(curr_ip+'app_services/combined_mf', {p_code: +s_code},function (data)
+       {
+            var myObj = JSON.parse(data);              
+            console.log(myObj);
 
 
+            
+               
+       });        
 
+        
+    }
+
+/***************************** OfferISDesign / Combined MF END ************************** */ 
+
+
+/***************************** ToolsScreener / Screener START ************************** */ 
 
     if(page.name==='ToolsScreener')
     {
@@ -3485,6 +4264,7 @@ window.onorientationchange = function()
         
     }
 
+/***************************** ToolsScreener / Screener END ************************** */ 
 
 
 })

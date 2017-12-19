@@ -10,10 +10,10 @@
    See https://github.com/apache/cordova-plugin-statusbar
 */
 
-.statusbar-overlay {
+/*.statusbar-overlay {
     background: #000000;
 }
-
+*/
 
 @charset "utf-8";
 
@@ -137,6 +137,9 @@ img {
 #RVNavbar #fund_names{
   max-width: 250px;
   width: 250px;
+}
+#RVNavbar img {
+  height: 30px;
 }
 .ui-front{
   z-index: 10000;
@@ -272,6 +275,7 @@ img {
 .d_none {display:none;}
 .NoAppearance { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
 .area_wrap {overflow-x:auto;}
+.glyphicon-star {color: #17406B;}
 .form-control {
   height: 32px;
   padding: 3px 6px;
@@ -418,6 +422,11 @@ img {
 /**********************************
     Mutual Fund Home
 ***********************************/
+#mfund_home .well {
+      padding: 4px;
+    border-radius: 0px;
+        margin-bottom: 5px;
+}
 #mfund_home .MFHeadTop{
   background: #eee;
   border-bottom: 1px solid #ccc;
@@ -485,10 +494,16 @@ img {
   color: #787979;
 }
 #fund_details #s_name{
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 #fund_details .top_1{
   margin-top: 1em;
+}
+#fund_details .pagination{
+  display: block;
+}
+#fund_details #pages{
+  text-align: center;
 }
 #fund_details .ov_top_nav h2{
   display: inline;
@@ -558,21 +573,16 @@ img {
   height: 10em;
   overflow-y: auto; 
 }
-/*#fund_details .breadcrumb_1 {
-    margin-bottom: 15px;
-    border: 1px solid #17396B;
-    background: linear-gradient(to bottom, rgba(18,51,86,1), rgba(38,89,149,1));
-}*/
 #fund_details .breadcrumb_2 {
-    margin-bottom: 15px;
-    border: 1px solid #17396B;
-    background: linear-gradient(to top, rgba(18,51,86,1), rgba(38,89,149,1));
+  margin-bottom: 15px;
+  border: 1px solid #17396B;
+  background: linear-gradient(to top, rgba(18,51,86,1), rgba(38,89,149,1));
 }
 #fund_details .breadcrumb_3 {
-    margin-bottom: 15px;
-    border: 1px solid #17396B;
-    background: linear-gradient(to bottom, rgba(18,51,86,1), rgba(38,89,149,1));
-    color:#fff;
+  margin-bottom: 15px;
+  border: 1px solid #17396B;
+  background: linear-gradient(to bottom, rgba(18,51,86,1), rgba(38,89,149,1));
+  color:#fff;
 }
 #fund_details .breadcrumb_4 {
   border: 2px solid #17396B;
@@ -592,11 +602,21 @@ img {
   padding-right: 5px;
 }
 #fund_details #portfolio_holdings th:nth-child(2){
-  min-width: 8em;
+  text-align: right;
+  padding-right: 2em;
+  /* width: 35%; */
+  min-width: 10em;
+}
+#fund_details #portfolio_holdings td:nth-child(1),#fund_details #portfolio_holdings th:nth-child(1){
+  width: 80%;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 180px;
 }
 #fund_details #portfolio_holdings td:nth-child(2){
-    text-align: right;
-    padding-right: 3.5em;
+  width: 25%;
+  text-align: right;
+  padding-right: 2em;
 }
 #fund_details #portfolio_table th:nth-child(n+2){
   text-align: center;

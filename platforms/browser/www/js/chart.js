@@ -3494,22 +3494,27 @@ return "True"
                                             },
                                             
                             allButtonsEnabled: true,
-                            buttons: [{
-                                type: 'month',
-                                count: 1,
-                                text: '1m'
-                            }, {
-                                type: 'month',
-                                count: 3,
-                                text: '3m'
-                            }, {
+                            buttons: 
+                            [
+                            // {
+                            //     type: 'month',
+                            //     count: 1,
+                            //     text: '1m'
+                            // }, {
+                            //     type: 'month',
+                            //     count: 3,
+                            //     text: '3m'
+                            // },
+                             {
                                 type: 'month',
                                 count: 6,
                                 text: '6m'
-                            }, {
-                                type: 'ytd',
-                                text: 'YTD'
-                            }, {
+                            },
+                            // {
+                            //     type: 'ytd',
+                            //     text: 'YTD'
+                            // },
+                             {
                                 type: 'year',
                                 count: 1,
                                 text: '1y'
@@ -3530,7 +3535,7 @@ return "True"
                                 text: 'All'
                             }],
                             
-                            selected: 4
+                            selected: 1
                         } 
 
                       }, function (chart) {
@@ -5319,6 +5324,25 @@ function alloc_bench_chart_debt(portCatArray,portHoldArray,portSectArray,classif
 
  function alloc_bench_chart(portCatArray,portHoldArray,portSectArray,classification,scheme_name,category,id){
     
+        i=0;   
+    scheme_name_graph=[];
+    category_graph=[];
+    portHoldArray_graph=[];
+    portSectArray_graph=[];
+    portCatArray_graph=[]
+    while (i<5)
+    {
+      // scheme_name_graph=scheme_name[i]
+      // category_graph=category[i]
+      portHoldArray_graph.push(portHoldArray[i])
+      portSectArray_graph.push(portSectArray[i])
+      portCatArray_graph.push(portCatArray[i])
+      i=i+1
+    }
+    console.log("--------------GRAPH===============")
+    // console.log()
+    console.log(portHoldArray.sort())
+
         $(function () {
         //$(".PortHeading").html("Sector Allocation v/s Category Average");
         /*var txt = "";        
@@ -5340,6 +5364,7 @@ function alloc_bench_chart_debt(portCatArray,portHoldArray,portSectArray,classif
               $('#container-01').hide();
             }
          }*/
+         
 Highcharts.setOptions({
     colors: ['#429EE9', '#A8A8A8']
 });
@@ -5367,7 +5392,7 @@ Highcharts.setOptions({
             text: ''
         },
         xAxis: {
-                categories: portSectArray,
+                categories: portSectArray_graph,
                 labels: {
                             formatter: function () {
                                 return this.value.replace(/ /g, '<br />');
@@ -5391,16 +5416,32 @@ Highcharts.setOptions({
         },
         series: [{
             name: scheme_name,
-            data: portHoldArray
+            data: portHoldArray_graph
         },{
             name: category,
-            data: portCatArray
+            data: portCatArray_graph
         }]
     });
 });
 }
 
 function alloc_bench_chart_debt(portCatArray,portHoldArray,portSectArray,classification,scheme_name,category,id){
+
+ i=0;   
+    scheme_name_graph=[];
+    category_graph=[];
+    portHoldArray_graph=[];
+    portSectArray_graph=[];
+    portCatArray_graph=[]
+    while (i<5)
+    {
+      // scheme_name_graph=scheme_name[i]
+      // category_graph=category[i]
+      portHoldArray_graph.push(portHoldArray[i])
+      portSectArray_graph.push(portSectArray[i])
+      portCatArray_graph.push(portCatArray[i])
+      i=i+1
+    }
 
         $(function () {
         //$(".PortHeading").html("Credit Rating v/s Category Average");
@@ -5415,7 +5456,7 @@ function alloc_bench_chart_debt(portCatArray,portHoldArray,portSectArray,classif
         }
         else{
         }*/
-        var arrayOfNumbers = portCatArray.map(Number);
+        var arrayOfNumbers = portCatArray_graph.map(Number);
           portCatArray = arrayOfNumbers;
         var chart = new Highcharts.Chart({
         //$('#container').highcharts({
@@ -5441,7 +5482,7 @@ function alloc_bench_chart_debt(portCatArray,portHoldArray,portSectArray,classif
             text: ''
         },
                         xAxis: {
-                    categories: portSectArray
+                    categories: portSectArray_graph
                 },
         yAxis: {
                     title: {
@@ -5460,11 +5501,11 @@ function alloc_bench_chart_debt(portCatArray,portHoldArray,portSectArray,classif
         },
         series: [{
             name: scheme_name,
-            data: portHoldArray,
+            data: portHoldArray_graph,
             color: '#429EE9'
         },{
             name: category,
-            data: portCatArray,
+            data: portCatArray_graph,
             color: '#A8A8A8'
         }]
     });
