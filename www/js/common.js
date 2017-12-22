@@ -1072,51 +1072,41 @@ function fundname_search()
        });
 }
 
+
+
+
 function fundname_search_sip_return()
 {
 	$.ajax({
 		type:'GET',
-		url: '/home/get_search_data',
+		url: curr_ip+'home/get_search_data',
 		datatype:'json',
 		success:function(searchdata, textStatus, jqXHR) {
 				 
 				 
-						 var schemename = [];
-						 map = {};
- 
+		 var schemename = [];
+		 map = {};
 
-						 for(var i =0;i <= searchdata.search_data.length-1;i++)
-						 {
-							var item1 = searchdata.search_data[i];
-							var scheme_code = item1.scheme_code;
-							var s_name = item1.s_name;
-							schemename.push(item1.s_name);                               
-                            s_name_temp = item1.s_name                            
-                            s_name_temp=s_name_temp.replace(/-/g,' ');
-							map[s_name_temp] = item1.schemecode
-						 }
-                          
 
-						 //    $("#fund_names_sip").autocomplete({
-						 //    	maxResults: 10,
-							// 	source: schemename,
-							// });
- 						
-						    	
-							// $.ui.autocomplete.filter = function (array, term) {
-				   //      var matcher = new RegExp("(^| )" + $.ui.autocomplete.escapeRegex(term), "i");
-				   //      return $.grep(array, function (value) {
-				   //          return matcher.test(value.label || value.value || value);
-				   //      });
-				   //  	};
+		 for(var i =0;i <= searchdata.search_data.length-1;i++)
+		 {
+			var item1 = searchdata.search_data[i];
+			var scheme_code = item1.scheme_code;
+			var s_name = item1.s_name;
+			schemename.push(item1.s_name);                               
+            s_name_temp = item1.s_name                            
+            s_name_temp=s_name_temp.replace(/-/g,' ');
+			map[s_name_temp] = item1.schemecode
+		 }
+						console.log(map); 
                            
 
-                           $("#fund_names_sip").autocomplete ( {
-    source: function (requestObj, responseFunc) {
-                var matchArry   = schemename.slice (); //-- Copy the array
+       $("#fund_names_sip").autocomplete ( {
+    		source: function (requestObj, responseFunc) {
+                var matchArry   = schemename.slice (); 
                 var srchTerms   = $.trim (requestObj.term).split (/\s+/);
 
-                //--- For each search term, remove non-matches.
+                console.log("aaaaaaaaaaaaaaaaaaaaaa");
                 $.each (srchTerms, function (J, term) {
                     var regX    = new RegExp (term, "i");
                     matchArry   = $.map (matchArry, function (item) {
@@ -1124,28 +1114,16 @@ function fundname_search_sip_return()
                     } );
                 } );
 
-                /* New jQuery-UI busts this AND the old highlighting!
-                    //--- For any surviving matches, highlight the terms.
-                    $.each (srchTerms, function (J, term) {
-                        matchArry       = $.map (matchArry, function (item) {
-                            var regX    = new RegExp (term, "ig");
-
-                            return item.replace (regX, '<span class="srchHilite">' + term + '</span>');
-                        } );
-                    } );
-                */
-
-                //--- Return the match results.
+                
+              
                 responseFunc (matchArry);
             },
          open: function (event, ui) {
-                /*--- This function provides no hooks to the results list, so we have to trust the
-                    selector, for now.
-                */
+                
                 var resultsList = $("ul.ui-autocomplete > li.ui-menu-item > a");
                 var srchTerm    = $.trim ( $("#fund_names_sip").val () ).split (/\s+/).join ('|');
 
-                //--- Loop through the results list and highlight the terms.
+               
                 resultsList.each ( function () {
                     var jThis   = $(this);
                     var regX    = new RegExp ('(' + srchTerm + ')', "ig");
@@ -1153,11 +1131,72 @@ function fundname_search_sip_return()
 
                     jThis.html (oldTxt.replace (regX, '<span class="srchHilite">$1</span>') );
                 } );
-            }
+            },
+            select: function (a, b) 
+                   {
+                        $(this).val(b.item.value); 
+                         
+                          $('#container-head').show();
+                          var scheme_name = $('#fund_names_sip').val();
+                            scheme_name = scheme_name.replace(/-/g,' ');
+                            console.log(scheme_name);
+                            console.log(map);
+                            var schemecode = map[scheme_name];
+                          var frequency = $('#frequency :selected').text();
+
+                          var amount = $('#amt').val();
+                              amount=amount.replace(/,/g, '');
+                             //$('#amt').html(commaSeparateNumber(amount));
+
+                          var startDate = new Date($('#from_date').val());
+                          var endDate = new Date($('#to_date').val());
+                          startDate = moment(startDate).format('YYYY-MM-DD');
+                          endDate = moment(endDate).format('YYYY-MM-DD');
+                          
+
+                          // var url_fund_name = scheme_name.replace(/ /g,'-');
+                          //     url_fund_name = url_fund_name.replace(/&/g,'');
+                          //     url_fund_name = url_fund_name.replace(/'/g,'');
+                          //     url_fund_name = url_fund_name.replace("[",'(');
+                          //     url_fund_name = url_fund_name.replace("]",')');
+                          //     url_fund_name = url_fund_name.replace("<",'LT');
+                          //     url_fund_name = url_fund_name.replace(">",'Gt');
+                          //     url_fund_name = url_fund_name.replace("/",'');
+                          //     url_fund_name = url_fund_name.replace("‘",'');
+                          //     url_fund_name = url_fund_name.replace("'",'');
+                          //     url_fund_name = url_fund_name.replace("%",'');  // added 29.08.2017
+
+                           var scheme_name1 = $('#fund_names_sip').val();
+                          var url_fund_name;
+                              url_fund_name = scheme_name1.replace(/&/g,'');
+                              url_fund_name = url_fund_name.replace(/-/g,' ');
+                              url_fund_name = url_fund_name.replace(/'/g,'');
+                              url_fund_name = url_fund_name.replace("[",'(');
+                              url_fund_name = url_fund_name.replace("]",')');
+                              url_fund_name = url_fund_name.replace("<",'LT');
+                              url_fund_name = url_fund_name.replace(">",'Gt');
+                              url_fund_name = url_fund_name.replace("/",'');
+                              url_fund_name = url_fund_name.replace("‘",'');
+                              url_fund_name = url_fund_name.replace("'",'');
+                              url_fund_name = url_fund_name.replace("%",'');  // added 29.08.2017
+
+                              url_fund_name = url_fund_name.replace(/ *\([^)]*\) */g, "")
+                              // alert(url_fund_name);
+                              url_fund_name = url_fund_name.trim().replace(/ /g,'-');
+
+
+                          var url1 = "/Mutual-Fund-Calculator/Sip-Return/"+url_fund_name+"/"+schemecode
+                          window.history.pushState('','',url1);
+                          console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjj");
+
+                          test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+
+
+                    }
+
+
         });
-						//$("#scheme_code").html(scheme_code);
-						//$("#s_name").html(s_name);
-						// console.log(schemename);
+						
 
 		},
 		 error:function(jqXHR, textStatus, errorThrown) {

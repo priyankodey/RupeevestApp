@@ -3689,23 +3689,28 @@ function test_graph_sip(scheme_name,schemecode,container_id,amount,frequency,sta
         start_date_GBL = start_date;
         end_date_GBL = end_date;
 
-    //     console.log("----------------")
-    // console.log(amount);
-    // console.log(frequency);
-    // console.log(start_date);
-    // console.log(end_date);
-    // console.log("--------------");
+        console.log(schemecode);
+    console.log(amount);
+    console.log(frequency);
+    console.log(start_date);
+    console.log(end_date);
+    console.log("--------------");
+ $$.get(curr_ip+'functionalities/sip_return_graph', {schemecode:schemecode,amount:amount,frequency:frequency,start_date:start_date,end_date:end_date},function (data) 
+{
 
-
-              $.ajax({
-         type: 'GET',
-         url: '/functionalities/sip_return_graph',
-          data :{schemecode:schemecode,amount:amount,frequency:frequency,start_date:start_date,end_date:end_date},
-         dataType: 'json',
-         // data: { 'iin' : $('#client_name').val()},
-         success: function(data)
-         {
+         //      $.ajax({
+         // type: 'GET',
+         // url: curr_ip+'functionalities/sip_return_graph',
+         // //url: curr_ip+'functionalities/sip_return_graph',
+         //  data :{schemecode:schemecode,amount:amount,frequency:frequency,start_date:start_date,end_date:end_date},
+         // dataType: 'json',
+         // // data: { 'iin' : $('#client_name').val()},
+         // success: function(data)
+         // {
           // console.log(data);
+            var data = JSON.parse(data);
+
+            console.log(data);
              var i;
              var navrs1=[];
              var ratio=[];
@@ -3816,7 +3821,7 @@ function test_graph_sip(scheme_name,schemecode,container_id,amount,frequency,sta
           $('#fund_category').html("<span id='classification' onclick=setvalue_asset_temp('"+data.fund_data[0].classification.replace(/ /g,'_')+"','asset')>"+data.fund_data[0].classification+"</span>");
 
          test_graph_new_graph_sip(scheme_name,navrs1,nifty1,container_id,ratio)   //added on 6.3.2017
-    }
+    // }
 });
       }
  }

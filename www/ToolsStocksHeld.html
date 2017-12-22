@@ -7,8 +7,7 @@
                 </div>                
             </div>
             <div class="row">
-                <div class="col-xs-12">
-                    <p class="text-center">Select Time Horizon</p>
+                <div class="col-xs-12">                    
                     <div class="StocksTabs">          
                         <div class="buttons-row">            
                             <a href="#StockHeldMF" id="" class="button active tab-link">Stocks held by Mutual Funds</a>
@@ -104,39 +103,41 @@
                         <div id="StocksAttractingFundManagers" class="page-content tab">
                             
                             <div class="breadcrumb">
-                                <div class="row">
-                                    <div class="col-sm-12">
+                                <!-- <div class="row"> -->
+                                    <!-- <div class="col-sm-12"> -->
 
-                    <div class="row">
-                      <div class="col-sm-12">
-                         <p>Below is a list of stocks which have witnessed net mutual fund buying for the month of <span id="stock_att_month_yr"></span>. Along with the number of stocks which have seen net inflow, one can also see the approximate buy value for the month.</p>
-                      </div>
-                    </div>
+                                        <div class="row">
+                                          <div class="col-sm-12">
+                                             <p>Below is a list of stocks which have witnessed net mutual fund buying for the month of <span id="stock_att_month_yr"></span>. Along with the number of stocks which have seen net inflow, one can also see the approximate buy value for the month.</p>
+                                          </div>
+                                        </div>
 
-                     <div class="row hidden">
-                        <div class="col-md-6"> 
-                         <table id="stock_price_heading" class="table table-bordered table-striped table-condensed sortable-theme-bootstrap">
-                           <thead><tr><th>No. of Stocks</th><th>Total Incremental Buy Value</th></tr></thead>
-                           <tbody><tr><td><center><span id="tot_count_all"></span></center></td><td><span>₹ </span><span id="tot_price_all"></span><span> cr.</span></td></tr></tbody>
-                         </table>
-                        </div> 
-                      </div>
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <button id="download_spc" class="btn btn-default btn-xs pull-right">Download</button>
-                        </div>
-                      </div>
-                      
-                      <div class="row">
-                          <div class="col-md-12">
-                              <table id="stock_price_compare" class="table table-bordered table-striped table-condensed sortable-theme-bootstrap" data-sortable>
-                              </table>
-                              <h6><em>Note: Shareholding has been adjusted for outstanding derivative positions as on month end date, if any.</em></h6>
-                          </div>
-                      </div>
+                                        <div class="row hidden">
+                                          <div class="col-md-6"> 
+                                           <table id="stock_price_heading" class="table table-bordered table-striped table-condensed sortable-theme-bootstrap">
+                                             <thead><tr><th>No. of Stocks</th><th>Total Incremental Buy Value</th></tr></thead>
+                                             <tbody><tr><td><center><span id="tot_count_all"></span></center></td><td><span>₹ </span><span id="tot_price_all"></span><span> cr.</span></td></tr></tbody>
+                                           </table>
+                                          </div> 
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-sm-12">
+                                            <button id="download_spc" class="btn btn-default btn-xs pull-right">Download</button>
+                                          </div>
+                                        </div>
+                                          
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                              <div class="area_wrap">
+                                                <table id="stock_price_compare" class="table table-bordered table-striped table-condensed sortable-theme-bootstrap" data-sortable>
+                                                </table>
+                                              </div>
+                                                <h6><em>Note: Shareholding has been adjusted for outstanding derivative positions as on month end date, if any.</em></h6>
+                                            </div>
+                                        </div>
 
-                </div>                                    
-                                </div>
+                                    <!-- </div>   -->                                  
+                                <!-- </div> -->
                             </div>
                             
                         </div>
@@ -144,8 +145,8 @@
                         <div id="StocksSeeingSellingPressure" class="page-content tab">
                             
                             <div class="breadcrumb">
-                                <div class="row">
-                                    <div class="col-sm-12">
+                               <!--  <div class="row">
+                                    <div class="col-sm-12"> -->
 
                     <div class="row">
                       <div class="col-sm-12">
@@ -175,9 +176,9 @@
                           </div>
                       </div>
 
-                </div>                                   
-                                </div>
-                            </div>
+                                 <!--  </div>                                   
+                                </div> -->
+                              </div>
 
                         </div>
                       </div>

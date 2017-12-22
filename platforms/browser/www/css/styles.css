@@ -258,15 +258,20 @@ img {
 
 
 }
-/*.btn-primary, .btn-primary.disabled, .btn-primary[disabled], .btn-primary[disabled]:active, .btn-primary[disabled]:hover,
+.btn-RV:focus, .btn-RV:active, .btn-RV:hover, .btn-RV:active:focus, .btn-RV.active:focus {
+  color: #fff;
+}
+
+.btn-primary, .btn-primary.disabled, .btn-primary[disabled], .btn-primary[disabled]:active, .btn-primary[disabled]:hover,
  .btn-primary:active:focus, .btn-primary:active:hover {
-  background-color: #7fb800;
+   background: linear-gradient(to bottom, #7fb800 , #6d9f00);
+  /*background-color: #7fb800;*/
   border-color: #7fb800;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {  
-  background-color: #6d9f00;
-  border-color: #6d9f00;
-}*/
+  background-color: #6d9f00 !important;
+  border-color: #6d9f00 !important;
+}
 
 
 .d_inline { display: inline; }
@@ -871,7 +876,29 @@ img {
   width: 48.7%;
 }
 
-
+/**************************************
+      Stocks Held By Mutual Funds 
+***************************************/
+#rv_stock .StocksTabs{
+  margin-bottom: 10px;
+}
+#rv_stock .StocksTabs .buttons-row .button {
+  font-size: 12px;
+  padding: 0 3px;
+  color: #333;
+  border-color: #7fb800;
+  white-space: normal;
+  line-height: 18px;
+  min-height: 38px;
+}
+#rv_stock .StocksTabs .buttons-row .button.active {
+  color: #FFF;
+  background: #7fb800;
+  border-color: #7fb800;
+}
+#stock_price_compare_wrapper {
+  overflow-x : auto;
+}
 
 /******************** 
     Fixed deposit 
@@ -1167,8 +1194,133 @@ img {
   margin-top: 10px;
 }
 
+
+/***************************************************************************
+      Investment Solution - Combined MF / Design / Capital Preservation
+****************************************************************************/
+#ISCapitalPres .CPBody h4 {
+  margin-bottom: 5px;
+}
+#ISCapitalPres .CPTop .btn-toolbar .btn-group {
+  text-align: center;
+}
+#ISCapitalPres .CPTop .btn-toolbar .btn-group .comtopicon {
+  display: inline-block;
+  border: 1px solid #6d9f00;
+  padding: 5px;
+  width: 2.5em;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 1.5em;
+}
+#ISCapitalPres .CPTop #InvestNow {
+  float: right;
+}
+#ISCapitalPres .CPTop .btn-RV {
+  min-width: 100px;
+  padding: 4px 10px;
+}
+#ISCapitalPres .CPTop .dropdown-menu {
+    padding: 0;
+    min-width: 100%;
+    background: #fff;
+    border: 1px solid #c0c1c1;
+}
+#ISCapitalPres .CPTop .dropdown-menu li a {
+    color: #3b3f42;
+    font-size: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+#ISCapitalPres .table {
+  margin-bottom: 0;
+}
+#ISCapitalPres .table tr th, #ISCapitalPres .table tr td {
+  text-align: center;
+}
+#ISCapitalPres .CPBody .AssetAllocReturnTable h6 {
+  margin-top: 5px;
+  font-style: italic;
+  color: #787979;
+}
+#ISCapitalPres .chartCircleInside {
+  text-align: center;
+  margin-left: 1.3em;
+  margin-top: 1.7em;
+}
+#ISCapitalPres .ChartCIEQ {
+  margin-right: -4px;
+}
+#ISCapitalPres .ChartCIDT {
+  margin-left: -4px;
+}
+#ISCapitalPres .ChartCIP {
+  font-size: 18px;
+}
+#ISCapitalPres .ChartCIT {
+  font-size: 9px;
+}
+/*#ISCapitalPres .chartCircleInside {
+  text-align: center;
+  margin-left: 1.2em;
+  margin-top: 1.7em;
+  top: 50px !important;
+  z-index: 0;
+}*/
+#ISCapitalPres .tooltop {
+  padding: 5px;
+}
+#ISCapitalPres .highcharts-container {
+  position: inherit !important;
+}
+#ISCapitalPres .highcharts-tooltip {
+  z-index: 9998;
+}
+#ISCapitalPres .highcharts-tooltip div {
+  background-color: #fff;
+  border:1px solid #c0c1c1;
+}
+#ISCapitalPres #asset_alloc {
+  left:0px; 
+  top:0px;
+  min-width: 100px !important;; 
+  max-width: 160px !important;;
+  height:160px !important;;
+}
+#ISCapitalPres #addText {
+  position:absolute; 
+  left:0px; 
+  top:0px;
+}
+#ISCapitalPres .card {
+  margin: 10px 0;
+  border: 1px solid;
+  border-top: 10px solid;
+  border-radius: 6px;
+}
+ #ISCapitalPres .card-header {
+  padding: 0 4px;
+  background: #f1f2f2;
+  border-bottom: 1px solid #c0c1c1 !important;
+  border-radius: 0;
+}
+#ISCapitalPres .card-content {
+  padding: 4px;
+}
+#ISCapitalPres .CPBotP1 h5 {
+  margin-top: 5px;
+}
+#ISCapitalPres .CPBotP1 h5 a {
+  color: inherit;
+}
+#ISCapitalPres .fa-lock {
+  padding: 3px 8px;
+  color: #fff;
+  font-size: 18px;
+}
+
 /************************
-    Contact
+      Contact
 *************************/
 #Contact .HeadTop {
   margin-bottom: 0;
@@ -1264,4 +1416,107 @@ img {
 }
 #faq #faq_fd_tab .content-block {
   margin-top: 5px;
+}
+
+
+/************************
+        FD Calculator
+*************************/
+#fd_calculator .validation_col{
+  color: red;
+}
+#fd_calculator #calculate{
+  margin: 2em 0;
+}
+#fd_calculator .breadcrumb{
+  margin: 1em 0;
+}
+input[type=range] {
+  height: 28px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: #3071A9;
+  border-radius: 5px;
+  border: 1px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #3071A9;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: #3071A9;
+  border-radius: 5px;
+  border: 1px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #3071A9;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3071A9;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071A9;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #3071A9;
 }
