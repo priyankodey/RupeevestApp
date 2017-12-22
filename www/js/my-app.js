@@ -532,7 +532,7 @@ if(page.name==='OfferMutualFund')
 if(page.name==='ToolsSIPReturn')
 {
     
-    $$.get(curr_ip+'app_services/sip_return_page?schemecode=1331', function (data) 
+    $$.get(curr_ip+'app_services/sip_return_page', function (data) 
     {
         var data = JSON.parse(data);
 
@@ -557,7 +557,7 @@ if(page.name==='ToolsSIPReturn')
                       
         if(url=="ERROR")
         {              
-           window.history.pushState('','','/Mutual-Fund-Calculator/Sip-Return/');
+           // window.history.pushState('','','/Mutual-Fund-Calculator/Sip-Return/');
         }
         if(url!="NONE" && url!="ERROR")
         {                         
@@ -581,7 +581,7 @@ if(page.name==='ToolsSIPReturn')
             $('#container-head').show();
 
             $('#fund_names_sip').val($("#fund_name_actual").val().replace(/-/g,' '));
-                window.history.pushState('','',url);                     
+                // window.history.pushState('','',url);                     
         }
 
         $("#frequency").change(function() 
@@ -979,7 +979,7 @@ $$.get(curr_ip+'app_services/get_stock_detail',{fin_code:fincode_tmp},function (
                           var no_of_stock = data.stock_data.length;
                           var mnth_1_total=0,mnth_2_total=0,mnth_3_total=0,mnth_4_total=0; 
 
-                             window.history.pushState('','','/Mutual-Fund-Holdings/'+nw_comp_name+'/'+fincode_tmp+'');
+                             // window.history.pushState('','','/Mutual-Fund-Holdings/'+nw_comp_name+'/'+fincode_tmp+'');
 
 
 

@@ -1186,7 +1186,7 @@ function fundname_search_sip_return()
 
 
                           var url1 = "/Mutual-Fund-Calculator/Sip-Return/"+url_fund_name+"/"+schemecode
-                          window.history.pushState('','',url1);
+                        //  window.history.pushState('','',url1);
                           console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjj");
 
                           test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
