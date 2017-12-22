@@ -1431,16 +1431,16 @@ img {
 #fd_calculator .breadcrumb{
   margin: 1em 0;
 }
-input[type=range] {
+#fd_calculator input[type=range] {
   height: 28px;
   -webkit-appearance: none;
   margin: 10px 0;
   width: 100%;
 }
-input[type=range]:focus {
+#fd_calculator input[type=range]:focus {
   outline: none;
 }
-input[type=range]::-webkit-slider-runnable-track {
+#fd_calculator input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 10px;
   cursor: pointer;
@@ -1450,7 +1450,7 @@ input[type=range]::-webkit-slider-runnable-track {
   border-radius: 5px;
   border: 1px solid #000000;
 }
-input[type=range]::-webkit-slider-thumb {
+#fd_calculator input[type=range]::-webkit-slider-thumb {
   box-shadow: 1px 1px 1px #000000;
   border: 1px solid #000000;
   height: 20px;
@@ -1461,10 +1461,10 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   margin-top: -6px;
 }
-input[type=range]:focus::-webkit-slider-runnable-track {
+#fd_calculator input[type=range]:focus::-webkit-slider-runnable-track {
   background: #3071A9;
 }
-input[type=range]::-moz-range-track {
+#fd_calculator input[type=range]::-moz-range-track {
   width: 100%;
   height: 10px;
   cursor: pointer;
@@ -1474,7 +1474,7 @@ input[type=range]::-moz-range-track {
   border-radius: 5px;
   border: 1px solid #000000;
 }
-input[type=range]::-moz-range-thumb {
+#fd_calculator input[type=range]::-moz-range-thumb {
   box-shadow: 1px 1px 1px #000000;
   border: 1px solid #000000;
   height: 20px;
@@ -1483,7 +1483,7 @@ input[type=range]::-moz-range-thumb {
   background: #FFFFFF;
   cursor: pointer;
 }
-input[type=range]::-ms-track {
+#fd_calculator input[type=range]::-ms-track {
   width: 100%;
   height: 10px;
   cursor: pointer;
@@ -1492,19 +1492,19 @@ input[type=range]::-ms-track {
   border-color: transparent;
   color: transparent;
 }
-input[type=range]::-ms-fill-lower {
+#fd_calculator input[type=range]::-ms-fill-lower {
   background: #3071A9;
   border: 1px solid #000000;
   border-radius: 10px;
   box-shadow: 1px 1px 1px #000000;
 }
-input[type=range]::-ms-fill-upper {
+#fd_calculator input[type=range]::-ms-fill-upper {
   background: #3071A9;
   border: 1px solid #000000;
   border-radius: 10px;
   box-shadow: 1px 1px 1px #000000;
 }
-input[type=range]::-ms-thumb {
+#fd_calculator input[type=range]::-ms-thumb {
   margin-top: 1px;
   box-shadow: 1px 1px 1px #000000;
   border: 1px solid #000000;
@@ -1514,9 +1514,9 @@ input[type=range]::-ms-thumb {
   background: #FFFFFF;
   cursor: pointer;
 }
-input[type=range]:focus::-ms-fill-lower {
+#fd_calculator input[type=range]:focus::-ms-fill-lower {
   background: #3071A9;
 }
-input[type=range]:focus::-ms-fill-upper {
+#fd_calculator input[type=range]:focus::-ms-fill-upper {
   background: #3071A9;
 }
