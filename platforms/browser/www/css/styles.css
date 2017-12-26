@@ -285,6 +285,9 @@ img {
   height: 32px;
   padding: 3px 6px;
 }
+.validation_col{
+  color: #da4453;
+}
 .spinner {
   width: 100px;
   height: 100px;
@@ -1401,6 +1404,9 @@ img {
 #faq #faq_general_tab .content-block {
   margin-top: 5px;
 }
+#faq li{
+  margin-bottom: 1em;
+}
 #faq li a {
   color: #848a90;
   line-height: 24px;
@@ -1422,11 +1428,10 @@ img {
 /************************
         FD Calculator
 *************************/
-#fd_calculator .validation_col{
-  color: red;
-}
+
 #fd_calculator #calculate{
-  margin: 2em 0;
+  margin: 0em 0;
+  font-size: 20px;
 }
 #fd_calculator .breadcrumb{
   margin: 1em 0;

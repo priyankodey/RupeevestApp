@@ -6578,9 +6578,10 @@ function nextPaged() {
 /***************************** ToolsCalculatorFD / FD Calcultor START ************************** */ 
 
 
+ 
     if(page.name==='ToolsCalculatorFD'){
 
-    var $amount_slide = $('#js-amount-range');
+     var $amount_slide = $('#js-amount-range');
     var $amount = $('#amount');
 
     $amount_slide.rangeslider({
@@ -6588,10 +6589,12 @@ function nextPaged() {
       })
       .on('input', function() {
         // var abc=commaSeparateNumber(this.value);
+        console.log(commaSeparateNumber(this.value));
         $amount[0].value = commaSeparateNumber(this.value);
       });
 
     $amount.on('input', function() {
+        // console.log(commaSeparateNumber(this.value));
       $amount_slide.val(commaSeparateNumber(this.value)).change();
     });
 
@@ -6661,10 +6664,16 @@ function nextPaged() {
       $interest_slide.val(this.value).change();
     });
 
+    $('#amount').keyup(function(event) {
+   
+       $('#amount').val($('#amount').val().replace(/\D/g, "")
+        .replace(/\B(?=(\d\d)+\d$)/g, ","));
+    });
+
     $("#calculate").click(function () {
 
-      var abc=$('#amount').val().replace(/\D/g, "").replace(/\B(?=(\d\d)+\d$)/g, ",");
-      
+      // var abc=$('#amount').val().replace(/\D/g, "").replace(/\B(?=(\d\d)+\d$)/g, ",");
+      // console.log(abc)  ;
         var a = parseInt($("#amount").val().replace(/,/g, ''));
         var r = parseFloat($("#interest").val() / 100);
         var y = parseInt($("#year").val());
@@ -6677,10 +6686,14 @@ function nextPaged() {
         var amount=[];
         var interest = [];
         var opening = [];
+        $(".col-xs-12 .breadcrumb").css("border","1px solid #ccc");
+
 
             if($("#amount").val() < 1 ) {
                 $("#amount_valid").show();
                 $("#amount_valid").text('Please Fill The Amount') ; 
+                // console.log("aa")
+                $(".col-xs-12 .breadcrumb:nth-child(1)").css("border","1px dashed red");
                 return;               
            }        
            else {
@@ -6689,6 +6702,7 @@ function nextPaged() {
            if($("#year").val() == 0 && $("#month").val() == 0 && $("#day").val() == 0) {
                 $("#period_valid").show();
                 $("#period_valid").text('Please Choose period') ;
+                $(".col-xs-12 .breadcrumb:nth-child(2)").css("border","1px dashed red");
                 return;
            }
            else {
@@ -6697,6 +6711,7 @@ function nextPaged() {
            if($("#interest").val() < 1 ) {
             $("#interest_valid").show();
                 $("#interest_valid").text('Please Fill The Interest') ;
+                $(".col-xs-12 .breadcrumb:nth-child(3)").css("border","1px dashed red");
                 return;
            }
            else {
@@ -6707,7 +6722,7 @@ function nextPaged() {
 
         for(z=1; z<=x;z++)
         {
-            
+            console.log("a");
              var cb = a * Math.pow((1 + (r / p)) , (z * p));
             if (z>1){
               interest[z-1]= cb-amount[z-2]; 
@@ -6723,7 +6738,7 @@ function nextPaged() {
         }
 
         if(x>z-1){
-           
+            console.log("b")
             var cb = a * Math.pow((1 + (r / p)) , (x * p));
             amount[z-1]= cb;
             year[z-1]= x;
@@ -6736,6 +6751,10 @@ function nextPaged() {
             }
         }
 
+        // console.log(amount);
+        // console.log(year);
+        // console.log(interest);
+        // console.log(opening);
         var opening_final=[], interest_final=[] , year_final=[];
         var tot_intrst_earned=0, tot_maturity_amt=0;
          $('#part_calculations').empty();
@@ -6769,8 +6788,8 @@ function nextPaged() {
             $('#maturity_amt').html(commaSeparateNumber(tot_maturity_amt));
             $('#total_int').html(commaSeparateNumber(tot_intrst_earned));
             
-           
-        
+            console.log(tot_maturity_amt);
+        // draw_charts(opening_final,interest_final,year_final );    
         
     
     });

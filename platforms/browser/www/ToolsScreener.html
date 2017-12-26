@@ -1,0 +1,620 @@
+<div  data-page="ToolsScreener" class="page" id="mf_screener">
+    <div class="page-content">
+		<div class="container">
+    		<div class="row HeadTop">
+              <div class="col-sm-12">
+                <h1>Mutual Fund Screener</h1>
+              </div>
+            </div>
+            <!-- main section wrapper starts here -->
+            <div class="row tab-main-menu-wrapper">
+
+                <div class="col-xs-12 tab-wrapper">
+                   <ul class="nav nav-tabs" id="main-tabs">
+                        <li class="nav-menu" id="one">
+                            <a class="" data-toggle="tab" href="#home">Asset Class Selection</a>
+                        </li>
+                        <li class="nav-menu" id="filter-nav">
+                            <a class="" data-toggle="tab" href="#menu2">Filters
+                            </a>
+                        </li>
+                        <li class="nav-menu" id="columns-nav">
+                            <a class="" data-toggle="tab" href="#menu3">Choose Columns
+                            </a>
+                        </li>
+                        <li class="nav-menu" id="date-nav">
+                            <a class="" data-toggle="tab" href="#menu4">Point to Point Return
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade ">  
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="outer_wrapper_fund">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                               <span class="selector_head" id="eq_selector_head">Equity Funds</span>
+                                                <div class="ineer_wrapper_fund" id="eq_selector">
+                                                    <label>
+                                                         <input type="checkbox" id="EquityLargeCap" name="chkAllEquity" class="chkboxasset div-tag ck" value="6" data-text="Equity : Large Cap">&nbsp;Equity : Large Cap
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="EquityMultiCap" name="chkAllEquity" class="chkboxasset div-tag ck" value="7" data-text="Equity : Multi Cap">&nbsp;Equity : Multi Cap
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="EquityMid&SmallCap" name="chkAllEquity" class="chkboxasset div-tag ck" value="8" data-text="Equity : Mid & Small Cap">&nbsp;Equity : Mid & Small Cap
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="EquityTaxSaving(ELSS)" name="chkAllEquity" class="chkboxasset div-tag ck" value="10" data-text="Equity : Tax Saving (ELSS)">&nbsp;Equity : Tax Saving (ELSS)
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="EquityInternational" name="chkAllEquity" class="chkboxasset div-tag ck" value="11" data-text="Equity : International">&nbsp;Equity : International
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="EquitySectorPharma" name="chkAllEquity" class="chkboxasset div-tag ck" value="9" data-text="Equity : Sector-Pharma">&nbsp;Equity : Sector - Pharma
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="EquitySectorFinancialServices" name="chkAllEquity" class="chkboxasset div-tag ck" value="9" data-text="Equity : Sector-Financial Services">&nbsp;Equity : Sector - Financial Services
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="EquitySectorFMCG" name="chkAllEquity" class="chkboxasset div-tag ck" value="9" data-text="Equity : Sector-FMCG">&nbsp;Equity : Sector - FMCG
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="EquitySectorTech" name="chkAllEquity" class="chkboxasset div-tag ck" value="9" data-text="Equity : Sector-Tech">&nbsp;Equity : Sector - Tech
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="EquitySectorInfrastructure" name="chkAllEquity" class="chkboxasset div-tag ck" value="9" data-text="Equity : Sector-Infrastructure">&nbsp;Equity : Sector - Infrastructure
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="EquitySectorEnergy/Power" name="chkAllEquity" class="chkboxasset div-tag ck" value="9" data-text="Equity : Sector-Energy/Power">&nbsp;Equity : Sector - Energy/Power
+                                                    </label>
+                                                    <label>
+                                                          <input type="checkbox" id="EquityFoF" name="chkAllEquity" class="chkboxasset div-tag ck" value="9" data-text="Equity : FoF">&nbsp;Equity : FoF
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="EquityOthers" name="chkAllEquity" class="chkboxasset div-tag ck" value="12" data-text="Equity : Others">&nbsp;Equity : Others
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <span class="selector_head" id="db_selector_head">Debt Funds</span>
+                                                <div class="ineer_wrapper_fund" id="db_selector">
+                                                    <label>
+                                                        <input type="checkbox" id="DebtLiquid" name="chkAllDebt" value="13" class = "ck" data-text="Debt : Liquid">&nbsp;Debt : Liquid<br>
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="DebtUltraShortTerm" name="chkAllDebt" value="14" class = "ck" data-text="Debt : Ultra Short Term">&nbsp;Debt : Ultra Short Term
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="DebtShortTerm" name="chkAllDebt" value="15" class = "ck" data-text="Debt : Short Term">&nbsp;Debt : Short Term
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="DebtMedium&LongTerm" name="chkAllDebt" value="15" class = "ck" data-text="Debt : Medium & Long Term">&nbsp;Debt : Medium &amp; Long Term
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="DebtFTP/FMP" name="chkAllDebt" value="17" class = "ck" data-text="Debt : FTP/FMP">&nbsp;Debt : FTP / FMP
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="DebtFoF" name="chkAllDebt" value="17" class = "ck" data-text="Debt : FoF">&nbsp;Debt : FoF
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="DebtOthers" name="chkAllDebt" value="18" class = "ck" data-text="Debt : Others">&nbsp;Debt : Others
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <span class="selector_head" id="hb_selector_head">Hybrid Funds</span>
+                                                <div class="ineer_wrapper_fund" id="hb_selector">
+                                                    <label>
+                                                         <input type="checkbox" id="HybridEquityOriented" name="chkAllHybrid" value="19" class = "ck" data-text="Hybrid : Equity Oriented">&nbsp;Hybrid : Equity Oriented
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="HybridDebtOriented" name="chkAllHybrid" value="20" class = "ck" data-text="Hybrid : Debt Oriented">&nbsp;Hybrid : Debt Oriented
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="HybridArbitrage" name="chkAllHybrid" value="21" class = "ck" data-text="Hybrid : Arbitrage">&nbsp;Hybrid : Arbitrage
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="HybridFoF" name="chkAllHybrid" value="17" class = "ck" data-text="Hybrid : FoF">&nbsp;Hybrid : FoF
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="HybridOthers" name="chkAllHybrid" value="22" class = "ck" data-text="Hybrid : Others">&nbsp;Hybrid : Others
+                                                    </label>    
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <span class="selector_head" id="etf_selector_head">ETFs / Gold</span>
+                                                <div class="ineer_wrapper_fund_last" id="etf_selector">
+                                                    <label>
+                                                        <input type="checkbox" id="GoldMFs" name="chkAllEtfs" value="23" class = "ck" data-text="Gold : MFs">&nbsp;Gold : MFs
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="GoldETFs" name="chkAllEtfs" value="24" class = "ck" data-text="Gold : ETFs">&nbsp;Gold : ETFs
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="EquityETFs" name="chkAllEtfs" value="23" class = "ck" data-text="Equity : ETFs">&nbsp;Equity : ETFs
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" id="DebtETFs" name="chkAllEtfs" value="23" class = "ck" data-text="Debt : ETFs">&nbsp;Debt : ETFs
+                                                    </label>
+                                                    <!-- <label>
+                                                         <input type="checkbox" id="chkAllothers" name="chkothers1" value="5" class="chkbox ck" data-text="Others" >&nbsp;Others
+                                                    </label> -->
+                                                </div>
+                                                <div class="ResetSelect">
+                                                    <div class="pull-right">
+
+                                                         <button class="btn btn-primary btn-xs reset_asset"><span class="glyphicon glyphicon-refresh " aria-hidden="true"></span> Reset All</button>
+                                                         <button class="btn btn-primary btn-xs dropbox_close"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+
+                                                    </div>
+                                                    <div class="pull-left">
+                                                         <span class="select_all"><input type="checkbox" id= "ChkAllCategories"  value= "All Funds" class="categories_all" >&nbsp;Select All</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                                                 
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            
+                        </div>
+                       
+                        <div id="menu2" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="outer_wrapper_rating">
+                                         <span id="rvfundrating_head" class="fund_head">RupeeVest Rating</span><br>
+                                         <div class="filter_rating" id="rvfundrating">
+                                        <input type="checkbox" onclick="rating_all()" id="chkratingAll" name="chkRating" value="25" checked="checked">&nbsp;All<br>
+                                        <input type="checkbox" id="rating5" name="chkratingAll" value="5" class="rating" >&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><br>
+                                        <input type="checkbox" id="rating4" name="chkratingAll" value="4" class="rating" >&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><br>
+                                        <input type="checkbox" id="rating3" name="chkratingAll" value="3" class="rating" >&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><br>
+                                        <input type="checkbox" id="rating2" name="chkratingAll" value="2" class="rating" >&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><br>
+                                        <input type="checkbox" id="rating1" name="chkratingAll" value="1" class="rating" >&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span><br>
+                                        <input type="checkbox" id="ratingUnrated" name="chkratingAll" value="Unrated" class="rating" >&nbsp;Unrated<br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="outer_wrapper_fund">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <span class="fund_head" id="amcname_head">Fund House</span><span class="pull-right"><input type="checkbox" id= "ChkAmc"  value= "all" class="amc_all" >&nbsp;<span>Select </span>All</span>
+                                                <div class="ineer_wrapper_fund" id="amcname">
+                                                     <input type="checkbox" >&nbsp;Option1<br>
+                                                     
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <span class="fund_head" id="fundmanager_head">Fund Manager</span><span class="pull-right"><input type="checkbox" id="fmanager" class="Chkfmanager" >&nbsp;<span>Select </span>All</span>
+                                                <div class="ineer_wrapper_fund" id="fundmanager">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <span class="fund_head" id="indexname_head">Benchmark Index</span><span class="pull-right"><input type="checkbox" id="fund_index" class="f_index" >&nbsp;<span>Select </span>All</span>
+                                                <div class="ineer_wrapper_fund" id="indexname">
+                                                     <!-- <input type="checkbox" >&nbsp;Option1<br>
+                                                     <input type="checkbox" >&nbsp;Option1<br>
+                                                     <input type="checkbox" >&nbsp;Option1<br>
+                                                     <input type="checkbox" >&nbsp;Option1<br>
+                                                     <input type="checkbox" >&nbsp;Option1<br>
+                                                     <input type="checkbox" >&nbsp;Option1<br>
+                                                     <input type="checkbox" >&nbsp;Option1<br>
+                                                     <input type="checkbox" >&nbsp;Option1<br>
+                                                     <input type="checkbox" >&nbsp;Option1<br>
+                                                     <input type="checkbox" >&nbsp;Option1<br> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <span class="fund_head" id="fundtype_head">Fund Type</span>
+                                                <div class="ineer_wrapper_fund_last" id="fundtype">
+                                                    <label>
+                                                         <input type="checkbox" class="fund_type" id="OpenEnded" value="Open Ended">&nbsp;Open Ended 
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" class="fund_type" id="ClosedEnded" value="Closed Ended">&nbsp;Closed Ended 
+                                                    </label>
+                                                    <label>
+                                                         <input type="checkbox" class="fund_type" id="Interval" value="Interval">&nbsp;Interval 
+                                                    </label>
+                                                </div>
+                                                <div class="pull-right ResClose">
+                                                      <button class="btn btn-primary btn-xs reset_filter"><span class="glyphicon glyphicon-refresh " aria-hidden="true"></span> Reset All</button>
+                                                      <button class="btn btn-primary btn-xs dropbox_close"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                                                 
+                                    </div>
+                                   
+                                </div>
+                            </div>
+
+                             
+                        </div>
+                       <div id="menu3" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="outer_wrapper_fund">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                               <span class="columns_head" id="basic_columns_head">Basic Details</span>
+                                                <div class="ineer_wrapper_fund" id="basic_columns">
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" name="aum" onclick="showcolumns(this.id)" id="5" >&nbsp;AUM (in ₹ cr)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="6" >&nbsp;Expense Ratio (%)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="7" >&nbsp;Exit Load (%)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="8" >&nbsp;Fund Type
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="9" >&nbsp;Inception Date
+                                                    </label>
+                                                 <!--    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="27" >&nbsp;Min. Investment (in ₹)
+                                                    </label> -->
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="10" >&nbsp;Benchmark Index
+                                                    </label>
+                                                   <!--  <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="29" >&nbsp;Fund House
+                                                    </label> -->
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="11" >&nbsp;NAV 
+                                                    </label>              
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <span class="columns_head" id="return_columns_head">Return (%)</span>
+                                                <div class="ineer_wrapper_fund" id="return_columns">
+                                                   <!--   <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="7" >&nbsp;YTD Return
+                                                    </label> -->
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="12" >&nbsp;Return (1 mo)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="13" >&nbsp;Return (3 mo)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="14" >&nbsp;Return (6 mo)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="15"  >&nbsp;Return (1 yr)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="16" >&nbsp;Return (2 yrs)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="17" >&nbsp;Return (3 yrs)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="18"  >&nbsp;Return (5 yrs)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="19"  >&nbsp;Return (10 yrs)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <span class="columns_head" id="portfolio_attributes_columns_head">Portfolio Attributes</span>                                        
+                                                <div class="ineer_wrapper_fund" id="portfolio_attributes_columns">
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="20" >&nbsp;Turnover Ratio (%)
+                                                    </label>
+                                                     <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="21" >&nbsp;No. of Stocks
+                                                    </label>  
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="22" >&nbsp;Highest Sector Allocation
+                                                    </label>
+                                                   
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="23" >&nbsp;Average Maturity (in years)
+                                                    </label>  
+                                                    <label> 
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="24" >&nbsp;Modified Duration (in years)
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="25" >&nbsp;Yield To Maturity (%)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <span class="columns_head" id="mf_ratio_columns_head">MF Ratios</span>
+                                                <div class="ineer_wrapper_fund_last" id="mf_ratio_columns">
+                                                  <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="26" >&nbsp;Alpha
+                                                    </label>
+                                                      <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="27" >&nbsp;Sharpe
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="28" >&nbsp;Sortino
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="29" >&nbsp;Beta
+                                                    </label>
+                                                  
+                                                    <label>
+                                                        <input type="checkbox" class="cbx" onclick="showcolumns(this.id)" id="30" >&nbsp;Standard Deviation
+                                                    </label>
+                                                    
+                                                </div>
+                                                <div class="pull-right">
+                                                     <button class="btn btn-primary btn-xs reset_column"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset All</button>
+                                                     <button class="btn btn-primary btn-xs dropbox_close"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                                                 
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div id="menu4" class="tab-pane fade">
+                            <div class="row">                               
+                                <div class="col-sm-12">
+                                    <div class="outer_wrapper_fund">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <span>From</span><input id="from_date" class="form-control" placeholder="dd-mm-yyyy" type="text" title="Date in the format dd-mmm-yyyy" readonly="readonly">
+                                                    </li>
+                                                    <li>
+                                                        <span>To</span><input id="to_date" class="form-control" placeholder="dd-mm-yyyy" type="text" title="Date in the format dd-mmm-yyyy" readonly="readonly">
+                                                    </li>
+                                                </ul>
+                                                <div class="">
+                                                     <button class="btn btn-primary btn-xs ptp_show"><span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span> Show</button>
+                                                     <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset All</button>
+                                                     <button class="btn btn-primary btn-xs dropbox_close ptp_close"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+                                                </div>
+                                            </div>
+                                        </div>                                                                           
+                                    </div>
+                                </div>
+                            </div>                             
+                        </div> -->
+
+
+
+                        <div id="menu4" class="tab-pane fade">
+                            <div class="row">                               
+                                <div class="col-sm-12">
+                                    <div class="outer_wrapper_fund">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <span class="StartDate">Start Date</span><input id="from_date" class="form-control" placeholder="dd/mm/yyyy" type="text" title="Date in the format dd/mm/yyyy">
+                                                       
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <span class="EndDate">End Date</span><input id="to_date" class="form-control" placeholder="dd/mm/yyyy" type="text" title="Date in the format dd/mm/yyyy">
+                                                        
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                     <h6 id="error_msg" class="text-center">&nbsp;</h6>
+                                                   </div>
+                                                </div>
+                                                
+                                                <div class="row menu4_btn">
+                                                    <div class="col-md-12 text-center">
+                                                     <button class="btn btn-primary btn-xs ptp_show" ><span class="glyphicon glyphicon-plus " aria-hidden="true"  ></span> Add</button>
+                                                     <button class="btn btn-primary btn-xs ptp_remove"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Remove</button>
+                                                     <button class="btn btn-primary btn-xs dropbox_close ptp_close"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                            </div>
+                                        </div> 
+                                        <div class="row">
+                                          <div class="col-md-2"></div>
+                                          <div class="col-md-8 text-center">
+                                            <hr class="mini central">
+                                            <span>This feature helps you calculate the exact return of your selected funds between any two custom dates as selected by you. Returns greater than 1 year have been annualized.</span>
+                                          </div>
+                                          <div class="col-md-2"></div>
+                                        </div>                                                                          
+                                    </div>
+                                </div>
+                            </div>                             
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <div class="fixed-button">
+                <button class="invest-now-button">Invest Now</button>
+            </div> -->
+
+            <!-- <div class="tags"></div> -->
+           <!--  <div class="closeTag"></div> -->
+           <!--  <div class="row">
+                <div class="col-md-6">
+                    <button class="col-md-6 snapShotTab btn btn-info btn-sm">Snapshot</button>
+                    <button class="col-md-6 historicalTab btn btn-info btn-sm">Historical Returns</button>
+                </div>
+                 <div class="col-md-6">
+                    <ul class="list-inline pull-right">
+                        <li>
+                            <button class="btn btn-info btn-sm">Download</button>
+                        </li>
+                        <li>
+                            <button class="btn btn-info btn-sm" onclick="add_compare()">Add To Compare</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="col-md-4 annuallyTab enable-table enabling-color btn btn-info btn-xs" >Annually</button>
+                    <button class="col-md-4 quarterlyTab enable-table enabling-color btn btn-info btn-xs">Quarterly</button>
+                    <button class="col-md-4 monthlyTab enable-table enabling-color btn btn-info btn-xs">Monthly</button>
+                </div>
+                           
+               
+            </div> -->
+
+            <div class="row shda">
+                <div class="col-xs-12 snaphist">                   
+                    <button class="btn_snap snapShotTab active">Snapshot</button>         
+                    <button class="btn_hist historicalTab">Historical Returns</button>                       
+                </div>
+                <div class="col-md-6 docp">
+                    <ul class="list-inline pull-right">
+                        <li>
+                            <button class="btn btn-default btn-xs" id="screener_download" >Download</button>
+                        </li>
+                        <li class="hidden-xs">
+                            <button class="btn btn-default btn-xs" onclick="add_compare()">Add To Compare</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 aqm">
+                    <button class="btn_annually annuallyTab enable-table enabling-color" >Annually</button>
+                    <button class="btn_quarterly quarterlyTab enable-table enabling-color">Quarterly</button>
+                    <button class="btn_monthly monthlyTab enable-table enabling-color">Monthly</button>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-sm-12 pull-left" >
+                    <div class="row fund_attr">
+                        <div class="col-sm-2 col-lg-2 fattr">
+                            <span><strong>Category: </strong></span>
+                        </div>
+                        <div class="col-sm-10 col-lg-10">
+                            <div class="btn-group" id="ui_classification">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="FundType_display" class="row fund_attr">
+                        <div class="col-sm-2 col-lg-2 fattr">
+                            <span><strong>Fund Type: </strong></span>
+                        </div>
+                        <div class="col-sm-10 col-lg-10">
+                            <div class="btn-group" id="ui_fund_type">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="rating_display" class="row fund_attr" style="display:none;">
+                        <div class="col-sm-2 col-lg-2 fattr">
+                            <span><strong>Rating: </strong></span>
+                        </div>
+                        <div class="col-sm-10 col-lg-10">
+                            <div class="btn-group" id="ui_rating">
+                            </div>
+                        </div>
+                    </div>
+                     <div id="amc_display" class="row fund_attr" style="display:none;">
+                        <div class="col-sm-2 col-lg-2 fattr">
+                            <span><strong>Fund House: </strong></span>
+                        </div>
+                        <div class="col-sm-10 col-lg-10">
+                            <div class="btn-group" id="ui_filter">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="manager_display" class="row fund_attr" style="display:none;">
+                        <div class="col-sm-2 col-lg-2 fattr">
+                            <span><strong>Fund Manager: </strong></span>
+                        </div>
+                        <div class="col-sm-10 col-lg-10">
+                            <div class="btn-group" id="ui_manager">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="index_display" class="row fund_attr" style="display:none;">
+                        <div class="col-sm-2 col-lg-2 fattr">
+                            <span><strong>Index Name: </strong></span>
+                        </div>
+                        <div class="col-sm-10 col-lg-10">
+                            <div class="btn-group" id="ui_index">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                               
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class ="pull-right">
+                        <span>Funds selected:</span>
+                        <span id="total_res"></span>
+                    </div> 
+                </div>
+            </div>
+
+  
+                  <div id="wait" style="display: none;">
+                      <div class="spinner"></div>
+                  </div>  
+
+            <!-- <span  class="range-slider-span"><input id="Slider2" type="slider" name="price" value="0;2056" /></span> -->
+           <div class="row">
+            <div class="col-xs-12" id="main_div">
+                 
+                 <div id ="annuallyTable_div">
+                     
+                 </div>
+                 <div id ="quarterlyTable_div">
+                     
+                 </div>
+                  <div id ="monthlyTable_div">
+                     
+                 </div>
+<!-- 
+                <table style="width:100%" id="quarterlyTable" class="display" border-collapse="collapse">
+                    
+                </table>
+                <table style="width:100%" id="monthlyTable" border-collapse="collapse">
+                    
+                </table> -->
+
+
+
+                <div id="screener_table_div" class="area_wrap">
+                    
+
+                </div>
+               <!--  <table style="width:100%" id="snapShotTable" name="aum" border-collapse="collapse" class="tablesorter "> --> 
+                 <div id="snapshottable_div" class="d_none">
+                    <p>None of the funds qualified for the selected criteria. <a href="#" onclick="menu_selector()"> Click here </a> to modify your selection.</p>
+                  </div>
+            </div>
+        </div>
+
+
+
+          </div>
+	</div>
+</div> 
