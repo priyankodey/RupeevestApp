@@ -6,7 +6,7 @@ var myApp = new Framework7({pushState: true,});
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
-var curr_ip='http://192.168.1.22:3000/'
+var curr_ip='http://192.168.1.23:3000/'
 
 var RVNav="";
 RVNav ="<div class='navbar'><div class='navbar-inner'><div class='left'><a href='#' class='link icon-only open-panel'><i class='icon icon-bars'></i></a></div><div class='center'><span id='navbar_info_span'><a href='index.html'><img src='img/icons/logo.png' alt='RupeeVest'></a></span><input type='text' id='fund_names' class='form-control ui-autocomplete-input' placeholder='Search mutual funds here...' autocomplete='off'></div><div class='right'><a href='#' class='' id='navbar_search_btn'><i class='fa fa-search' aria-hidden='true'></i></a><a href='#' class='' id='navbar_close_btn'><i class='fa fa-times' aria-hidden='true'></i></a></div></div></div>"
@@ -55,7 +55,7 @@ $$(document).on('deviceready', function() {
 
    var interval = setInterval(function () { myFunction(); }, 1000);
 
-    $$.get('http://192.168.1.22:3000/functionalities/get_user_info', {iin: 5011179660},function (data) {
+    $$.get('http://192.168.1.23:3000/functionalities/get_user_info', {iin: 5011179660},function (data) {
        });
 
             $$('#fund_names').hide();
@@ -72,6 +72,25 @@ $$(document).on('deviceready', function() {
                 $$('#navbar_info_span').show();
                 $$('#navbar_close_btn').hide();
                 $$('#navbar_search_btn').show();
+            });
+            $$('#sidepanel_log_out_flag').on('click', function () {
+                console.log("LOg out");
+                  $$.ajax({
+                    type: 'DELETE',
+                    url: curr_ip+'users/sign_out',
+                    
+                    success: function(response){
+                        //alert('got the response');
+                        console.log(response);
+                        mainView.router.loadPage('index.html');
+                        $("#sidepanel_log_out_flag").hide();
+                        $("#sidepanel_log_flag").show();
+                        
+                    },
+                    error: function(){
+                        alert('got an error');
+                    }
+                });
             });
             $$('li.accordion-item .item-content.item-link').on('click', function (e) {
                 $(this.children[0].children[2]).toggleClass("fa-minus");
@@ -120,53 +139,244 @@ $$(document).on('pageInit', function (e) {
 
     }
 
-    if (page.name === 'about') {
-        
-    }
 
-   if(page.name==='FAQs'){
-        
-        $$.get(curr_ip+'app_services/faq_list_of_details', function (faq_data_ajax) 
-        {
-            var faq_data=JSON.parse(faq_data_ajax);
-            var tab_bank_data="";
-            for (var i=0; i<faq_data.bank_list.length;i++){
+/******************* Signin / Signout / Forgot Password START *******************/
 
-                tab_bank_data=tab_bank_data+"<tr><td>"+(i+1)+"</td><td>"+faq_data.bank_list[i].BANK_NAME+"</td></tr>";                
-            }
-            
-            var tab_bank_data_final="<thead><tr><th>Sl.No.</th><th>Bank Name</th></tr></thead><tbody>"+tab_bank_data+"</tbody>";
-
-            $("#faq_bank_table").html(tab_bank_data_final);
-            var li_amc_data="";
-            for (i=0; i<faq_data.amc_list.length;i++){
-                
-                li_amc_data=li_amc_data+"<li>"+faq_data.amc_list[i].amc+"</li>";                
-            }
-            $("#faq_amc_list").html(li_amc_data);
-
-        });
-
-    }
-
-    if (page.url === 'login.html') {
-        
-        $$('.form-to-data').on('click', function(){
-           
-            var email = $$('#email').val();
-            var password= $$('#password').val();
-            console.log(email);
-            console.log(password);
-            $$.get('http://192.168.1.22:3000/users/sign_in', {email: email,password: password},function (data) {
-                
-                console.log(data);
-               
-            });
-
-        }); 
-    }
+if (page.name === 'RVSign') {
     
+    // $$('.form-to-data').on('click', function(){
+       
+    //     var email = $$('#email').val();
+    //     var password= $$('#password').val();
+    //     console.log(email);
+    //     console.log(password);
+    //     $$.get('http://192.168.1.23:3000/users/sign_in', {email: email,password: password},function (data) {
+            
+    //         console.log(data);
+           
+    //     });
 
+    // }); 
+
+// $("#aa").click(function(){
+//     console.log("AAAA");
+
+//     var data1=$('form#new_user').serialize();
+//     console.log(data1)
+//           var email = $$('#user_email').val();
+//         var password= $$('#user_password').val();
+//         console.log(email);
+//         console.log(password)
+//     $$.post(curr_ip+'users/sign_in',{data1} ,function (data) {
+//         console.log(data);
+
+//         });
+
+
+
+$("#new_user").submit(function(e) {
+    e.preventDefault();
+    var $form = $(e.target);
+// $("#new_user").click(function(){
+      alert("ooo")
+  $.ajax({
+    type: 'POST',
+    url: $form.attr('action'),
+    data: $form.serialize(),
+    // data: { 'email' : $("#email").val(),'password' : $("#password").val()},
+    success: function(data){
+        alert("success")
+        // console.log(data)
+      // $(this).fadeOut(600).hide(); 
+      // $(this).append('<h3>Thank You. You should receive an email shortly.</h3>').fadeIn(1000);
+      //window.location.href=curr_ip+"home/after_sign_in_path_for"
+      $("#sidepanel_log_out_flag").show();
+      $("#sidepanel_log_flag").hide();
+      mainView.router.loadPage('DashboardIndex.html');
+
+      // window.location.href="/dashboard";
+    },
+    error: function(){
+     alert("error")
+     $("#error_msg").removeClass("d_none");
+      
+    }
+  });
+ });
+
+
+
+//     $$.ajax({
+//     url: curr_ip+'users/sign_in',
+//     data: {email: email, password: password},
+//     success: function(response){
+//         alert('got the response');
+//         console.log(response);
+//     },
+//     error: function(){
+//         alert('got an error');
+//     }
+// });
+
+
+
+// });
+
+
+
+
+
+
+// $$('form.ajax-submit').on('submitted', function (e) {
+
+// }
+
+// $(document).ready(function() {
+    //form id
+    // $('#new_user')
+    // .bind('ajax:success', function(evt, data, status, xhr) {
+    //   //function called on status: 200 (for ex.)
+    //   console.log('success');
+    //   //window.location.href=curr_ip+"home/after_sign_in_path_for"
+    //   $$.post(curr_ip+'home/after_sign_in_path_for', function (data) {
+    //     console.log(data);
+
+    //     });
+
+    // })
+    // .bind("ajax:error", function(evt, xhr, status, error) {
+    //   //function called on status: 401 or 500 (for ex.)
+    //   console.log(xhr.responseText);
+    //   $("#flash_alert").removeClass("d_none")
+    // });
+
+// });
+
+
+    $$('.ForgotPass').on('click', function () {
+        myApp.prompt('Forgot your password ?', '', function (value) {
+           
+            if (value == '') { 
+                myApp.alert('Enter some value','');
+            }
+            else {
+                myApp.alert('"' + value + '" email not found','');
+            }
+           
+        });
+    });
+
+    
+}        
+
+/******************* Signin / Signout / Forgot Password END *******************/
+
+/******************************** Dashboard START ******************************/
+
+if(page.name === 'DashboardIndex') {
+
+    console.log(" inside DashboardIndex");
+    
+    // 3 Slides Per View, 10px Between
+    var mySwiper3 = myApp.swiper('.swiper-DIndex', {
+      pagination:'.swiper-DIndex .swiper-pagination',
+      spaceBetween: 10,
+      slidesPerView: 5
+    });
+}
+
+/********************************* Dashboard END ******************************/
+
+/**************************** Investor Profile START ******************************/
+
+if(page.name === 'DashboardProfile') {
+    
+    // 3 Slides Per View, 10px Between
+    var mySwiper3 = myApp.swiper('.swiper-DProfile', {
+      pagination:'.swiper-DProfile .swiper-pagination',
+      spaceBetween: 10,
+      slidesPerView: 5
+    });
+}
+
+/**************************** Investor Profile END ******************************/
+
+/************************** Transaction Status START ***************************/
+
+if(page.name === 'DashboardTransStatus') {
+    
+    // 3 Slides Per View, 10px Between
+    var mySwiper3 = myApp.swiper('.swiper-DTrans', {
+      pagination:'.swiper-DTrans .swiper-pagination',
+      spaceBetween: 10,
+      slidesPerView: 5
+    });
+}
+
+/************************** Transaction Status END ***************************/
+
+/*************************** Saved Portfolio START ***************************/
+
+if(page.name === 'DashboardSavedPort') {
+    
+    // 3 Slides Per View, 10px Between
+    var mySwiper3 = myApp.swiper('.swiper-DPort', {
+      pagination:'.swiper-DPort .swiper-pagination',
+      spaceBetween: 10,
+      slidesPerView: 5
+    });
+}
+
+/*************************** Saved Portfolio END ***************************/
+
+/************************* Schedule a pickup START ***************************/
+
+if(page.name === 'DashboardSchedule') {
+    
+    // 3 Slides Per View, 10px Between
+    var mySwiper3 = myApp.swiper('.swiper-DSchedule', {
+      pagination:'.swiper-DSchedule .swiper-pagination',
+      spaceBetween: 10,
+      slidesPerView: 5
+    });
+}
+
+/************************* Schedule a pickup END ***************************/
+
+/***************************** About Us START ***************************/
+if (page.name === 'about') {
+    
+}
+
+/****************************** About Us END ***************************/
+
+/******************************* FAQs START ****************************/
+
+if(page.name==='FAQs'){
+    
+    $$.get(curr_ip+'app_services/faq_list_of_details', function (faq_data_ajax) 
+    {
+        var faq_data=JSON.parse(faq_data_ajax);
+        var tab_bank_data="";
+        for (var i=0; i<faq_data.bank_list.length;i++){
+
+            tab_bank_data=tab_bank_data+"<tr><td>"+(i+1)+"</td><td>"+faq_data.bank_list[i].BANK_NAME+"</td></tr>";                
+        }
+        
+        var tab_bank_data_final="<thead><tr><th>Sl.No.</th><th>Bank Name</th></tr></thead><tbody>"+tab_bank_data+"</tbody>";
+
+        $("#faq_bank_table").html(tab_bank_data_final);
+        var li_amc_data="";
+        for (i=0; i<faq_data.amc_list.length;i++){
+            
+            li_amc_data=li_amc_data+"<li>"+faq_data.amc_list[i].amc+"</li>";                
+        }
+        $("#faq_amc_list").html(li_amc_data);
+
+    });
+}
+    
+/******************************* FAQs END ****************************/
     
 if(page.name === 'fund_details')
     {
@@ -391,7 +601,7 @@ if(page.name === 'fund_details')
                 $("#expenceratio").html(expenceratio);
 
                 $("#turnover_ratio").html(turnover_ratio);
-                $("#minimum_investment").html(minimum_investment+" / "+min_sip_inv);
+                $("#minimum_investment").html(" &#8377; "+minimum_investment+" / "+min_sip_inv);
                 $("#index_name").html(index_name);
                 $("#lockperiod").html(lockperiod);
                 $("#redemption_period").html(redemption_period);
@@ -430,6 +640,7 @@ if(page.name === 'fund_details')
         });
         
     }
+
 
     
 
@@ -527,6 +738,152 @@ if(page.name==='OfferMutualFund')
 
 /****************** MF Home / Top Rated MF END ******************************/
 
+/************* ToolsComparison / MF Comparison START ******************* */ 
+
+    if(page.name==='ToolsComparison'){
+
+
+        //  add_id_array();
+        // compare_value();
+        // add_fundname_search();
+
+        var array_id=[];
+        var color_arr=['#2d94e7','#85c953','#a55fa9','#00C78C'];
+
+        var query = $$.parseUrlQuery(page.url);
+        var scheme_codes=query.scheme_codes;
+
+
+        var id=scheme_codes.split(',');
+         var array_id1=[]
+         for(var t=0;t<id.length;t++)
+         {
+            array_id1.push(id[t]);
+            array_id.push(id[t]);
+         }
+        console.log(array_id);
+          generate_chart(array_id1,color_arr);
+         compare_value(array_id);
+        // add_fundname_search();
+        // console.log(scheme_name)
+        // fundname_search();
+
+        add_fundname_search();
+        $("#srch-term").autocomplete({
+
+                select: function (a, b) 
+                {
+                    console.log("aaa");
+                    console.log(b.item.value)
+                  $(this).val(b.item.value);
+                    $("#add_btn_search").click();
+                    //array_id.pop();
+
+                    //array_id.push("1131")
+                    // console.log(array_id)
+                    // console.log(array_id[1])
+                    // console.log(map[b.item.value])
+
+                    $$.post(curr_ip+'/home/index_search',{schemename: b.item.value},function (data) {
+                    var scheme_code=JSON.parse(data);
+
+                    // if(myApp.getCurrentView().activePage.name==='fund_details'){
+                    //     mainView.router.reloadPage('fund_details.html?scheme_code='+scheme_code_new.schemecode);
+                    // }
+                    // else{
+                    //     mainView.router.loadPage('fund_details.html?scheme_code='+scheme_code_new.schemecode);
+                    // }
+                    array_id.push(scheme_code.schemecode);
+                    mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]+','+array_id[1]);
+                });                   
+
+                }
+           });  
+
+ 
+
+ // $(".comparison_fund_inner_top.ct1 .close_image").click(function() {
+ //     array_id.shift();
+ //      mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]);
+ // })
+ // $(".comparison_fund_inner_top.ct2 .close_image").click(function() {
+ //     array_id.pop();
+ //      mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]);
+ // })
+
+     $(".col_0").css("display", "none");
+     $(".col_1").css("display", "none");
+     $(".col_2").css("display", "none");
+     $(".col_3").css("display", "none");
+
+         $(".close_image").click(function(){
+            $("."+this.parentElement.parentElement.parentElement.className.replace(/(mob_mf_com col-xs-3 col-sm-3| )/g, "")).hide();
+            
+
+            
+            if(this.parentElement.parentElement.parentElement.className.replace(/(mob_mf_com col-xs-3 col-sm-3| )/g, "")=="col_0")
+            {   
+
+
+                 var a = parseInt(array_id.indexOf($('#scheme_code_0').text()));
+                 array_id.splice(a,1);
+                 color_arr.splice(a,1);
+
+
+            }
+            else if(this.parentElement.parentElement.parentElement.className.replace(/(mob_mf_com col-xs-3 col-sm-3| )/g, "")=="col_1")
+            {
+              
+
+                  var a = parseInt(array_id.indexOf($('#scheme_code_1').text()));
+                  array_id.splice(a,1);  
+                  color_arr.splice(a,1);
+
+              
+            }
+            else if(this.parentElement.parentElement.parentElement.className.replace(/(mob_mf_com col-xs-3 col-sm-3| )/g, "")=="col_2")
+            {
+              
+
+                  var a = parseInt(array_id.indexOf($('#scheme_code_2').text()));
+                  array_id.splice(a,1);  
+                  color_arr.splice(a,1);
+
+              
+              
+            }
+            else if(this.parentElement.parentElement.parentElement.className.replace(/(mob_mf_com col-xs-3 col-sm-3| )/g, "")=="col_3")
+            {
+
+
+
+                   var a = parseInt(array_id.indexOf($('#scheme_code_3').text()));
+                   array_id.splice(a,1);  
+                   color_arr.splice(a,1); 
+              
+            }
+                
+                if(array_id.length>0)
+                {
+                  generate_chart(array_id,color_arr);
+
+                }
+                else
+                {
+
+                   $("#compare_chart").empty();                      
+                }
+
+         });
+
+         
+   
+
+
+    }
+
+/************* ToolsComparison / MF Comparison END ******************** */ 
+
 /*********************** SIP Return START ***********************************/
 
 if(page.name==='ToolsSIPReturn')
@@ -535,7 +892,7 @@ if(page.name==='ToolsSIPReturn')
     $$.get(curr_ip+'app_services/sip_return_page', function (data) 
     {
         var data = JSON.parse(data);
-
+console.log(data);
         $("#full_url").val(data.full_url);
         $("#schemecode_selected").val(data.selected_schemecode);
         $("#fund_name_rec").val(data.fund_name_rec);

@@ -79,10 +79,6 @@ p {
   font-style: normal;
   text-align: justify;
 }
-p a {
-  font-style: italic;
-  text-decoration: underline;
-}
 a {
   color: #6d9f00;
   text-decoration: none;
@@ -206,7 +202,8 @@ img {
   margin-left: 1em;
   font-size: 11px;
 }
-#RVSidebar #sidepanel_head #sidepanel_log_flag{
+#RVSidebar #sidepanel_head a {
+  color: #fff;
   margin-right: 1em;
   font-size: 11px;
 }
@@ -373,6 +370,52 @@ img {
   width: 40px;
 }
 
+/***********************************************
+        Sign In / Sign Out / Forgot User  
+************************************************/
+#RV_Sign h1 {
+  color: inherit;
+}
+#RV_Sign p {
+  margin: 5px 0 5px;
+}
+#RV_Sign .list-block {
+  margin: 15px 0 5px;
+  /*box-shadow: 1px 0px 15px 5px rgba(0,0,0,0.075);*/
+  box-shadow: 0 5px 5px -1px #777;
+}
+#RV_Sign .list-block ul {
+  border: 1px solid #ccc;
+  border-bottom: 0;
+  position: inherit;
+  background: transparent;
+}
+#RV_Sign .list-block ul li {
+  border-bottom: 1px solid #ccc;
+}
+#RV_Sign .Submit {
+  margin: 4em 0 2em;
+}
+#RV_Sign .SignInFB .btn {
+  background: #3b5998;
+  color: #fff;
+}
+#RV_Sign .SignInGoogle .btn {
+  background: #d34836;
+  color: #fff;
+}
+#RV_Sign .SignInFB .fa, #RV_Sign .SignInGoogle .fa  {
+  margin-right: 10px;
+}
+#RV_Sign .signin .SignInFB, #RV_Sign .signin .SignInGoogle {
+  margin-top: 1em;
+}
+#RV_Sign .signup .SignInFB, #RV_Sign .signup .SignInGoogle {
+  margin: 1em 0 6em;
+}
+
+
+
 /****************
     About page 
 *****************/
@@ -425,6 +468,31 @@ img {
   margin: 0;
 }
 
+/*************************
+    Dashboard Common
+**************************/
+
+.DashCommon .DashTop .swiper-slide span {
+  text-align:center;
+  display:block;
+  font-size:20px;
+}
+.DashCommon .DashTop .swiper-container {
+  margin: 10px 0;
+}
+.DashCommon .DashTop a.dashactive {
+  color: #0f5fa0;
+}
+.DashCommon .DashHead {
+  background: #f1f2f2;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+}
+.DashCommon .DashHead h1 {
+  color: inherit;
+  text-align: center;
+  font-size: 18px;
+}
 
 
 /**********************************
@@ -878,6 +946,61 @@ img {
 #mf_screener .shda .btn_hist {
   width: 48.7%;
 }
+
+
+
+/**************************************
+           MF Comparison
+***************************************/
+
+#rv_comparison #comparison_fund .list-group h2{
+  font-style: normal;
+    font-weight: 400;
+    margin: 10px 0;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 24px;
+    color: #5f6469;
+}
+#rv_comparison .area_wrap_mob {
+    overflow-x: auto;
+}
+#rv_comparison #comparison_fund {
+    width: 100em;
+}
+/*#rv_comparison .mob_mf_com {
+    min-width: 10em;
+    max-width: 15em;
+}*/
+#rv_comparison #comparison_basic {
+    min-width: 100em;
+}
+#rv_comparison #comparison_return{
+  min-width: 100em;
+}
+#rv_comparison #comparison_performance_measures{
+  min-width: 100em;
+}
+#rv_comparison #comparison_portfolio_attributes{
+  min-width: 100em;
+}
+#rv_comparison #comparison_portfolio_market{
+  min-width: 100em;
+}
+#rv_comparison #comparison_top_10_holdings{
+  min-width: 100em;
+}
+#rv_comparison #comparison_Chart{
+  min-width: 100em;
+}
+#rv_comparison .comp_holding{
+  white-space: nowrap;
+    overflow-x: auto;
+}
+#rv_comparison .glyphicon-remove-circle{
+  float: right;
+}
+
 
 /**************************************
       Stocks Held By Mutual Funds 

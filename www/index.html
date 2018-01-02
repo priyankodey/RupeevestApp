@@ -13,12 +13,12 @@
   <!--   
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
 
-   <!--  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src 'self' http://192.168.1.22:3000">
+   <!--  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src 'self' http://192.168.1.23:3000">
  -->
     <meta http-equiv="Content-Security-Policy" content="default-src * gap: ws: https://ssl.gstatic.com;style-src * 'unsafe-inline' 'self' data: blob:;script-src * 'unsafe-inline' 'unsafe-eval' data: blob:;img-src * data: 'unsafe-inline' 'self' content:;">
 
 
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://192.168.1.22:3000"> -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://192.168.1.23:3000"> -->
 
 
     <!-- Required meta tags-->
@@ -35,13 +35,12 @@
     <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
         http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
      -->
-
+    <link rel="stylesheet" href="css/bootstrap.min.css">  
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/datepicker.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
     <link rel="stylesheet" href="img/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">  
-    <link rel="stylesheet" href="css/datepicker.min.css">
     <link rel="stylesheet" href="css/styles.css">
     
 </head>
@@ -64,7 +63,10 @@
                                 <img id="sidepanel_head_img" src="img/icons/logo.png" alt="RupeeVest" />
                             </div>
                             <div class="col-xs-6"><span id="sidepanel_user_name">Hello Guest</span></div>
-                            <div class="col-xs-6"><span id="sidepanel_log_flag" class="pull-right">Login</span></div>
+                            <div class="col-xs-6">
+                              <a href="RVSign.html" id="sidepanel_log_flag" class="pull-right">Login</a>
+                              <a href="#" id="sidepanel_log_out_flag" class="pull-right d_none" >Logout</a>
+                            </div>
                         </div>
                     </div>
                     <ul>
@@ -73,7 +75,7 @@
                               <div class="item-title"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></div></a>
                         </li>
                         <li class="">
-                            <a href="#" class="item-content item-link">
+                            <a href="DashboardIndex.html" class="item-content item-link">
                               <div class="item-title"><i class="fa fa-user" aria-hidden="true"></i><span>Dashboard</span></div></a>
                         </li>
                         <li class="">
@@ -179,8 +181,12 @@
                               <div class="item-title"><i class="fa fa-info" aria-hidden="true"></i><span>FAQs</span></div></a>
                         </li>
                         <li class="">
-                            <a href="ShareApp.html" class="item-content item-link">
+                            <a href="#" data-picker=".picker-1" class="item-content item-link open-picker" >
                               <div class="item-title"><i class="fa fa-share-square-o" aria-hidden="true"></i><span>Share this App</span></div></a>
+
+                              <!-- a href="#" data-picker=".picker-1" class="open-picker" -->
+
+
                         </li>
                         <li class="">
                             <a href="ContactUs.html" class="item-content item-link">
@@ -318,6 +324,26 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Share App -->
+            <div class="picker-modal picker-1">
+                <div class="toolbar">
+                  <div class="toolbar-inner">
+                    <div class="left"></div>
+                    <div class="right"><a href="#" class="close-picker">Close</a></div>
+                  </div>
+                </div>
+                <div class="picker-modal-inner">
+                  <div class="content-block">
+                    <h4>Share this app</h4>
+                    <p>WhatsApp</p>
+                    <p>Messaging</p>
+                    <p>Tweet</p>
+                    <p>Gmail</p>
+                    <p>Snapchat</p>
+                  </div>
+                </div>
+            </div>
             <!-- Bottom Toolbar-->
             
             <div class="toolbar">
@@ -344,10 +370,11 @@
     <script type="text/javascript" src="js/chart.js"></script> 
     <script type="text/javascript" src="js/landing.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/comparision.js"></script>
     <script type="text/javascript" src="js/dataTables.min.js"></script> 
     <script type="text/javascript" src="js/rangeslider.min.js"></script>
    
-               
+
     <script type="text/javascript" src="js/my-app.js"></script>
 
 

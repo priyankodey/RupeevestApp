@@ -1344,7 +1344,7 @@ function add_fundname_search()
 {
 	$.ajax({
 		type:'GET',
-		url: '/home/get_search_data',
+		url: curr_ip+'home/get_search_data',
 		datatype:'json',
 		success:function(searchdata, textStatus, jqXHR) {
 		 console.log(searchdata);

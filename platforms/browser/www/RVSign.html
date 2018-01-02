@@ -1,0 +1,101 @@
+<div data-page="RVSign" class="page" id="RV_Sign">
+    <div class="page-content">                
+        <section class="container signin">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-right">New user ? <a href="#" class="open-login-screen">Sign up here</a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="text-center">Sign in</h1>
+                    <form id="new_user" class="new_user" action="http://192.168.1.23:3000/users/sign_in" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓">
+                        <div id="flash_alert" class="flash_error d_none">Invalid Email or password.</div>
+                        <div class="list-block">                            
+                            <ul>
+                                <li class="item-content">                                  
+                                    <input type="email" autofocus="autofocus" name="user[email]" placeholder="Email" id="user_email">                                    
+                                </li>
+                                <li class="item-content">
+                                    <input type="password" autocomplete="off" name="user[password]" placeholder="Password" id="user_password">                                    
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="ForgotPass">Forgot password ?</a>
+                        </div>
+                        <div class="Submit">                
+                            <input type="submit" name="commit" value="Log in" class="btn btn-primary form-control">
+                        </div>
+                    </form>                    
+                </div>
+                <div class="col-xs-12">            
+                    <p class="text-center">or<br><br>Sign in with</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 SignInFB">
+                    <a class="btn btn-block" href="#"><span class="fa fa-facebook-square" aria-hidden="true"></span>Facebook</a><br>
+                </div>
+                <div class="col-xs-6 SignInGoogle">
+                    <a class="btn btn-block" href="#"><span class="fa fa-google-plus-square" aria-hidden="true"></span>Google</a><br>
+                </div>
+            </div>
+
+            
+        </section>
+      <div class="login-screen">
+        <section class="container signup">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-right"><a href="#" class="close-login-screen">Back to Sign in</a></p>
+                </div>
+            </div>           
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="text-center">Sign up</h1>
+                    <form>
+                        <div class="list-block">                            
+                            <ul>
+                                <li class="item-content">                                             
+                                    <input type="text" autofocus="autofocus" placeholder="Name" name="user[name]" id="user_name1">
+                                </li>
+                                <li class="item-content">                                             
+                                     <input type="email" placeholder="Email" value="" name="user[email]" id="user_email1">
+                                </li>
+                                <li><h6>(8 characters minimum)</h6></li>
+                                <li class="item-content">                                             
+                                    <input type="password" placeholder="Password" autocomplete="off"  name="user[password]" id="user_password1">
+                                </li>
+                                <li class="item-content">                                             
+                                    <input type="password" placeholder="Retype Password" autocomplete="off" name="user[password_confirmation]" id="user_password_confirmation">
+                                </li>                                
+                            </ul>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="ForgotPass">Forgot password ?</a>
+                        </div>
+                        <div class="Submit"> 
+                            <input type="submit" name="commit" value="Sign up" class="btn btn-primary form-control">
+                        </div>
+                    </form>                    
+                </div>
+                <div class="col-xs-12">            
+                    <p class="text-center">or<br><br>Sign up with</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 SignInFB">
+                    <a class="btn btn-block" href="/users/auth/facebook"><span class="fa fa-facebook-square" aria-hidden="true"></span>Facebook</a><br>
+                </div>
+                <div class="col-xs-6 SignInGoogle">
+                    <a class="btn btn-block" href="/users/auth/google_oauth2"><span class="fa fa-google-plus-square" aria-hidden="true"></span>Google</a><br>
+                </div>
+            </div>
+        </section>
+      </div> 
+
+        
+    </div>
+</div>
+            

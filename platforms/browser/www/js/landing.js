@@ -1776,7 +1776,7 @@ function get_peer_comparision(schemecode)
     	var peer_comparision = JSON.parse(peer_comparision_ajax);
     	// console.log(peer_comparision);
 		var pc_data;
-		var th = "<thead class='breadcrumb_3'><tr><th rowspan='2'>Fund</th><th rowspan='2'>Rupeevest<br>Rating</th><th rowspan='2'>AUM (in cr)</th><th rowspan='2'>Expense (%)</th><th class='peertabl_mon' colspan='4'>Return (%)</th></tr><tr><th>6 Mo</th><th>1 Yr</th><th>3 Yr</th><th>5 Yr</th></tr></thead>";
+		var th = "<thead class='breadcrumb_3'><tr><th rowspan='2'>Fund</th><th rowspan='2'>Rupeevest<br>Rating</th><th rowspan='2'>AUM (in Cr)</th><th rowspan='2'>Expense (%)</th><th class='peertabl_mon' colspan='4'>Return (%)</th></tr><tr><th>6 Mo</th><th>1 Yr</th><th>3 Yr</th><th>5 Yr</th></tr></thead>";
 		for(var i =0;i <= peer_comparision.peer_comparision.length-1;i++)
 		{
 		var pc_data = peer_comparision.peer_comparision[i];
@@ -2645,9 +2645,9 @@ function get_return_data(schemecode)
 		    {
 		    	index_name="-";
 		    }
-			var category_Average = "category Average";
-			var Rank =  "Rank Within category";
-			var Number_fund = " Number Of funds in category";
+			var category_Average = "Category Average";
+			var Rank =  "Rank Within Category";
+			var Number_fund = " Number Of funds in Category";
 			var rank_1month = mf_data.rank_1month;
 		  	if(rank_1month==null)
 		    {
@@ -2961,9 +2961,9 @@ function get_risk_measures(schemecode)
 
 	var fund = "Fund";
 	var index_name = rm_data.index_name;
-	var category_Average = "category Average";
-	var Rank =  "Rank Within category";
-	var Number_fund = " Number Of funds in category";
+	var category_Average = "Category Average";
+	var Rank =  "Rank Within Category";
+	var Number_fund = " Number Of funds in Category";
 	 
 	var sdy_returns;
 	

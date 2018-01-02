@@ -4039,7 +4039,7 @@ $.datepicker.setDefaults({
         // console.log(asect_alloc);
         var sect_code=[];
         var hold_perc=[];
-        var table_thead="<thead class='breadcrumb_3'><tr><th>Sector Name</th><th>Sector Percentage</th></thead>"
+        var table_thead="<thead class='breadcrumb_3'><tr><th>Sector Name</th><th>%</th></thead>"
         var table_tbody_temp=""
         for(var i =0;i <= asect_alloc.asect_alloc_chart.length-1;i++)
         {
@@ -5389,7 +5389,7 @@ Highcharts.setOptions({
         title: {            
             //text: txt
             align: 'left',
-            text: 'Sector Allocation v/s Category Average',
+            text: 'Top 5 Sectors v/s Category Average',
             style: { "color": '#3b3f42', 'letter-spacing': "-1px", "font-family": "verdana, arial, helvetica, sans-serif", "margin-left": "10px" }
           
         },
