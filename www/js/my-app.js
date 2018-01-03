@@ -73,6 +73,14 @@ $$(document).on('deviceready', function() {
                 $$('#navbar_close_btn').hide();
                 $$('#navbar_search_btn').show();
             });
+            $$.get(curr_ip+'app_services/dashboard', function (client_data_ajax) {
+            var client_data=JSON.parse(client_data_ajax);
+            $("#sidepanel_user_name").html("Hello "+client_data.name);
+            $("#sidepanel_log_out_flag").show();
+            $("#sidepanel_log_flag").hide();
+
+            });
+            
             $$('#sidepanel_log_out_flag').on('click', function () {
                 console.log("LOg out");
                   $$.ajax({
@@ -80,11 +88,12 @@ $$(document).on('deviceready', function() {
                     url: curr_ip+'users/sign_out',
                     
                     success: function(response){
-                        //alert('got the response');
+      
                         console.log(response);
                         mainView.router.loadPage('index.html');
                         $("#sidepanel_log_out_flag").hide();
                         $("#sidepanel_log_flag").show();
+                         $("#sidepanel_user_name").html("Hello Guest");
                         
                     },
                     error: function(){
@@ -94,7 +103,7 @@ $$(document).on('deviceready', function() {
             });
             $$('li.accordion-item .item-content.item-link').on('click', function (e) {
                 $(this.children[0].children[2]).toggleClass("fa-minus");
-             });
+            });
 
             
 });
@@ -144,115 +153,33 @@ $$(document).on('pageInit', function (e) {
 
 if (page.name === 'RVSign') {
     
-    // $$('.form-to-data').on('click', function(){
-       
-    //     var email = $$('#email').val();
-    //     var password= $$('#password').val();
-    //     console.log(email);
-    //     console.log(password);
-    //     $$.get('http://192.168.1.23:3000/users/sign_in', {email: email,password: password},function (data) {
-            
-    //         console.log(data);
-           
-    //     });
-
-    // }); 
-
-// $("#aa").click(function(){
-//     console.log("AAAA");
-
-//     var data1=$('form#new_user').serialize();
-//     console.log(data1)
-//           var email = $$('#user_email').val();
-//         var password= $$('#user_password').val();
-//         console.log(email);
-//         console.log(password)
-//     $$.post(curr_ip+'users/sign_in',{data1} ,function (data) {
-//         console.log(data);
-
-//         });
-
-
-
 $("#new_user").submit(function(e) {
     e.preventDefault();
     var $form = $(e.target);
-// $("#new_user").click(function(){
-      alert("ooo")
-  $.ajax({
+    $.ajax({
     type: 'POST',
     url: $form.attr('action'),
     data: $form.serialize(),
-    // data: { 'email' : $("#email").val(),'password' : $("#password").val()},
     success: function(data){
         alert("success")
-        // console.log(data)
-      // $(this).fadeOut(600).hide(); 
-      // $(this).append('<h3>Thank You. You should receive an email shortly.</h3>').fadeIn(1000);
-      //window.location.href=curr_ip+"home/after_sign_in_path_for"
-      $("#sidepanel_log_out_flag").show();
-      $("#sidepanel_log_flag").hide();
-      mainView.router.loadPage('DashboardIndex.html');
+      $$.get(curr_ip+'app_services/dashboard', function (client_data_ajax) {
+          console.log(client_data_ajax);
+          var client_data=JSON.parse(client_data_ajax);
+          console.log(client_data.name)
+          $("#sidepanel_user_name").html("Hello "+client_data.name);
+          $("#sidepanel_log_out_flag").show();
+          $("#sidepanel_log_flag").hide();
 
-      // window.location.href="/dashboard";
+        });
+      
+      mainView.router.loadPage('DashboardIndex.html');
     },
     error: function(){
-     alert("error")
-     $("#error_msg").removeClass("d_none");
-      
+     alert("Invalid Email id or password");
+     $("#error_msg").removeClass("d_none");      
     }
   });
  });
-
-
-
-//     $$.ajax({
-//     url: curr_ip+'users/sign_in',
-//     data: {email: email, password: password},
-//     success: function(response){
-//         alert('got the response');
-//         console.log(response);
-//     },
-//     error: function(){
-//         alert('got an error');
-//     }
-// });
-
-
-
-// });
-
-
-
-
-
-
-// $$('form.ajax-submit').on('submitted', function (e) {
-
-// }
-
-// $(document).ready(function() {
-    //form id
-    // $('#new_user')
-    // .bind('ajax:success', function(evt, data, status, xhr) {
-    //   //function called on status: 200 (for ex.)
-    //   console.log('success');
-    //   //window.location.href=curr_ip+"home/after_sign_in_path_for"
-    //   $$.post(curr_ip+'home/after_sign_in_path_for', function (data) {
-    //     console.log(data);
-
-    //     });
-
-    // })
-    // .bind("ajax:error", function(evt, xhr, status, error) {
-    //   //function called on status: 401 or 500 (for ex.)
-    //   console.log(xhr.responseText);
-    //   $("#flash_alert").removeClass("d_none")
-    // });
-
-// });
-
-
     $$('.ForgotPass').on('click', function () {
         myApp.prompt('Forgot your password ?', '', function (value) {
            
@@ -265,9 +192,8 @@ $("#new_user").submit(function(e) {
            
         });
     });
-
     
-}        
+}   
 
 /******************* Signin / Signout / Forgot Password END *******************/
 
@@ -283,6 +209,15 @@ if(page.name === 'DashboardIndex') {
       spaceBetween: 10,
       slidesPerView: 5
     });
+    $$.get(curr_ip+'app_services/dashboard', function (client_data_ajax) {
+      //console.log(client_data_ajax);
+      var client_data=JSON.parse(client_data_ajax);
+      //console.log(client_data.name)
+      $("#client_name").html("Hello "+client_data.name);
+
+    });
+
+
 }
 
 /********************************* Dashboard END ******************************/
@@ -296,6 +231,20 @@ if(page.name === 'DashboardProfile') {
       pagination:'.swiper-DProfile .swiper-pagination',
       spaceBetween: 10,
       slidesPerView: 5
+    });
+
+    $$.get(curr_ip+'app_services/dashboard', function (client_data_ajax) {
+
+      var client_data=JSON.parse(client_data_ajax);
+      console.log(client_data.client.length);
+      
+      for (var i = 0; i <= client_data.client.length; i++) 
+      {
+        console.log(client_data.client[i].inv_name);
+       };
+       //console.log(client_data.client.inv_name[0])
+      // $("#client_name").html("Hello "+client_data.name);
+
     });
 }
 
