@@ -175,7 +175,7 @@ $("#new_user").submit(function(e) {
       mainView.router.loadPage('DashboardIndex.html');
     },
     error: function(){
-     alert("Invalid Email id or password");
+     myApp.alert("Invalid Email id or password",'');
      $("#error_msg").removeClass("d_none");      
     }
   });
@@ -213,7 +213,7 @@ if(page.name === 'DashboardIndex') {
       //console.log(client_data_ajax);
       var client_data=JSON.parse(client_data_ajax);
       //console.log(client_data.name)
-      $("#client_name").html("Hello "+client_data.name);
+      $("#ClientName").html(client_data.name);
 
     });
 
@@ -236,7 +236,8 @@ if(page.name === 'DashboardProfile') {
     $$.get(curr_ip+'app_services/dashboard', function (client_data_ajax) {
 
       var client_data=JSON.parse(client_data_ajax);
-      console.log(client_data.client.length);
+      console.log(client_data.client.length);  
+      
       
       for (var i = 0; i <= client_data.client.length; i++) 
       {
@@ -679,8 +680,8 @@ if(page.name==='OfferMutualFund')
         }
         $$('#hybrid_arbitage_tab div').html(table_data_hybrid_arb+"<h6 class='mf_as_on'></h6>");
 
-         $$('#equity_large_tab .mf_as_on, #equity_multi_tab .mf_as_on, #equity_mid_small_tab .mf_as_on, #debt_liquid_tab .mf_as_on, #debt_ultra_short_tab .mf_as_on, #debt_short_tab .mf_as_on, #debt_medium_long_tab .mf_as_on, #hybrid_equity_tab .mf_as_on, #hybrid_debt_tab .mf_as_on, #hybrid_arbitage_tab .mf_as_on').html("As on 01 Oct 2017");
-         $$('#equity_elss_tab .mf_as_on').html("As on 01 Apr 2017");
+        $$('#equity_large_tab .mf_as_on, #equity_multi_tab .mf_as_on, #equity_mid_small_tab .mf_as_on, #debt_liquid_tab .mf_as_on, #debt_ultra_short_tab .mf_as_on, #debt_short_tab .mf_as_on, #debt_medium_long_tab .mf_as_on, #hybrid_equity_tab .mf_as_on, #hybrid_debt_tab .mf_as_on, #hybrid_arbitage_tab .mf_as_on').html("As on 01 Jan 2018");
+        $$('#equity_elss_tab .mf_as_on').html("As on 01 Apr 2017");
 
     });
 }
@@ -7105,6 +7106,121 @@ function nextPaged() {
 
 
 /***************************** ToolsCalculatorFD / FD Calcultor END ************************** */ 
+
+/***************************** ToolsCalculatorSIP / SIP Calcultor START ************************** */ 
+
+if(page.name==='ToolsCalculatorSIP'){
+
+  var $amount_slide = $('#js-amount-range');
+    var $amount = $('#amount');
+
+    $amount_slide.rangeslider({
+        polyfill: true,
+      })
+      .on('input', function() {
+        // var abc=commaSeparateNumber(this.value);
+        console.log(commaSeparateNumber(this.value));
+        $amount[0].value = commaSeparateNumber(this.value);
+      });
+
+    $amount.on('input', function() {
+        // console.log(commaSeparateNumber(this.value));
+      $amount_slide.val(commaSeparateNumber(this.value)).change();
+    });
+
+    var $interest_slide = $('#js-interest-range');
+    var $interest = $('#interest');
+
+    $interest_slide.rangeslider({
+        polyfill: true
+      })
+      .on('input', function() {
+        $interest[0].value = this.value;
+      });
+
+    $interest.on('input', function() {
+      $interest_slide.val(this.value).change();
+    });
+
+    var $installment_slide = $('#js-installment-range');
+    var $installment = $('#installment');
+
+    $installment_slide.rangeslider({
+        polyfill: true
+      })
+      .on('input', function() {
+        $installment[0].value = this.value;
+      });
+
+    $installment.on('input', function() {
+      $installment_slide.val(this.value).change();
+    });
+
+    $('#amount').keyup(function(event) {
+   
+       $('#amount').val($('#amount').val().replace(/\D/g, "")
+        .replace(/\B(?=(\d\d)+\d$)/g, ","));
+    });
+
+    $("#calculate").click(function () {
+
+      // console.log("Calcultor");
+       var a = parseInt($("#amount").val().replace(/,/g, ''));
+             var p = parseInt($("input[name='frequency']:checked").val());
+             var i = parseFloat($("#interest").val() / 100);       
+             var x = parseInt($("#installment").val());
+        console.log(a);
+        console.log(p);
+        console.log(i);
+        console.log(x);
+        fav = Math.round(a * (Math.pow((1 + i),(x / p)) - 1) / (1 - (Math.pow((1 /(1 + i)),(1 / p)))));     
+        var ti = a * x ;
+
+
+        if(p==12){
+             y = parseInt(x / 12);
+             m = x % 12;   
+             //console.log("hi")             
+         }
+         else if(p==4){
+             y = parseInt(x / 4);
+             m = (x % 4) * 3;
+         }
+         else if(p==2){
+             y = parseInt(x / 2);
+             m = (x % 2) * 6;
+         }
+         else if(p==1){
+             y = parseInt(x);
+             m = 0;
+         }
+
+
+        console.log(fav);
+        console.log(ti);
+
+        $(".table").show();
+        $('#amt').html(commaSeparateNumber(a));       // Amount
+             $('#rate').text($("#interest").val());                    //Interest rate
+             $('.freq').text($("#frequency option:selected").text());    // Frequency
+
+
+
+             $('#year').text(y);   // Duration in year
+             $('#month').text(m);    // Duration in month
+             $('#tot_inv').html(commaSeparateNumber(ti));     // Total investment 
+             $('#fut_value').html(commaSeparateNumber(fav));   // Future value
+
+
+
+
+    });
+
+}
+
+
+
+/***************************** ToolsCalculatorSIP / SIP Calcultor END ************************** */ 
 
 
 

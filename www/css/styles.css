@@ -1654,3 +1654,114 @@ img {
 #fd_calculator input[type=range]:focus::-ms-fill-upper {
   background: #3071A9;
 }
+
+
+/**************************
+        SIP Calculator
+***************************/
+
+#sip_calculator #calculate{
+  margin: 0em 0;
+  margin-bottom: 1em;
+  font-size: 20px;
+}
+#sip_calculator .breadcrumb{
+  margin: 1em 0;
+}
+#sip_calculator input[type=range] {
+  height: 28px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+#sip_calculator input[type=range]:focus {
+  outline: none;
+}
+#sip_calculator input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: #3071A9;
+  border-radius: 5px;
+  border: 1px solid #000000;
+}
+#sip_calculator input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6px;
+}
+#sip_calculator input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #3071A9;
+}
+#sip_calculator input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: #3071A9;
+  border-radius: 5px;
+  border: 1px solid #000000;
+}
+#sip_calculator input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+#sip_calculator input[type=range]::-ms-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+#sip_calculator input[type=range]::-ms-fill-lower {
+  background: #3071A9;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000;
+}
+#sip_calculator input[type=range]::-ms-fill-upper {
+  background: #3071A9;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000;
+}
+#sip_calculator input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+#sip_calculator input[type=range]:focus::-ms-fill-lower {
+  background: #3071A9;
+}
+#sip_calculator input[type=range]:focus::-ms-fill-upper {
+  background: #3071A9;
+}
+#sip_calculator #sip_cal_t2 {
+    background: #44a0ea;
+    font-size: 16px;
+    color: #fff;
+}
+#sip_calculator #sip_cal_t2.table>tbody>tr>td {
+    border-top: 0;
+}

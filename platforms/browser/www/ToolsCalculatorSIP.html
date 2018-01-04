@@ -8,20 +8,116 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
+                    <div class="breadcrumb">
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <h5>SIP Amount</h5>
+                          </div>
+                          <div class="col-xs-6">
+                              <input type="text" id="amount" value="1000" min="1000" max="10000000" step="500" class="form-control"></input>
+                          </div>
+                        </div>                     
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <input type="range" id="js-amount-range" value="1000" min="1000" step="500" max="10000000"></input>
+                          </div>
+                        </div>                              
+                    </div>
+
+                    <div class="breadcrumb">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <h5>Compounding Frequency</h5>
+                          </div>
+                        </div>                     
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <input type="radio" name="frequency" value="12" checked> Monthly
+                            <input type="radio" name="frequency" value="4"> Quartely
+                            <input type="radio" name="frequency" value="2"> Half Yearly
+                            <input type="radio" name="frequency" value="1" > Yearly
+                          </div>
+                        </div>
+                      </div> 
+
+                      <div class="breadcrumb">
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <h5>Rate of Interest</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <input type="number" id="interest" value="10" min="1" max="100" class="form-control"></input>
+                          </div>
+                        </div>                     
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <input type="range" id="js-interest-range" value="10" min="1" max="100">
+                          </div>
+                        </div>
+                        
+                      </div>
 
 
-<div data-role="header">
-    <h2>jQuery Mobile</h2>
-  </div>
+                      <div class="breadcrumb">
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <h5>No of Installments</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <input type="number" id="installment" value="60" min="1" max="600" class="form-control"></input>
+                          </div>
+                          <div class="col-xs-12">
+                            <h6>(e.g: If you want to start a <strong>monthly</strong> SIP for <strong>10 years,</strong> No. of installment = 10 * 12 = 120)</h6>
+                          </div>
+                        </div>                     
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <input type="range" id="js-installment-range" value="60" min="1" max="600">
+                          </div>
+                        </div>
+                        
+                      </div>
 
 
-                            <input type="range" id="slider-range-min">
-                            <div><span class="pull-left"><strong>18</strong></span><span class="pull-right"><strong>55</strong></span></div>
-                            <p class="text-center">                      
-                              <input type="text" id="age" >
-                              <label for="age"> Years</label>
-                            </p>
+                      <div class="row">
+                        <div class="col-xs-12 text-center">
+                          <button type="button" id="calculate" class="btn btn-RV btn-block" tabindex="7">Calculate</button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <table class="table table-condensed d_none" >
+                            <tbody>
+                                <tr>
+                                    <td><span class="freq">Monthly</span> Amount</td>
+                                    <td>₹ <span id="amt"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Rate of Return (%)</td>
+                                    <td id="rate"></td>
+                                </tr>
+                                <tr>
+                                    <td>Duration</td>
+                                    <td><span id="year">0</span>Y <span id="month">0</span>M</td>
+                                </tr>                       
+                            </tbody>
+                        </table>
 
+                        <table class="table table-condensed d_none" id="sip_cal_t2" >
+                            <tbody>
+                                <tr>
+                                    <td>Total Investments</td>
+                                    <td>₹ <span id="tot_inv"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Future Value</td>
+                                    <td>₹ <span id="fut_value"></span></td>
+                                </tr>                                               
+                            </tbody>
+                        </table>
+
+                        </div>
+                      </div>
 
                 </div>                
             </div>                     
