@@ -10,7 +10,7 @@ var curr_ip='http://192.168.1.23:3000/'
 
 var RVNav="";
 RVNav ="<div class='navbar'><div class='navbar-inner'><div class='left'><a href='#' class='link icon-only open-panel'><i class='icon icon-bars'></i></a></div><div class='center'><span id='navbar_info_span'><a href='index.html'><img src='img/icons/logo.png' alt='RupeeVest'></a></span><input type='text' id='fund_names' class='form-control ui-autocomplete-input' placeholder='Search mutual funds here...' autocomplete='off'></div><div class='right'><a href='#' class='' id='navbar_search_btn'><i class='fa fa-search' aria-hidden='true'></i></a><a href='#' class='' id='navbar_close_btn'><i class='fa fa-times' aria-hidden='true'></i></a></div></div></div>"
-
+var Client_Name="";
 
 // Add view
 var mainView = myApp.addView('.view-main', {
@@ -76,6 +76,7 @@ $$(document).on('deviceready', function() {
             $$.get(curr_ip+'app_services/dashboard', function (client_data_ajax) {
             var client_data=JSON.parse(client_data_ajax);
             $("#sidepanel_user_name").html("Hello "+client_data.name);
+            Client_Name=client_data.name;
             $("#sidepanel_log_out_flag").show();
             $("#sidepanel_log_flag").hide();
 
@@ -94,6 +95,7 @@ $$(document).on('deviceready', function() {
                         $("#sidepanel_log_out_flag").hide();
                         $("#sidepanel_log_flag").show();
                          $("#sidepanel_user_name").html("Hello Guest");
+                         Client_Name="";
                         
                     },
                     error: function(){
@@ -161,11 +163,12 @@ $("#new_user").submit(function(e) {
     url: $form.attr('action'),
     data: $form.serialize(),
     success: function(data){
-        alert("success")
+        myApp.alert("You have been successfully logged in",'');
       $$.get(curr_ip+'app_services/dashboard', function (client_data_ajax) {
-          console.log(client_data_ajax);
+          //console.log(client_data_ajax);
           var client_data=JSON.parse(client_data_ajax);
-          console.log(client_data.name)
+          //console.log(client_data.name);
+          Client_Name=client_data.name;
           $("#sidepanel_user_name").html("Hello "+client_data.name);
           $("#sidepanel_log_out_flag").show();
           $("#sidepanel_log_flag").hide();
@@ -212,10 +215,109 @@ if(page.name === 'DashboardIndex') {
     $$.get(curr_ip+'app_services/dashboard', function (client_data_ajax) {
       //console.log(client_data_ajax);
       var client_data=JSON.parse(client_data_ajax);
-      //console.log(client_data.name)
+      // console.log(client_data);
+      // console.log(client_data.client.length);
       $("#ClientName").html(client_data.name);
+      var temp="<option value=''>Select an Investor</option>";
+      for(var j=0;j<client_data.client.length;j++){
+        // console.log(client_data.client[j].iin);
+        var temp=temp+"<option value='"+client_data.client[j].iin+"'>"+client_data.client[j].inv_name+"</option>"
+      }
+        $('#client_name').html(temp);
 
     });
+      $(".disclaimer").on("click", function() {
+        
+        if($('.disclaimer').html()==="Current Value"){
+          $('.disclaimer').html("Amt. Invested");
+           $("#mf_fund_table tbody tr td:nth-child(4)").hide();
+            $("#mf_fund_table tbody tr td:nth-child(5)").show();
+        }
+        else if($('.disclaimer').html()==="Amt. Invested"){
+          $('.disclaimer').html("Current Value");
+          $("#mf_fund_table tbody tr td:nth-child(5)").hide();
+               $("#mf_fund_table tbody tr td:nth-child(4)").show();
+        }
+      });
+
+
+
+$("#client_name").change(function(){
+      if($('#client_name').val()!="" ){
+        console.log(client_name.value);
+        var iin=client_name.value;
+
+        $$.get(curr_ip+'dashboards/dashboard_update',{iin: iin,'fund' : 'All'},function (dashboards_data_ajax)
+      {
+        dashboards_data=JSON.parse(dashboards_data_ajax);
+        console.log(dashboards_data);
+        var tab_data=""
+        var fund_name=[];
+        var amt_invested=[];
+        var curr_val=[];
+        var gain_loss=[];
+        var percent=[];
+        var total_amt_invested=0;
+        var total_curr_val=0;
+        if(dashboards_data.trans_group.length===0)
+        {
+          $("#mf_fund_table tbody").html("<tr><td>-</td><td><span>-</span></td><td>-</td><td class='d_none'>-</td></tr>");
+          $("#mf_total_table tbody").html("<tr><td>-</td><td>-</td><td>-</td></tr>");
+        }
+        else
+        {
+          for(var i=0;i<dashboards_data.trans_group[0].length;i++){
+          fund_name[i]=dashboards_data.trans_group[0][i].s_name;
+          amt_invested[i]=Math.round(dashboards_data.trans_group[0][i].COST_VALUE);
+          curr_val[i]=Math.round(dashboards_data.trans_group[0][i].BALANCE_UNITS*dashboards_data.trans_group[0][i].navrs)
+          gain_loss[i]=Math.round(curr_val[i]-amt_invested[i])
+          percent[i]=((gain_loss[i]/amt_invested[i])*100).toFixed(2);
+          fund_checkbox="<span><input type='checkbox' value='"+fund_name[i]+"'></span>"
+          tab_data=tab_data+"<tr><td>"+fund_checkbox+"</td><td>"+fund_name[i]+"</td><td><span>"+gain_loss[i]+" (&#8377;)</span><h5> "+percent[i]+" %</h5></td><td>"+curr_val[i]+" (&#8377;)</td><td class='d_none'>"+amt_invested[i]+" (&#8377;)</td></tr>"
+          total_amt_invested=total_amt_invested+amt_invested[i];
+          total_curr_val=total_curr_val+curr_val[i];
+        }
+        $("#mf_fund_table tbody").html(tab_data);
+        var total_gain_loss=(total_curr_val-total_amt_invested);
+        var tab_data_1="<tr><td>"+total_amt_invested+"</td><td>"+total_curr_val+"</td><td>"+total_gain_loss+"</td></tr>"
+        $("#mf_total_table tbody").html(tab_data_1);
+        }
+
+        var sip_fund_name="";
+        var sip_amt=0;
+        var sip_date="";
+        var sip_frequency="";
+        var tab_data_sip=""
+        if(dashboards_data.sip_transactions.length===0){
+          $("#mf_sip_table tbody").html("<tr><td>-</td><td>-</td><td>-</td><td></td></tr>");
+        }
+        else{
+          for(var i=0;i<dashboards_data.sip_transactions[0].length;i++){
+            sip_fund_name=dashboards_data.sip_transactions[0][i].s_name;
+            sip_amt=dashboards_data.sip_transactions[0][i].AMOUNT;
+            sip_date=dashboards_data.sip_transactions[0][i].INSTDATE;
+            // sip_frequency=dashboards_data.sip_transactions[0][i].FREQUENCY;
+            sip_cease_id=dashboards_data.sip_transactions[0][i].AUTO_TRXN_NO+"_SIP_"+iin+"_"+dashboards_data.sip_transactions[0][i].id
+            sip_cease_button="<button id='"+sip_cease_id+"'>Stop SIP</button>"
+            tab_data_sip=tab_data_sip+"<tr><td>"+sip_fund_name+"</td><td>"+sip_amt+"</td><td>"+sip_date+"</td><td>"+sip_cease_button+"</td></tr>"
+
+          }
+          console.log(tab_data_sip);
+          $("#mf_sip_table tbody").html(tab_data_sip);
+        }
+        
+
+
+      });
+         
+      }
+  });
+      
+
+
+
+
+
 
 
 }
@@ -233,20 +335,186 @@ if(page.name === 'DashboardProfile') {
       slidesPerView: 5
     });
 
-    $$.get(curr_ip+'app_services/dashboard', function (client_data_ajax) {
 
-      var client_data=JSON.parse(client_data_ajax);
-      console.log(client_data.client.length);  
-      
-      
-      for (var i = 0; i <= client_data.client.length; i++) 
+
+
+  // $$.get(curr_ip+'app_services/complete_reg', function (client_data_ajax) {
+  //   data=JSON.parse(client_data_ajax);
+  //   console.log(data);
+  //   console.log(data.clients[0].inv_name);
+  //   var option_list_active="";
+  //   var option_list_inactive="";
+  //   for(var i=0;i<data.clients.length;i++)
+  //   {
+  //     if(data.clients[i].part_validation=="ready")
+  //     {
+  //         option_list_active=option_list_active+"<option value='"+data.clients[i].id+"'>"+data.clients[i].inv_name+"</option>"
+  //     }
+  //     else
+  //     {
+  //       option_list_inactive=option_list_inactive+"<option value='"+data.clients[i].id+"'>"+data.clients[i].inv_name+"</option>"
+  //     }
+  //   }
+  //   $("#client_name_active").html(option_list_active);
+  //   $("#client_name_inactive").html(option_list_inactive);
+
+  //   $("#client_name_active").change(function(){
+  //     console.log("Hi");
+  //   });
+
+
+  // });
+
+   $$.get(curr_ip+'app_services/investor_profile', function (client_data_ajax) {
+     data=JSON.parse(client_data_ajax);
+      console.log(data);
+      if (data.status==="OK"){
+        var option_list_active="<option value=''>Select an investor</option>";
+        // var full_dtls_client="";
+        for(var i=0;i<data.clients_active.length;i++)
+        {
+          option_list_active=option_list_active+"<option value='"+data.clients_active[i].iin+"'>"+data.clients_active[i].inv_name+"</option>";
+          // full_dtls_client=full_dtls_client+"<div class='s_none' id='"+data.clients_active[i].id+"'>"+data.clients_active[i].inv_name+"</div>";
+        }
+        // console.log(full_dtls_client);
+        $("#client_name_active").html(option_list_active);
+         // $("#full_dtls").html(full_dtls_client);    
+      }
+
+       
+   });
+
+   $("#client_name_active").change(function(){
+      var iin=client_name_active.value;
+      console.log(iin);
+       // $("#full_dtls1").hide();
+      if(iin=="")
       {
-        console.log(client_data.client[i].inv_name);
-       };
-       //console.log(client_data.client.inv_name[0])
-      // $("#client_name").html("Hello "+client_data.name);
+        $("#full_dtls1").hide();
+      }
+      else
+      {
+        $$.get(curr_ip+'app_services/investor_iin', {iin: iin} ,function (client_all_data_ajax) 
+         {
+            client_all_data=JSON.parse(client_all_data_ajax);
+            console.log(client_all_data);
+            if(client_all_data.status==="OK")
+            {
+              $("#full_dtls1").show();
+              $("#dash_inv_name").html(client_all_data.clients.inv_name);
+              var client_dob=new Date(client_all_data.clients.dob);
+              var client_dob_month=client_dob.getMonth()+1;
+              client_dob=client_dob.getDate()+"/"+client_dob_month+"/"+client_dob.getFullYear();
+              $("#dash_inv_dob").html(client_dob);
+              $("#dash_inv_mob").html(client_all_data.clients.mobile_no);
+              var client_addr="";
+              client_addr=client_all_data.clients.addr1;
+              if(client_all_data.clients.addr2!="" && client_all_data.clients.addr2!=null){
+                client_addr=client_addr+", "+client_all_data.clients.addr2;
+              }
+              if(client_all_data.clients.addr3!="" && client_all_data.clients.addr3!=null){
+                client_addr=client_addr+", "+client_all_data.clients.addr3;
+              }
+              $("#dash_inv_addr").html(client_addr);
+              $("#dash_inv_city").html(client_all_data.clients.city);
+              if(client_all_data.clients.state==client_all_data.state_tmp.STATE_CODE){
+              $("#dash_inv_state").html(client_all_data.state_tmp.STATE_NAME);
+              }
+              $("#dash_inv_pin").html(client_all_data.clients.pincode);
+              if(client_all_data.clients.country==client_all_data.country_tmp.COUNTRY_CODE){
+                $("#dash_inv_country").html(client_all_data.country_tmp.COUNTRY_NAME);
+              }
+              
+              $("#dash_inv_pan").html(client_all_data.clients.pan);
+              $("#dash_inv_kyc").html(client_all_data.clients.kyc);
+              $("#dash_inv_email").html(client_all_data.clients.email);
+              if(client_all_data.clients.nominee1_name=="" || client_all_data.clients.nominee1_name==null)
+              {
+                    $("#nominee_dtls").hide();
+                    $("#no_nominee_dtls").show();
+              }
+              else
+              {
+                $("#nominee_dtls").show();
+                  $("#no_nominee_dtls").hide();
+                $("#dash_nom_name").html(client_all_data.clients.nominee1_name);
+                var client_nom_addr="";
+                client_nom_addr=client_all_data.clients.nominee1_addr1;
+                if(client_all_data.clients.nominee1_addr2!="" && client_all_data.clients.nominee1_addr2!=null){
+                client_nom_addr=client_nom_addr+","+client_all_data.clients.nominee1_addr2;
+                }
+                if(client_all_data.clients.nominee1_addr3!="" && client_all_data.clients.nominee1_addr3!=null){
+                  client_nom_addr=client_nom_addr+","+client_all_data.clients.nominee1_addr3;
+                }
+                $("#dash_nom_addr").html(client_nom_addr);
+                $("#dash_nom_city").html(client_all_data.clients.nominee1_city);
+                if(client_all_data.clients.nominee1_state==client_all_data.state_tmp_nominee.STATE_CODE){
+                $("#dash_nom_state").html(client_all_data.state_tmp_nominee.STATE_NAME);
+                }
+                $("#dash_nom_pin").html(client_all_data.clients.nominee1_pincode);
+              }
+              $("#all_bank_dtls").html("");
+              for(var i=0;i<client_all_data.additional_bank.length;i++)
+              {
+                var acc_no="";
+                var bank_name="";
+                var acc_type="";
+                var ifsc_code="";
+                var status="";
+                var default_bank="";
+                 acc_no="<p>Account No: "+client_all_data.additional_bank[i].acc_no+"</p>";
+                if(client_all_data.additional_bank[i].bank_name==client_all_data.bnk_tmp[i].BANK_CODE)
+                {
+                  bank_name="<p>Bank Name: "+client_all_data.bnk_tmp[i].BANK_NAME+"</p>";      
+                }                
+                if(client_all_data.additional_bank[i].acc_type==client_all_data.cc_tmp.ACC_TYPE)
+                {
+                  acc_type="<p>Account Type: "+client_all_data.cc_tmp.DESCRIPTION+"</p>";
+                }
+                ifsc_code="<p>IFSC Code: "+client_all_data.additional_bank[i].ifsc_code+"</p>";
+                status="<p>Status: "+client_all_data.additional_bank[i].status+"</p>";
+                if(client_all_data.additional_bank[i].default_bank=="Y"){
+                  default_bank="<label class='label-checkbox item-content'><div class = 'item-inner'><p class = 'item-title'>Default: <input type='checkbox' name='ks-checkbox' value='"+client_all_data.additional_bank[i].acc_no+"' id='"+client_all_data.additional_bank[i].acc_no+"_"+client_all_data.additional_bank[i].ifsc_code+"' checked><span class='item-media'><i class='icon icon-form-checkbox'></i></span></p></div></label>";
+                }
+                else if(client_all_data.additional_bank[i].default_bank=="N"){
+                  default_bank="<label class='label-checkbox item-content'><div class = 'item-inner'><p class = 'item-title'>Default: <input type='checkbox' name='ks-checkbox' value='"+client_all_data.additional_bank[i].acc_no+"' id='"+client_all_data.additional_bank[i].acc_no+"_"+client_all_data.additional_bank[i].ifsc_code+"'><span class='item-media'><i class='icon icon-form-checkbox'></i></span></p></div></label>";
+                }
+  
+                $("#all_bank_dtls").append("<div class=''><div class='alert alert-success'>"+acc_no+bank_name+acc_type+ifsc_code+status+default_bank+"</div></div>")
 
-    });
+              }
+
+              $("#dash_inv_iin").html(client_all_data.clients.iin);
+              $('#dash_inv_dp').html(client_all_data.clients.dp_id);
+
+              $("#all_otm_dtls").html("");
+              if(client_all_data.umrn_lst_accepted[0].length==0){
+                $("#all_otm_dtls").html("<div class=''><div class='alert alert-success'>No OTM Details Available</div></div>");
+              }
+              else{
+                for (var i=0;i<client_all_data.umrn_lst_accepted[0].length;i++)
+                {
+                  var bank_name_1="";
+                  var otm_no="";
+                  var mandate_amt="";
+                  bank_name="<p>BANK NAME: "+client_all_data.umrn_lst_accepted[0][i].BANK_NAME+"</p>";
+                  otm_no="<p>OTM NO: "+client_all_data.umrn_lst_accepted[0][i].UMRN_NO+"</p>";
+                  mandate_amt="<p>MANDATE AMOUNT: "+client_all_data.umrn_lst_accepted[0][i].AMOUNT+"</P>";
+
+                  $("#all_otm_dtls").append("<div class=''><div class='alert alert-success'>"+bank_name+otm_no+mandate_amt+"</div></div>")
+                }
+              }
+            }
+        
+         });
+      }
+         
+
+   });
+
+
+
+
 }
 
 /**************************** Investor Profile END ******************************/
@@ -261,6 +529,73 @@ if(page.name === 'DashboardTransStatus') {
       spaceBetween: 10,
       slidesPerView: 5
     });
+
+     $$.get(curr_ip+'app_services/investor_profile', function (client_data_ajax) {
+     data=JSON.parse(client_data_ajax);
+      console.log(data);
+      if (data.status==="OK"){
+        var option_list_active="<option value=''>Select an investor</option>";
+
+        for(var i=0;i<data.clients_active.length;i++)
+        {
+          option_list_active=option_list_active+"<option value='"+data.clients_active[i].iin+"'>"+data.clients_active[i].inv_name+"</option>"
+        }
+        $("#client_name").html(option_list_active);
+  
+      }
+       
+   });
+
+
+     $("#client_name").change(function(){
+         var iin=client_name.value;
+         console.log("-----")
+         $$.get(curr_ip+'dashboards/transaction_calculation',{iin : iin, flag :1},function (trans_data_ajax) {
+          data=JSON.parse(trans_data_ajax);
+          console.log("--------")
+          console.log(data.info);
+          console.log("----------");
+          var payment_ref_no="";
+          var fund_name="";
+          var trans_date="";
+          var trans_amount="";
+          var trans_unit="";
+          var trans_type="";
+          var trans_status="";
+          var total_div="";
+          for( var i=0;i<data.info.length;i++)
+          {
+            payment_ref_no=data.info[i].unique_no;
+            fund_name=data.info[i].s_name;
+            trans_date=data.info[i].date_of_trxn_request;
+            if(data.info[i].amt!=null)
+            {
+              trans_amount=data.info[i].amt+" (&#8377;)";
+            }
+            else if(data.info[i].units!=null)
+            {
+              trans_amount=data.info[i].units+" (Units)";
+            }
+            else
+            {
+              trans_amount=0;
+            }
+            trans_type=data.info[i].trxn_type;
+            trans_status=data.info[i].trxn_status;
+            alert_head="<div class='row alert_head'><div class='col-xs-8'><h6>Payment Ref. No. : "+payment_ref_no+"</h6></div><div class='col-xs-4'><h6>"+trans_date+"</h6></div></div>"
+            alert_body="<div class='row alert_content'><div class='col-xs-8'><p>"+fund_name+"</p></div><div class='col-xs-4'><h6>"+trans_amount+"</h6><h6>"+trans_type+"</h6></div></div>"
+            alert_footer="<div class='row alert_footer'><div class='col-xs-12'><h6>Transaction Status: "+trans_status+"</h6></div></div>";
+            total_div=total_div+"<div class='row'><div class='col-xs-12'><div class='alert alert-success'>"+alert_head+alert_body+alert_footer+"</div></div></div>";
+            
+          }
+          $("#all_trans_data").html(total_div);
+
+         });
+
+     });
+
+
+
 }
 
 /************************** Transaction Status END ***************************/
@@ -1843,47 +2178,2033 @@ function Load_stock_data_autocomplete_1()
 
 
 
-    if(page.name==='OfferFixedDeposit')
-    {
-       
-       $$.get(curr_ip+'app_services/fd_all_data',function (data) 
-       {
-               var myObj = JSON.parse(data);              
-               var i;
-               var list_fd = "";               
+    
 
-               for (var i = 0; i < myObj.fds.length; i++) { 
-                   var ComName = myObj.fds[i].name;
-                   ComName = ComName.replace(/[.\s]/g, '');                                     
-                   list_fd = list_fd + "<div class='breadcrumb'><a href='OfferFD"+ComName+".html'><div class='row'><div class='col-xs-6'><div class='FDName'>"+myObj.fds[i].name+"</div></div><div class='col-xs-3'><div class='FDPeriod'>"+myObj.fds[i].period+"</div></div><div class='col-xs-3'><div class='FDInterest'>"+myObj.fds[i].interest+"</div></div></div></a></div>"
-                };
+/*********************** Fixed Deposit START *********************************/
 
-            $$('#fd_all_list').html(list_fd);
-               
-       });
+if(page.name==='OfferFixedDeposit')
+{
+   
+   $$.get(curr_ip+'app_services/fd_all_data',function (data) 
+   {
+           var myObj = JSON.parse(data);              
+           var i;
+           var list_fd = "";               
+
+           for (var i = 0; i < myObj.fds.length; i++) { 
+               var ComName = myObj.fds[i].name;
+               ComName = ComName.replace(/[.\s]/g, '');                                     
+               list_fd = list_fd + "<div class='breadcrumb'><a href='OfferFD"+ComName+".html?FDName="+myObj.fds[i].name+"&Period="+myObj.fds[i].period+"&Interest="+myObj.fds[i].interest+"&InterestOption="+myObj.fds[i].interest_option+"'><div class='row'><div class='col-xs-6'><div class='FDName'>"+myObj.fds[i].name+"</div></div><div class='col-xs-3'><div class='FDPeriod'>"+myObj.fds[i].period+"</div></div><div class='col-xs-3'><div class='FDInterest'>"+myObj.fds[i].interest+"</div></div></div></a></div>"
+            };
+
+        $$('#fd_all_list').html(list_fd);
+           
+   });
+}
+
+/*********************** Fixed Deposit END *********************************/
+
+/*********************** FD - Bajaj START *********************************/
+
+if(page.name==='OfferFDBajajFinanceLimited')
+{
+    var query_Baj = $$.parseUrlQuery(page.url);
+    // console.log(query_Baj);
+    var FDName_Baj=query_Baj.FDName;
+    var Period_Baj=query_Baj.Period;
+    var Interest_Baj=query_Baj.Interest;
+    var InterestOption_Baj=query_Baj.InterestOption;
+  
+
+// console.log(FDName);
+// console.log(Period);
+// console.log(Interest);
+// console.log(InterestOption);
+
+    $("#BajajFin #period").val(Period_Baj);
+    $("#BajajFin #interest").val(Interest_Baj);
+    $("#BajajFin #interest_option").val(InterestOption_Baj);
+
+    
+
+
+ //   $$('#RevProceed').html("<a class='btn btn-RV' href='OfferFixedDepositCreate.html?Period="+ $("#period").val() +"'>Proceed</a>");
+
+   $$.get(curr_ip+'app_services/fd_all_data_bajaj',function (data) 
+   {
+    var myObj = JSON.parse(data);
+    console.log(myObj);
+    var table_tr = "";
+    var period;
+    var cinterest=0, minterest=0, qinterest=0, hinterest=0, yinterest=0;
+     // console.log(myObj.fds[0].rating);
+    $("#Rating").html(myObj.fds[0].rating);
+         
+    period = myObj.fds[0].period;
+
+    for (var i = 0; i < myObj.fds.length; i++) { 
+
+      if (myObj.fds[i].period == period ) {
+
+          if ( myObj.fds[i].interest_option == "Cumulative" ) {            
+                 cinterest = myObj.fds[i].interest;  
+              }
+          else if ( myObj.fds[i].interest_option == "Monthly" ) {            
+                 minterest = myObj.fds[i].interest;
+              }
+          else if ( myObj.fds[i].interest_option == "Quarterly" ) {            
+                 qinterest = myObj.fds[i].interest;
+              }
+          else if ( myObj.fds[i].interest_option == "Half Yearly" ) {            
+                 hinterest = myObj.fds[i].interest;
+              }
+          else if ( myObj.fds[i].interest_option == "Yearly" ) {            
+                 yinterest = myObj.fds[i].interest;
+              }
+      }
+      else {
+
+        table_tr = table_tr + "<tr><td>"+period+"</td><td class = 'abc cum'><span class='tcontent'>"+cinterest.toFixed(2)+"%</span></td><td class = 'abc mon'><span class='tcontent'>"+minterest.toFixed(2)+"%</span></td><td class = 'abc quar'><span class='tcontent'>"+qinterest.toFixed(2)+"%</span></td><td class = 'abc half'><span class='tcontent'>"+hinterest.toFixed(2)+"%</span></td><td class = 'abc year'><span class='tcontent'>"+yinterest.toFixed(2)+"%</span></td></tr>"
+          
+          if ( myObj.fds[i].interest_option == "Cumulative" ) {            
+                 cinterest = myObj.fds[i].interest;  
+              }
+          else if ( myObj.fds[i].interest_option == "Monthly" ) {            
+                 minterest = myObj.fds[i].interest;
+              }
+          else if ( myObj.fds[i].interest_option == "Quarterly" ) {            
+                 qinterest = myObj.fds[i].interest;
+              }
+          else if ( myObj.fds[i].interest_option == "Half Yearly" ) {            
+                 hinterest = myObj.fds[i].interest;
+              }
+          else if ( myObj.fds[i].interest_option == "Yearly" ) {            
+                 yinterest = myObj.fds[i].interest;
+              }
+
+          period = myObj.fds[i].period;
+      }
+
+    };
+      
+    $$('#BajajFin .IntRates .table tbody').html(table_tr);
+
+
+
+
+
+    var c, d, x, p ,q ;
+  x = parseFloat(document.getElementById("interest").value);
+$('.abc').click(function(){
+
+   // x = parseFloat(document.getElementById("interest").value);
+   // debugger;
+  if (document.getElementById("privilege").checked==true)
+  {
+    p = parseFloat(this.textContent)+ 0.25;
+      document.getElementById("interest").value = p.toFixed(2) + "%";
+  }
+  else if(document.getElementById("more_than_50").checked==true)
+  {
+     c = parseFloat(this.textContent)+ 0.10;
+     document.getElementById("interest").value = c.toFixed(2) + "%";
+  }
+  else
+  {
+    document.getElementById("interest").value = this.textContent;
+  }
+
+    // $('.chk_pri').attr('checked' , false);
+    // $(".chk_pri").attr ( "disabled" , false );
+    // $('.chk_emp').attr('checked' , false);
+    // $(".chk_emp").attr ( "disabled" , false );
+    // $(".radio_pri").prop ( "checked" , false );
+    // $(".radio_pri").attr ( "disabled" , true );
+    
+    document.getElementById("period").value = this.parentElement.childNodes[0].textContent;
+    // document.getElementById("interest").value = this.textContent;
+     x = parseFloat(document.getElementById("interest").value);
+
+
+});
+
+ $("#pri_senior").val("");
+ $("#more_than_50").val("");
+
+$(".chk_pri").change(function() {
+    if(this.checked){
+        if (document.getElementById("more_than_50").checked==true)
+        {    
+          x = x- 0.10;      
+        // document.getElementById("interest").value = p.toFixed(2) + "%";
+        }
+        $(".chk_emp").prop ( "checked" , false );
+        $(".radio_senior").prop ( "checked" , true );
+        $("#pri_senior").val("Senior Citizen");
+        $("#more_than_50").val("");
+    }
+    else {
+        $(".radio_pri").prop ( "checked" , false );
+        $("#pri_senior").val("");
     }
 
-
-    if(page.name==='OfferFDBajajFinanceLimited')
-    {
-       
-       $$.get(curr_ip+'app_services/fd_all_data',function (data) 
-       {
-               var myObj = JSON.parse(data); 
-               console.log(myObj);             
-               // var i;
-               // var list_fd = "";               
-
-            //    for (var i = 0; i < myObj.fds.length; i++) { 
-            //        var ComName = myObj.fds[i].name;
-            //        ComName = ComName.replace(/[.\s]/g, '');                                     
-            //        list_fd = list_fd + "<div class='breadcrumb'><a href='OfferFD"+ComName+".html'><div class='row'><div class='col-xs-6'><div class='FDName'>"+myObj.fds[i].name+"</div></div><div class='col-xs-3'><div class='FDPeriod'>"+myObj.fds[i].period+"</div></div><div class='col-xs-3'><div class='FDInterest'>"+myObj.fds[i].interest+"</div></div></div></a></div>"
-            //     };
-
-            // $$('#fd_all_list').html(list_fd);
-               
-       });
+    $('.radio_pri').prop('disabled', !this.checked);
+    if(this.checked){
+     p = x+ 0.25;
+      document.getElementById("interest").value = p.toFixed(2) + "%";
     }
+     else{
+     q = x- 0.25;
+      document.getElementById("interest").value = q.toFixed(2) + "%";
+
+    }
+     x = parseFloat(document.getElementById("interest").value);
+  });
+
+$(".chk_emp").change(function() {
+
+    if(this.checked){
+     if (document.getElementById("privilege").checked==true)
+      {
+          x = x- 0.25;
+          // document.getElementById("interest").value = p.toFixed(2) + "%";
+      }
+      $(".chk_pri").prop ( "checked" , false );
+      $(".radio_pri").prop ( "checked" , false );
+      $(".radio_pri").attr ( "disabled" , true );
+     c = x+ 0.10;
+      document.getElementById("interest").value = c.toFixed(2) + "%";
+      $("#pri_senior").val("");
+      $("#more_than_50").val("Yes");
+    }
+     else {
+     d = x- 0.10;
+      document.getElementById("interest").value = d.toFixed(2) + "%";
+      $("#more_than_50").val("");
+    }
+      x = parseFloat(document.getElementById("interest").value);
+
+});
+
+$('.cum').click(function(){
+    document.getElementById("interest_option").value = "Cumulative";
+});
+$('.mon').click(function(){
+    document.getElementById("interest_option").value = "Monthly";
+});
+$('.quar').click(function(){
+    document.getElementById("interest_option").value = "Quarterly";
+});
+$('.half').click(function(){
+    document.getElementById("interest_option").value = "Half Yearly";
+});
+$('.year').click(function(){
+    document.getElementById("interest_option").value = "Yearly";
+});
+
+
+$('.tcontent').click(function(){
+  $(".tcontent").css("color","#6d9f00");
+  $(this).css("color","#5f6469");
+});
+
+
+    $("#RevProceed").attr ( "disabled" , false );
+    $$("#RevProceed").click(function() {    
+    mainView.router.loadPage("OfferFixedDepositCreate.html?FDNameR="+FDName_Baj+"&PeriodR="+ $("#BajajFin #period").val() +"&InterestR="+ $("#BajajFin #interest").val() + "&InterestOptionR=" +$("#BajajFin #interest_option").val() + "&pri_seniorR=" +$("#BajajFin #pri_senior").val() + "&more_than_50R=" +$("#BajajFin #more_than_50").val());
+  //mainView.router.loadPage("OfferFixedDepositCreate.html?FDDetails="+FDName+","+$("#period").val() +","+$("#interest").val()+","+$("#interest_option").val()+","+$("#pri_senior").val()+","+$("#more_than_50").val());
+  
+    })
+
+
+
+   });
+
+    
+}
+
+/*********************** FD - Bajaj END *********************************/
+
+/*********************** FD - Review Details START *********************************/
+
+if(page.name==='OfferFixedDepositCreate')
+{
+    var query1 = $$.parseUrlQuery(page.url);
+    console.log(query1);    
+
+    // var FDDetailsArray = query1.FDDetails.split(',');
+    // console.log(FDDetailsArray);
+
+    // $("#FDCreate #fdName").html(FDDetailsArray[0]);
+    // $("#FDCreate #period").html(FDDetailsArray[1]);
+    // $("#FDCreate #interest").html(FDDetailsArray[2]);
+    // $("#FDCreate #interest_option").html(FDDetailsArray[3]);
+    // $("#FDCreate #pri_senior").html(FDDetailsArray[4]);
+    // $("#FDCreate #more_than_50").html(FDDetailsArray[5]);  
+
+    var FDNameRC=query1.FDNameR;
+    var PeriodRC=query1.PeriodR;
+    var InterestRC=query1.InterestR;
+    var InterestOptionRC=query1.InterestOptionR;
+    var pri_seniorRC=query1.pri_seniorR;
+    var more_than_50RC=query1.more_than_50R;
+
+    if (pri_seniorRC == "") {
+      $(".PrivilegeCreate").hide();
+    }
+    else {
+      $(".PrivilegeCreate").show();
+    }
+    if (more_than_50RC == "") {
+      $(".EmployeeCreate").hide();
+    }
+    else {
+      $(".EmployeeCreate").show();
+    }
+
+    $("#FDCreate #fdName").html(FDNameRC);
+    $("#FDCreate #period").html(PeriodRC);
+    $("#FDCreate #interest").html(InterestRC);
+    $("#FDCreate #interest_option").html(InterestOptionRC);
+    $("#FDCreate #pri_senior").html(pri_seniorRC);
+    $("#FDCreate #more_than_50").html(more_than_50RC);
+
+
+    var CurUsrname;
+    var SelInv; 
+
+    $$.get(curr_ip+'app_services/fd_review',function (data) 
+    {
+      var myObj = JSON.parse(data);
+      console.log(myObj);
+      
+      var list_inv=""; 
+
+      CurUsrname =  myObj.name; 
+      $("#CurrentUser").html(CurUsrname);    
+
+      for (var i=0; i < myObj.clients.length ; i++) {
+
+        list_inv = list_inv + "<li><label><input type='radio' class='invRadio' name='investorRadios' value='"+myObj.clients[i].id+"'>"+ myObj.clients[i].inv_name +"</label></li>";
+        //console.log(list_inv);
+        
+      }
+                      
+      $("#Investor ul").html(list_inv);
+
+      $('input[name="investorRadios"]').first().prop('checked', true);
+
+        SelInv =  $("input[name='investorRadios']:checked").val(); 
+      $( ".invRadio" ).change(function() {
+         SelInv =  $("input[name='investorRadios']:checked").val(); 
+
+      });
+
+               
+      
+      $("#FormProceed").attr ( "disabled" , false );
+      $$("#FormProceed").click(function() {    
+        mainView.router.loadPage("OfferFixedDepositCreateForm.html?SelInvCF="+SelInv+"&FDNameCF="+FDNameRC+"&PeriodCF="+ $("#FDCreate #period").html() +"&InterestCF="+ $("#FDCreate #interest").html() + "&InterestOptionCF=" +$("#FDCreate #interest_option").html()+ "&pri_seniorCF=" + $("#FDCreate #pri_senior").html() + "&more_than_50CF=" + $("#FDCreate #more_than_50").html());
+      })
+
+
+    });
+    
+
+}
+
+/*********************** FD - Review Details END *********************************/
+
+/*********************** FD - Form Fill START *********************************/
+
+if(page.name==='OfferFixedDepositCreateForm')
+{
+
+    var query = $$.parseUrlQuery(page.url);
+    console.log(query);
+
+    var SelInvFDCF = query.SelInvCF;
+    var FDNameFDCF=query.FDNameCF;
+    var PeriodFDCF=query.PeriodCF;
+    var InterestFDCF=query.InterestCF;
+    var InterestOptionFDCF=query.InterestOptionCF;
+    var pri_seniorFDCF=query.pri_seniorCF;
+    var more_than_50FDCF=query.more_than_50CF;
+
+    // $("#FDCreateForm #fdName").html(FDNameFDCF);
+    // $("#FDCreateForm #period").html(PeriodFDCF);
+    // $("#FDCreateForm #interest").html(InterestFDCF);
+    // $("#FDCreateForm #interest_option").html(InterestOptionFDCF);
+    // $("#FDCreateForm #pri_senior").html(pri_seniorFDCF);
+    // $("#FDCreateForm #more_than_50").html(more_than_50FDCF);
+
+
+  $$.get(curr_ip+'app_services/create_fd_two',{
+
+    optionsRadios: +SelInvFDCF,
+    client_id: +SelInvFDCF,
+    fd_name: +FDNameFDCF,
+    period: +PeriodFDCF,
+    interest: +InterestFDCF,
+    interest_option: +InterestOptionFDCF,
+    privilege: +pri_seniorFDCF,
+    more_than_50: +more_than_50FDCF,   
+    category: +""
+
+  },function (data) 
+  {
+    // optionsRadios=SelInvFDCF;
+    // client_id=SelInvFDCF;
+    // fd_name=FDNameFDCF;
+    // period = PeriodFDCF;
+    // interest=InterestFDCF;
+    // interest_option=InterestOptionFDCF;
+    // privilege=pri_seniorFDCF;
+    // more_than_50=more_than_50FDCF;   
+    // category="";
+
+       var myObjFD = JSON.parse(data);
+ console.log("------------------------------");
+       console.log(myObjFD);
+      //console.log(optionsRadios);
+      //console.log(client_id);
+      console.log(FDNameFDCF);
+      console.log(PeriodFDCF);
+      console.log(InterestFDCF);
+      console.log(InterestOptionFDCF);
+      console.log(pri_seniorFDCF);
+      console.log(more_than_50FDCF);
+      //console.log(category);
+ console.log("------------------------------");
+
+//debugger;
+$("#inv_name").val(myObjFD.clients.inv_name);
+  
+
+
+  var bnk_acc_no, bnk_name, bnk_acc_type, bnk_branch_name, bnk_ifsc,bnk_micr,tmp;
+
+  $('#overlayTrigger').click(function(event) {
+    event.preventDefault();
+    $('body').chardinJs('start');
+  });
+
+//Fresh renewal
+ $(document).ready(function() {  
+  in_ni=$("#in_ni").val();
+  if(in_ni=="individual")
+   { indi();
+     
+}
+  else if (in_ni=="nonindividual")
+    non_indi();
+});
+
+
+$("#inline_content input[name='inv_type']").change(function()
+{   
+
+    if($('input:radio[name=inv_type]:checked').val()=="renewal" )
+    {
+         $('#div_inv_renewal').attr("style", "display : inline;");
+         $('#fdr_no').attr("class", " ");
+          $('#fdr_month').attr("class", " ");
+    }
+    else if($('input:radio[name=inv_type]:checked').val()=="fresh" )
+    {   
+
+
+    // $("#loginForm")
+    //            .formValidation('resetField','fdr_no')
+    //            .formValidation('resetField','fdr_month');
+
+          $('#div_inv_renewal').attr("style", "display : none");
+          // $('#div_inv_renewal').attr("disabled", true);
+
+         // $('#inv_type_fresh').attr("style", "display : inline;");
+         // $('#inv_type_fresh').attr("disabled", false);
+          $('#fdr_no').val("");
+          $('#fdr_month').val("");
+          $('#fdr_no').attr("class", "ignore1");
+          $('#fdr_month').attr("class", "ignore2");
+         
+           
+
+
+    }
+});
+ 
+ // Individual non individual
+
+$$("#fdIndi").click(function indi() {
+
+    $('#user_type_info').val('individual');
+    $('#address_proof_div').show();
+    $('#address_proof_div').attr("class" , " "); 
+    $('#non_individual_div').attr("style", "display: none");
+    $('#non_individual_div').attr("class" , "ignore_3");
+    $('#non_individual_div input[type="text"]').val('');
+    $('#non_individual_div input[type="date"]').val(''); 
+
+    $('#individual_div_single').attr("style", "display : inline;");
+    $('#individual_div_single').attr("class" , " ");
+    $('#individual_div_single input[type="text"]').val('');
+    $('#individual_div_single input[type="date"]').val(''); 
+    $('#tab_indi_joint').attr("style", "display : inline");
+    $('#indi_sing_joint_single').prop('checked', true);
+    name=$("#name").val();
+    // swal(name);
+    dob=$("#dob").val();
+    pan_no=$("#pan_no").val();
+    mobile=$("#mobile").val();
+    mail=$("#mail").val();
+    address=$("#address").val();
+    cty=$("#cty").val();
+    ste=$("#ste").val();
+    cntry=$("#cntry").val();
+    pin=$("#pin").val();
+    $("#inv_name").val(name);
+    $("#datePicker_i").val(dob);
+    $("#pan").val(pan_no);
+    $("#mobile_no").val(mobile);
+    $("#email").val(mail);
+    $("#addr1").val(address);
+    $("#city").val(cty);
+    $("#state").val(ste);
+    $("#country").val(cntry);
+    $("#pincode").val(pin);
+})
+
+
+$$("#fdNonIndi").click(function non_indi() {
+  
+    $('#user_type_info').val('nonindividual');
+    $('#address_proof_div').hide();
+    $('#address_proof_div').attr("class" , "ignore_5"); 
+    $('#individual_div_single').attr("style", "display : none;");
+    $('#individual_div_single').attr("class" , "ignore_3"); 
+
+    $('#individual_div_joint').attr("style", "display : none");
+    $('#individual_div_joint').attr("class" , "ignore_3"); 
+
+    $('#non_individual_div').attr("style", "display: inline");
+    $('#non_individual_div').attr("class" , " "); 
+    
+    $('#tab_indi_joint').attr("style", "display : none");
+    $('#individual_div_joint input[type="text"]').val('');
+    $('#individual_div_joint input[type="date"]').val('');
+  
+})
+
+
+$("#customer_type_content input[name='indi_sing_joint']").change(function()
+{
+    if($('input:radio[name=indi_sing_joint]:checked').val()=="single" )
+    {    
+        $('#individual_div_joint').attr("style", "display : none");
+    
+        $('#individual_div').attr("style", "display : inline;");
+        
+        $('#individual_div_joint').attr("class" , "ignorejoint"); 
+        $('#individual_div_joint input[type="text"]').val('');
+        $('#individual_div_joint input[type="date"]').val('');
+
+        //$('#non_individual_div').attr("class" , " ");  // later added for testing
+        //$('#individual_div').attr("class" , "ignore_1"); // later added for testing
+
+    }
+    else if($('input:radio[name=indi_sing_joint]:checked').val()=="joint" )
+    {   
+
+           $('#individual_div_joint').attr("style", "display : inline");
+            $('#individual_div_joint').attr("class" , " "); 
+         
+         // $('#individual_div').attr("style", "display : inline");
+          //$('#non_individual_div').attr("style", "display : none");
+         // $('#c').attr("style", "display : inline;");
+
+         // $('#non_individual_div').attr("class" , "ignore_1"); // later added for testing
+         // $('#individual_div').attr("class" , " "); // later added for testing
+           
+    
+    }
+});
+
+
+                          //occupation
+ $('#occu_select').change(function(){
+    if ($('#occu_select').val()=='others'){
+      $('#occupation').attr('style','display:inline');
+       $('#occupation').val('');
+    }
+      else {
+        $('#occupation').attr('style','display:none');
+         $('#occupation').val($('#occu_select').val());
+      }
+ });
+
+  $('#occu_select_j1').change(function(){
+    if ($('#occu_select_j1').val()=='others'){
+      $('#occupation_j1').attr('style','display:inline');
+       $('#occupation_j1').val('');
+    }
+      else {
+        $('#occupation_j1').attr('style','display:none');
+         $('#occupation_j1').val($('#occu_select_j1').val());
+      }
+ });
+
+ $('#occu_select_j2').change(function(){
+    if ($('#occu_select_j2').val()=='others'){
+      $('#occupation_j2').attr('style','display:inline');
+       $('#occupation_j2').val('');
+    }
+      else {
+        $('#occupation_j2').attr('style','display:none');
+         $('#occupation_j2').val($('#occu_select_j2').val());
+      }
+ });
+                          
+                          //annual income
+  $('#income_select').change(function(){
+         $('#annual_income').val($('#income_select').val());
+ });
+   $('#income_select_j1').change(function(){
+         $('#annual_income_j1').val($('#income_select_j1').val());
+ });
+    $('#income_select_j2').change(function(){
+         $('#annual_income_j2').val($('#income_select_j2').val());
+ });
+                        
+
+
+// Address proof
+$("#address_proof_div input[name='address_proof']").change(function()
+{
+    tmp = $('input:radio[name=address_proof]:checked').val();
+            $('#other_addr').val(tmp);
+
+
+    if($('input:radio[name=address_proof]:checked').val()=="others" )
+    {
+        $('#other_addr_1').show();
+        $('#other_addr').attr("disabled", false);
+        $('#other_addr').attr("class", " ");
+    }
+    else 
+    {     
+       $('#other_addr_1').hide();
+        $('#other_addr').attr("disabled", true);
+        $('#other_addr').val(" ");
+         $('#other_addr').attr("class", "ignore_4");
+          
+    }
+
+});
+
+// // new Added  // voter card is added as default value in the addressprof othas text box
+// $("#tds_content input[name='address_proof']").change(function()
+
+
+//     swal($('input:radio[name=address_proof]:checked').val());
+//    //tmp = $('input:radio[name=address_proof]:checked').val();
+//   //$('#other_addr_1').val(vl);
+
+// )};
+
+
+//TDS
+$("#tds_content input[name='tds_type']").change(function()
+{
+    if($('input:radio[name=tds_type]:checked').val()=="tds_no" )
+    {
+         $('#div_tds').attr("style", "display : inline;");
+    }
+    else 
+    {   
+          $('#tds_fdr_no').attr("class", "ignore_2");
+          $('#div_tds').attr("style", "display : none");
+          
+          $('input:radio[name=tds_form]').attr('checked' , false);
+          $('input:radio[name=tds_above]').attr('checked' , false);
+          $('#tds_fdr_no').val(" ");
+
+         $('#tds_content').find('small').attr("style", "display : none;");
+          
+
+
+          //swal("running--");
+        //  $('#div_tds .help-block').attr("style", "display : none");
+
+    }
+
+});
+
+$("#tds_content input[name='tds_form']").change(function()
+{
+    if($('input:radio[name=tds_form]:checked').val()=="tds_above" )
+    {
+         $('#tds_fdr_no').attr("disabled", false);
+          $('#tds_fdr_no').attr("class", " ");
+    }
+    else 
+    {   
+        $('#tds_fdr_no').attr("disabled", true);
+         $('#tds_fdr_no').attr("class", "ignore_2");
+          
+    }
+
+});
+
+// Bank 
+$("#bank_details_content input[name='mat_acc_type']").change(function()
+{ 
+
+
+           // $("#loginForm")
+           //     .formValidation('resetField','bank_name_red')
+           //     .formValidation('resetField','account_no_red')
+           //     .formValidation('resetField','bank_branch_red')
+           //     .formValidation('resetField','ifsc')
+           //     .formValidation('resetField','micr_1');
+
+
+    if($('input:radio[name=mat_acc_type]:checked').val()=="new" )
+    {
+         //bnk_acc_no, bnk_name, bnk_acc_type, bnk_branch_name, bnk_ifsc
+         $('#bank_details_new').show();
+
+
+// debugger;
+          //swal($('#account_no').val());
+
+          $('#bnk_ac_no_1').attr('value','');
+          $('#bnk_nm_1').attr('value','');
+          $('#bnk_brnch_1').attr('value','');
+          $('#bnk_ifsc_1').attr('value','');
+          $('#micr_1').attr('value','');
+
+
+           // $("#loginForm")
+           //     .formValidation('resetField','bank_name_red')
+           //     .formValidation('resetField','account_no_red')
+           //     .formValidation('resetField','bank_branch_red')
+           //     .formValidation('resetField','ifsc')
+           //     .formValidation('resetField','micr_1');
+          
+            //swal($('#account_no').val());
+
+          // $('#bank_name').attr("value","");
+          // $('#bank_branch').attr("value","");
+          // $('#ifsc_code').attr("value","");
+
+    }
+    else  if($('input:radio[name=mat_acc_type]:checked').val()=="existing" )
+    {   
+         $('#bank_details_new').hide();
+         $('#bank_details_new input[type="text"]').val('');              
+
+    }
+});
+
+//nominee
+
+$("#nom_yes_no_content input[name='nom_yes_no']").change(function()
+{      
+      // $("#loginForm")
+      //          .formValidation('resetField','nominee1_name')
+      //          .formValidation('resetField','nominee1_pan')
+      //          .formValidation('resetField','nominee1_addr1')
+      //          .formValidation('resetField','nominee1_city')
+      //          .formValidation('resetField','nominee1_state')
+      //          .formValidation('resetField','nominee1_pincode')
+      //          .formValidation('resetField','nominee1_relation')
+      //          .formValidation('resetField','nominee1_dob');
+
+
+
+
+    if($('input:radio[name=nom_yes_no]:checked').val()=="nom_yes" )
+    {
+         $('#nom_details').attr("style", "display : inline;");
+    }
+    else if($('input:radio[name=nom_yes_no]:checked').val()=="nom_no" )
+    {   
+         $('#nom_details').attr("style", "display : none;");
+         $('#nom_details input[type="text"]').val('');
+         $('#nom_details input[type="date"]').val('');
+         $('#nominee_minor').attr("style", "display : none;");
+         
+    }
+
+});
+
+
+
+$('input:radio[name=ac_type_1]').click(function() { 
+    
+    var accnt_type = $('input:radio[name=ac_type_1]:checked').val()
+    //swal(accnt_type);      
+
+   if (accnt_type=="Current")
+   {
+       $("#ac_type_Savings").prop("checked", false);  
+       $("#ac_type_Current").prop("checked", true);
+       //swal("Current checked");
+   }
+   if(accnt_type=="Savings")
+   {
+       $("#ac_type_Current").prop("checked", false); 
+       $("#ac_type_Savings").prop("checked", true);   
+
+       //swal("Savings checked");
+   }
+
+
+
+
+    
+});
+
+$('#bank_name').change(function() { 
+  
+  var bnm_tmp = $('#bank_name').val();
+  $('#bnk_nm_1').val(bnm_tmp);
+
+   //swal("Bank Name Running...");
+});
+
+$('#account_no').change(function() { 
+
+  var bnm_tmp = $('#account_no').val();
+  $('#bnk_ac_no_1').val(bnm_tmp);
+   //swal("Account no Running...");
+});
+
+$('#bank_branch').change(function() { 
+   //swal("bank_branch Running...");
+  var bnm_tmp = $('#bank_branch').val();
+  $('#bnk_brnch_1').val(bnm_tmp);
+
+
+});   
+
+$('#bnk_ifsc_code').change(function() { 
+
+  var bnm_tmp = $('#bnk_ifsc_code').val();
+  $('#bnk_ifsc').val(bnm_tmp);
+   //swal("bank_IFSC CODE Running...");
+});   
+
+$('#micr').change(function() { 
+   
+   var bnm_tmp = $('#micr').val();
+   $('#micr_1').val(bnm_tmp);
+   //swal("micr Running...");
+}); 
+
+
+
+
+    $(document).ready(function() {
+    var min_inv;  
+      // minimum_investment();
+
+      bnk_acc_no = $('#account_no').val();
+         bnk_acc_type = $('input:radio[name=ac_type]:checked').val();
+         bnk_name = $('#bank_name').val();
+         bnk_branch_name = $('#bank_branch').val();
+         bnk_ifsc = $('#bnk_ifsc_2').val();
+         bnk_micr = $('#micr').val();
+
+   if (bnk_acc_no !== null){
+             $('#bnk_ac_no_1').attr('value',bnk_acc_no);
+          }
+          if (bnk_name !== null){
+            $('#bnk_nm_1').attr('value',bnk_name);
+          }
+          if (bnk_branch_name !== null){
+            $('#bnk_brnch_1').attr('value',bnk_branch_name);
+          }
+          if (bnk_ifsc !== null){
+             $('#bnk_ifsc_1').attr('value',bnk_ifsc);
+          }
+          if (bnk_acc_type !== null){
+
+
+            if (bnk_acc_type == "Savings"){
+              $('#first_ac_type').attr('checked','checked')
+            }
+              else if (bnk_acc_type == "Current") {
+              $('#second_ac_type').attr('checked','checked')
+            }
+          }
+
+
+  
+
+
+  // $('#loginForm').formValidation({
+  //       framework: 'bootstrap',
+  //       excluded: [':disabled', ':hidden', ':not(:visible)','.ignore1','.ignore2','.ignorejoint'],
+  //       icon: {
+  //           valid: 'glyphicon glyphicon-ok',
+  //           invalid: 'glyphicon glyphicon-remove',
+  //           validating: 'glyphicon glyphicon-refresh'
+  //       },
+  //       fields: {
+  //           fdr_no: {
+  //               validators: {
+  //                   notEmpty: {
+  //                       message: 'FDR no is required'
+  //                   },
+  //                   regexp: { regexp: /^[0-9]{1,45}$/i, message: 'Please enter only Number' } 
+  //               }
+  //           },
+  //            fdr_month: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Month is required'
+  //                    },
+  //                    regexp: { regexp: /^[0-9]{1,3}$/i, message: 'Please enter only Number upto 3 digit' } 
+  //                }
+  //            }, 
+  //            inv_name: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Investor name is required'
+  //                    }
+  //                }
+  //            },
+  //            dob_doi: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Date of birth is required'
+  //                    }
+  //                }
+  //            },
+  //            pan: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'PAN is required'
+  //                    },
+  //                    regexp: { regexp: /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/i, message: 'Please enter valid PAN number' }
+  //                }
+  //            },
+  //            mobile_no: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Mobile no is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{10})$/i, message: 'Please enter 10 digit mobile number' }
+  //                }
+  //            },
+  //            email: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Email is required'
+  //                    },
+  //                    regexp: { regexp: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i, message: 'Please enter valid email' }
+  //                }
+  //            },
+  //            addr1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Address 1 is required'
+  //                    }
+  //                }
+  //            },
+  //            city: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'City is required'
+  //                    }
+  //                }
+  //            },
+  //            state: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'State is required'
+  //                    }
+  //                }
+  //            },
+  //            country: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Country is required'
+  //                    }
+  //                }
+  //            },
+  //            pincode: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Pincode is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{6})$/i, message: 'Please enter valid pin code' }
+  //                }
+  //            },            
+  //            second_applicant: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Second applicant is required'
+  //                    }
+  //                }
+  //            },
+  //            dob_doi_j1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Date of birth is required'
+  //                    }
+  //                }
+  //            },
+  //            pan_j1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'PAN is required'
+  //                    },
+  //                    regexp: { regexp: /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/i, message: 'Please enter valid PAN number' }
+  //                }
+  //            },
+  //            mobile_no_j1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Mobile no is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{10})$/i, message: 'Please enter 10 digit mobile number' }
+  //                }
+  //            },
+  //            email_j1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Email is required'
+  //                    },
+  //                    regexp: { regexp: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i, message: 'Please enter valid email' }
+  //                }
+  //            },
+  //            city_j1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'City is required'
+  //                    }
+  //                }
+  //            },
+  //            state_j1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'State is required'
+  //                    }
+  //                }
+  //            },
+  //            country_j1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Country is required'
+  //                    }
+  //                }
+  //            },
+  //             pincode_j1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Pincode is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{6})$/i, message: 'Please enter valid pin code' }
+  //                }
+  //            },
+  //            third_applicant: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Third applicant is required'
+  //                    }
+  //                }
+  //            },
+  //            dob_doi_j2: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Date of birth is required'
+  //                    }
+  //                }
+  //            },
+  //            pan_j2: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'PAN is required'
+  //                    },
+  //                    regexp: { regexp: /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/i, message: 'Please enter valid PAN number' }
+  //                }
+  //            },
+  //            mobile_no_j2: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Mobile no is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{10})$/i, message: 'Please enter 10 digit mobile number' }
+  //                }
+  //            },
+  //            email_j2: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Email is required'
+  //                    },
+  //                    regexp: { regexp: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i, message: 'Please enter valid email' }
+  //                }
+  //            },
+  //            city_j2: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'City is required'
+  //                    }
+  //                }
+  //            },
+  //            state_j2: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'State is required'
+  //                    }
+  //                }
+  //            },
+  //            country_j2: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Country is required'
+  //                    }
+  //                }
+  //            },
+  //             pincode_j2: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Pincode is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{6})$/i, message: 'Please enter valid pin code' }
+  //                }
+  //            },
+  //            name_of_ni: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Name is required'
+  //                    }
+  //                }
+  //            },
+  //            date_inc: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Date is required'
+  //                    }
+  //                }
+  //            },
+  //            pan_ni: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'PAN is required'
+  //                    },
+  //                    regexp: { regexp: /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/i, message: 'Please enter valid PAN number' }
+  //                }
+  //            },
+  //            mobile_no_ni: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Mobile no is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{10})$/i, message: 'Please enter 10 digit mobile number' }
+  //                }
+  //            },
+  //            addr1_ni: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Address 1 is required'
+  //                    }
+  //                }
+  //            },
+  //            city_ni: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'City is required'
+  //                    }
+  //                }
+  //            },
+  //            state_ni: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'State is required'
+  //                    }
+  //                }
+  //            },
+  //            country_ni: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Country is required'
+  //                    }
+  //                }
+  //            },
+  //            pincode_ni: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Pincode is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{6})$/i, message: 'Please enter valid pin code' }
+  //                }
+  //            },
+  //            cheque_dd_no: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Cheque or DD no is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{6})$/i, message: 'Please enter 6 digit Cheque  or DD number' }
+  //                }
+  //            },
+  //            date_fd: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Date is required'
+  //                    }
+  //                }
+  //            },
+  //            amount: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Amount is required'
+  //                    },
+  //                   between: {
+  //                           min: $('#minimum_invest').val(),
+  //                           max: 999999999999,
+  //                           message: 'Amount must be greater than equal to '+$('#minimum_invest').val()
+  //                       }
+
+  //                }
+  //            },
+  //            bank_name: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Bank name is required'
+  //                    },
+  //                       regexp: { regexp: /^([A-Za-z ]*)$/i, message: 'Please enter valid Bank Name ' }
+  //                }
+  //            },
+  //            account_no: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Account no is required'
+  //                    },
+  //                       regexp: { regexp: /^([0-9]*)$/i, message: 'Please enter valid Account No ' }
+  //                }
+  //            },
+  //            bank_branch: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Branch name is required'
+  //                    },
+  //                       regexp: { regexp: /^([A-Za-z ]*)$/i, message: 'Please enter valid Branch Name ' }
+  //                }
+  //            },
+  //            ifsc_code: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'IFSC code is required'
+  //                    },
+  //                       regexp: { regexp: /^([A-Z|a-z]{4})([0])([\d]{2})([A-Z|a-z|0-9]{1})([\d]{3})$/i, message: 'Please enter valid IFSC CODE ' } 
+  //                }
+  //            },
+  //            micr: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'MICR no is required'
+  //                    },
+  //                   regexp: { regexp: /^(\d{9})$/i, message: 'Please enter 9 digit MICR CODE' }
+  //                }
+  //            },
+  //            bank_name_red: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Bank name is required'
+  //                    },
+  //                       regexp: { regexp: /^([A-Za-z ]*)$/i, message: 'Please enter valid Bank Name ' }
+  //                }
+  //            },
+  //            account_no_red: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Account no is required'
+  //                    },
+  //                       regexp: { regexp: /^([0-9]*)$/i, message: 'Please enter valid Account No ' }
+  //                }
+  //            },
+  //            bank_branch_red: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Branch name is required'
+  //                    },
+  //                       regexp: { regexp: /^([A-Za-z ]*)$/i, message: 'Please enter valid Branch Name ' }
+  //                }
+  //            },
+  //            ifsc: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'IFSC code is required'
+  //                    }
+  //                }
+  //            },
+  //            micr_1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'MICR no is required'
+  //                    },
+  //                   regexp: { regexp: /^(\d{9})$/i, message: 'Please enter 9 digit MICR CODE' }
+  //                }
+  //            },
+  //            nominee1_name: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Nominee name is required'
+  //                    }
+  //                }
+  //            },
+  //            nominee1_pan: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Nominee PAN is required'
+  //                    },
+  //                    regexp: { regexp: /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/i, message: 'Please enter valid PAN number' }
+  //                }
+  //            },
+  //            nominee1_addr1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Nominee address 1 is required'
+  //                    }
+  //                }
+  //            },
+  //            nominee1_city: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Nominee city is required'
+  //                    }
+  //                }
+  //            },
+  //            nominee1_state: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Nominee state is required'
+  //                    }
+  //                }
+  //            },
+  //            nominee1_pincode: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Nominee pincode is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{6})$/i, message: 'Please enter valid pin code' }
+  //                }
+  //            },
+  //            nominee1_relation: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Nominee relation is required'
+  //                    }
+  //                }
+  //            },
+  //            nominee1_dob: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Nominee date of birth is required'
+  //                    }
+  //                }
+  //            },
+  //            nominee1_guard_name: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Guardian name is required'
+  //                    }
+  //                }
+  //            },
+  //            guardian_pan_1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Guardian PAN is required'
+  //                    },
+  //                    regexp: { regexp: /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/i, message: 'Please enter valid PAN number' }
+  //                }
+  //            },
+  //            nominee1_guard_addr1: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Guardian address 1 is required'
+  //                    }
+  //                }
+  //            },
+  //            nominee1_guard_city: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Guardian city is required'
+  //                    }
+  //                }
+  //            },
+  //            nominee1_guard_state: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Guardian state is required'
+  //                    }
+  //                }
+  //            },
+  //            nominee1_guard_pincode: {
+  //                validators: {
+  //                    notEmpty: {
+  //                        message: 'Guardian pincode is required'
+  //                    },
+  //                    regexp: { regexp: /^(\d{6})$/i, message: 'Please enter valid pin code' }
+  //                }
+  //            }
+            
+  //       }
+  //   });
+
+
+    // nominee
+
+$('#datePicker_nd').change(function()
+{
+   // swal("rororooro");
+   var start = $('#datePicker_nd').datepicker('getDate');
+    var end   = new Date();
+    var days   = new Date(end - start)/1000/60/60/24/365;
+    //swal(days);
+   if (((Math.trunc(days)) < 18) && ((days) >= 0)) {
+    $('#nominee_minor').show();
+   }
+   else {
+    $('#nominee_minor').hide();
+    $('#nominee_minor input[type="text"]').val('');
+   }
+
+});
+
+
+
+
+   
+    $('#datePicker_i')
+        .datepicker({
+            format: 'dd/mm/yyyy',
+             endDate : '+0d',
+            autoclose : true
+        })  
+        .on('changeDate', function(e) {
+            // Revalidate the date field
+            $('#loginForm').formValidation('revalidateField', 'dob_doi');
+        });
+     $('#datePicker_i_j1')
+    .datepicker({
+        format: 'dd/mm/yyyy',
+         endDate : '+0d',
+        autoclose : true
+    })
+    .on('changeDate', function(e) {
+            // Revalidate the date field
+            $('#loginForm').formValidation('revalidateField', 'dob_doi_j1');
+        }); 
+     $('#datePicker_i_j2')
+    .datepicker({
+        format: 'dd/mm/yyyy',
+         endDate : '+0d',
+        autoclose : true
+    })
+    .on('changeDate', function(e) {
+            // Revalidate the date field
+            $('#loginForm').formValidation('revalidateField', 'dob_doi_j2');
+        });
+    $('#datePicker_ni')
+        .datepicker({
+            format: 'dd/mm/yyyy',
+             endDate : '+0d',
+            autoclose : true
+        })
+        .on('changeDate', function(e) {
+            // Revalidate the date field
+            $('#loginForm').formValidation('revalidateField', 'date_inc');
+        });
+
+    $('#datePicker_dd')
+        .datepicker({
+            format: 'dd/mm/yyyy',
+             endDate : '+0d',
+            autoclose : true
+        })
+        .on('changeDate', function(e) {
+            // Revalidate the date field
+            $('#loginForm').formValidation('revalidateField', 'date_fd');
+        });   
+ 
+    $('#datePicker_nd')
+        .datepicker({
+            format: 'dd/mm/yyyy', 
+            endDate : '+0d',
+            autoclose : true
+        })
+         .on('changeDate', function(e) {
+            // Revalidate the date field
+            $('#loginForm').formValidation('revalidateField', 'nominee1_dob');
+        });   
+  
+
+});
+$('#third_applicant').change(function() {
+
+  if($('#third_applicant').val()!="")
+  {
+    $('#th_jh input[type="text"]').removeClass('ignore1');
+  }
+  else
+   {
+    $('#th_jh input[type="text"]').addClass('ignore1');
+    $('#th_jh .form-group').removeClass('has-error has-feedback');
+                  $('#th_jh .validtor').removeClass('has-error has-feedback');
+                  $('#th_jh .form-group').find('small.help-block').hide();
+                  $('#th_jh .form-group').find('i.form-control-feedback').hide();
+                  $('#th_jh .form-group').css("border-color", "green");
+  } 
+  });
+
+
+function minimum_investment()
+{
+  fd_name=$("#fd_name").val();
+  amount=$("#amount").val();
+  more_than_50=$("#more_than_50").val();
+  privilege=$("#privilege").val();
+  period=$("#period").val();
+  interest=$("#interest").val();
+  int_opt=$("#int_opt").val();
+   $.ajax({
+         type: 'GET',
+         url: '/fds/minimum_investment',
+         dataType: 'json',
+         data: { 'fd_name' : fd_name,'period' : period,'int_opt' : int_opt},
+         success: function(data)
+         {
+          console.log(data.minimum_invest);
+         
+          console.log(more_than_50);
+            min_inv=data.minimum_invest;
+            console.log(min_inv);
+
+          // if(more_than_50=="")
+          // {
+          //   if(amount<data.minimum_invest)
+          //   {
+          //     swal("Amount should be greater than"+data.minimum_invest);
+          //   }
+          // }
+          // else
+          // {
+          //   if(amount<5000000)
+          //   {
+          //     swal("Amount should be greater than 50 lakh");
+          //   }
+          // }
+        }
+      });
+
+}   
+
+
+
+
+$("#bank_details").change(function()
+{ 
+       $("#loginForm")
+               .formValidation('resetField','bank_name')
+               .formValidation('resetField','account_no')
+               .formValidation('resetField','bank_branch')
+               .formValidation('resetField','ifsc_code')
+               .formValidation('resetField','micr');
+               // .formValidation('resetField','nominee1_pincode')
+               // .formValidation('resetField','nominee1_relation')
+               // .formValidation('resetField','nominee1_dob');
+
+     if (this.value=="N")
+     {
+      $("#bank_name").val("");
+      $("#account_no").val("");
+      $("#bank_branch").val("");
+      $("#bnk_ifsc_code").val("");
+      $("#micr").val("");
+     }
+     else
+     {
+      var bank_id=this.value.split("_")
+      $.ajax({
+         type: 'GET',
+         url: '/fds/investor_bank_detail',
+         dataType: 'json',
+         data: { 'bank_code' : bank_id[1],'client_id' : bank_id[0]},
+         success: function(data)
+         {
+          console.log(data);
+          $("#bank_name").val(data.bank_full_name.BANK_NAME);
+          $("#account_no").val(data.bank_details.acc_no);
+          $("#bank_branch").val(data.bank_details.branch_name);
+          $("#bnk_ifsc_code").val(data.bank_details.ifsc_code);
+          $("#micr").val(data.bank_details.micr_no);
+          if(data.bank_details.acc_type=="SB")
+          {
+            document.getElementById("ac_type_1_saving").checked=true;
+          }
+          else
+          {
+            document.getElementById("ac_type_1_current").checked=true;
+          }
+          // else if(data.bank_details.acc_type=="CA")
+          // {
+          //   document.getElementById("ac_type_1_current").checked=true;
+          // }
+          // else if(data.bank_details.acc_type=="NRE")
+          // {
+          //   document.getElementById("ac_type_1_nre").checked=true;
+          // }
+          // else if(data.bank_details.acc_type=="NRO")
+          // {
+          //   document.getElementById("ac_type_1_nro").checked=true;
+          // }
+         }
+       });
+     }
+});
+
+
+
+
+//---------------------------- Individual DOB Date picker ---------------------------------------
+
+   var today = new Date();
+   var pickerInline = myApp.picker ({
+      input: '#datePicker_i',
+      // container: '#datePicker_i-container',
+      toolbarTemplate:
+         '<div class = "toolbar">' +
+            '<div class = "toolbar-inner">' +
+               '<div class = "left">' +
+                  '<a href = "#" class = "link close-picker" id="IndipickerCancel">Reset</a>' +
+               '</div>' +
+               
+               '<div class = "right">' +
+                  '<a href = "#" class="link close-picker">Done</a>' +
+               '</div>' +
+            '</div>' +
+         '</div>',
+      rotateEffect: true,
+      value: [            
+         today.getMonth(),
+         today.getDate(), 
+         today.getFullYear()
+
+         // today.getHours(), 
+         // (today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes())
+      ],            
+      onChange: function (picker, values, displayValues) {
+         var daysInMonth = new Date(picker.value[2], picker.value[0]*1 + 1, 0).getDate();
+         
+         if (values[1] > daysInMonth) {
+            picker.cols[1].setValue(daysInMonth);
+         }
+      },
+      
+      formatValue: function (p, values, displayValues) {
+         //return displayValues[0] + ' ' + values[1] + ', ' + values[2] + ' ' + values[3] + ':' + values[4];
+         return displayValues[0] + ' ' + values[1] + ', ' + values[2];
+      },
+      
+      cols: [
+         // Months
+         {
+            values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+            displayValues: ('January February March April May June July August September October November December').split(' '),
+            textAlign: 'left'
+         },
+         
+         // Days
+         {
+            values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+         },
+         
+         // Years
+         {
+            values: (function () {
+               var arr = [];
+               for (var i = 1950; i <= 2030; i++) { arr.push(i); }
+               return arr;
+            })(),
+         },
+         
+         // Space divider
+         {
+            divider: true,
+            content: '  '
+         },
+         
+        //  // Hours
+        //  {
+        //     values: (function () {
+        //        var arr = [];
+        //        for (var i = 0; i <= 23; i++) { arr.push(i); }
+        //        return arr;
+        //     })(),
+        //  },
+         
+        //  // Divider
+        //  {
+        //     divider: true,
+        //     content: ':'
+        //  },
+         
+        // // Minutes
+        //  {
+        //     values: (function () {
+        //        var arr = [];
+        //        for (var i = 0; i <= 59; i++) { arr.push(i < 10 ? '0' + i : i); }
+        //        return arr;
+        //     })(),
+        //  }
+      ],
+      onOpen: function (picker) {              
+          
+          picker.container.find('#IndipickerCancel').on('click', function () {                                   
+           $("#datePicker_i").val('');                 
+          });
+
+      },
+   });
+
+          //debugger;
+
+//---------------------------------------------------------------------------------------------
+
+
+//---------------------------- Joint Holder 1 DOB Date picker ---------------------------------------
+
+   var todayJ1 = new Date();
+   var pickerInline = myApp.picker ({
+      input: '#datePicker_i_j1',            
+      toolbarTemplate:
+         '<div class = "toolbar">' +
+            '<div class = "toolbar-inner">' +
+               '<div class = "left">' +
+                  '<a href = "#" class = "link close-picker" id="IndiJ1pickerCancel">Reset</a>' +
+               '</div>' +
+               
+               '<div class = "right">' +
+                  '<a href = "#" class="link close-picker">Done</a>' +
+               '</div>' +
+            '</div>' +
+         '</div>',
+      rotateEffect: true,
+      value: [            
+         todayJ1.getMonth(),
+         todayJ1.getDate(), 
+         todayJ1.getFullYear()
+      ],            
+      onChange: function (picker, values, displayValues) {
+         var daysInMonth = new Date(picker.value[2], picker.value[0]*1 + 1, 0).getDate();               
+         if (values[1] > daysInMonth) {
+            picker.cols[1].setValue(daysInMonth);
+         }
+      },            
+      formatValue: function (p, values, displayValues) {              
+         return displayValues[0] + ' ' + values[1] + ', ' + values[2];
+      },            
+      cols: [
+         {
+            values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+            displayValues: ('January February March April May June July August September October November December').split(' '),
+            textAlign: 'left'
+         },               
+         {
+            values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+         },                             
+         {
+            values: (function () {
+               var arr = [];
+               for (var i = 1950; i <= 2030; i++) { arr.push(i); }
+               return arr;
+            })(),
+         },
+         {
+            divider: true,
+            content: '  '
+         }
+      ],
+      onOpen: function (picker) { 
+          picker.container.find('#IndiJ1pickerCancel').on('click', function () {                                   
+           $("#datePicker_i_j1").val('');                 
+          });
+      },
+
+   });               
+
+//---------------------------------------------------------------------------------------------
+
+//---------------------------- Joint Holder 2 DOB Date picker ---------------------------------------
+
+   var todayJ2 = new Date();
+   var pickerInline = myApp.picker ({
+      input: '#datePicker_i_j2',
+      toolbarTemplate:
+         '<div class = "toolbar">' +
+            '<div class = "toolbar-inner">' +
+               '<div class = "left">' +
+                  '<a href = "#" class = "link close-picker" id="IndiJ2pickerCancel">Reset</a>' +
+               '</div>' +
+               
+               '<div class = "right">' +
+                  '<a href = "#" class="link close-picker">Done</a>' +
+               '</div>' +
+            '</div>' +
+         '</div>',
+      rotateEffect: true,
+      value: [            
+         todayJ2.getMonth(),
+         todayJ2.getDate(), 
+         todayJ2.getFullYear()
+      ],            
+      onChange: function (picker, values, displayValues) {
+         var daysInMonth = new Date(picker.value[2], picker.value[0]*1 + 1, 0).getDate();               
+         if (values[1] > daysInMonth) {
+            picker.cols[1].setValue(daysInMonth);
+         }
+      },            
+      formatValue: function (p, values, displayValues) {
+         return displayValues[0] + ' ' + values[1] + ', ' + values[2];
+      },            
+      cols: [
+         {
+            values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+            displayValues: ('January February March April May June July August September October November December').split(' '),
+            textAlign: 'left'
+         },
+         {
+            values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+         },
+         {
+            values: (function () {
+               var arr = [];
+               for (var i = 1950; i <= 2030; i++) { arr.push(i); }
+               return arr;
+            })(),
+         },
+         {
+            divider: true,
+            content: '  '
+         },
+      ],
+      onOpen: function (picker) { 
+          picker.container.find('#IndiJ2pickerCancel').on('click', function () {                                   
+           $("#datePicker_i_j2").val('');                 
+          });
+      },
+
+   });             
+
+//---------------------------------------------------------------------------------------------
+
+//---------------------------- Non Individual DOI Date picker ---------------------------------------
+
+   var todayNi = new Date();
+   var pickerInline = myApp.picker ({
+      input: '#datePicker_ni',
+      toolbarTemplate:
+         '<div class = "toolbar">' +
+            '<div class = "toolbar-inner">' +
+               '<div class = "left">' +
+                  '<a href = "#" class = "link close-picker" id="NonIndipickerCancel">Reset</a>' +
+               '</div>' +
+               
+               '<div class = "right">' +
+                  '<a href = "#" class="link close-picker">Done</a>' +
+               '</div>' +
+            '</div>' +
+         '</div>',
+      rotateEffect: true,
+      value: [            
+         todayNi.getMonth(),
+         todayNi.getDate(), 
+         todayNi.getFullYear()
+      ],            
+      onChange: function (picker, values, displayValues) {
+         var daysInMonth = new Date(picker.value[2], picker.value[0]*1 + 1, 0).getDate();               
+         if (values[1] > daysInMonth) {
+            picker.cols[1].setValue(daysInMonth);
+         }
+      },            
+      formatValue: function (p, values, displayValues) {
+         return displayValues[0] + ' ' + values[1] + ', ' + values[2];
+      },            
+      cols: [
+         {
+            values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+            displayValues: ('January February March April May June July August September October November December').split(' '),
+            textAlign: 'left'
+         },
+         {
+            values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+         },
+         {
+            values: (function () {
+               var arr = [];
+               for (var i = 1950; i <= 2030; i++) { arr.push(i); }
+               return arr;
+            })(),
+         },
+         {
+            divider: true,
+            content: '  '
+         }
+      ],
+      onOpen: function (picker) {              
+          
+          picker.container.find('#NonIndipickerCancel').on('click', function () {                                   
+           $("#datePicker_ni").val('');                 
+          });
+      },
+
+   });
+
+              
+
+//---------------------------------------------------------------------------------------------
+
+//---------------------------- Payment DOI Date picker ---------------------------------------
+
+   var todayPay = new Date();
+   var pickerInline = myApp.picker ({
+      input: '#datePicker_dd',            
+      toolbarTemplate:
+         '<div class = "toolbar">' +
+            '<div class = "toolbar-inner">' +
+               '<div class = "left">' +
+                  '<a href = "#" class = "link close-picker" id="PayDOIpickerCancel">Reset</a>' +
+               '</div>' +
+               
+               '<div class = "right">' +
+                  '<a href = "#" class="link close-picker">Done</a>' +
+               '</div>' +
+            '</div>' +
+         '</div>',
+      rotateEffect: true,
+      value: [            
+         todayPay.getMonth(),
+         todayPay.getDate(), 
+         todayPay.getFullYear()
+      ],            
+      onChange: function (picker, values, displayValues) {
+         var daysInMonth = new Date(picker.value[2], picker.value[0]*1 + 1, 0).getDate();               
+         if (values[1] > daysInMonth) {
+            picker.cols[1].setValue(daysInMonth);
+         }
+      },            
+      formatValue: function (p, values, displayValues) {              
+         return displayValues[0] + ' ' + values[1] + ', ' + values[2];
+      },            
+      cols: [
+         {
+            values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+            displayValues: ('January February March April May June July August September October November December').split(' '),
+            textAlign: 'left'
+         },               
+         {
+            values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+         },                             
+         {
+            values: (function () {
+               var arr = [];
+               for (var i = 1950; i <= 2030; i++) { arr.push(i); }
+               return arr;
+            })(),
+         },
+         {
+            divider: true,
+            content: '  '
+         }
+      ],
+      onOpen: function (picker) { 
+          picker.container.find('#PayDOIpickerCancel').on('click', function () {                                   
+           $("#datePicker_dd").val('');                 
+          });
+      },
+
+   });               
+
+//---------------------------------------------------------------------------------------------
+
+//---------------------------- Nominee DOB Date picker ---------------------------------------
+
+   var todayNom = new Date();
+   var pickerInline = myApp.picker ({
+      input: '#datePicker_nd',            
+      toolbarTemplate:
+         '<div class = "toolbar">' +
+            '<div class = "toolbar-inner">' +
+               '<div class = "left">' +
+                  '<a href = "#" class = "link close-picker" id="NomineepickerCancel">Reset</a>' +
+               '</div>' +
+               
+               '<div class = "right">' +
+                  '<a href = "#" class="link close-picker">Done</a>' +
+               '</div>' +
+            '</div>' +
+         '</div>',
+      rotateEffect: true,
+      value: [            
+         todayNom.getMonth(),
+         todayNom.getDate(), 
+         todayNom.getFullYear()
+      ],            
+      onChange: function (picker, values, displayValues) {
+         var daysInMonth = new Date(picker.value[2], picker.value[0]*1 + 1, 0).getDate();               
+         if (values[1] > daysInMonth) {
+            picker.cols[1].setValue(daysInMonth);
+         }
+      },            
+      formatValue: function (p, values, displayValues) {              
+         return displayValues[0] + ' ' + values[1] + ', ' + values[2];
+      },            
+      cols: [
+         {
+            values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+            displayValues: ('January February March April May June July August September October November December').split(' '),
+            textAlign: 'left'
+         },               
+         {
+            values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+         },                             
+         {
+            values: (function () {
+               var arr = [];
+               for (var i = 1950; i <= 2030; i++) { arr.push(i); }
+               return arr;
+            })(),
+         },
+         {
+            divider: true,
+            content: '  '
+         }
+      ],
+      onOpen: function (picker) { 
+          picker.container.find('#NomineepickerCancel').on('click', function () {                                   
+           $("#datePicker_nd").val('');                 
+          });
+      },
+
+   });               
+
+//---------------------------------------------------------------------------------------------
+
+});
+
+}
+
+/*********************** FD - Form Fill END *********************************/
+
+    
+
+
+    
 
 
     if(page.name==='OfferInvestmentSolution')
@@ -4829,9 +7150,7 @@ window.onorientationchange = function()
 if(page.name==='OfferISDesign')
     {
         var query = $$.parseUrlQuery(page.url);
-        // console.log(query);
         var p_code=query.scheme_code;
-        // console.log(scheme_code);
         s_code=[];
         weight=[];
         min_investment_sip=[];
@@ -4842,10 +7161,10 @@ if(page.name==='OfferISDesign')
         {
             var data = JSON.parse(data);              
              console.log(data);
-            // debugger;
+
             $("#ItemCount").html(data.s_code_new.length);
             $("#append_scheme").empty();
-               //  debugger;               
+
                 var add_fund="";               
               $("#port_name").html(data.portfoliio.portfolio_name);
               $("#port_subname").html(data.portfoliio.portfolio_sub_name);
@@ -4908,6 +7227,98 @@ if(page.name==='OfferISDesign')
  // {
 //var s_code=data.s_code_new;
 
+
+                        var $amount_slide_0 = $('#rg'+s_code[0]);
+                        var $amount_0 = $('#weightage'+s_code[0]);
+                        $amount_slide_0.rangeslider({
+                            polyfill: true,
+                          })
+                          .on('input', function() {
+
+                            $amount_0[0].value = commaSeparateNumber(this.value);
+                             $('#weightage'+s_code[0]).html(this.value);
+                             // console.log("----")
+                             // calculate_min_invest();
+                          });
+                        $amount_0.on('input', function() {
+                          $amount_slide_0.val(commaSeparateNumber(this.value)).change();
+                        });
+
+                        var $amount_slide_1 = $('#rg'+s_code[1]);
+                        var $amount_1 = $('#weightage'+s_code[1]);
+                        $amount_slide_1.rangeslider({
+                            polyfill: true,
+                          })
+                          .on('input', function() {
+
+                            $amount_1[0].value = commaSeparateNumber(this.value);
+                             $('#weightage'+s_code[1]).html(this.value);
+                          });
+                        $amount_1.on('input', function() {
+                          $amount_slide_1.val(commaSeparateNumber(this.value)).change();
+                        });
+
+                        var $amount_slide_2 = $('#rg'+s_code[2]);
+                        var $amount_2 = $('#weightage'+s_code[2]);
+                        $amount_slide_2.rangeslider({
+                            polyfill: true,
+                          })
+                          .on('input', function() {
+
+                            $amount_2[0].value = commaSeparateNumber(this.value);
+                             $('#weightage'+s_code[2]).html(this.value);
+                          });
+                        $amount_2.on('input', function() {
+                          $amount_slide_2.val(commaSeparateNumber(this.value)).change();
+                        });
+
+                        var $amount_slide_3 = $('#rg'+s_code[3]);
+                        var $amount_3 = $('#weightage'+s_code[3]);
+                        $amount_slide_3.rangeslider({
+                            polyfill: true,
+                          })
+                          .on('input', function() {
+                            $amount_3[0].value = commaSeparateNumber(this.value);
+                             $('#weightage'+s_code[3]).html(this.value);
+                          });
+                        $amount_3.on('input', function() {
+                          $amount_slide_3.val(commaSeparateNumber(this.value)).change();
+                        });
+
+                        var $amount_slide_4 = $('#rg'+s_code[4]);
+                        var $amount_4 = $('#weightage'+s_code[4]);
+                        $amount_slide_4.rangeslider({
+                            polyfill: true,
+                          })
+                          .on('input', function() {
+                            $amount_4[0].value = commaSeparateNumber(this.value);
+                             $('#weightage'+s_code[4]).html(this.value);
+                          });
+                        $amount_4.on('input', function() {
+                          $amount_slide_4.val(commaSeparateNumber(this.value)).change();
+                        });
+
+                        var $amount_slide_5 = $('#rg'+s_code[5]);
+                        var $amount_5 = $('#weightage'+s_code[5]);
+                        $amount_slide_5.rangeslider({
+                            polyfill: true,
+                          })
+                          .on('input', function() {
+                            $amount_5[0].value = commaSeparateNumber(this.value);
+                             $('#weightage'+s_code[5]).html(this.value);
+                          });
+                        $amount_5.on('input', function() {
+                          $amount_slide_5.val(commaSeparateNumber(this.value)).change();
+                        });
+
+
+
+
+
+
+
+
+
 calculate_min_invest();
 calculate_min_invest_sip();
 get_return_data_portfolio(s_code,weight);
@@ -4925,7 +7336,7 @@ get_portfolio(s_code , weight);
 
     function calculate_min_invest()
      {
-        // console.log(s_code);
+        console.log("+++++++++++++++");
               if(s_code.length==0)
           {
             $("#imdone").prop('disabled', true);
@@ -4978,6 +7389,7 @@ get_portfolio(s_code , weight);
             {
               
               res[i]=parseInt(parseInt((min_investment[i])*100)/parseInt($('#weightage'+s_code[i]).html()));
+
             }
             else
             {
@@ -5016,7 +7428,31 @@ get_portfolio(s_code , weight);
 
             $('#min_invest').html(commaSeparateNumber(min));
           }
+
+                        
+                        
+
+                        // var $amount_slide_6 = $('#rg'+s_code[6]);
+                        // var $amount_6 = $('#weightage'+s_code[6]);
+                        // $amount_slide_6.rangeslider({
+                        //     polyfill: true,
+                        //   })
+                        //   .on('input', function() {
+                        //     $amount_6[0].value = commaSeparateNumber(this.value);
+                        //      $('#weightage'+s_code[]).html(this.value);
+                        //   });
+                        // $amount_5.on('input', function() {
+                        //   $amount_slide_5.val(commaSeparateNumber(this.value)).change();
+                        // });
+
+
+
+
+
+
      }
+
+
 
 function calculate_min_invest_sip()
      {
@@ -6849,6 +9285,189 @@ function nextPaged() {
 
 
 
+$("#Lumpsum").click(function()
+    {
+     console.log("========")
+      if(s_code.length !=0)
+      {
+       var index = min_investment.indexOf("0")
+        if(index>-1)
+        {
+          swal("Lump Sum is not allowed in " +  map[s_code[index]]);
+            $("#invest").val("Invest Now");
+        }
+        else
+        {
+          invest_normal();
+        }
+      }
+      else
+      {
+        swal("Please add atleast 1 fund");
+      }
+
+      
+    });
+
+
+
+function invest_normal()
+  {
+    var weight=[];
+    var url="";
+    // swal(s_code.length);
+    for(var i=0;i<s_code.length;i++)
+    {
+      if($('#weightage'+s_code[i]).html()!="0")
+      {
+        if(i!=s_code.length && url!="")
+        {
+          url=url+","
+        }
+        weight[i]=$('#weightage'+s_code[i]).html();
+        url=url+s_code[i]+","+weight[i];
+
+        
+    }
+    }
+   var min_in=$('#min_invest').html().replace(/,/g, "");
+   $("#loading").show();
+              // $('#data').css("display", "block");
+              $("#combined_mf_check *").css('pointer-events','none');
+                $('#combined_mf_check').css("opacity", "0.5");
+
+            $.ajax({
+            type:'GET',
+            url: curr_ip+'home/server_availability_check',
+            datatype:'json',
+            success:function(data, textStatus, jqXHR)
+         {
+          if (data.msg=="ERROR")
+          {
+            $("#loading").hide();
+            $("#combined_mf_check *").css('pointer-events','block');
+            $('#combined_mf_check').css("opacity", "1");
+            console.log("Server is under maintainence.Please try after sometime.");
+          }
+          else
+          {
+            $("#loading").hide();
+            console.log("Server is not under maintainence.Please try after sometime.");
+            $("#combined_mf_check *").css('pointer-events','block');
+            $('#combined_mf_check').css("opacity", "1");
+            console.log(Client_Name);
+            if(Client_Name=="")
+            {
+                  mainView.router.loadPage('RVSign.html');
+            }else
+            {
+                 mainView.router.loadPage('InvestmentLumpsum.html?s='+url+","+min_in);
+            }
+           
+           // window.location.href="/InvestmLumpsum?s="+url+","+min_in;
+          }
+        }
+         }); 
+    
+
+  }
+    $("#SIP").click(function()
+        {
+          
+            // var index = min_investment_sip.indexOf("0")
+            if(s_code.length !=0)
+          {
+            var index1=[];
+            for(var i=0;i<s_code.length;i++)
+            {
+              if(min_investment_sip[i]=="0")
+              {
+                index1.push(i)
+              }
+            }
+            var name="";
+            if(index1.length>0)
+            {
+              for(var i=0;i<index1.length;i++)
+              {
+                if(i!=0)
+                    name=name+", "+map[s_code[index1[i]]];
+                  else
+                    name=name+map[s_code[index1[i]]];
+              }
+              swal("SIP is not allowed in " + name);
+              $("#invest").val("Invest Now");
+
+            }
+            else
+            {
+              invest_sip();
+            }
+            }
+          else
+          {
+            swal("Please add atleast 1 fund");
+          }
+          
+        });
+
+function invest_sip()
+  {
+    var weight=[];
+    var url="";
+    for(var i=0;i<s_code.length;i++)
+    {
+       if($('#weightage'+s_code[i]).html()!="0")
+      {
+        if(i!=s_code.length && url!="")
+      {
+        url=url+","
+      }
+      weight[i]=$('#weightage'+s_code[i]).html();
+      url=url+s_code[i]+","+weight[i]
+      
+    }
+    }
+   var min_in_sip=$('#min_invest_sip').html().replace(/,/g, "");
+$("#loading").show();
+              // $('#data').css("display", "block");
+              $("#combined_mf_check *").css('pointer-events','none');
+                $('#combined_mf_check').css("opacity", "0.5");
+
+            $.ajax({
+            type:'GET',
+            url: curr_ip+'home/server_availability_check',
+            datatype:'json',
+            success:function(data, textStatus, jqXHR)
+         {
+          if (data.msg=="ERROR")
+          {
+            $("#loading").hide();
+            $("#combined_mf_check *").css('pointer-events','block');
+            $('#combined_mf_check').css("opacity", "1");
+            swal("Server is under maintainence.Please try after sometime.");
+          }
+          else
+          {
+            $("#loading").hide();
+            $("#combined_mf_check *").css('pointer-events','block');
+            $('#combined_mf_check').css("opacity", "1");
+           // window.location.href="/Mutual-Funds/Portfolio-Investment/SIP?s="+url+","+min_in_sip;
+           if(Client_Name=="")
+            {
+                  mainView.router.loadPage('RVSign.html');
+            }else
+            {
+                 mainView.router.loadPage('InvestmentSIP.html?s='+url+","+min_in_sip);
+            }
+          }
+        }
+         }); 
+    
+    
+
+  }
+
 
         
     }
@@ -6895,13 +9514,11 @@ function nextPaged() {
         polyfill: true,
       })
       .on('input', function() {
-        // var abc=commaSeparateNumber(this.value);
         console.log(commaSeparateNumber(this.value));
         $amount[0].value = commaSeparateNumber(this.value);
       });
 
     $amount.on('input', function() {
-        // console.log(commaSeparateNumber(this.value));
       $amount_slide.val(commaSeparateNumber(this.value)).change();
     });
 
@@ -7224,6 +9841,564 @@ if(page.name==='ToolsCalculatorSIP'){
 
 
 
+/***************************** InvestmentLumpsum / Lumpsum Investment START ************************** */ 
+
+if(page.name==='InvestmentLumpsum')
+{
+  var query = $$.parseUrlQuery(page.url);
+
+var idleTime = 0;
+ var data_umrn="";
+ var Child_trans_count=1;
+ var amt=0;
+
+
+
+  var adjust="";
+  var schemecode="";
+  var weightage="";
+  var ratio ="";
+  $$.get(curr_ip+'app_services/invest_now',{'s': query.s} ,function (client_name_list_ajax) {
+    client_name_list=JSON.parse(client_name_list_ajax);
+    console.log(client_name_list);
+    adjust=client_name_list.adjust;
+    schemecode=client_name_list.s_code;
+    weightage=client_name_list.weight;
+    ratio=client_name_list.ratio;
+
+    console.log(adjust);
+    // ratio=ratio.replace(/&quot;/g,'');
+    // ratio=ratio.replace("[",'');
+    // ratio=ratio.replace("]",'');
+    // ratio=ratio.replace(/ /g,'');
+console.log(schemecode);
+console.log(weightage);
+console.log(ratio);
+
+    // adjust=adjust.replace(/&quot;/g,'');
+    // adjust=adjust.replace("[",'');
+    // adjust=adjust.replace("]",'');
+    // adjust=adjust.replace(/ /g,'');
+
+    // weightage=weightage.replace(/&quot;/g,'');
+    // weightage=weightage.replace("[",'');
+    // weightage=weightage.replace("]",'');
+    // weightage=weightage.replace(/ /g,'');
+
+    var client_list_option="<option value>Please select investor</option>";
+    for(var i in client_name_list.client_list) 
+    { 
+      client_list_option=client_list_option+"<option value="+client_name_list.client_list[i]+">"+i+"</option>"
+    }
+    $("#client_name").html(client_list_option);
+
+    var fund_td_data="";
+    var total_amount=0;
+    var amount="";
+    var fund_name="";
+    var ratio="";
+    for(var i=0;i<client_name_list.s_name.length;i++){
+      fund_name=client_name_list.s_name[i];
+      amount="<input type='text' id='weightage"+client_name_list.s_code[i]+"' class='wt readonly_div' value='"+client_name_list.adjust[i]+"'>"
+      amount_min_symbol="<span type='button' class='btn btnPM inv_m' id='min_"+client_name_list.s_code[i]+"'><i class='fa fa-minus-square-o fa-2x' aria-hidden='true'></i></span>"
+      amount_plus_symbol="<span type='button' class='btn btnPM inv_p' id='pls_"+client_name_list.s_code[i]+"'><i class='fa fa-plus-square-o fa-2x' aria-hidden='true'></i></span>"
+      console.log(amount_min_symbol);
+      fund_td_data=fund_td_data+"<tr><td>"+client_name_list.s_name[i]+"</td><td>"+amount+amount_min_symbol+amount_plus_symbol+"</td><td>"+client_name_list.ratio[i]+"</td></tr>";
+      total_amount=total_amount+client_name_list.adjust[i];
+    }
+    console.log(fund_td_data);
+    fund_td_data=fund_td_data+"<tr><td>Total Investment Amount (₹)</td><td>"+total_amount+"</td><td></td></tr>"
+    $('.all_fund_table tbody').html(fund_td_data);
+    $('#amt_invested').val(total_amount);
+  });
+  
+  $("#client_name").change(function(){
+      if($('#client_name').val()!="" ){
+         get_client_details();
+      }
+  });
+
+  function get_client_details()
+  {  
+    var id=$('#client_name').val();
+    var bk_name=[];
+    var acc_no=[];
+    var ifsc_code_arr=[];
+
+    if (id.length!=0)
+     {  
+      $$.get(curr_ip+'investments/client_populate',{'id' : id },function (data_ajax) {
+        
+        var data=JSON.parse(data_ajax);
+
+        $('#acc_no').empty();
+        $('#iin').empty();
+        $('#status_amount').empty();
+        $('#otm').empty();
+
+        $('#acc_no').append(data.bank_details[0].acc_no);
+        $('#iin').append(data.info.iin);
+        ifsc_code=data.info.ifsc_code;
+        $('#ifsc_code').append(data.info.ifsc_code);
+        $('#Instru_rtgs_cd').val(data.bank_details[0].ifsc_code);
+        if(data.mandate!=null)
+       {
+        $('#status_amount').append("OTM Amount :");
+        $('#otm').append("₹ "+commaSeparateNumber(data.mandate.AMOUNT)) ;
+         
+       }
+        else if(data.pending_otm!=null)
+        {
+           $('#otm').append("Pending");
+           $('#status_amount').append("OTM Status :");
+         }
+         else
+         {
+         $('#otm').append("Inactive");
+          $('#status_amount').append("OTM Status :");
+        }
+
+          if(data.bank_details.length==1)
+          {
+            bk_name.push(data.bank_details[0].bank_name)
+            acc_no.push(data.bank_details[0].acc_no)
+            ifsc_code_arr.push(data.bank_details[0].ifsc_code)
+          }
+          else
+          {
+            for(var i=0;i<data.bank_details.length;i++)
+            {
+              bk_name.push(data.bank_details[i].bank_name)
+              acc_no.push(data.bank_details[i].acc_no)
+              ifsc_code_arr.push(data.bank_details[i].ifsc_code)
+            }
+          }
+          console.log(bk_name)
+          console.log(acc_no)
+          console.log(ifsc_code_arr)
+          $$.get(curr_ip+'investments/get_bank_desc',{ 'bank_code' : bk_name},function (bank_data_ajax) {
+            var data=JSON.parse(bank_data_ajax);
+            if(data.fl_bnk_name.length==1)
+            {
+               $('#bank_name').empty();
+              $('#bank_name').append("<h5 class='white_col tab_move_1'>"+data.fl_bnk_name[0].BANK_NAME+"</h5>");
+            }
+            else
+            {  
+              $('#bank_name').empty();
+             var bb="<div class='white_col'><select class='form-control tab_move_1 bnk_change' id='bank_det_name'>";  
+              for(var i=0;i<data.fl_bnk_name.length;i++)
+              {  
+                var value_to_sent=acc_no[i]+"_"+ifsc_code_arr[i]
+                console.log(i);
+               bb=bb+"<option value="+value_to_sent+" >"+data.fl_bnk_name[i].BANK_NAME+"</option>"
+
+              }
+               $('#bank_name').html(bb+"</select></div>");
+               var sent="";
+               for(var i=0;i<s_code.length;i++)
+                {
+                  sent=sent+s_code[i]+","+$("#ratio_"+s_code[i]).val().replace(/,/g,'')+","
+                }
+                sent=sent+$('#amt_invested').val().replace(/,/g,'')
+                $("#sent_url").val(sent);
+            }
+            generate_umrn();
+            // Multiple bank account holder bank account change function later
+          });
+      });
+
+  }
+       
+
+}
+
+ratio=ratio.replace(/&quot;/g,'');
+ratio=ratio.replace("[",'');
+ratio=ratio.replace("]",'');
+ratio=ratio.replace(/ /g,'');
+
+adjust=adjust.replace(/&quot;/g,'');
+adjust=adjust.replace("[",'');
+adjust=adjust.replace("]",'');
+adjust=adjust.replace(/ /g,'');
+
+weightage=weightage.replace(/&quot;/g,'');
+weightage=weightage.replace("[",'');
+weightage=weightage.replace("]",'');
+weightage=weightage.replace(/ /g,'');
+
+console.log("-----")
+console.log(ratio);
+console.log("-----")
+  
+}
+
+
+
+$('#payment_type_selector').change(function()
+ {
+  console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+  $('#submit_btn').prop("disabled",false);
+   if($(this).val()=="Y")
+   {
+    // alert($(this).val());
+      $("#pay_select").show();
+      $("#payment_amt").show();
+      $("#payment_type_selector option[value='OL']").prop('selected', true);
+      // $("#payment_type_selector").addClass('readonly_div');
+      // $("#payment_type_selector").addClass('NoAppearance');
+       $("#payment_type_selector option[value='M']").hide();
+      $("#payment_type_selector option[value='Q']").hide();
+      // $('#IA').hide();
+        $('#IN').hide();
+        $('#IB').hide();
+        $('#IBrnch').hide();
+        $('#IDate').hide();
+        $('#IAccNo').hide();
+        $('#IRtgsCode').hide();
+        $('#IMICRCode').hide();
+        $('#IMandate').hide();
+        $('#IMandateAmount').hide();
+        $('#no_otm').hide();
+         $('#no_otm_ls').hide();
+        flag=0;
+        $("#submit_btn").removeClass("disabled");
+                 $("#submit_btn").prop("disabled",false);
+
+        REinit();
+
+   }
+   else
+   {
+    //  $("#payment_type_selector").append('<option value="M">OTM</option>');
+    // $("#payment_type_selector").append('<option value="Q">Cheque</option>');
+     $("#pay_select").show();
+     $("#payment_amt").show();
+     $('#IUtr').hide();
+     $('#ITransfer').hide();
+     // if($("#payment_type_selector").val()=="TR")
+     //    $('#form5').bootstrapValidator('resetForm', true)
+   }
+   change_otm_lumpsum();
+ });
+
+
+function change_otm_lumpsum()
+{
+
+   $('#Instru_amt').val(commaSeparateNumber(amt));
+   if($("#payment_type_selector").val()=="OL")
+     {
+
+        $('#IA').hide();
+        $('#IN').hide();
+        $('#IB').hide();
+        $('#IBrnch').hide();
+        $('#IDate').hide();
+        $('#IAccNo').hide();
+        $('#IRtgsCode').hide();
+        $('#IMICRCode').hide();
+        $('#IMandate').hide();
+        $('#IMandateAmount').hide();
+        $('#no_otm').hide();
+         $('#no_otm_ls').hide();
+         $('#IUtr').hide();
+          $('#ITransfer').hide();
+         $("#cheque_image_1").hide();
+         $('.net_btn_info').show();
+          $("#rtgs_info").hide();
+        flag=0;
+        $("#submit_btn").removeClass("disabled");
+        $("#submit_btn").prop("disabled",false);
+        $("#submit_btn_later").show();
+        $("#submit_btn_later").removeClass("disabled");
+        $("#submit_btn").val("Purchase (Pay Now)");
+        $("#submit_btn_later").prop("disabled",false);
+
+         
+        REinit();
+     }
+     else if($("#payment_type_selector").val()=="Q")
+     {
+        $('#IA').show();
+        $('#IN').show();
+        $('#IB').show();
+
+        $('#IDate').show();
+        $('#IAccNo').show();
+        
+        $('#IRtgsCode').hide();
+        $('#IMICRCode').show();
+        $('#IMandate').hide();
+        $('#IMandateAmount').hide();
+        $('#no_otm').hide();
+         $('#no_otm_ls').hide();
+          $("#IB").addClass('readonly_div');
+          $("#IAccNo").addClass('readonly_div');
+          $('#IUtr').hide();
+          $('#ITransfer').hide();
+          $("#cheque_image_1").show();
+          $("#submit_btn_later").hide();
+          $("#submit_btn").val("Purchase");
+          $('.net_btn_info').hide();
+          $("#rtgs_info").hide();
+          REinit();
+
+
+     }
+     else if($("#payment_type_selector").val()=="TR")
+     {
+        $('#IRtgsCode').hide();
+        $('#IA').hide();
+        $('#IRtgsCode').hide();
+
+        $('#IMICRCode').hide();
+        $('#IB').hide();
+        $('#IBrnch').hide();
+
+        $('#IN').hide();
+        $('#IDate').hide();
+        $('#IAccNo').hide();
+        $('#IMandate').hide();
+        $('#IMandateAmount').hide();
+        $('#no_otm').hide();
+         $('#no_otm_ls').hide();
+         $("#cheque_image_1").hide();
+          $('.net_btn_info').hide();
+         $("#rtgs_info").show();
+
+            $('#IUtr').show();
+            $('#ITransfer').show();
+ 
+          if($("#utr_no").parent()[0].className.indexOf("has-success")!=-1)
+
+            $('#form5').bootstrapValidator('resetForm', true) ;
+          $("#submit_btn_later").hide();
+          $("#submit_btn").val("Purchase");
+          REinit();
+
+     }
+     else if($("#payment_type_selector").val()=="M")
+     {
+      $("#submit_btn").removeClass("disabled");
+                 $("#submit_btn").prop("disabled",false);
+        $('#IRtgsCode').hide();
+        $('#IA').hide();
+        $('#IRtgsCode').hide();
+
+        $('#IMICRCode').hide();
+        $('#IB').hide();
+        $('#IBrnch').hide();
+
+        $('#IN').hide();
+        $('#IDate').hide();
+        $('#IAccNo').hide();
+        $("#cheque_image_1").hide();
+        $('#IUtr').hide();
+          $('#ITransfer').hide();
+          $('.net_btn_info').hide();
+         $("#rtgs_info").hide();
+
+
+
+        if(data_umrn!="")
+        {         
+          $('#IMandate').show();
+         $('#no_otm_ls').hide();
+       }
+        else
+        {
+          $('#no_otm_ls').show();
+          $('#IMandate').hide();
+        }
+        umrn_status();
+
+        $("#submit_btn_later").hide();
+          $("#submit_btn").val("Purchase");
+         REinit();
+     }
+
+  if(($("#payment_type_selector").val()=="M" && data_umrn.length==0 )|| ($("#payment_type_selector").val()=="M" && $("#umrn_status").html()!=""))
+    $('#submit_btn').prop( "disabled", true );
+  else
+     $('#submit_btn').prop( "disabled", false );
+  
+  if($("#payment_type_selector").val()=="Q" || $("#payment_type_selector").val()=="TR" )
+  {
+    $('#Instru_amt').val(commaSeparateNumber(amt));
+
+    // alert("tr");
+    $("#form5").formValidation({
+            framework: 'bootstrap',
+            icon: {
+                required: 'glyphicon glyphicon-asterisk',
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+              'MicrCode': {
+                    row: '.validtor',
+                     enabled: false,
+                    validators: {
+                    notEmpty: {
+                        message: 'MICR Code is required'
+                    },
+                    regexp: { regexp: /^(\d{9})$/i, message: 'Please enter 9 digit MICR CODE' }
+                  }
+                }, 
+                'Instru_nmbr': {
+                    row: '.validtor',
+                     enabled: false,
+                    validators: {
+                    notEmpty: {
+                        message: 'Cheque number is required'
+                    },
+                    regexp: { regexp: /^(\d{6})$/i, message: 'Please enter 6 digit Cheque number' }
+                  }
+                },
+                'Instru_rtgs_cd': {
+                    row: '.validtor',
+                    validators: {
+                    notEmpty: {
+                        message: 'RTGS CODE is required'
+
+                    },
+                        regexp: { regexp: /^([A-Z|a-z]{4})([0])([\d]{6})$/i, message: 'Please enter valid RTGS CODE ' } 
+                  }
+                },
+                'Instru_date': {
+                    row: '.validtor',
+                     enabled: false,
+                    validators: {
+                    notEmpty: {
+                        message: 'Cheque date is required'
+
+                    }
+                  }
+                }
+              }
+              })   
+             
+         }
+          if($("#payment_type_selector").val()=="Q") 
+          {
+           
+            if(flag_cheque==1)
+            {
+              $('#form5').data('formValidation').validate();
+            }
+            flag_cheque=1;
+            $('#form5')
+                    .formValidation('enableFieldValidators', 'MicrCode', true)
+                    .formValidation('enableFieldValidators', 'Instru_nmbr', true)
+                    .formValidation('enableFieldValidators', 'Instru_date', true);
+
+                   
+          }
+          if($("#payment_type_selector").val()=="TR") 
+          {
+
+           $('#Instru_amt').val($('#amt_invested').val().replace(/,/g , ""));
+           $("#submit_btn").removeClass("disabled");
+                 $("#submit_btn").prop("disabled",false);
+                   if ($("#sumbit_btn").is(":disabled"))
+                   {}
+                      else
+                      {
+
+          }
+
+        }
+
+}
+ function REinit()   // function for disabling / Enabling Submit button 
+            {
+                
+            }
+
+ function umrn_status()
+{
+  // alert("umrn");
+  // alert(amt);
+    if(parseInt($('#umrn_mandate_amt').val().replace(/,/g , ""))<amt)
+    {
+      // alert(parseInt($('#umrn_mandate_amt').val()))
+      $('#umrn_status').html("");
+      $('#umrn_status').html("Your Existing Mandate amount is less than total amount. Please choose another UMRN or another Payment Mode");
+      $('#umrn_status').show();
+      flag=1;
+      if($("#payment_type_selector").val()=="M")
+        $("#submit_btn").prop("disabled",true);
+    }
+    else
+    {
+      flag=0;
+      $('#umrn_status').html("");
+      if($("#payment_type_selector").val()=="M")
+        $("#submit_btn").prop("disabled",false);
+    }
+
+}
+
+
+function generate_umrn()
+{
+     var umrn_index=0;
+     sip_umrn_amount=0;
+     var umrn_obj=[]; 
+     var acc_no=$("#acc_no").text();
+     var ifsc_code=$('#Instru_rtgs_cd').val();
+     console.log("%%%%%%%")
+     console.log(acc_no);
+      console.log(ifsc_code);
+      console.log($('#iin'))
+      console.log("%%%%%%%")
+      $.ajax({
+         type: 'GET',
+         url: curr_ip+'investments/get_umrn_info',
+         dataType: 'json',
+         data: { 'iin' : $('#iin').text(),acc_no:acc_no,ifsc_code:ifsc_code},
+         success: function(data)
+            {
+                console.log(data)
+                data_umrn=data;
+               if(data.length!=0)
+               {
+                // $('#no_otm_status_ls').html("")
+                $('#umrn_mandate').empty();
+                $('#umrn_mandate_amt').empty();
+                var t_r="";
+                var t_r=" <select id='mandate_no' name='mandate_no' class='form-control'>"
+                for(var i=0;i<data.length ;i++)
+                {
+                t_r =t_r+"<option value="+data[i].UMRN_NO+" >"+data[i].UMRN_NO+"</option>" 
+                   sip_umrn_amount = data[0].AMOUNT;
+                 }
+               $('#umrn_mandate').append(t_r+"</select>");
+               $('#umrn_info').html("Existing Umrn");
+               $('#umrn_mandate_amt').val(commaSeparateNumber(sip_umrn_amount));
+               
+               umrn_status()
+               }
+               else
+               {
+                 $('#no_otm_status_ls').html("There is no existing OTM. Please select another payment Mode")
+                 
+               }
+                change_otm_lumpsum(); 
+            } 
+         
+         });
+
+}
+
+
+
+
+
+/***************************** InvestmentLumpsum / Lumpsum Investment END ************************** */ 
 
 
 })

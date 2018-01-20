@@ -1,54 +1,125 @@
 <div data-page="DashboardIndex" class="page DashCommon" id="DashIndex">
-    <div class="page-content">
-        <section class="container">
-            <div class="row DashTop">
-                <div class="col-xs-12">                    
-                    <div class="swiper-container swiper-DIndex">
-                        <!-- <div class="swiper-pagination"></div> -->
-                        <div class="swiper-wrapper">
-                          <a href="DashboardIndex.html" class="swiper-slide item-link dashactive"><span class="fa fa-home" aria-hidden="true"></span></a>
-                          <a href="DashboardProfile.html" class="swiper-slide item-link"><span class="fa fa-user" aria-hidden="true"></span></a>
-                          <a href="DashboardTransStatus.html" class="swiper-slide item-link"><span class="fa fa-list-ul" aria-hidden="true"></span></a>
-                          <a href="DashboardSavedPort.html" class="swiper-slide item-link"><span class="fa fa-bookmark" aria-hidden="true"></span></a>
-                          <a href="DashboardSchedule.html" class="swiper-slide item-link"><span class="fa fa-truck" aria-hidden="true"></span></a>
-                          <a href="" class="swiper-slide"><span class="fa fa-microchip" aria-hidden="true"></span></a>
-                          <a href="" class="swiper-slide"><span class="fa fa-bath" aria-hidden="true"></span></a>
-                          <a href="" class="swiper-slide"><span class="fa fa-meetup" aria-hidden="true"></span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>  
-            <div class="row">
-                <div class="col-xs-12 DashHead">
-                    <h1>My Dashboard</h1>                    
-                </div>
+  <div class="page-content">
+    <section class="container">
+      <div class="row DashTop">
+        <div class="col-xs-12">                    
+          <div class="swiper-container swiper-DIndex">
+            <div class="swiper-wrapper">
+              <a href="DashboardIndex.html" class="swiper-slide item-link dashactive"><span class="fa fa-home" aria-hidden="true"></span></a>
+              <a href="DashboardProfile.html" class="swiper-slide item-link"><span class="fa fa-user" aria-hidden="true"></span></a>
+              <a href="DashboardTransStatus.html" class="swiper-slide item-link"><span class="fa fa-list-ul" aria-hidden="true"></span></a>
+              <a href="DashboardSavedPort.html" class="swiper-slide item-link"><span class="fa fa-bookmark" aria-hidden="true"></span></a>
+              <a href="DashboardSchedule.html" class="swiper-slide item-link"><span class="fa fa-truck" aria-hidden="true"></span></a>
+              <a href="" class="swiper-slide"><span class="fa fa-microchip" aria-hidden="true"></span></a>
+              <a href="" class="swiper-slide"><span class="fa fa-bath" aria-hidden="true"></span></a>
+              <a href="" class="swiper-slide"><span class="fa fa-meetup" aria-hidden="true"></span></a>
             </div>
-             <div class="row">
-                <div class="col-xs-12 DashBody">
-
-                  <h2>Hello, <span id="ClientName"></span></h2>
-
-                  <div class="list-block">
-                    <ul>
-                      <li class="item-content">
-                        <div class="item-title label">Fruit</div>
-                        <div class="item-input">
-                          <input type="text" placeholder="Fruit" id="autocomplete-dropdown-all"></div>
-                      </li>
-                    </ul>
-                  </div>
-                                        
+          </div>
+        </div>
+      </div>  
+      <div class="row">
+        <div class="col-xs-12 DashHead">
+          <h1>My Dashboard</h1>                    
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 DashBody">
+          <h2>Hello, <span id="ClientName"></span></h2>                     
+        </div>
+        <div class="col-xs-12">
+          <!-- <div class="btn-group" role="group" aria-label="Select Investor"> -->
+            <!-- <label class="btn btn-default">Select Investor</label> -->
+            <p>Select an Investor</p>
+            <select class="form-control tab_move" name="client_name" id="client_name"></select>
+          <!-- </div> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="input-group">
+              <div class="input-group-addon" id=""><h6>Amount Invested</h6><h2>₹ <span id="trans_amt_total">-</span></h2></div>
+              <div class="input-group-addon" id=""><h6>Current Value</h6><h2>₹ <span id="current_value_2">-</span></h2></div>
+              <div class="input-group-addon" id=""><h6>Gain / Loss</h6><h2>₹ <span id="gainloss">-</span></h2></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="buttons-row">            
+            <a href="#mutual_fund" id="a1" class="button tab-link active">Mutual Funds</a>           
+            <a href="#fixed_deposit" id="a2" class="button tab-link">Fixed Deposits</a>                         
+          </div>
+          <div class="tabs-swipeable-wrap swiper-container swiper-container-horizontal">
+            <div class="tabs swiper-wrapper">
+              <div id="mutual_fund" class="page-content tab active swiper-slide swiper-slide-active">
+                <div class="block">
+                  <table class="table table-responsive table-striped table-condensed" id="mf_total_table">
+                    <thead>
+                      <tr>
+                        <th>Amount Invested (&#8377;)</th>
+                        <th>Current Value (&#8377;)</th>
+                        <th>Gain / Loss (&#8377;)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table table-responsive table-striped table-condensed" id="mf_fund_table">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th><span>Fund Name</span></th>
+                        <th><span>Gain / Loss</span></th>
+                        <th class=""><span class="pull-left fa fa-caret-down"></span><span class="disclaimer">Current Value</span></h6>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="d_none">-</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <h3>SIP Details (Systematic Investment Plan)</h3>
+                  <table class="table table-responsive table-striped table-condensed" id="mf_sip_table">
+                    <thead>
+                      <tr>
+                        <th>Fund Name</th>
+                        <th>Amount (&#8377;)</th>
+                        <th>SIP Date</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+              </div>
+              <div id="fixed_deposit" class="page-content tab swiper-slide swiper-slide-next">
+                <div class="block">
+                  <p>Tab 2 content</p>
+                  ...
+                </div>
+              </div>
             </div>
-
-            
-
-            
-
-            
-
-        </section>
-    </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
             

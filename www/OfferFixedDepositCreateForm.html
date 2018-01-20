@@ -1,0 +1,1288 @@
+<div data-page="OfferFixedDepositCreateForm" class="page" id="FDCreateForm">
+    <div class="page-content">                
+        <div class="container">
+            <div class="row HeadTop">
+                <div class="col-xs-12">
+                    <h1>Fill The Form</h1>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#loginForm" id="fdIndi" aria-controls="loginForm" role="tab" data-toggle="tab">Individual</a>
+    </li>
+    <li role="presentation">
+      <a href="#loginForm" id="fdNonIndi" aria-controls="loginForm" role="tab" data-toggle="tab" >Non Individual</a>
+    </li>
+</ul>
+
+<input type="hidden" id="user_type_info" name="user_type_info" value="individual">
+
+<div class="row">
+  <div class="col-xs-12 pad_top1">
+      <h4>Deposit Details</h4>
+      <div id="fresh_deposit_renewal"> 
+          <div id="inline_content">
+              <label class="checkbox-inline">
+                  <input type="radio" name="inv_type" id="inv_type_fresh" value="fresh" checked="checked"> Fresh Deposit
+              </label>
+              <label class="checkbox-inline"> 
+                  <input type="radio" name="inv_type" id="inv_type_renewal" value="renewal"> Renewal
+              </label>
+              <div id="div_inv_renewal" style="display: none;"  name="div_inv_renewal" >
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="input-group">
+                      <span class="input-group-addon">Old FDR no. </span>
+                      <div class="">                                
+                        <input type="text" name="fdr_no" id="fdr_no" class="ignore1 form-control">
+                      </div>
+                      <span class="input-group-addon">for</span>
+                      <div class="">                                
+                        <input type="text" name="fdr_month" id="fdr_month" class="ignore2 form-control" >
+                      </div>
+                      <span class="input-group-addon">months</span>
+                    </div>
+                  </div>
+                </div>
+              </div>                   
+          </div>
+      </div>
+  </div>
+</div>
+
+<hr>
+   
+<div id = "customer_type_content">
+
+  <div id="tab_indi_joint">
+    <div class="" >                
+      <div class="row">
+        <div class="col-xs-12">
+            <div id="inline_content">
+              <label class="checkbox-inline">
+                  <input type="radio" name="indi_sing_joint" id="indi_sing_joint_single" value="single" checked="checked"> Individual Single
+              </label> 
+              <label class="checkbox-inline"> 
+                  <input type="radio" name="indi_sing_joint" id="indi_sing_joint_joint" value="joint"> Individual Joint Holder
+              </label>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="individual_div_single">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>For Individual</h4>
+        <div class = "list-block">
+          <ul>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Investor Name <sup>*</sup></div>
+                      <div class = "item-input">
+                        <input type="text" name="inv_name" id="inv_name" placeholder="Investor Name">
+                      </div>
+                   </div>
+                </div>
+             </li>                           
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Date of Birth <sup>*</sup></div>
+                      <div class = "item-input">
+                        <input type = "text" name="dob_doi" id="datePicker_i" placeholder = "DOB" readonly />
+                        <!-- <input type="date" name="dob_doi" id="datePicker_i" placeholder="DD/MM/YYYY"> -->
+                      </div>
+                   </div>
+                </div>
+             </li>                           
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Gender</div>
+                      <div class = "item-input">
+                          <label class="checkbox-inline">
+                              <input type="radio" name="inv_gender" id="inv_gender_male" value="male" checked="checked"> Male
+                          </label> 
+                          <label class="checkbox-inline"> 
+                            <input type="radio" name="inv_gender" id="inv_gender_female" value="female"> Female
+                          </label>  
+                      </div>
+                   </div>
+                </div>
+             </li>                      
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Customer PAN <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="pan" id="pan" placeholder="PAN">
+                      </div>
+                   </div>
+                </div>
+             </li>                           
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Guardian/Spouse</div>
+                      <div class = "item-input">
+                         <input type="text" name="guardian" id="guardian" placeholder="Guardian/Spouse">
+                      </div>
+                   </div>
+                </div>
+             </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Mobile No <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="mobile_no" id="mobile_no" placeholder="Mobile No">
+                      </div>
+                   </div>
+                </div>
+             </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Email <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="email" id="email" placeholder="Email">
+                      </div>
+                   </div>
+                </div>
+              </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Address Line 1 <sup>*</sup></div>
+                      <div class = "item-input">
+                        <input type="text" name="addr1" id="addr1" placeholder="Address Line 1">
+                      </div>
+                   </div>
+                </div>
+              </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Address Line 2</div>
+                      <div class = "item-input">
+                         <input type="text" name="addr2" id="addr2" placeholder="Address Line 2">
+                      </div>
+                   </div>
+                </div>
+              </li>                            
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">City <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="city" id="city" placeholder="City">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">State <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="state" id="state" placeholder="State">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Country <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="country" id="country" placeholder="Country">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Pin Code <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="pincode" id="pincode" placeholder="Pin Code">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Occupation</div>
+                      <div class = "item-input">
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <select id="occu_select" name="occu_select"> 
+                            <option value="">Select</option>
+                            <option value="public">Public Sector</option>
+                            <option value="private">Private Sector</option>
+                            <option value="professional">Professional</option>
+                            <option value="retired">Retired</option>
+                            <option value="housewife">House Wife</option>
+                            <option value="student">Student</option>
+                            <option value="others">Others</option>
+                          </select>
+                          </div>
+                          <div class="col-xs-6">
+                            <input type="text" name="occupation" id="occupation" style="display:none">
+                          </div>
+                        </div>
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Annual Income</div>
+                      <div class = "item-input">
+                          <select id="income_select" name="income_select">  
+                              <option value="">Select</option>
+                              <option value="upto_five">Upto 5 Lacs</option>
+                              <option value="five_ten">5 to 10 Lacs</option>
+                              <option value="ten_twentyfive">10 to 25 Lacs</option>
+                              <option value="twentyfive_above">25 Lacs &amp; above</option>
+                          </select>
+                          <input type="hidden" name="annual_income" id="annual_income">
+                      </div>
+                   </div>
+                </div>
+             </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- For joint one -->
+  <div id="individual_div_joint" style="display: none;">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>For Joint 1</h4>  
+        <div class = "list-block">
+          <ul>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Investor Name <sup>*</sup></div>
+                      <div class = "item-input">
+                        <input type="text" name="second_applicant" id="second_applicant" placeholder="Investor Name">
+                      </div>
+                   </div>
+                </div>
+             </li>                           
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Date of Birth <sup>*</sup></div>
+                      <div class = "item-input">
+                        <input type = "text" name="dob_doi_j1" id="datePicker_i_j1" placeholder = "DOB" readonly />
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Gender</div>
+                      <div class = "item-input">
+                          <label class="checkbox-inline">
+                              <input type="radio" name="inv_gender_j1" id="inv_gender_j1_male" value="male" checked="checked"> Male
+                          </label> 
+                          <label class="checkbox-inline">
+                              <input type="radio" name="inv_gender_j1" id="inv_gender_j1_female" value="female"> Female
+                          </label>  
+                      </div>
+                   </div>
+                </div>
+             </li>                      
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Customer PAN <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="pan_j1" id="pan_j1" placeholder="PAN">
+                      </div>
+                   </div>
+                </div>
+             </li>                           
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Guardian/Spouse</div>
+                      <div class = "item-input">
+                         <input type="text" name="guardian_j1" id="guardian_j1" placeholder="Guardian/Spouse">
+                      </div>
+                   </div>
+                </div>
+             </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Mobile No <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="mobile_no_j1" id="mobile_no_j1" placeholder="Mobile No">
+                      </div>
+                   </div>
+                </div>
+             </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Email <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="email_j1" id="email_j1" placeholder="Email">
+                      </div>
+                   </div>
+                </div>
+              </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Address Line 1 <sup>*</sup></div>
+                      <div class = "item-input">
+                        <input type="text" name="addr1_j1" id="addr1_j1" placeholder="Address Line 1">
+                      </div>
+                   </div>
+                </div>
+              </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Address Line 2</div>
+                      <div class = "item-input">
+                         <input type="text" name="addr2_j1" id="addr2_j1" placeholder="Address Line 2">
+                      </div>
+                   </div>
+                </div>
+              </li>                            
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">City <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="city_j1" id="city_j1" placeholder="City">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">State <sup>*</sup></div>
+                      <div class = "item-input">                       
+                         <input type="text" name="state_j1" id="state_j1" placeholder="State">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Country <sup>*</sup></div>
+                      <div class = "item-input">                       
+                         <input type="text" name="country_j1" id="country_j1" placeholder="Country">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Pin Code <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="pincode_j1" id="pincode_j1" placeholder="Pin Code">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Occupation</div>
+                      <div class = "item-input">
+                        <div class="row">
+                          <div class="col-xs-6">                          
+                            <select id="occu_select_j1" name="occu_select_j1"> 
+                              <option value="">Select</option>
+                              <option value="public">Public sector</option>
+                              <option value="private">Private sector</option>
+                              <option value="professional">Professional</option>
+                              <option value="retired">Retired</option>
+                              <option value="housewife">House wife</option>
+                              <option value="student">Student</option>
+                              <option value="others">Others</option>
+                            </select>
+                          </div>
+                          <div class="col-xs-6">
+                              <input type="text" name="occupation_j1" id="occupation_j1" style="display:none">
+                          </div>
+                        </div>
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Annual Income</div>
+                      <div class = "item-input">
+                          <select id="income_select_j1" name="income_select_j1"> 
+                              <option value="">Select</option>
+                              <option value="upto_five">Upto 5 Lacs</option>
+                              <option value="five_ten">5 to 10 Lacs</option>
+                              <option value="ten_twentyfive">10 to 25 Lacs</option>
+                              <option value="twentyfive_above">25 Lacs &amp; above</option>
+                          </select>
+                          <input type="hidden" name="annual_income_j1" id="annual_income_j1">
+                      </div>
+                   </div>
+                </div>
+             </li>
+          </ul>
+        </div>
+      </div>  
+    </div>
+
+  <!-- For joint two -->
+    <div id="th_jh">
+      <div class="row">
+        <div class="col-xs-12">  
+          <h4>For Joint 2</h4>
+          <div class = "list-block">
+            <ul>
+               <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Investor Name <sup>*</sup></div>
+                        <div class = "item-input">                      
+                          <input type="text" name="third_applicant" id="third_applicant" placeholder="Investor Name">
+                        </div>
+                     </div>
+                  </div>
+               </li>                           
+               <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Date of Birth <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type = "text" name="dob_doi_j2" id="datePicker_i_j2" placeholder = "DOB" readonly />
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Gender</div>
+                        <div class = "item-input">
+                            <label class="checkbox-inline">
+                                <input type="radio" name="inv_gender_j2" id="inv_gender_j2_male" value="male" checked="checked"> Male
+                            </label> 
+                            <label class="checkbox-inline">
+                                <input type="radio" name="inv_gender_j2" id="inv_gender_j2_female" value="female"> Female
+                            </label>  
+                        </div>
+                     </div>
+                  </div>
+               </li>                      
+               <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Customer PAN <sup>*</sup></div>
+                        <div class = "item-input">
+                           <input type="text" name="pan_j2" id="pan_j2" placeholder="PAN">
+                        </div>
+                     </div>
+                  </div>
+               </li>                           
+               <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Guardian/Spouse</div>
+                        <div class = "item-input">
+                           <input type="text" name="guardian_j2" id="guardian_j2" placeholder="Guardian/Spouse">
+                        </div>
+                     </div>
+                  </div>
+               </li>
+                <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Mobile No <sup>*</sup></div>
+                        <div class = "item-input">
+                           <input type="text" name="mobile_no_j2" id="mobile_no_j2" placeholder="Mobile No">
+                        </div>
+                     </div>
+                  </div>
+               </li>
+                <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Email <sup>*</sup></div>
+                        <div class = "item-input">
+                           <input type="text" name="email_j2" id="email_j2" placeholder="Email">
+                        </div>
+                     </div>
+                  </div>
+                </li>
+                <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Address Line 1 <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="addr1_j2" id="addr1_j2" placeholder="Address Line 1">
+                        </div>
+                     </div>
+                  </div>
+                </li>
+                <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Address Line 2</div>
+                        <div class = "item-input">
+                           <input type="text" name="addr2_j2" id="addr2_j2" placeholder="Address Line 2">
+                        </div>
+                     </div>
+                  </div>
+                </li>                            
+                <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">City <sup>*</sup></div>
+                        <div class = "item-input">
+                           <input type="text" name="city_j2" id="city_j2" placeholder="City">
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">State <sup>*</sup></div>
+                        <div class = "item-input">
+                           <input type="text" name="state_j2" id="state_j2" placeholder="State">
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Country <sup>*</sup></div>
+                        <div class = "item-input">
+                           <input type="text" name="country_j2" id="country_j2" placeholder="Country">
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Pin Code <sup>*</sup></div>
+                        <div class = "item-input">
+                           <input type="text" name="pincode_j2" id="pincode_j2" placeholder="Pin Code">
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Occupation</div>
+                        <div class = "item-input">
+                          <div class="row">
+                            <div class="col-xs-6"> 
+                              <select id="occu_select_j2" name="occu_select_j2"> 
+                                <option value="">Select</option>
+                                <option value="public">Public sector</option>
+                                <option value="private">Private sector</option>
+                                <option value="professional">Professional</option>
+                                <option value="retired">Retired</option>
+                                <option value="housewife">House wife</option>
+                                <option value="student">Student</option>
+                                <option value="others">Others</option>
+                              </select>
+                            </div>
+                            <div class="col-xs-6">                            
+                                <input type="text" name="occupation_j2" id="occupation_j2" style="display:none">
+                            </div>
+                          </div>
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Annual Income</div>
+                        <div class = "item-input">
+                            <select id="income_select_j2" name="income_select_j2"> 
+                                <option value="">Select</option>
+                                <option value="upto_five">Upto 5 Lacs</option>
+                                <option value="five_ten">5 to 10 Lacs</option>
+                                <option value="ten_twentyfive">10 to 25 Lacs</option>
+                                <option value="twentyfive_above">25 Lacs &amp; above</option>
+                            </select>
+                            <input type="hidden" name="annual_income_j2" id="annual_income_j2">
+                        </div>
+                     </div>
+                  </div>
+               </li>
+            </ul>
+          </div>    
+        </div>
+      </div>
+    </div>
+
+  </div> 
+
+  <!-- <div id="non_individual_div"> -->
+  <div id="non_individual_div" style="display: none;" class="ignore_1"> 
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>For Non-Individual</h4>
+        <div class = "list-block">
+          <ul>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Name of Trust/Society/Club/Association/Corporate <sup>*</sup></div>
+                      <div class = "item-input">
+                        <input type="text" name="name_of_ni" id="name_of_ni" placeholder="Trust/Society/Club/Association/Corporate">
+                      </div>
+                   </div>
+                </div>
+             </li>                           
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Date of Incorporation <sup>*</sup></div>
+                      <div class = "item-input">
+                        <input type = "text" name="date_inc" id="datePicker_ni" placeholder = "Date of Incorporation" readonly />
+                      </div>
+                   </div>
+                </div>
+             </li>                      
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">PAN <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="pan_ni" id="pan_ni" placeholder="PAN">
+                      </div>
+                   </div>
+                </div>
+             </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Mobile No <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="mobile_no_ni" id="mobile_no_ni" placeholder="Mobile No">
+                      </div>
+                   </div>
+                </div>
+             </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Address Line 1 <sup>*</sup></div>
+                      <div class = "item-input">
+                        <input type="text" name="addr1_ni" id="addr1_ni" placeholder="Address Line 1">
+                      </div>
+                   </div>
+                </div>
+              </li>
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Address Line 2</div>
+                      <div class = "item-input">
+                         <input type="text" name="addr2_ni" id="addr2_ni" placeholder="Address Line 2">
+                      </div>
+                   </div>
+                </div>
+              </li>                            
+              <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">City <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="city_ni" id="city_ni" placeholder="City">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">State <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="state_ni" id="state_ni" placeholder="State">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Country <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="country_ni" id="country_ni" placeholder="Country">
+                      </div>
+                   </div>
+                </div>
+             </li>
+             <li>
+                <div class = "item-content">
+                   <div class = "item-inner">
+                      <div class = "item-title">Pin Code <sup>*</sup></div>
+                      <div class = "item-input">
+                         <input type="text" name="pincode_ni" id="pincode_ni" placeholder="Pin Code">
+                      </div>
+                   </div>
+                </div>
+             </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>  <!-- non individual -->
+
+</div>
+
+
+<div id="address_proof_div">
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">    
+        <h4>Address Proof (1st Depositor Only)</h4>
+        <div>Please provide any one</div>
+        <label class="checkbox-inline">
+            <input type="radio" name="address_proof" id="address_proof_passport" value="passport"> Passport
+        </label> 
+        <label class="checkbox-inline"> 
+            <input type="radio" name="address_proof" id="address_proof_voter_card" value="voter_card"> Voter Card
+        </label>
+        <label class="checkbox-inline"> 
+            <input type="radio" name="address_proof" id="address_proof_driving_license" value="driving_license"> Driving License No.
+        </label>
+        <label class="checkbox-inline"> 
+            <input type="radio" name="address_proof" id="address_proof_aadhar" value="aadhar"> Aadhar
+        </label>
+        <label class="checkbox-inline"> 
+            <input type="radio" name="address_proof" id="address_proof_others" value="others"> Others<span class="ignore_4" id="other_addr_1" style="display:none"> <input type="text" name="other_addr" id="other_addr" disabled="disabled" class="ignore_4"></span>
+        </label>          
+    </div>
+  </div>
+</div>
+
+<hr>
+<div id="ModeOfPayment">
+  <div class="row">
+    <div class="col-xs-12 col-lg-6">
+      <h4>Mode of Payment</h4>
+      <div class = "list-block">
+          <ul>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Cheque / DD No <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="cheque_dd_no" id="cheque_dd_no" placeholder="Cheque / DD No">
+                        </div>
+                     </div>
+                  </div>
+              </li>                           
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Date of Incorporation <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type = "text" name="date_fd" id="datePicker_dd" placeholder = "Date of Incorporation" readonly />
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Amount <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="amount" id="amount" placeholder="Amount">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Select Bank</div>
+                        <div class = "item-input">
+                          <select id="bank_details">                                         
+                            <option value="371_UTI">Axis Bank Ltd</option>
+                            <option value="N">New Bank</option>                     
+                          </select>
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Account Type</div>
+                        <div class = "item-input">
+                          <label class="checkbox-inline">
+                            <input type="radio" name="ac_type_1" id="ac_type_1_current" value="current"> Current
+                         </label>
+                         <label class="checkbox-inline"> 
+                          <input type="radio" name="ac_type_1" id="ac_type_1_saving" value="saving" checked="checked"> Saving
+                          </label>
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Bank Name <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="bank_name" id="bank_name">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Account No <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="account_no" id="account_no">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Branch Name <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="bank_branch" id="bank_branch">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">IFSC Code <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="ifsc_code" id="bnk_ifsc_code">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">MICR <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="micr" id="micr">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+          </ul>
+          <div id="cheque_image">
+              <img src="img/weOffer/cheque-image.png" alt="Cheque">
+          </div>
+      </div>      
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4>Bank Account Details for Redemption</h4>
+    <div id="bank_details_content">
+        <label class="checkbox-inline">
+            <input type="radio" name="mat_acc_type" id="mat_acc_type_existing" value="existing" checked="checked"> Same as Above
+        </label> 
+        <label class="checkbox-inline"> 
+            <input type="radio" name="mat_acc_type" id="mat_acc_type_new" value="new"> New Account
+        </label>
+    </div>
+    <div id="bank_details_new" style="display:none">      
+        <h4>Account</h4>
+        <div class = "list-block">
+          <ul>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">                        
+                        <div class = "item-input">
+                          <label class="checkbox-inline">
+                              <input type="radio" name="ac_type" id="ac_type_current" value="current"> Current
+                          </label>
+                          <label class="checkbox-inline"> 
+                              <input type="radio" name="ac_type" id="ac_type_saving" value="saving" checked="checked"> Saving
+                          </label>
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Bank Name <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="bank_name_red" id="bnk_nm_1">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Account No <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="account_no_red" id="bnk_ac_no_1">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Branch Name <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="bank_branch_red" id="bnk_brnch_1">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">IFSC Code <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="ifsc" id="bnk_ifsc">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">MICR <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="micr_1" id="micr_1">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+          </ul>
+          <h6 class="myred">Please provide a cancelled cheque of the above mentioned bank account (Mandatory).</h6>
+        </div>
+    </div>     
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-xs-12">
+      <h4>Nomination Details</h4>
+      <div id="nom_yes_no_content">
+          <label class="checkbox-inline">
+              <input type="radio" name="nom_yes_no" id="nom_yes_no_nom_yes" value="nom_yes"> Yes
+          </label> 
+          <label class="checkbox-inline"> 
+              <input type="radio" name="nom_yes_no" id="nom_yes_no_nom_no" value="nom_no" checked="checked"> No
+          </label>
+      </div> 
+      <div id="nom_details" style="display:none">
+        <div class = "list-block">
+          <ul>              
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Nominee Name <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="nominee1_name" id="nominee1_name">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Nominee PAN <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="nominee1_pan" id="nominee1_pan">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Nominee Address Line 1 <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="nominee1_addr1" id="nominee1_addr1">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Nominee Address Line 2</div>
+                        <div class = "item-input">
+                          <input type="text" name="nominee1_addr2" id="nominee1_addr2">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Nominee City <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="nominee1_city" id="nominee1_city">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Nominee State <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="nominee1_state" id="nominee1_state">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Nominee PIN Code <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="nominee1_pincode" id="nominee1_pincode">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Nominee Relation <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type="text" name="nominee1_relation" id="nominee1_relation">
+                        </div>
+                     </div>
+                  </div>
+              </li>
+              <li>
+                  <div class = "item-content">
+                     <div class = "item-inner">
+                        <div class = "item-title">Nominee Date of Birth <sup>*</sup></div>
+                        <div class = "item-input">
+                          <input type = "text" name="nominee1_dob" id="datePicker_nd" placeholder = "Nominee DOB" readonly />
+                        </div>
+                     </div>
+                  </div>
+              </li>
+          </ul>          
+        </div>
+        <div id="nominee_minor" style="display:none">
+          <div class = "list-block">
+            <ul>              
+                <li>
+                    <div class = "item-content">
+                       <div class = "item-inner">
+                          <div class = "item-title">Guardian Name <sup>*</sup></div>
+                          <div class = "item-input">
+                            <input type="text" name="nominee1_guard_name" id="nominee1_guard_name">
+                          </div>
+                       </div>
+                    </div>
+                </li>
+                <li>
+                    <div class = "item-content">
+                       <div class = "item-inner">
+                          <div class = "item-title">PAN <sup>*</sup></div>
+                          <div class = "item-input">
+                            <input type="text" name="guardian_pan_1" id="guardian_pan_1">
+                          </div>
+                       </div>
+                    </div>
+                </li>
+                <li>
+                    <div class = "item-content">
+                       <div class = "item-inner">
+                          <div class = "item-title">Address Line 1 <sup>*</sup></div>
+                          <div class = "item-input">
+                            <input type="text" name="nominee1_guard_addr1" id="nominee1_guard_addr1">
+                          </div>
+                       </div>
+                    </div>
+                </li>
+                <li>
+                    <div class = "item-content">
+                       <div class = "item-inner">
+                          <div class = "item-title">Address Line 2</div>
+                          <div class = "item-input">
+                            <input type="text" name="nominee1_guard_addr2" id="nominee1_guard_addr2">
+                          </div>
+                       </div>
+                    </div>
+                </li>
+                <li>
+                    <div class = "item-content">
+                       <div class = "item-inner">
+                          <div class = "item-title">City <sup>*</sup></div>
+                          <div class = "item-input">
+                            <input type="text" name="nominee1_guard_city" id="nominee1_guard_city">
+                          </div>
+                       </div>
+                    </div>
+                </li>
+                <li>
+                    <div class = "item-content">
+                       <div class = "item-inner">
+                          <div class = "item-title">State <sup>*</sup></div>
+                          <div class = "item-input">
+                            <input type="text" name="nominee1_guard_state" id="nominee1_guard_state">
+                          </div>
+                       </div>
+                    </div>
+                </li>
+                <li>
+                    <div class = "item-content">
+                       <div class = "item-inner">
+                          <div class = "item-title">PIN Code <sup>*</sup></div>
+                          <div class = "item-input">
+                            <input type="text" name="nominee1_guard_pincode" id="nominee1_guard_pincode">
+                          </div>
+                       </div>
+                    </div>
+                </li>
+            </ul>          
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+ 
+<hr>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4>Deposit Repayable (On Maturity / Prematurity) to</h4>
+    <div>
+        <label class="checkbox-inline">
+            <input type="radio" name="dep_repayable" id="dep_repayable_first_depositor" value="first_depositor"> First Depositor
+        </label> 
+        <label class="checkbox-inline"> 
+            <input type="radio" name="dep_repayable" id="dep_repayable_survivor" value="survivor" checked="checked"> First Depositor or Survivor/s (default)
+        </label>
+    </div>
+  </div>
+</div>
+  
+<hr>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4>TDS to be Deducted</h4>
+    <div id="tds_content">
+        <label class="checkbox-inline">
+            <input type="radio" name="tds_type" id="tds_type_tds_yes" value="tds_yes" checked="checked"> Yes
+        </label> 
+        <label class="checkbox-inline"> 
+            <input type="radio" name="tds_type" id="tds_type_tds_no" value="tds_no"> No
+        </label>
+        <label class="checkbox-inline"> 
+            <input type="radio" name="tds_type" id="tds_type_tds_int" value="tds_int"> My / Our interest for the year will be less than Rs. 5000
+        </label>    
+        <div id="div_tds" style="display: none;">
+          <div class="TDSProvide">Please provide any one</div>
+          <div>
+             <label class="checkbox-inline">
+                <input type="radio" name="tds_form" id="tds_form_fifteen_g" value="fifteen_g"> 15G
+             </label> 
+             <label class="checkbox-inline"> 
+                <input type="radio" name="tds_form" id="tds_form_fifteen_h" value="fifteen_h"> 15H
+             </label>
+             <label class="checkbox-inline"> 
+                <input type="radio" name="tds_form" id="tds_form_order_197" value="order_197"> order u/s 197
+             </label>
+             <label class="checkbox-inline"> 
+                <input type="radio" name="tds_form" id="tds_form_order_10" value="order_10"> order u/s 10
+             </label>
+             <label class="checkbox-inline"> 
+                <input type="radio" name="tds_form" id="tds_form_tds_above" value="tds_above"> Above is already submited for current financial year with FDR no. <span class="ignore_2" id="tds_fdr_no"><input type="text" name="tds_fdr_no" id="tds_fdr_no"></span>
+             </label>
+          </div>
+        </div>            
+    </div>    
+  </div>
+</div>
+
+<hr>
+ 
+<div class="row">
+  <div class="col-xs-12">
+    <h4>FDR Delivery to the Above Address to be Done Via</h4>
+    <div> 
+        <label class="checkbox-inline">
+            <input type="radio" name="courier_type" id="courier_type_courier" value="courier" checked="checked"> Courier / Post
+        </label> 
+       
+        <label class="checkbox-inline"> 
+            <input type="radio" name="courier_type" id="courier_type_person" value="person"> Collect in person from the branch
+        </label>
+    </div>      
+  </div>
+</div>
+
+<hr>
+
+<div class="SubmitButton">
+  <div class="row">
+      <div class="col-xs-12">
+        <input type="submit" name="commit" value="Submit FD" class=" btn btn-RV" id="id_submit">
+          <!-- <a href="" class="btn btn-RV">Submit FD</a> -->
+      </div>
+   </div>
+</div> 
+
+
+
+
+                                      
+                </div>   
+            </div>
+            
+
+        </div> 
+    </div>
+</div>
+            
+        
+
+

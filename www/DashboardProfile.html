@@ -21,11 +21,132 @@
             </div>  
             <div class="row">
                 <div class="col-xs-12 DashHead">
-                    <h1>Investor Profile</h1>                    
+                    <h1>Investor Profile</h1>
                 </div>
             </div>
 
+            <div class="row">
+              <div class="col-xs-12">
+                <h2>Active Investor</h2>
+                <select class="form-control tab_move" name="client_name_active" id="client_name_active"></select>
+              </div>
+            </div>
+
+
+             <div class="row">
+              <div class="col-xs-12">
+               <div id="full_dtls1" class="d_none">
+                <div class="">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <h4>Personal Details</h4>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="alert alert-success">
+                                <p>Name: <span id="dash_inv_name">-</span></p>
+                                <p>DOB/DOI: <span id="dash_inv_dob">-</span></p>
+                                <p>Mobile: <span id="dash_inv_mob">-</span></p>
+                                <p>Address: <span id="dash_inv_addr">-</span></p>
+                                <p>City: <span id="dash_inv_city">-</span></p>
+                                <p>State: <span id="dash_inv_state">-</span></p>
+                                <p>Pin Code: <span id="dash_inv_pin">-</span></p>
+                                <p>Country: <span id="dash_inv_country">-</span></p>
+                                <p>PAN: <span id="dash_inv_pan">-</span></p>
+                                <p>KYC: <span id="dash_inv_kyc">-</span></p>
+                                <p>E-Mail: <span id="dash_inv_email">-</span></p>
+                            </div> 
+                            
+                                                      
+
+
+                        </div>
+
+                        <div class="col-xs-12">
+                          <h4>Nominee Details</h4>
+                        </div>
+                        <div class="col-xs-12" id="nominee_dtls">
+                               <div class="alert alert-success">
+                                  <p>Nominee Name: <span id="dash_nom_name">-</span></p>
+                                  <p>Address: <span id="dash_nom_addr">-</span></p>
+                                  <p>City: <span id="dash_nom_city">-</span></p>
+                                  <p>State: <span id="dash_nom_state">-</span></p>
+                                  <p>Pin Code: <span id="dash_nom_pin">-</span></p>                                
+                          </div>                                                      
+                        </div>
+                        <div class="col-xs-12" id="no_nominee_dtls">
+                           <div class="alert alert-success">
+                              <p>No Nominee Details Available</p>
+                           </div>
+                        </div>
+                       
+                        <div class="col-sm-12">
+                          <h6 class="PersonalNote">To update or modify your personal details, please email us at <a data-name="care" data-domain="rupeevest" data-tld="com" href="#" class="cryptedmail" onclick="window.location.href = 'mailto:' + this.dataset.name + '@' + this.dataset.domain + '.' + this.dataset.tld"></a> from your registered email id.</h6>
+                        </div>
+                        <div class="col-xs-12">
+                          <div class="row">
+                            <div class="col-xs-12">
+                              <h4 class="d_inline_b">Bank Details</h4>
+                               
+                               <a data-toggle="modal" data-target="#myModal_bank" data-backdrop="static" data-keyboard="false" id="823/01/1" class="btn btn-default btn-sm pull-right ttt">Add New Bank</a>
+                            </div>                             
+
+                        </div>
+                        </div>
+
+                        <div class="col-xs-12" id="all_bank_dtls">
+
+
+                        </div>
+
+
+
+                        <div class="col-xs-12">
+                          <h4>Other Details</h4>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="alert alert-success">
+                              <p>IIN: <span id="dash_inv_iin">-</span></p>
+                              <p>DP ID / Client ID: <span id="dash_inv_dp">-</span></p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-xs-12">
+                          <h4>One Time Mandate Details</h4>
+                        </div>
+
+                        <div class="col-xs-12" id="all_otm_dtls">
+                    
+                        </div>
+                      
+                      </div>
+                      
+                      
+                      <!--  -->
+                      
+                    
+                    
+                          <!-- Joint Holder1 Pan: <br> -->
+
+
+
+                    </div>
+
+
+
+
+               </div>
+              </div>
+            </div>
             
+
+             <div class="row">
+              <div class="col-xs-12">
+                 <h2>Inactive Investor</h2>
+                <select class="form-control tab_move" id="client_name_inactive"></select>
+              </div>
+            </div>
 
             
 

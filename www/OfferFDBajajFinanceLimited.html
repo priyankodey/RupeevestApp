@@ -1,4 +1,4 @@
-<div data-page="FAQs" class="page" id="faq">
+<div data-page="OfferFDBajajFinanceLimited" class="page FDCommonInd" id="BajajFin">
     <div class="page-content">                
         <div class="container">
             <div class="row HeadTop">
@@ -6,18 +6,218 @@
                     <h1>Bajaj Finance Limited</h1>
                 </div>                
             </div>
-            <div class="row">
+            <div class="row PreSelect">
                 <div class="col-xs-12">
-
-
-
-
-
-                            
-
-
+                    <div class="list-block">
+                      <ul>
+                        <li>
+                          <div class="item-content">
+                            <div class="item-media"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                            <div class="item-inner">
+                              <div class="item-title">Period (months)</div>
+                              <div class="item-after"> <span class="badge"><input type="text" name="period" id="period" value="" readonly="readonly"></span></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="item-content">
+                            <div class="item-media"><i class="fa fa-inr" aria-hidden="true"></i></div>
+                            <div class="item-inner">
+                              <div class="item-title">Interest (p.a.)</div>
+                              <div class="item-after"> <span class="badge"><input type="text" name="interest" id="interest" value="" readonly="readonly"></span>
+                            </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="item-content">
+                            <div class="item-media"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></div>
+                            <div class="item-inner">
+                              <div class="item-title">Interest Option</div>
+                              <div class="item-after"> <span class="badge"><input type="text" name="interest_option" id="interest_option" value="" readonly="readonly"></span></div>
+                            </div>
+                          </div>
+                        </li>    
+                      </ul>
+                       <p>Rating: <span id="Rating"></span></p>
+                    </div>
                 </div>                
-            </div>                     
+            </div> 
+            <div class="row IntRates">
+                <div class="col-xs-12">
+                    <div class="area_wrap">
+                        <table class="table table-bordered table-condensed table-striped">
+                          <thead>
+                            <tr>
+                              <th class="text-center" colspan="6">Rate Per Annum Valid up to Rs.5 Crore</th>
+                            </tr>                            
+                            <tr>
+                              <th class="text-center">Period (months)</th>
+                              <th class="text-center">Cumulative</th>
+                              <th class="text-center" colspan="4">Non-cumulative</th>
+                            </tr>
+                            <tr>
+                              <th></th>
+                              <th></th>
+                              <th class="text-center">Monthly</th>
+                              <th class="text-center">Quarterly</th>
+                              <th class="text-center">Half-Yearly</th>
+                              <th class="text-center">Yearly</th>     
+                            </tr>
+                          </thead>
+                          <tbody>            
+                          </tbody>          
+                        </table>
+                    </div>
+                </div> 
+            </div>
+
+
+            <div class="row CommFdOption">
+              <div class="col-sm-12">
+                  <div class = "list-block">               
+                      <label class = "label-checkbox item-content">
+                         <input type="checkbox" name="privilege" id="privilege" value="yes" class="chk_pri">
+                         <div class = "item-media"><i class = "icon icon-form-checkbox"></i></div>
+                         <div class = "item-inner">
+                            <p>Check this if you are privilege customer :</p>
+                         </div>
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="pri" id="pri_senior" value="senior" class="radio_pri radio_senior" disabled="disabled">Senior Citizen
+                      </label>                
+                      <!-- <label class = "label-radio item-content">
+                          <input type="radio" name="pri" id="pri_senior" value="senior" class="radio_pri radio_senior" disabled="">
+                         <div class = "item-media"><i class = "icon icon-form-radio"></i></div>
+                         <div class = "item-inner">
+                            <div class = "item-title">Senior Citizen</div>
+                         </div>
+                      </label> --> 
+                      <label class = "label-checkbox item-content">
+                         <input type="checkbox" name="more_than_50" id="more_than_50" value="yes" class="chk_emp">
+                         <div class = "item-media"><i class = "icon icon-form-checkbox"></i></div>
+                         <div class = "item-inner">
+                            <p>Check this if you are Bajaj group employee or Bajaj Finance Limited existing loan customer or FD renewal customer</p>
+                         </div>
+                      </label>                  
+                  </div>
+              </div>
+            </div>           
+          
+            <div class="row">
+              <div class="col-sm-12" >
+                  <a href='#'  class="btn btn-RV" id="RevProceed" disabled>Proceed</a>
+              </div>
+            </div>
+
+
+            <div class="row CommFdInst">
+              <div class="col-sm-12">
+                <h5>Note:</h5>
+                <h6>Senior Citizens (more than 60 years of age, subject to provision of proof of age) – Additional rate of 0.25% p.a. for deposit size up to Rs.1 Crore</h6>
+                <h6>Bajaj Group Employees – Additional rate of 0.10% p.a. (BHIL, BAL, BFS, BFL, MSL, BAGIC, BALIC, MUKAND and BAJAJ ELECTRICALS) for deposit size up to Rs. 1 Crore</h6>
+                <h6>Bajaj Finance Limited existing loan customers and FD renewal customers – Additional rate of 0.10% p.a. for deposit size up to Rs. 1 Crore</h6>            
+                <h6>Only one of the above special category benefits is allowed per transaction</h6>
+                <h6>Rate of interest for bulk deposits of more than Rs.5 Crore may vary from the published card rate and to be decided on a case to case basis by Bajaj Finance Limited</h6>                 
+                <h6>Minimum deposit size Rs. 25,000</h6>
+              </div>
+            </div>
+
+
+            <div class="row CommFdFaq">
+              <div class="col-sm-12">                  
+                  <div class="list-block accordion-list">
+                    <ul>
+                       <!-- <li class="accordion-item">
+                          <a href="#" class="item-content item-link">
+                             <div class="item-inner">
+                                <div class="item-title">Download section</div>
+                             </div>
+                          </a>
+                          <div class="accordion-item-content">
+                             <div class="content-block">
+                                <p>%= link_to "Application form", '/Mutual-Fund-Investment/Download', method: :get %></p>
+                             </div>
+                          </div>
+                       </li> -->
+                       <li class="accordion-item">
+                          <a href="#" class="item-content item-link">
+                             <div class="item-inner">
+                                <div class="item-title">What are the documents required for investing in the above FD?</div>
+                             </div>
+                          </a>
+                          <div class="accordion-item-content">
+                             <div class="content-block">
+                                <ul>
+                                  <li>Duly filled Application Form along with Cheque (only)  ‘Bajaj Finance Limited – Fixed Deposit Account number 00070350006738’ and crossed ‘Account Payee only’.</li>
+                                  <!-- <li>Duly filled Application Form</li> -->
+                                  <li>Proof of Identity - PAN, Aadhaar Card, Voter's Identity Card, Driving License &amp; Photograph, Identity Card (subject to the Bank's satisfaction)</li>
+                                  <li>Proof of Residence - Aadhaar Card, Voter I card , Passport, Driving License, Telephone / Electricity Bill, Bank Account Statement, Letter from any recognised public authority, Ration Card</li>
+                                </ul>
+                                <h3>Special Category</h3>
+                                <ul>
+                                  <li>Senior Citizen <b>:</b> Proof of Age duly attested viz-Ration Card, Voter I Card, Passport, PAN Card, Birth Certificate, LIC Policy etc.</li>
+                                  <li>Other than Individual <b>:</b> Duly certified copy of Resolution/Letter from a competent Authority of Company/Trust</li>
+                                </ul>
+                                <p>For the list of documents for other categories please <a href="/Mutual-Fund-Investment/FAQ#Bajaj">Click here</a></p>
+                             </div>
+                          </div>
+                       </li>
+                       <li class="accordion-item">
+                          <a href="#" class="item-content item-link">
+                             <div class="item-inner">
+                                <div class="item-title">How can I premature my FD?</div>
+                             </div>
+                          </a>
+                          <div class="accordion-item-content">
+                             <div class="content-block">
+                                  <p>Minimum lock-in period for all types of deposit shall be 3 months.</p>      
+                                  <p><strong>The interest rates for prepayment of deposits are as under: </strong></p>
+                                  <table class="table table-bordered table-responsive">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center">Period exceeding</th>
+                                        <th class="text-center">But not less than</th>
+                                        <th class="text-center">Interest rate payable</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                      <tr>
+                                          <td>3 Months</td>
+                                          <td>6 Months</td>
+                                          <td>NIL</td>
+                                      </tr>
+                                      <tr>
+                                          <td>6 Months</td>
+                                          <td>Before Maturity</td> 
+                                          <td>2 % lower than the interest applicable on the deposit</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                    
+                             </div>
+                          </div>
+                       </li>
+                       <li class="accordion-item">
+                          <a href="#" class="item-content item-link">
+                             <div class="item-inner">
+                                <div class="item-title">Loan facility available against Bajaj Finance Limited fixed deposit</div>
+                             </div>
+                          </a>
+                          <div class="accordion-item-content">
+                             <div class="content-block">
+                                <p>Loan against Fixed Deposit is available up to 75% of principal provided the deposits had run for atleast 3 months.</p>
+                                <p>Loan facilty is at the sole discretion of the Company</p> 
+                             </div>
+                          </div>
+                       </li>
+                    </ul>
+                  </div>
+              </div>
+            </div>
+        
+
+
         </div> 
     </div>
 </div>

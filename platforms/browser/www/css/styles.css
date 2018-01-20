@@ -98,17 +98,21 @@ a:hover, a:focus {
   color: #7fb800;
   text-decoration: none;
 }
+img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
 hr {
   border-top: 1px solid #c8cbcd;
 }
 .vr_left {
   border-left: 1px solid #c8cbcd;
 }
-img {
-  max-width: 100%;
-  width: auto;
-  height: auto;
+.page {    
+  background: #fff;
 }
+
 /* *************************************** 
                 Navbar
   **************************************** */
@@ -498,6 +502,39 @@ img {
   color: inherit;
   text-align: center;
   font-size: 18px;
+}
+
+/*---------------- Dash Index ---------------------*/
+
+#DashIndex #mf_fund_table thead tr th:nth-child(2){
+  min-width: 5em;
+}
+#DashIndex #mf_fund_table thead tr th:nth-child(3){
+  min-width: 8em;
+}
+#DashIndex #mf_fund_table thead tr th:nth-child(4){
+  min-width: 9em;
+}
+#DashIndex #mf_fund_table tr th,#DashIndex #mf_fund_table tr td{
+  text-align: center;
+}
+#DashIndex #mf_fund_table tr th:first-child,#DashIndex #mf_fund_table tr td:first-child{
+  text-align: left;
+}
+
+
+/*----------------- Dash Transaction ------------------*/
+
+#DashTrans .alert.alert-success{
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+#DashTrans .alert_head{
+  border-bottom: 1px solid #fff;
+}
+#DashTrans .alert_footer{
+  border-top: 1px solid #fff;
+      text-align: center;
 }
 
 
@@ -1033,7 +1070,7 @@ img {
 }
 
 /******************** 
-    Fixed deposit 
+    Fixed Deposit 
 *********************/
 
 #FixedDeposit #fd_all_list_head .breadcrumb {
@@ -1061,6 +1098,112 @@ img {
   text-align: center;
   padding-right: 0.5em;
 }
+
+/********************************* 
+    Fixed Deposit Individual
+**********************************/
+.FDCommonInd .table tr th {
+  font-weight: 500;
+}   
+.FDCommonInd .table tr td, .FDCommonInd .table tr td span {
+  font-weight: 400;
+}
+.FDCommonInd .table {
+  text-align: center;
+}  
+.FDCommonInd .table-condensed>thead>tr>th, .FDCommonInd .table-condensed>tbody>tr>td {
+  padding: 3px;
+}
+.FDCommonInd .PreSelect .fa {
+  width: 15px;
+}
+.FDCommonInd .PreSelect .list-block {
+  margin: 0;
+  font-size: 14px;
+}
+.FDCommonInd .PreSelect p, .FDCommonInd .PreSelect p span {
+  font-weight: bold;
+}
+.FDCommonInd .PreSelect input {
+  width: 7em;
+  height: inherit;
+  color: #fff;
+  font-size: inherit;
+  text-align: center;
+}
+.FDCommonInd .IntRates .table .tcontent {
+  color: #6d9f00;
+}
+.FDCommonInd .CommFdOption .list-block {
+  margin: 0 0 20px 0;
+  font-size: 12px;
+}
+.FDCommonInd .CommFdOption .list-block .item-content {
+  padding-left: 0;
+  margin: 0;
+}
+.FDCommonInd .CommFdOption .list-block .item-inner {
+  padding: 0;
+}
+.FDCommonInd .CommFdOption .list-block .item-inner:after {
+  background-color: transparent;
+}
+.FDCommonInd .CommFdOption .radio-inline {
+  padding-left: 23px;
+  font-weight: 300;
+}
+.FDCommonInd .CommFdInst {
+  margin-top: 20px;
+}
+.FDCommonInd .CommFdFaq .list-block ul {
+  background: none;
+}
+.FDCommonInd .CommFdFaq .list-block .item-title {
+  font-size: 14px;
+  white-space: normal;
+}
+.FDCommonInd .CommFdFaq .list-block .item-content {
+  padding-left: 0;
+}
+.FDCommonInd .CommFdFaq .accordion-item-content {
+  font-size: 12px;
+}
+
+
+/********************************* 
+    Fixed Deposit Create Form
+**********************************/
+#FDCreateForm .nav-tabs>li {
+  text-align: center;
+  width: 50%;
+}
+#FDCreateForm .list-block {
+  margin: 10px 0;
+}
+#FDCreateForm .list-block .item-content {
+  padding-left: 0;
+}
+#FDCreateForm .list-block .item-inner {
+  display: block;
+}
+#FDCreateForm .list-block .item-inner .item-title {
+  font-size: 12px;
+  white-space: normal;
+}
+#FDCreateForm .radio-inline+.radio-inline, #FDCreateForm .checkbox-inline+.checkbox-inline {    
+  margin-left: 0; 
+}
+#FDCreateForm .radio-inline, #FDCreateForm .checkbox-inline {
+  padding-left: 0;
+}
+#FDCreateForm .item-content .item-inner .checkbox-inline {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.picker-items {
+    font-size: 18px;
+  }
+          
 
 /**********************************
     Investment Solution
