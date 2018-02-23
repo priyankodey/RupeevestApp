@@ -6,7 +6,7 @@ var myApp = new Framework7({pushState: true,});
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
-var curr_ip='http://192.168.1.23:3000/'
+var curr_ip='http://192.168.1.17:3000/'
 
 var RVNav="";
 RVNav ="<div class='navbar'><div class='navbar-inner'><div class='left'><a href='#' class='link icon-only open-panel'><i class='icon icon-bars'></i></a></div><div class='center'><span id='navbar_info_span'><a href='index.html'><img src='img/icons/logo.png' alt='RupeeVest'></a></span><input type='text' id='fund_names' class='form-control ui-autocomplete-input' placeholder='Search mutual funds here...' autocomplete='off'></div><div class='right'><a href='#' class='' id='navbar_search_btn'><i class='fa fa-search' aria-hidden='true'></i></a><a href='#' class='' id='navbar_close_btn'><i class='fa fa-times' aria-hidden='true'></i></a></div></div></div>"
@@ -55,7 +55,7 @@ $$(document).on('deviceready', function() {
 
    var interval = setInterval(function () { myFunction(); }, 1000);
 
-    $$.get('http://192.168.1.23:3000/functionalities/get_user_info', {iin: 5011179660},function (data) {
+    $$.get('http://192.168.1.17:3000/functionalities/get_user_info', {iin: 5011179660},function (data) {
        });
 
             $$('#fund_names').hide();
@@ -2524,10 +2524,10 @@ if(page.name==='OfferFixedDepositCreateForm')
     console.log(query);
 
     var SelInvFDCF = query.SelInvCF;
-    var FDNameFDCF=query.FDNameCF;
+    var FDNameFDCF=query.FDNameCF.toString();
     var PeriodFDCF=query.PeriodCF;
-    var InterestFDCF=query.InterestCF;
-    var InterestOptionFDCF=query.InterestOptionCF;
+    var InterestFDCF=query.InterestCF.toString();
+    var InterestOptionFDCF=query.InterestOptionCF.toString();
     var pri_seniorFDCF=query.pri_seniorCF;
     var more_than_50FDCF=query.more_than_50CF;
 
@@ -2537,21 +2537,15 @@ if(page.name==='OfferFixedDepositCreateForm')
     // $("#FDCreateForm #interest_option").html(InterestOptionFDCF);
     // $("#FDCreateForm #pri_senior").html(pri_seniorFDCF);
     // $("#FDCreateForm #more_than_50").html(more_than_50FDCF);
+      
+      console.log(FDNameFDCF);
+      console.log(PeriodFDCF);
+      console.log(InterestFDCF);
+      console.log(InterestOptionFDCF);
+      console.log(pri_seniorFDCF);
+      console.log(more_than_50FDCF);
 
-
-  $$.get(curr_ip+'app_services/create_fd_two',{
-
-    optionsRadios: +SelInvFDCF,
-    client_id: +SelInvFDCF,
-    fd_name: +FDNameFDCF,
-    period: +PeriodFDCF,
-    interest: +InterestFDCF,
-    interest_option: +InterestOptionFDCF,
-    privilege: +pri_seniorFDCF,
-    more_than_50: +more_than_50FDCF,   
-    category: +""
-
-  },function (data) 
+  $$.get(curr_ip+'app_services/create_fd_two',{optionsRadios:+SelInvFDCF,client_id:+SelInvFDCF,fd_name:+FDNameFDCF,period:+PeriodFDCF,interest:+InterestFDCF,interest_option:+InterestOptionFDCF,privilege:+pri_seniorFDCF,more_than_50:+more_than_50FDCF,category:+""},function (data) 
   {
     // optionsRadios=SelInvFDCF;
     // client_id=SelInvFDCF;
