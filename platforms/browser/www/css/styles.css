@@ -538,9 +538,9 @@ hr {
 }
 
 
-/**********************************
-    Mutual Fund Home
-***********************************/
+/******************************************************************
+                            Mutual Fund Home
+*******************************************************************/
 #mfund_home .well {
       padding: 4px;
     border-radius: 0px;
@@ -601,396 +601,224 @@ hr {
 
 
 
-/*************************************************************
-          Overview 
-**************************************************************/
+/*********************************************************************
+                            Overview 
+*********************************************************************/
 
-#fund_details .glyphicon.glyphicon-star{
+#FundDetails .glyphicon.glyphicon-star{
   color: #fff;
 }
-#fund_details #navdate,#fund_details #aumdate{
+#FundDetails #navdate,#FundDetails #aumdate{
   font-style: italic;
   color: #787979;
 }
-#fund_details #s_name{
+#FundDetails #s_name{
   margin-bottom: 5px;
 }
-#fund_details .top_1{
+#FundDetails .top_1{
   margin-top: 1em;
 }
-#fund_details .pagination{
+#FundDetails .pagination{
   display: block;
 }
-#fund_details #pages{
+#FundDetails #pages{
   text-align: center;
 }
-#fund_details .ov_top_nav h2{
+#FundDetails .ov_top_nav h2{
   display: inline;
   margin-right: 10px;
 }
-#fund_details .ov_top_nav h4{
+#FundDetails .ov_top_nav h4{
   display: inline;
 }
-#fund_details .ov_top_nav h6{
+#FundDetails .ov_top_nav h6{
   margin-top: 0px;
 }
-#fund_details table#return th:nth-child(2),#fund_details table#return td:nth-child(2){
+#FundDetails table#return th:nth-child(2),#FundDetails table#return td:nth-child(2){
   display: none;
 }
-#fund_details table#return th:nth-child(3),#fund_details table#return td:nth-child(3){
+#FundDetails table#return th:nth-child(3),#FundDetails table#return td:nth-child(3){
   display: none;
 }
-#fund_details table#return th:first-child{
+#FundDetails table#return th:first-child{
   min-width: 16em;
 }
-#fund_details table#return th:nth-child(n+2){
+#FundDetails table#return th:nth-child(n+2){
   min-width: 6em;
 }
-#fund_details table#return td:nth-child(n+2){
+#FundDetails table#return td:nth-child(n+2){
   text-align: right;
   padding-right: 2.5em;
 }
-#fund_details table#peertabl tr th:nth-child(1){
+#FundDetails table#peertabl tr th:nth-child(1){
   min-width: 12em;
 }
-#fund_details table#peertabl tr:nth-child(1) th:nth-child(2),#fund_details table#peertabl tr td:nth-child(2){
+#FundDetails table#peertabl tr:nth-child(1) th:nth-child(2),#FundDetails table#peertabl tr td:nth-child(2){
   display: none;
 }
-#fund_details table#peertabl tr:nth-child(2) th:nth-child(1),#fund_details table#peertabl tr td:nth-child(5){
+#FundDetails table#peertabl tr:nth-child(2) th:nth-child(1),#FundDetails table#peertabl tr td:nth-child(5){
   display: none;
 }
-#fund_details table#peertabl tr:nth-child(1) th:nth-child(3){
+#FundDetails table#peertabl tr:nth-child(1) th:nth-child(3){
   min-width: 8em;
 }
-#fund_details table#peertabl tr:nth-child(1) th:nth-child(4){
+#FundDetails table#peertabl tr:nth-child(1) th:nth-child(4){
   min-width: 9em;
 }
-#fund_details table#peertabl tr:nth-child(1) th:nth-child(5){
+#FundDetails table#peertabl tr:nth-child(1) th:nth-child(5){
   text-align: center;
 }
-#fund_details table#peertabl tr td:nth-child(3){
+#FundDetails table#peertabl tr td:nth-child(3){
   text-align: right;
   padding-right: 2em;
 }
-#fund_details table#peertabl tr td:nth-child(4){
+#FundDetails table#peertabl tr td:nth-child(4){
   text-align: right;
   padding-right: 4em;
 }
-#fund_details table#peertabl tr td:nth-child(6){
+#FundDetails table#peertabl tr td:nth-child(6){
   text-align: right;
   padding-right: 1.2em;
 }
-#fund_details table#peertabl tr td:nth-child(7){
+#FundDetails table#peertabl tr td:nth-child(7){
   text-align: right;
   padding-right: 1.2em;
 }
-#fund_details table#peertabl tr td:nth-child(8){
+#FundDetails table#peertabl tr td:nth-child(8){
   text-align: right;
   padding-right: 1.2em;
 }
-#fund_details table#portfolio_holdings{
+#FundDetails table#portfolio_holdings{
   height: 10em;
   overflow-y: auto; 
 }
-#fund_details .breadcrumb_2 {
+#FundDetails .breadcrumb_2 {
   margin-bottom: 15px;
   border: 1px solid #17396B;
   background: linear-gradient(to top, rgba(18,51,86,1), rgba(38,89,149,1));
 }
-#fund_details .breadcrumb_3 {
+#FundDetails .breadcrumb_3 {
   margin-bottom: 15px;
   border: 1px solid #17396B;
   background: linear-gradient(to bottom, rgba(18,51,86,1), rgba(38,89,149,1));
   color:#fff;
 }
-#fund_details .breadcrumb_4 {
+#FundDetails .breadcrumb_4 {
   border: 2px solid #17396B;
   border-radius: 10px;
   margin-bottom: 1em;
 }
-#fund_details .breadcrumb_bgr{
+#FundDetails .breadcrumb_bgr{
   background: #fff;
 }
-#fund_details .breadcrumb_4 h4{
+#FundDetails .breadcrumb_4 h4{
   margin-left: 0.5em;
 }
-#fund_details .pad_left{
+#FundDetails .pad_left{
   padding-left: 5px;
 }
-#fund_details .pad_right{
+#FundDetails .pad_right{
   padding-right: 5px;
 }
-#fund_details #portfolio_holdings th:nth-child(2){
+#FundDetails #portfolio_holdings th:nth-child(2){
   text-align: right;
   padding-right: 2em;
   /* width: 35%; */
   min-width: 10em;
 }
-#fund_details #portfolio_holdings td:nth-child(1),#fund_details #portfolio_holdings th:nth-child(1){
+#FundDetails #portfolio_holdings td:nth-child(1),#FundDetails #portfolio_holdings th:nth-child(1){
   width: 80%;
   overflow-x: auto;
   white-space: nowrap;
   max-width: 180px;
 }
-#fund_details #portfolio_holdings td:nth-child(2){
+#FundDetails #portfolio_holdings td:nth-child(2){
   width: 25%;
   text-align: right;
   padding-right: 2em;
 }
-#fund_details #portfolio_table th:nth-child(n+2){
+#FundDetails #portfolio_table th:nth-child(n+2){
   text-align: center;
 }
-#fund_details #portfolio_table th:nth-child(3){
+#FundDetails #portfolio_table th:nth-child(3){
   min-width: 9em;
 }
-#fund_details #portfolio_table th:nth-child(4){
+#FundDetails #portfolio_table th:nth-child(4){
   min-width: 8em;
 }
-#fund_details #portfolio_table th:nth-child(5){
+#FundDetails #portfolio_table th:nth-child(5){
   min-width: 6em;
 }
-#fund_details #portfolio_table td:nth-child(1){
+#FundDetails #portfolio_table td:nth-child(1){
   min-width: 8em;
 }
-#fund_details #portfolio_table td:nth-child(2){
+#FundDetails #portfolio_table td:nth-child(2){
   text-align: right;
   padding-right: 1em;
 }
-#fund_details #portfolio_table td:nth-child(3){
+#FundDetails #portfolio_table td:nth-child(3){
   text-align: right;
   padding-right: 2em;
 }
-#fund_details #portfolio_table td:nth-child(4){
+#FundDetails #portfolio_table td:nth-child(4){
   text-align: right;
   padding-right: 2em;
 }
-#fund_details #portfolio_table td:nth-child(5){
+#FundDetails #portfolio_table td:nth-child(5){
   text-align: right;
   padding-right: 2em;
 }
-#fund_details #portfolio_table .portcap{
+#FundDetails #portfolio_table .portcap{
   text-align: left;
   margin-top: 1em;
 }
-#fund_details #portfolio_table .portcap h6{
+#FundDetails #portfolio_table .portcap h6{
   font-style: italic;
   margin-top: 2px;
 }
-#fund_details #conval .portcap{
+#FundDetails #conval .portcap{
   text-align: left;
   margin-top: 1em;
 }
-#fund_details #conval .portcap h6{
+#FundDetails #conval .portcap h6{
   font-style: italic;
   margin-top: 2px;
 }
-#fund_details #conval td:nth-child(2){
+#FundDetails #conval td:nth-child(2){
   text-align: right;
   padding-right: 2em;
 }
-#fund_details #asset_alloc_table th:nth-child(2),#fund_details #asset_alloc_table td:nth-child(2){
+#FundDetails #asset_alloc_table th:nth-child(2),#FundDetails #asset_alloc_table td:nth-child(2){
   text-align: right;
   padding-right: 1em;
 }
-#fund_details .pad_right table td,#fund_details .pad_left table td{
+#FundDetails .pad_right table td,#FundDetails .pad_left table td{
   text-align: center;
 }
-#fund_details #container-0{
+#FundDetails #container-0{
   margin-bottom: 1em;
 }
-#fund_details #container-01{
+#FundDetails #container-01{
   margin-top: 1em;
   margin-bottom: 1em;
 }
 
 
-/**********************************
-          Screener
-***********************************/
-
-#mf_screener #main-tabs li {
-    width: 25%;
+/*****************************************************************
+                              Screener
+******************************************************************/
+#mf_screener .list-block {
+  margin: 0; 
 }
-#mf_screener #main-tabs .nav-menu a {
-  font-size: 11px;
-  padding: 5px 5px;
-  border: 2px solid #2d94e7;
-  background-color: transparent;
-  color: #3b3f42;
-  word-spacing: 0px;
-  min-height: 6em;
+#mf_screener .card-header {
+  padding: 0 5px;
 }
-#mf_screener #main-tabs .nav-menu.tab-active a {
-  background-color: #2d94e7;
-  color: #fff;
+#mf_screener .card-content-inner {
+  padding: 0 15px;
 }
-#mf_screener #home .outer_wrapper_fund .ineer_wrapper_fund, #mf_screener #home .outer_wrapper_fund .ineer_wrapper_fund_last {
-  border: 1px solid #555555;
-  background-color: #fff;
-  margin: 5px 0px;
-  display: inline-block;
-  padding: 0;
-  width: 100%;
-  height: 160px;
-  overflow-y: auto;
-}
-#mf_screener #home label {
-  display: block;
-  max-width: 100%;
-  margin-bottom: 0;
-  font-weight: 400;
-  padding: 2px 10px;
-}
-#mf_screener #home label:nth-child(odd) {
-  background: #fff;
-}
-#mf_screener #home label:nth-child(even) {
-  background: #f1f2f2;
-}
-#mf_screener #home .outer_wrapper_fund {
-  border: 1px solid #555555;
-  background-color: #f2f2f2;
-  margin-top: 3px;
-  width: 100%;
-  padding: 10px;
-  height: 450px;
-}
-#mf_screener #home .outer_wrapper_fund .selector_head {
-  display: inline-block;
-  margin: 0.2em 0;
-  padding: 0.5em 0.5em;
-  min-width: 12em;
-}
-
-#mf_screener #menu2 .outer_wrapper_rating .fund_head {
-  display: inline-block;
-  margin: 0.2em 0;
-  padding: 0.5em 0.5em;
-  min-width: 12em;
-}
-#mf_screener #menu2 .outer_wrapper_fund .fund_head {
-  display: inline-block;
-  margin: 0.2em 0;
-  padding: 0.5em 0.5em;
-  min-width: 12em;
-}
-#mf_screener #menu2 .outer_wrapper_rating {
-  border: 1px solid #555555;
-  background-color: #f2f2f2;
-  margin-top: 3px;
-  width: 100%;
-  padding: 10px;
-  height: 220px;
-}
-#mf_screener #menu2 .outer_wrapper_fund {
-  border: 1px solid #555555;
-  background-color: #f2f2f2;
-  margin-top: 3px;
-  width: 100%;
-  padding: 10px;
-  height: 220px;
-}
-#mf_screener #menu2 .outer_wrapper_fund .ineer_wrapper_fund {
-  border: 1px solid #555555;
-  background-color: #fff;
+#mf_screener h4 {
   margin: 5px 0;
-  display: inline-block;
-  padding: 0;
-  width: 100%;
-  height: 150px;
-  overflow-y: auto;
 }
-#mf_screener #menu2 .outer_wrapper_fund .ineer_wrapper_fund_last {
-  border: 1px solid #555555;
-  background-color: #fff;
-  margin: 8px 0px;
-  display: inline-block;
-  padding: 0;
-  width: 100%;
-  height: 125px;
-  overflow-y: auto;
-}
-#mf_screener #menu2 label {
-  display: block;
-  max-width: 100%;
-  margin-bottom: 0;
-  font-weight: 100;
-  padding: 2px 10px;
-}
-#mf_screener #menu2 label:nth-child(odd) {
-  background: #fff;
-}
-#mf_screener #menu2 label:nth-child(even) {
-  background: #f1f2f2;
-}
-#mf_screener #menu3 .outer_wrapper_fund .ineer_wrapper_fund, #mf_screener #menu3 .outer_wrapper_fund .ineer_wrapper_fund_last {
-  border: 1px solid #555555;
-  background-color: #fff;
-  margin: 5px 0px;
-  display: inline-block;
-  padding: 0;
-  width: 100%;
-  height: 160px;
-  overflow-y: auto;
-}
-#mf_screener #menu3 label{
-  display: block;
-  max-width: 100%;
-  margin-bottom: 0;
-  font-weight: 400;
-  padding: 2px 10px;
-}
-#mf_screener #menu3 .outer_wrapper_fund {
-  border: 1px solid #555555;
-  background-color: #f2f2f2;
-  margin-top: 3px;
-  width: 100%;
-  padding: 10px;
-  height: 410px;
-}
-#mf_screener #menu3 .outer_wrapper_fund .columns_head {
-  display: inline-block;
-  margin: 0.2em 0;
-  padding: 0.5em 0.5em;
-  min-width: 12em;
-}
-#mf_screener #menu3 label:nth-child(odd) {
-  background: #fff;
-}
-#mf_screener #menu3 label:nth-child(even) {
-  background: #f1f2f2;
-}
-#mf_screener #menu4 .outer_wrapper_fund {
-  border: 1px solid #555555;
-  background-color: #f2f2f2;
-  margin-top: 3px;
-  width: 100%;
-  padding: 10px;
-  height: 310px;
-}
-#mf_screener .shda .snaphist button {
-  font-size: 14px;
-  border: 0;
-  border-bottom: 2px solid #f1f2f2;
-  border-radius: 4px 4px 0 0;
-  color: #3b3f42;
-  background: #f1f2f2;
-  text-shadow: none;
-  padding: 6px 12px;
-  outline: none;
-}
-#mf_screener .shda .snaphist button.active{
-  border: 0;
-  border-bottom: 5px solid #2d94e7;
-  background-color: #a2d2f7;
-  font-weight: 600;
-  text-shadow: none;
-}
-#mf_screener .shda .btn_hist {
-  width: 48.7%;
-}
-
-
 
 /**************************************
            MF Comparison

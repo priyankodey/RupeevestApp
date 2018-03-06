@@ -663,7 +663,7 @@ if(page.name==='FAQs'){
     
 /******************************* FAQs END ****************************/
     
-if(page.name === 'fund_details')
+if(page.name === 'FundDetails')
     {
         var query = $$.parseUrlQuery(page.url);
         var scheme_code=query.scheme_code;
@@ -917,8 +917,8 @@ if(page.name === 'fund_details')
 
                 if (val_1=='True' && val_2=='True' && val_3=='True' && val_4=='True' && val_5=='True' && val_6=='True')
                 {
-                  $("#fund_details .container").css('display','block');
-                  $("#fund_details .fa.fa-spinner.fa-pulse").css('display','none');
+                  $("#FundDetails .container").css('display','block');
+                  $("#FundDetails .fa.fa-spinner.fa-pulse").css('display','none');
                 }
 
 
@@ -941,77 +941,77 @@ if(page.name==='OfferMutualFund')
 
         for (i = 0; i < myObj.equity_lc.length; i++) 
         {
-            table_data_equity_lc=table_data_equity_lc+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.equity_lc[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.equity_lc[i].s_name+"</div></div></div></a></div>";
+            table_data_equity_lc=table_data_equity_lc+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.equity_lc[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.equity_lc[i].s_name+"</div></div></div></a></div>";
         }
         $$('#equity_large_tab div').html(table_data_equity_lc+"<h6 class='mf_as_on'></h6>");
 
         var table_data_equity_mc="";
         for (i = 0; i < myObj.equity_mc.length; i++) 
         {
-            table_data_equity_mc=table_data_equity_mc+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.equity_mc[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.equity_mc[i].s_name+"</div></div></div></a></div>";
+            table_data_equity_mc=table_data_equity_mc+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.equity_mc[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.equity_mc[i].s_name+"</div></div></div></a></div>";
         }
         $$('#equity_multi_tab div').html(table_data_equity_mc+"<h6 class='mf_as_on'></h6>");
 
         var table_data_equity_msc="";
         for (i = 0; i < myObj.equity_msc.length; i++) 
         {
-            table_data_equity_msc=table_data_equity_msc+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.equity_msc[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.equity_msc[i].s_name+"</div></div></div></a></div>";
+            table_data_equity_msc=table_data_equity_msc+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.equity_msc[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.equity_msc[i].s_name+"</div></div></div></a></div>";
         }
         $$('#equity_mid_small_tab div').html(table_data_equity_msc+"<h6 class='mf_as_on'></h6>");
 
         var table_data_equity_elss="";
         for (i = 0; i < myObj.elss.length; i++) 
         {
-            table_data_equity_elss=table_data_equity_elss+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.elss[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.elss[i].s_name+"</div></div></div></a></div>";
+            table_data_equity_elss=table_data_equity_elss+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.elss[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.elss[i].s_name+"</div></div></div></a></div>";
         }
         $$('#equity_elss_tab div').html(table_data_equity_elss+"<h6 class='mf_as_on'></h6>");
 
         var table_data_debt_liq="";
         for (i = 0; i < myObj.debt_liq.length; i++) 
         {
-            table_data_debt_liq=table_data_debt_liq+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.debt_liq[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.debt_liq[i].s_name+"</div></div></div></a></div>";
+            table_data_debt_liq=table_data_debt_liq+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.debt_liq[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.debt_liq[i].s_name+"</div></div></div></a></div>";
         }
         $$('#debt_liquid_tab div').html(table_data_debt_liq+"<h6 class='mf_as_on'></h6>");
 
         var table_data_debt_ust="";
         for (i = 0; i < myObj.debt_ust.length; i++) 
         {
-            table_data_debt_ust=table_data_debt_ust+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.debt_ust[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.debt_ust[i].s_name+"</div></div></div></a></div>";
+            table_data_debt_ust=table_data_debt_ust+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.debt_ust[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.debt_ust[i].s_name+"</div></div></div></a></div>";
         }
         $$('#debt_ultra_short_tab div').html(table_data_debt_ust+"<h6 class='mf_as_on'></h6>");
 
         var table_data_debt_st="";
         for (i = 0; i < myObj.debt_st.length; i++) 
         {
-            table_data_debt_st=table_data_debt_st+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.debt_st[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.debt_st[i].s_name+"</div></div></div></a></div>";
+            table_data_debt_st=table_data_debt_st+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.debt_st[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.debt_st[i].s_name+"</div></div></div></a></div>";
         }
         $$('#debt_short_tab div').html(table_data_debt_st+"<h6 class='mf_as_on'></h6>");
 
         var table_data_debt_m_lt="";
         for (i = 0; i < myObj.debt_m_lt.length; i++) 
         {
-            table_data_debt_m_lt=table_data_debt_m_lt+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.debt_m_lt[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.debt_m_lt[i].s_name+"</div></div></div></a></div>";
+            table_data_debt_m_lt=table_data_debt_m_lt+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.debt_m_lt[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.debt_m_lt[i].s_name+"</div></div></div></a></div>";
         }
         $$('#debt_medium_long_tab div').html(table_data_debt_m_lt+"<h6 class='mf_as_on'></h6>");
 
         var table_data_hybrid_eo="";
         for (i = 0; i < myObj.hybrid_eo.length; i++) 
         {
-            table_data_hybrid_eo=table_data_hybrid_eo+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.hybrid_eo[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.hybrid_eo[i].s_name+"</div></div></div></a></div>";
+            table_data_hybrid_eo=table_data_hybrid_eo+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.hybrid_eo[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.hybrid_eo[i].s_name+"</div></div></div></a></div>";
         }
         $$('#hybrid_equity_tab div').html(table_data_hybrid_eo+"<h6 class='mf_as_on'></h6>");
 
         var table_data_hybrid_do="";
         for (i = 0; i < myObj.hybrid_do.length; i++) 
         {
-            table_data_hybrid_do=table_data_hybrid_do+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.hybrid_do[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.hybrid_do[i].s_name+"</div></div></div></a></div>";
+            table_data_hybrid_do=table_data_hybrid_do+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.hybrid_do[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.hybrid_do[i].s_name+"</div></div></div></a></div>";
         }
         $$('#hybrid_debt_tab div').html(table_data_hybrid_do+"<h6 class='mf_as_on'></h6>");
 
         var table_data_hybrid_arb="";
         for (i = 0; i < myObj.hybrid_arb.length; i++) 
         {
-            table_data_hybrid_arb=table_data_hybrid_arb+"<div class='breadcrumb'><a href=fund_details.html?scheme_code="+myObj.hybrid_arb[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.hybrid_arb[i].s_name+"</div></div></div></a></div>";
+            table_data_hybrid_arb=table_data_hybrid_arb+"<div class='breadcrumb'><a href=FundDetails.html?scheme_code="+myObj.hybrid_arb[i].schemecode+" class=''><div class='row'><div class='col-xs-12'><div class='mf_name'>"+myObj.hybrid_arb[i].s_name+"</div></div></div></a></div>";
         }
         $$('#hybrid_arbitage_tab div').html(table_data_hybrid_arb+"<h6 class='mf_as_on'></h6>");
 
@@ -1072,11 +1072,11 @@ if(page.name==='OfferMutualFund')
                     $$.post(curr_ip+'/home/index_search',{schemename: b.item.value},function (data) {
                     var scheme_code=JSON.parse(data);
 
-                    // if(myApp.getCurrentView().activePage.name==='fund_details'){
-                    //     mainView.router.reloadPage('fund_details.html?scheme_code='+scheme_code_new.schemecode);
+                    // if(myApp.getCurrentView().activePage.name==='FundDetails'){
+                    //     mainView.router.reloadPage('FundDetails.html?scheme_code='+scheme_code_new.schemecode);
                     // }
                     // else{
-                    //     mainView.router.loadPage('fund_details.html?scheme_code='+scheme_code_new.schemecode);
+                    //     mainView.router.loadPage('FundDetails.html?scheme_code='+scheme_code_new.schemecode);
                     // }
                     array_id.push(scheme_code.schemecode);
                     mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]+','+array_id[1]);
@@ -2573,8 +2573,27 @@ if(page.name==='OfferFixedDepositCreateForm')
 
 //debugger;
 $("#inv_name").val(myObjFD.clients.inv_name);
-  
+//$("#datePicker_i").val(myObjFD.clients.dob); 
+$("#pan").val(myObjFD.clients.pan);
+$("#guardian").val(myObjFD.clients.guard_name);
+$("#mobile_no").val(myObjFD.clients.mobile_no);
+$("#email").val(myObjFD.clients.email);
+$("#addr1").val(myObjFD.clients.addr1);
+$("#addr2").val(myObjFD.clients.addr2);
+$("#city").val(myObjFD.clients.city);
+$("#state").val(myObjFD.state.STATE_NAME);
+$("#country").val(myObjFD.country.COUNTRY_NAME);
+$("#pincode").val(myObjFD.clients.pincode);
 
+$("#account_no").val(myObjFD.clients.acc_no);
+$("#bank_branch").val(myObjFD.clients.branch_name);
+$("#bnk_ifsc_code").val(myObjFD.clients.ifsc_code);
+
+
+
+console.log(myObjFD.clients.occupation);
+
+//debugger;
 
   var bnk_acc_no, bnk_name, bnk_acc_type, bnk_branch_name, bnk_ifsc,bnk_micr,tmp;
 
@@ -9471,26 +9490,10 @@ $("#loading").show();
 
 /***************************** ToolsScreener / Screener START ************************** */ 
 
-    if(page.name==='ToolsScreener')
-    {
-      
-        $.getScript("js/screener.js");
-        //start_loading();
-
-        $(".dropbox_close").click(function(){
-            $(".tab-wrapper .tab-content").find(".active").removeClass("active").addClass("fade");
-            $("#main-tabs li").removeClass("tab-active");
-             $('.ptp_show').prop("disabled",false)
-                 $('#error_msg').html("");
-                 $('#from_date').val("");
-                 $('#to_date').val("");
-
-         });
-
-        
-
-        
-    }
+  if(page.name==='ToolsScreener')
+  {
+      $.getScript("js/screener.js");       
+  }
 
 /***************************** ToolsScreener / Screener END ************************** */ 
 

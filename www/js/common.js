@@ -1060,11 +1060,11 @@ function fundname_search()
 		        var schemename= ui.item.value;
 		        $$.post(curr_ip+'/home/index_search',{schemename: schemename},function (data) {
 		        	var scheme_code_new=JSON.parse(data);
-    				if(myApp.getCurrentView().activePage.name==='fund_details'){
-    					mainView.router.reloadPage('fund_details.html?scheme_code='+scheme_code_new.schemecode);
+    				if(myApp.getCurrentView().activePage.name==='FundDetails'){
+    					mainView.router.reloadPage('FundDetails.html?scheme_code='+scheme_code_new.schemecode);
     				}
     				else{
-    					mainView.router.loadPage('fund_details.html?scheme_code='+scheme_code_new.schemecode);
+    					mainView.router.loadPage('FundDetails.html?scheme_code='+scheme_code_new.schemecode);
     				}
 		        });
 		    }

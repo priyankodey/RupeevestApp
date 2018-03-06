@@ -187,10 +187,11 @@ function check_cookie_asset_value()
 function schemedata_landing()
 { 
 	var f=1;
-	if(refresh==1)
-	{
-	f=0;
-	}
+	// if(refresh==1)
+	// {
+	// f=0;
+	// }
+	
 	
 	$.ajax({
 	type:'GET',
@@ -199,67 +200,28 @@ function schemedata_landing()
 	data: {flag:f},
 	success:function(data1, textStatus, jqXHR) {
 
-            	if(data1.condition=="asset")
-            	{
-	                insert_asset_selection(data1.selected_asset_class[0].replace(/(')/g, ""));
-	                print_asset_selection();
-	                select_asset();
-	                document.getElementById("ChkAmc").checked = true;
-	                document.getElementById("fund_index").checked = true;
-	                 document.getElementById("fmanager").checked = true;
-	             }
-	             else if(data1.condition=="fund_manager")
-	             {
-	             	fund_m_selection.push(data1.selected_asset_class[0].replace(/(')/g, ""))
-	             	
-	             	 print_manager_selection();
-	             	 var id=data1.selected_asset_class[0].replace(/(:| |-|')/g, "").toString();
-	         
-	             	
-	             	  document.getElementById("ChkAmc").checked = true;
-	                document.getElementById("fund_index").checked = true;
-	                document.getElementById("ChkAllCategories").checked = true;
-	                asset_selected_flag2=1;
-	                 print_asset_selection();
-	   
-	             }
-	             else if(data1.condition=="index_name")
-	             {
-	             	index_selection.push(data1.selected_asset_class[0].replace(/(')/g, ""))
-	             	
-	             	 print_index_selection();
-	             	 var id=data1.selected_asset_class[0].replace(/(:| |-|')/g, "").toString();
+		console.log(data1);	
+
+            	// if(data1.condition=="asset")
+            	// {
+	            //     insert_asset_selection(data1.selected_asset_class[0].replace(/(')/g, ""));
+	            //     //print_asset_selection();
+	            //     // select_asset();
+	            //     // document.getElementById("ChkAmc").checked = true;
+	            //     // document.getElementById("fund_index").checked = true;
+	            //     //  document.getElementById("fmanager").checked = true;
+	            //  }    
 	             
-	             	 document.getElementById("ChkAmc").checked = true;
-	             	  document.getElementById("fmanager").checked = true;
-	             	  document.getElementById("ChkAllCategories").checked = true;
-	             	  asset_selected_flag2=1;
-	             	   print_asset_selection();
-
-	             	
-	             }
-	             else if(data1.condition=="fund_house")
-	             {
-	             	amc_selection.push(data1.selected_asset_class[0].replace(/(')/g, ""))
-	             	
-	             	 print_amc_selection();
-
-                      document.getElementById("fund_index").checked = true;
-	                 document.getElementById("fmanager").checked = true;
-	                 document.getElementById("ChkAllCategories").checked = true;
-	                 asset_selected_flag2=1;
-	                  print_asset_selection();
-
-	             }
-	             else
-	             {
+	             
+	            //  else
+	            //  {
 	             	insert_asset_selection("Equity : Large Cap");
-	                print_asset_selection();
-	                select_asset();
-	                document.getElementById("ChkAmc").checked = true;
-	                document.getElementById("fund_index").checked = true;
-	                 document.getElementById("fmanager").checked = true;
-	             }
+	                //print_asset_selection();
+	                //select_asset();
+	                // document.getElementById("ChkAmc").checked = true;
+	                // document.getElementById("fund_index").checked = true;
+	                //  document.getElementById("fmanager").checked = true;
+	             //}
 
 	             if (data1.schemedata.length==0)
                 {
@@ -274,7 +236,7 @@ function schemedata_landing()
 
                 }
 
-                get_landing_returns();
+                //get_landing_returns();
 
 	},
 	error:function(jqXHR, textStatus, errorThrown) {
@@ -286,1108 +248,85 @@ function schemedata_landing()
 }
 
 
-// function fill_snapshot_table(data1)
-// {
-// 	$("#snapshottable_div").hide();
-// 	$("#snapshotTabletblData").html("");
-// 	var tblData;
-// 	var th = "<thead><tr class='bg-color'><th style='width:50px'></th><th>Fund</th><th data-name='rup_rating'>Rupeevest </br>Rating</th><th data-name='aum'>AUM </br>(in crores)</th><th>Return</br>(1 year)</th><th>Return</br>(3 year)</th><th>Return</br> (5 year)</th><th>ExpenseRatio</th><th>Highest Sector Allocation</th></tr></thead>";
-// 	//var t = document.getElementById("snapshotTabletblData").innerHTML;
-// 	if(data1!="")
-// 	{
-// 	for(var i =0;i <= data1.schemedata.length-1;i++)
-// 	{
-// 	var scheme_data = data1.schemedata[i];
-// 	var scheme_code = scheme_data.schemecode;
-// 	var scheme_name = scheme_data.s_name;
-// 	var fund_manager = scheme_data.fund_manager;
-// 	var scheme_year1 = scheme_data.returns_1year;
-// 	var scheme_year3 = scheme_data.returns_3year;
-// 	var scheme_year5 = scheme_data.returns_5year;
-// 	var scheme_aum_total = scheme_data.aumtotal;
-// 	var exratio = scheme_data.expenceratio;
-// 	var rr = scheme_data.rupeevest_rating;
-// 	var returns_1month = scheme_data.returns_1month;
-// 	var returns_3month = scheme_data.returns_3month;
-// 	var turnover_ratio = scheme_data.turnover_ratio;
-// 	var exitload = scheme_data.exitload;
-// 	var navrs = scheme_data.navrs;
-// 	var inception_date = scheme_data.inception_date;
-// 	var minimum_investment = scheme_data.minimum_investment;
-// 	var betax_returns = scheme_data.betax_returns;
-// 	var alphax_returns = scheme_data.alphax_returns;
-// 	var sotinox_returns = scheme_data.sotinox_returns;
-// 	var sharpex_returns = scheme_data.sharpex_returns;
-
-
-// 	var sdx_returns = scheme_data.sdx_returns;
-// 	var portfolio_attributes = scheme_data.portfolio_attributes;
-// 	var cost_factor = scheme_data.cost_factor;
-// 	var risk = scheme_data.risk;
-// 	var consistency_of_return = scheme_data.consistency_of_return;
-
-// 	var total_return = scheme_data.total_return;
-// 	var high_sec_alloc;
-// 	if(scheme_data.highest_sector)
-// 	{
-// 	high_sec_alloc = scheme_data.highest_sector;
-// 	}
-// 	else
-// 	{
-// 	high_sec_alloc = "NA";
-// 	}
-
-
-// 	var rr;
-// 	if (scheme_data.rupeevest_rating)
-// 	{
-// 	rr = scheme_data.rupeevest_rating;
-// 	}
-// 	else
-// 	{
-// 	rr = "-";
-// 	}
-
-// 	if(i == 0)
-// 	{
-// 	  tblData = t + "<tr><td><inputid="+scheme_code+"type='checkbox'name='chkCompare'/></td><td><aid="+scheme_code+"href='#'onclick='setvalue(this.id)'>"+scheme_name+"</a></td><td>"+rr+"</td><td data-name= 'aum' style='display:block;'>"+scheme_aum_total+"</td><td data-name= 'retyr1' style='display:block;'>"+scheme_year1+"</td><tddata-name= 'retyr3' style='display:block;'>"+scheme_year3+"</td><td data-name= 'retyr5' style='display:block;'>"+scheme_year5+"</td><td data-name= 'exratio' style='display:block;'>"+exratio+"</td><td data-name= 'retmth1' style='display:block;'>"+returns_1month+"</td><td data-name= 'retmth3' style='display:block;'>"+returns_3month+"</td><td data-name= 'tnratio' style='display:block;'>"+turnover_ratio+"</td><td data-name= 'exload' style='display:block;'>"+exitload+"</td><td data-name= 'navrs' style='display:block;'>"+navrs+"</td><td data-name= 'indate' style='display:block;'>"+inception_date+"</td><td data-name= 'mininv' style='display:block;'>"+minimum_investment+"</td><td data-name= 'betax' style='display:block;'>"+betax_returns+"</td><td data-name= 'alphax' style='display:block;'>"+alphax_returns+"</td><td data-name= 'sotionox' style='display:block;'>"+sotinox_returns+"</td><td data-name= 'sharpex' style='display:block;'>"+sharpex_returns+"</td><td data-name= 'sdx' style='display:block;'>"+sdx_returns+"</td><td data-name= 'portattr' style='display:block;'>"+portfolio_attributes+"</td><td data-name= 'costfctr' style='display:block;'>"+cost_factor+"</td><td data-name= 'risk' style='display:block;'>"+risk+"</td><td data-name= 'ctrn' style='display:block;'>"+consistency_of_return+"</td><td data-name= 'trtn' style='display:block;'>"+total_return+"</td></tr>";
-// 	  tblData = th + "<tr><td style='width:50px'><input id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a id="+scheme_code+" href='#' onclick='setvalue(this.id)'>"+scheme_name+"</a><br><a href='#' >"+fund_manager+"</a></td><td data-name = 'rup_rating'>"+rr+"</td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+scheme_year1+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td>"+exratio+"</td><td>"+high_sec_alloc+"</td></tr>";
-// 	}
-
-// 	else
-// 	{
-// 	   /*tblData = tblData + "<tr><td><inputid="+scheme_code+"type='checkbox'name='chkCompare'/></td><td><a id="+scheme_code+"href='#'onclick='setvalue(this.id)'>"+scheme_name+"</a></td><td>"+rr+"</td><td data-name= 'aum' style='display:block;'>"+scheme_aum_total+"</td><td data-name= 'retyr1' style='display:block;'>"+scheme_year1+"</td><td data-name= 'retyr3' style='display:block;'>"+scheme_year3+"</td><td data-name= 'retyr5' style='display:block;'>"+scheme_year5+"</td><td data-name= 'exratio' style='display:block;'>"+exratio+"</td><td data-name= 'retmth1' style='display:block;'>"+returns_1month+"</td><td data-name= 'retmth3' style='display:block;'>"+returns_3month+"</td><td data-name= 'tnratio' style='display:block;'>"+turnover_ratio+"</td><td data-name= 'exload' style='display:block;'>"+exitload+"</td><td data-name= 'navrs' style='display:block;'>"+navrs+"</td><td data-name= 'indate' style='display:block;'>"+inception_date+"</td><td data-name= 'mininv' style='display:block;'>"+minimum_investment+"</td><td data-name= 'betax' style='display:block;'>"+betax_returns+"</td><td data-name= 'alphax' style='display:block;'>"+alphax_returns+"</td><td data-name= 'sotionox' style='display:block;'>"+sotinox_returns+"</td><td data-name= 'sharpex' style='display:block;'>"+sharpex_returns+"</td><td data-name= 'sdx' style='display:block;'>"+sdx_returns+"</td><td data-name= 'portattr' style='display:block;'>"+portfolio_attributes+"</td><td data-name= 'costfctr' style='display:block;'>"+cost_factor+"</td><td data-name= 'risk' style='display:block;'>"+risk+"</td><td data-name= 'ctrn' style='display:block;'>"+consistency_of_return+"</td><td data-name= 'trtn' style='display:block;'>"+total_return+"</td></tr>";*/
-
-
-// 	tblData = tblData + "<tr><td><input id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a id="+scheme_code+" href='#' onclick='setvalue(this.id)'>"+scheme_name+"</a><br><a href='#' >"+fund_manager+"</a></td><td data-name = 'rup_rating'>"+rr+"</td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+scheme_year1+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td>"+exratio+"</td><td>"+high_sec_alloc+"</td></tr>";
-// 	}
-// 	}
-	
-// 	$("#snapshotTabletblData").html(tblData);
-// 	}
-// 	else
-// 	{
-// 	$("#snapshottable_div").show();
-// 	}
-	
-// }
-
-
-
-
-// function fill_snapshot_table(data1)
-// {
-// 	$("#snapshottable_div").hide();
-// 	// $("#snapshotTabletblData").html("");
-// 	$("#screener_table_div").html("");
-// 	$("#screener_table").html("");
-    
-
-//     // $('.cbx').attr('checked',false);
-     
-//     //  $('.cbx').attr('checked',false);
-
-//     //  $('#4').prop('checked',true);
-//     //  $('#5').prop('checked',true);
-//     //  $('#6').prop('checked',true);
-//     //  $('#7').prop('checked',true);
-//     //  $('#8').prop('checked',true);
-//     //  $('#9').prop('checked',true);
-     
-
-
-// 	// var tblData;
-// 	// var tbl = " <table id='screener_table' name='aum' class='table table-bordered table-striped sortable-theme-bootstrap' data-sortable>"
-// 	// if (data1.ptp_returns!=null)
-// 	// {
-// 	// 	var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Fund</span></th><th data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric' data-name='aum'>AUM <br>(in crores)</th><th data-sortable-type='numeric'>Return<br>(1 year)</th data-sortable-type='numeric'><th>Return<br>(3 year)</th><th data-sortable-type='numeric'>Return<br> (5 year)</th><th data-sortable-type='numeric'>ExpenseRatio</th><th>Highest Sector Allocation</th><th data-sortable-type='numeric' id='rm_1' style='display: none;'>Return(1m)</th><th data-sortable-type='numeric' id='rm_3' style='display: none;'>Return(3m)</th><th data-sortable-type='numeric' id='rm_6' style='display: none;'>Return(6m)</th><th data-sortable-type='numeric' id='ry_2' style='display: none;' >Return(2Yr)</th><th style='display: none;' >BenchMark</th><th id='nav' style='display: none;'>Nav</th><th style='display: none;' >Turnover Ratio</th><th style='display: none;'>Exit Load</th><th data-sortable-type='date' style='display: none;'>Launch Date</th><th style='display: none;'>Minimum Investment</th><th style='display: none;'>Average Maturity</th><th style='display: none;'>Modified Duration</th><th style='display: none;'>YTM</th><th style='display: none;'>Benchmark Index</th><th style='display: none;'>Beta</th><th style='display: none;'>Sharpe</th><th style='display: none;'>Sortino</th><th style='display: none;'>Standard Deviation</th><th style='display: none;'>Alpha</th><th style='display: none;'>YTD</th><th style='display: none;'>Fund House</th><th style='display: none;'>Fund Type</th><th>Point to Point Return</th></tr></thead>";
-// 	// }
-// 	// else
-// 	// {
-// 	// 	var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Fund</span></th><th data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric' data-name='aum'>AUM <br>(in crores)</th><th data-sortable-type='numeric'>Return<br>(1 year)</th data-sortable-type='numeric'><th>Return<br>(3 year)</th><th data-sortable-type='numeric'>Return<br> (5 year)</th><th data-sortable-type='numeric'>ExpenseRatio</th><th>Highest Sector Allocation</th><th data-sortable-type='numeric' id='rm_1' style='display: none;'>Return(1m)</th><th data-sortable-type='numeric' id='rm_3' style='display: none;'>Return(3m)</th><th data-sortable-type='numeric' id='rm_6' style='display: none;'>Return(6m)</th><th data-sortable-type='numeric' id='ry_2' style='display: none;' >Return(2Yr)</th><th style='display: none;' >BenchMark</th><th id='nav' style='display: none;'>Nav</th><th style='display: none;' >Turnover Ratio</th><th style='display: none;'>Exit Load</th><th data-sortable-type='date' style='display: none;'>Launch Date</th><th style='display: none;'>Minimum Investment</th><th style='display: none;'>Average Maturity</th><th style='display: none;'>Modified Duration</th><th style='display: none;'>YTM</th><th style='display: none;'>Benchmark Index</th><th style='display: none;'>Beta</th><th style='display: none;'>Sharpe</th><th style='display: none;'>Sortino</th><th style='display: none;'>Standard Deviation</th><th style='display: none;'>Alpha</th><th style='display: none;'>YTD</th><th style='display: none;'>Fund House</th><th style='display: none;'>Fund Type</th></tr></thead>";
-// 	// }
-// 	// alert("ss");
-// 	var tblData="";
-// 	var tbl = " <table id='screener_table' name='aum' class='table table-bordered table-striped table-condensed sortable-theme-bootstrap' data-sortable>"
-// 	if (data1.ptp_returns!=null)
-// 	{
-// 	for (var c=0;c<=column_limit.length;c++)
-// 	{
-// 	   // "<th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' >Expense<br>Ratio (%)</th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'>Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th> <th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th><th style='display:none;'>Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield To Maturity (%)</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;'>Exit Load<br>(%)</th><th data-sortable-type='date' style='display:none;'  >Inception Date</th><th style='display:none;'>Min. Inv.<br>(in ₹)</th><th style='display:none;'>Benchmark Index</th><th style='display:none;'>Fund House</th> <th style='display:none;'> Nav </th> <th>Fund Type</th><th data-sortable-type='numeric'>Point to Point Return</th><th style='display:none'>classification</th>";
-// 	}
-// 	// alert("ss");
-// 	// var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-name='rup_rating'>Rupeevest Rating</th><th data-sortable-type='numeric' data-name='aum'>AUM (in ₹ cr)</th><th data-sortable-type='numeric'>Return - 1 yr (%)</th data-sortable-type='numeric'><th>Return - 3 yrs (%)</th><th data-sortable-type='numeric'>Return - 5 yrs (%)</th><th data-sortable-type='numeric'>Expense Ratio (%)</th><th>Highest Sector Allocation</th><th data-sortable-type='numeric' id='rm_1' style='display: none;'>Return - 1mo (%)</th><th data-sortable-type='numeric' id='rm_3' style='display: none;'>Return - 3 mo (%)</th><th data-sortable-type='numeric' id='rm_6' style='display: none;'>Return - 6 mo (%)</th><th data-sortable-type='numeric' id='ry_2' style='display: none;' >Return - 2 yrs (%)</th><th style='display: none;' >BenchMark</th><th id='nav' style='display: none;'>Nav</th><th style='display: none;' >Turnover Ratio (%)</th><th style='display: none;'>Exit Load</th><th data-sortable-type='date' style='display: none;'>Launch Date</th><th style='display: none;'>Min. Investment (in ₹)</th><th style='display: none;'>Avg. Maturity (in yrs)</th><th style='display: none;'>Mod. Duration (in yrs)</th><th style='display: none;'>Yield to Maturity (%)</th><th style='display: none;'>Benchmark Index</th><th style='display: none;'>Beta</th><th style='display: none;'>Sharpe</th><th style='display: none;'>Sortino</th><th style='display: none;'>Standard Deviation</th><th style='display: none;'>Alpha</th><th style='display: none;'>YTD (%)</th><th style='display: none;'>Fund House</th><th style='display: none;'>Fund Type</th><th>Point to Point Return</th></tr></thead>";
-// 	    var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span>Funds</span></th><th>Category</th><th data-sortable-type='numeric' data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' >Expense<br>Ratio (%)</th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'>Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th> <th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th><th style='display:none;'>Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield To Maturity (%)</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;'>Exit Load<br>(%)</th><th data-sortable-type='date' style='display:none;'  >Inception Date</th><th style='display:none;'>Min. Inv.<br>(in ₹)</th><th data-sortable-type='alpha' style='display:none;'>Benchmark Index</th><th style='display:none;'>Fund House</th> <th style='display:none;'> Nav </th> <th>Fund Type</th><th style='display:none;'><center> No. of<br>Stocks</center></th><th data-sortable-type='numeric'>Point to Point Return</th><th style='display:none'>classification</th></tr></thead>";
-//       //var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' > Expense<br>Ratio (%)</th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'> Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'> Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'> Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th> <th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th><th >Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield to Maturity (%)</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;'>Exit Load<br>(%)</th><th data-sortable-type='date' style='display:none;'>Inception Date</th><th style='display:none;'>Min. Inv.<br>(in ₹)</th><th style='display:none;'>Benchmark Index</th><th style='display:none;'>Fund House</th> <th style='display:none;'>Nav</th> <th>Fund Type</th><th data-sortable-type='numeric'>Point to Point Return</th><th style='display:none'>classification</th></tr></thead>";
-
-// 	}
-// 	else
-// 	{
-// 	// alert("ss");
-// 	// var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-name='rup_rating'>Rupeevest Rating</th><th data-sortable-type='numeric' data-name='aum'>AUM (in ₹ cr)</th><th data-sortable-type='numeric'>Return - 1 yr (%)</th data-sortable-type='numeric'><th>Return - 3 yrs (%)</th><th data-sortable-type='numeric'>Return - 5 yrs (%)</th><th data-sortable-type='numeric'>Expense Ratio (%)</th><th>Highest Sector Allocation</th><th data-sortable-type='numeric' id='rm_1' style='display: none;'>Return - 1mo (%)</th><th data-sortable-type='numeric' id='rm_3' style='display: none;'>Return - 3 mo (%)</th><th data-sortable-type='numeric' id='rm_6' style='display: none;'>Return - 6 mo (%)</th><th data-sortable-type='numeric' id='ry_2' style='display: none;' >Return - 2 yrs (%)</th><th style='display: none;' >BenchMark</th><th id='nav' style='display: none;'>Nav</th><th style='display: none;' >Turnover Ratio (%)</th><th style='display: none;'>Exit Load</th><th data-sortable-type='date' style='display: none;'>Launch Date</th><th style='display: none;'>Min. Investment (in ₹)</th><th style='display: none;'>Avg. Maturity (in yrs)</th><th style='display: none;'>Mod. Duration (in yrs)</th><th style='display: none;'>Yield to Maturity (%)</th><th style='display: none;'>Benchmark Index</th><th style='display: none;'>Beta</th><th style='display: none;'>Sharpe</th><th style='display: none;'>Sortino</th><th style='display: none;'>Standard Deviation</th><th style='display: none;'>Alpha</th><th style='display: none;'>YTD (%)</th><th style='display: none;'>Fund House</th><th style='display: none;'>Fund Type</th></tr></thead>";
-// 	// var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-name='rup_rating'>Rupeevest Rating</th><th data-sortable-type='numeric'>AUM</th><th> Expense Ratio (%)</th><th style='display:none;'> Exit Load (%)</th><th> Fund Type</th><th style='display:none;'> Launch Date </th><th style='display:none;'>  Min. Investment (in ₹) </th><th style='display:none;'>  Benchmark Index </th><th style='display:none;'>  Fund House </th> <th style='display:none;'> Nav </th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'> Return (1 mo) </th><th style='display:none;' data-sortable-type='numeric'> Return (3 mo) </th><th style='display:none;' data-sortable-type='numeric'>  Return (6 mo) </th><th data-sortable-type='numeric'> Return (1 yr) </th><th style='display:none;' data-sortable-type='numeric'> Return (2 yrs) </th><th data-sortable-type='numeric'> Return (3 yrs) </th><th data-sortable-type='numeric'> Return (5 yrs) </th><th style='display:none;' data-sortable-type='numeric'>  Turnover Ratio (%) </th><th > Highest Sector</th><th style='display:none;' data-sortable-type='numeric'> Average Maturity (in years) </th><th style='display:none;' data-sortable-type='numeric'> Modified Duration (in years) </th><th style='display:none;' data-sortable-type='numeric'> Yield To Maturity (%) </th><th style='display:none;' data-sortable-type='numeric'> Beta </th><th style='display:none;' data-sortable-type='numeric'> Sharpe </th><th style='display:none;' data-sortable-type='numeric'> Sortino </th><th style='display:none;' data-sortable-type='numeric'> Standard Deviation </th><th style='display:none;' data-sortable-type='numeric'> Alpha </th></tr></thead>";
-// 	var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span>Funds</span></th><th>Category</th><th data-sortable-type='numeric' data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' >Expense<br>Ratio (%)</th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'>Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th> <th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th><th style='display:none;'>Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield To Maturity (%)</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;'>Exit Load<br>(%)</th><th data-sortable-type='date' style='display:none;'>Inception Date</th><th style='display:none;'>Min. Inv.<br>(in ₹)</th><th data-sortable-type='alpha' style='display:none;'>Benchmark Index</th><th style='display:none;'>Fund House</th> <th style='display:none;'> Nav </th> <th>Fund Type</th><th style='display:none;'> <center>No. of<br>Stocks</center></th><th style='display:none'>classification</th></tr></thead>";
-// 	  //var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' > Expense<br>Ratio (%)</th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'> Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'> Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'> Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th> <th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th><th >Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield to Maturity (%)</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;'>Exit Load<br>(%)</th><th data-sortable-type='date' style='display:none;'>Inception Date</th><th style='display:none;'>Min. Inv.<br>(in ₹)</th><th style='display:none;'>Benchmark Index</th><th style='display:none;'>Fund House</th> <th style='display:none;'>Nav</th> <th>Fund Type</th><th style='display:none'>classification</th></tr></thead>";
-// 	}
-
-
-// 	if(data1!="")
-// 	{
-// 	$("#snapshottable_div").addClass("d_none");
-// 	for(var i =0;i <= data1.schemedata.length-1;i++)
-// 	{
-// 	var scheme_data = data1.schemedata[i];
-
-// 	var classification = scheme_data.classification;    // newly taken for classificaton {to use in hover function }
-
-// 	var scheme_code = scheme_data.schemecode;
-// 	var scheme_name = scheme_data.s_name;
-	
-// 	var fund_manager = scheme_data.fund_manager;
-// 	var category = scheme_data.remarks1;
-
-// 	var scheme_year1;
-//             if( scheme_data.returns_1year==null || scheme_data.returns_1year=='undefined')
-//               {
-//                 scheme_year1="-";
-//               }
-//               else
-//               {
-//               	scheme_year1=scheme_data.returns_1year;
-//               }
-
-//         var scheme_year2;
-//             if(scheme_data.returns_2year==null || scheme_data.returns_2year=='undefined')
-//               {
-//                    scheme_year2="-"; 	
-//               }
-//               else
-//               {
-//               	 scheme_year2=scheme_data.returns_2year;   
-//               }      
-
-// 	var scheme_year3;
-
-//             if( scheme_data.returns_3year==null || scheme_data.returns_3year=='undefined')
-//               {
-//                scheme_year3="-";    	
-//               }
-//               else
-//               {
-//               	scheme_year3=scheme_data.returns_3year;   
-//               }
-
-//         var scheme_year5;
-//             if( scheme_data.returns_5year==null  || scheme_data.returns_5year=='undefined')
-//               {
-//                  scheme_year5="-";   	
-//               }
-//             else
-//               {
-//   	scheme_year5=scheme_data.returns_5year; 
-//               }        
-	
-// 	var scheme_aum_total;
-
-// 	if(scheme_data.aumtotal==null || scheme_data.aumtotal=='undefined')
-// 	{
-//            scheme_aum_total = "-";
-// 	}
-// 	else
-// 	{
-// 	scheme_aum_total = commaSeparateNumber((parseFloat(scheme_data.aumtotal)).toFixed(2));
-// 	}
-	
-//         var exratio ;
-
-//         if(scheme_data.expenceratio==null || scheme_data.expenceratio=='undefined')
-//         {
-//         	exratio = "-";
-        	
-//         }
-//         else
-//         {
-//         	exratio = scheme_data.expenceratio;
-//         }
-	
-// 	var rr = scheme_data.rupeevest_rating;   
-
-
-//         var returns_1month;
-//              if( scheme_data.returns_1month==null || scheme_data.returns_1month=='undefined')
-//              {
-//                 returns_1month = "-";
-//              }
-//              else
-//              {
-//              	returns_1month = scheme_data.returns_1month;
-//              }
-
-//         var returns_3month;
-//              if( scheme_data.returns_3month==null || scheme_data.returns_3month=='undefined')
-//              {
-//                 returns_3month = "-";
-//              }
-//              else
-//              {
-//              	returns_3month = scheme_data.returns_3month;
-//              }
-
-//         var returns_6month;
-//              if(scheme_data.returns_6month==null || scheme_data.returns_6month=='undefined')
-//              {
-//                 returns_6month = "-";
-//              }
-//              else
-//              {
-//                returns_6month = scheme_data.returns_6month;
-//              }                 
-
-//          var avg_maturity="-";
-//               if((scheme_data.avg_maturity!=0) && ( scheme_data.avg_maturity!=null))
-//               {
-//                   avg_maturity = scheme_data.avg_maturity;
-
-//                   // console.log("Average MAt->"+scheme_data.avg_maturity)
-//               }
-
-// 	 var modified_duration="-";
-// 	    if((scheme_data.mod_duration!=0) && (scheme_data.mod_duration!=null) )
-// 	    {
-// 	    	 modified_duration=scheme_data.mod_duration;
-
-// 	    	 // console.log("Modified Duration->"+scheme_data.mod_duration)
-// 	    }
-
-// 	 var ytm ="-"
-// 	  if((scheme_data.ytm!=0) && (scheme_data.ytm!=null))
-// 	  {
-//                  ytm=scheme_data.ytm;
-                 
-//                  // console.log("Ytm->"+scheme_data.ytm)
-// 	  }
-        
-//         var Fund_House=scheme_data.fund_house; 
-//         var ytd_returns=scheme_data.ytd_returns;
-  
-//         var turnover_ratio;
-
-//         if(scheme_data.turnover_ratio==null || scheme_data.turnover_ratio=='undefined')
-//         {
-//         	turnover_ratio = "-";
-//         }
-//         else
-//         {
-//         	turnover_ratio = scheme_data.turnover_ratio;
-//         }
-
-// 	var exitload;
-
-// 	if(scheme_data.exitload==null || scheme_data.exitload=='undefined')
-// 	{
-// 	exitload="-";
-// 	} 
-// 	else
-// 	{
-//           exitload = scheme_data.exitload;
-// 	}
-
-	
-// 	var navrs = scheme_data.navrs;
-        
-
-//         // var inception_date = scheme_data.inception_date;
-
-//         var inception_date = "-";
-//         if(scheme_data.inception_date!=null)
-//         {
-//         	// console.log("TIME0000000000------------------------------------------------")
-//             // var date = new Date(scheme_data.inception_date);	
-//             // console.log(moment(scheme_data.inception_date).format('DD-MMM-YY'));
-//             inception_date= moment(scheme_data.inception_date).format('DD-MMM-YY');
-
-//               // console.log("date date date date")
-//              // console.log(date.format('MMM D, YYYY') );
-             
-//              // inception_date = date;
-
-//              // inception_date = DateFormat.format(date, "dd-MMM-yy")
-
-//             // inception_date =  date.getDate() + '/' + (date.getMonth() + 1)+ '/' +  date.getFullYear();
-//         }
-	   
-// 	var minimum_investment;
-        
-//         if(scheme_data.minimum_investment==null || scheme_data.minimum_investment=='undefined')
-//         {
-//         	minimum_investment = "-";
-//         }
-//         else
-//         {
-//             minimum_investment = commaSeparateNumber(scheme_data.minimum_investment);
-//         }
-
-// 	var betax_returns;
-
-// 	if(scheme_data.betax_returns==null || scheme_data.betax_returns=='undefined' || scheme_data.betax_returns==0)
-// 	{
-//            betax_returns = "-";
-// 	}
-// 	else
-// 	{
-//            betax_returns = scheme_data.betax_returns;
-// 	}
-
-// 	var alphax_returns;
-// 	 if(scheme_data.alphax_returns==null || scheme_data.alphax_returns=='undefined' || scheme_data.alphax_returns==0)
-// 	 {
-// 	 	alphax_returns ="-";
-// 	 }
-// 	 else
-// 	 {
-//               alphax_returns = scheme_data.alphax_returns;
-// 	 }
-
-// 	 var sotinox_returns;
-
-// 	 if(scheme_data.sotinox_returns ==null || scheme_data.sotinox_returns=='undefined' || scheme_data.sotinox_returns == 0)
-// 	 {
-// 	 	sotinox_returns ="-";
-// 	 }
-// 	 else
-// 	 {
-// 	    sotinox_returns = scheme_data.sotinox_returns;	
-// 	 }
-	 
-//  	var sharpex_returns;
-
-//  	if(scheme_data.sharpex_returns ==null || scheme_data.sharpex_returns=='undefined' || scheme_data.sharpex_returns==0)
-//  	{
-//  	sharpex_returns = "-";
-//  	}
-//  	else
-//  	{
-//  	sharpex_returns = scheme_data.sharpex_returns;
-//  	}
-
-	
-
-//         var Fund_Type=scheme_data.type_code;
-
-//            if(Fund_Type=="1")
-//            {
-//              Fund_Type="Open Ended";      
-//            }  
-//            else if(Fund_Type=="2")
-//            {
-//              Fund_Type="Closed Ended";      
-//            }
-//            else
-//            {
-//              Fund_Type="Interval"; 
-//            } 
-
-//         var Fund_Benchmark_Index=scheme_data.index_name;
-
-// 	var sdx_returns;
-
-// 	   if( scheme_data.assdx_returns==null || scheme_data.assdx_returns =='undefined' || scheme_data.assdx_returns==0 )
-//               {
-//                 sdx_returns ="-";	  
-//               }
-//               else
-//               {
-//               	sdx_returns = scheme_data.assdx_returns;
-//               }
-	
-
-// 	var portfolio_attributes = scheme_data.portfolio_attributes;
-// 	var cost_factor = scheme_data.cost_factor;
-// 	var risk = scheme_data.risk;
-// 	var consistency_of_return = scheme_data.consistency_of_return;
-
-// 	var total_return = scheme_data.total_return;
-// 	var high_sec_alloc;
-
-                
-
-//                 var now = moment(new Date()); //todays date
-// 	var end = moment(scheme_data.inception_date); // another date
-// 	var duration = moment.duration(now.diff(end));
-// 	var days = duration.asDays();
-
-// 	       if( days < 365 )
-// 	       {
-// 	       	sdx_returns = "-";
-// 	betax_returns = "-";
-// 	sharpex_returns = "-";
-// 	alphax_returns = "-";
-// 	sotinox_returns = "-";
-                   
-// 	       }
-
-// 	// <td>"+returns_1month+"</td><td>"+returns_3month+"</td><td>"+returns_6month+"</td><td>"+scheme_year2+"</td><td>"+scheme_year10+"</td><td>"+navrs+"</td>
-
-// 	if(scheme_data.highest_sector)
-// 	{
-// 	high_sec_alloc = scheme_data.highest_sector;
-// 	}
-// 	else
-// 	{
-// 	high_sec_alloc = "NA";
-// 	}
-
-
-// 	var rr , rr_ico;
-// 	if (scheme_data.rupeevest_rating)
-// 	{
-// 	rr = scheme_data.rupeevest_rating;
-// 	if(rr == 5){
-// 	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
-// 	}
-// 	else if (rr == 4){
-// 	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
-// 	}
-// 	else if (rr == 3){
-// 	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"	
-// 	}
-// 	else if (rr == 2){
-// 	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"	
-// 	}
-// 	else if (rr == 1){
-// 	rr_ico = "<span class = 'glyphicon glyphicon-star'></span>"
-// 	}
-// 	else if (rr == "Unrated"){
-// 	rr_ico = "Unrated"
-// 	}
-// 	}
-// 	else
-// 	{
-// 	rr = "-";
-// 	}
-
-
-//      var no_of_securities="-";
-       
-      
-//        	 no_of_securities=scheme_data.no_of_stocks;
-       
-//          if (no_of_securities==null)
-//          {
-//          	 no_of_securities="-";
-//          }
-
-// 	if(i == 0)
-// 	{
-// 	if (data1.ptp_returns!=null)
-// 	{
-// 	var returns = data1.ptp_returns[i].ptp_return;
-	
-// 	var days=data1.no_days.split('/');
-// 	if (days[0]>365 && returns!="-")
-// 	{
-// 	var power=(365/days[0]);
-	
-// 	var returns=((Math.pow((1+(returns/100)), power)-1)*100).toFixed(2);
-// 	}
-// 	// tblData = th + "<tbody><tr><td><input id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a id="+scheme_code+" href='#' onclick='setvalue(this.id)'>"+scheme_name+"</a><br>"+fund_manager+"</td><td>"+category+"</td><td data-name = 'rup_rating'>"+rr+"</td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+scheme_year1+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td>"+exratio+"</td><td>"+high_sec_alloc+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td style='display: none;'>"+scheme_year2+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+navrs+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+Fund_Type+"</td><td>"+returns+"</td></tr>";
-                   
-//                    tblData = th + "<tbody><tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td> <td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+navrs+"</td><td >"+Fund_Type+"</td><td style='display: none;'>"+no_of_securities+"</td><td>"+returns+"</td><td class='fund_category' style='display:none'>"+classification+"</td></tr>";
-                 
-                
-// 	}
-// 	else 
-// 	{
-// 	 tblData = th + "<tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td> <td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+navrs+"</td><td >"+Fund_Type+"</td><td style='display: none;'>"+no_of_securities+"</td><td class='fund_category' style='display:none'>"+classification+"</td></tr>";
-// 	} 
-// 	 }         
-// 	else
-// 	{
-// 	   /*tblData = tblData + "<tr><td><inputid="+scheme_code+"type='checkbox'name='chkCompare'/></td><td><a id="+scheme_code+"href='#'onclick='setvalue(this.id)'>"+scheme_name+"</a></td><td>"+rr+"</td><td data-name= 'aum' style='display:block;'>"+scheme_aum_total+"</td><td data-name= 'retyr1' style='display:block;'>"+scheme_year1+"</td><td data-name= 'retyr3' style='display:block;'>"+scheme_year3+"</td><td data-name= 'retyr5' style='display:block;'>"+scheme_year5+"</td><td data-name= 'exratio' style='display:block;'>"+exratio+"</td><td data-name= 'retmth1' style='display:block;'>"+returns_1month+"</td><td data-name= 'retmth3' style='display:block;'>"+returns_3month+"</td><td data-name= 'tnratio' style='display:block;'>"+turnover_ratio+"</td><td data-name= 'exload' style='display:block;'>"+exitload+"</td><td data-name= 'navrs' style='display:block;'>"+navrs+"</td><td data-name= 'indate' style='display:block;'>"+inception_date+"</td><td data-name= 'mininv' style='display:block;'>"+minimum_investment+"</td><td data-name= 'betax' style='display:block;'>"+betax_returns+"</td><td data-name= 'alphax' style='display:block;'>"+alphax_returns+"</td><td data-name= 'sotionox' style='display:block;'>"+sotinox_returns+"</td><td data-name= 'sharpex' style='display:block;'>"+sharpex_returns+"</td><td data-name= 'sdx' style='display:block;'>"+sdx_returns+"</td><td data-name= 'portattr' style='display:block;'>"+portfolio_attributes+"</td><td data-name= 'costfctr' style='display:block;'>"+cost_factor+"</td><td data-name= 'risk' style='display:block;'>"+risk+"</td><td data-name= 'ctrn' style='display:block;'>"+consistency_of_return+"</td><td data-name= 'trtn' style='display:block;'>"+total_return+"</td></tr>";*/
-
-// 	   if (data1.ptp_returns!=null)
-// 	{
-// 	var returns = data1.ptp_returns[i].ptp_return;
-	
-// 	var days=data1.no_days.split('/');
-// 	if (days[0]>365 && returns!="-")
-// 	{
-// 	var power=(365/days[0]);
-	
-// 	var returns=((Math.pow((1+(returns/100)), power)-1)*100).toFixed(2);
-// 	}
-// 	// tblData = tblData + "<tr><td><input id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a id="+scheme_code+" href='#' onclick='setvalue(this.id)'>"+scheme_name+"</a><br>"+fund_manager+"</td><td>"+category+"</td><td data-name = 'rup_rating'>"+rr+"</td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+scheme_year1+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td>"+exratio+"</td><td>"+high_sec_alloc+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td style='display: none;'>"+scheme_year2+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+navrs+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+Fund_Type+"</td><td>"+returns+"</td></tr>";
-// 	tblData = tblData + "<tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td> <td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+navrs+"</td><td >"+Fund_Type+"</td><td style='display: none;'>"+no_of_securities+"</td><td>"+returns+"</td><td class='fund_category' style='display:none'>"+classification+"</td></tr>";
-// 	}
-// 	else 
-// 	{
-// 	tblData = tblData + "<tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td> <td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+navrs+"</td><td >"+Fund_Type+"</td><td style='display: none;'>"+no_of_securities+"</td><td class='fund_category' style='display:none'>"+classification+"</td></tr>";
-// 	}
-// 	}
-
-// 	}
-// 	// $("#snapshotTabletblData").html("");
-// 	// $("#snapshotTabletblData").html(tblData);
-// 	tblData = tblData +"</tbody></table>";
-// 	$("#screener_table_div").html(tblData);
-// 	 $("#total_res").html(data1.schemedata.length +" out of "+data1.total_count[0].count);
-// 	 tbldata="";
-// 	Sortable.init();
-
-//     $( ".FundCategory").hover(function(){
-
-//         $("[data-toggle=popover]").popover();
-//         var res = (this.parentElement.parentElement.childNodes[this.parentElement.parentElement.childElementCount].innerHTML);         
-//         $(this).attr('data-content', res);
-    
-//     });
-
-//     $( ".CompCheckBox").hover(function(){
-
-//         $("[data-toggle=popover]").popover();
-        
-//         $(this).attr('data-content', 'Select to compare');
-    
-//     });
-
-// 	get_selected_item();
-// 	}
-// 	else
-// 	{
-// 	$("#snapshottable_div").removeClass("d_none");
-// 	$("#snapshottable_div").show();
-// 	}
-	
-// }
-
 
 function fill_snapshot_table(data1)
 {
-	$("#snapshottable_div").hide();
-	// $("#snapshotTabletblData").html("");
-	$("#screener_table_div").html("");
-	$("#screener_table").html("");
-    
 
-    // $('.cbx').attr('checked',false);
-     
-    //  $('.cbx').attr('checked',false);
-
-    //  $('#4').prop('checked',true);
-    //  $('#5').prop('checked',true);
-    //  $('#6').prop('checked',true);
-    //  $('#7').prop('checked',true);
-    //  $('#8').prop('checked',true);
-    //  $('#9').prop('checked',true);
-     
-
-
-	// var tblData;
-	// var tbl = " <table id='screener_table' name='aum' class='table table-bordered table-striped sortable-theme-bootstrap' data-sortable>"
-	// if (data1.ptp_returns!=null)
-	// {
-	// 	var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Fund</span></th><th data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric' data-name='aum'>AUM <br>(in crores)</th><th data-sortable-type='numeric'>Return<br>(1 year)</th data-sortable-type='numeric'><th>Return<br>(3 year)</th><th data-sortable-type='numeric'>Return<br> (5 year)</th><th data-sortable-type='numeric'>ExpenseRatio</th><th>Highest Sector Allocation</th><th data-sortable-type='numeric' id='rm_1' style='display: none;'>Return(1m)</th><th data-sortable-type='numeric' id='rm_3' style='display: none;'>Return(3m)</th><th data-sortable-type='numeric' id='rm_6' style='display: none;'>Return(6m)</th><th data-sortable-type='numeric' id='ry_2' style='display: none;' >Return(2Yr)</th><th style='display: none;' >BenchMark</th><th id='nav' style='display: none;'>Nav</th><th style='display: none;' >Turnover Ratio</th><th style='display: none;'>Exit Load</th><th data-sortable-type='date' style='display: none;'>Launch Date</th><th style='display: none;'>Minimum Investment</th><th style='display: none;'>Average Maturity</th><th style='display: none;'>Modified Duration</th><th style='display: none;'>YTM</th><th style='display: none;'>Benchmark Index</th><th style='display: none;'>Beta</th><th style='display: none;'>Sharpe</th><th style='display: none;'>Sortino</th><th style='display: none;'>Standard Deviation</th><th style='display: none;'>Alpha</th><th style='display: none;'>YTD</th><th style='display: none;'>Fund House</th><th style='display: none;'>Fund Type</th><th>Point to Point Return</th></tr></thead>";
-	// }
-	// else
-	// {
-	// 	var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Fund</span></th><th data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric' data-name='aum'>AUM <br>(in crores)</th><th data-sortable-type='numeric'>Return<br>(1 year)</th data-sortable-type='numeric'><th>Return<br>(3 year)</th><th data-sortable-type='numeric'>Return<br> (5 year)</th><th data-sortable-type='numeric'>ExpenseRatio</th><th>Highest Sector Allocation</th><th data-sortable-type='numeric' id='rm_1' style='display: none;'>Return(1m)</th><th data-sortable-type='numeric' id='rm_3' style='display: none;'>Return(3m)</th><th data-sortable-type='numeric' id='rm_6' style='display: none;'>Return(6m)</th><th data-sortable-type='numeric' id='ry_2' style='display: none;' >Return(2Yr)</th><th style='display: none;' >BenchMark</th><th id='nav' style='display: none;'>Nav</th><th style='display: none;' >Turnover Ratio</th><th style='display: none;'>Exit Load</th><th data-sortable-type='date' style='display: none;'>Launch Date</th><th style='display: none;'>Minimum Investment</th><th style='display: none;'>Average Maturity</th><th style='display: none;'>Modified Duration</th><th style='display: none;'>YTM</th><th style='display: none;'>Benchmark Index</th><th style='display: none;'>Beta</th><th style='display: none;'>Sharpe</th><th style='display: none;'>Sortino</th><th style='display: none;'>Standard Deviation</th><th style='display: none;'>Alpha</th><th style='display: none;'>YTD</th><th style='display: none;'>Fund House</th><th style='display: none;'>Fund Type</th></tr></thead>";
-	// }
-	// alert("ss");
-	var tblData="";
-	var tbl = " <table id='screener_table' name='aum' class='table table-bordered table-striped table-condensed sortable-theme-bootstrap' data-sortable>"
-	if (data1.ptp_returns!=null)
+ 	var card1 = "";
+ 	for(var i =0; i <= data1.schemedata.length-1; i++)
 	{
-	for (var c=0;c<=column_limit.length;c++)
-	{
-	   // "<th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' >Expense<br>Ratio (%)</th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'>Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th> <th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th><th style='display:none;'>Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield To Maturity (%)</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;'>Exit Load<br>(%)</th><th data-sortable-type='date' style='display:none;'  >Inception Date</th><th style='display:none;'>Min. Inv.<br>(in ₹)</th><th style='display:none;'>Benchmark Index</th><th style='display:none;'>Fund House</th> <th style='display:none;'> Nav </th> <th>Fund Type</th><th data-sortable-type='numeric'>Point to Point Return</th><th style='display:none'>classification</th>";
-	}
-	// alert("ss");
-	// var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-name='rup_rating'>Rupeevest Rating</th><th data-sortable-type='numeric' data-name='aum'>AUM (in ₹ cr)</th><th data-sortable-type='numeric'>Return - 1 yr (%)</th data-sortable-type='numeric'><th>Return - 3 yrs (%)</th><th data-sortable-type='numeric'>Return - 5 yrs (%)</th><th data-sortable-type='numeric'>Expense Ratio (%)</th><th>Highest Sector Allocation</th><th data-sortable-type='numeric' id='rm_1' style='display: none;'>Return - 1mo (%)</th><th data-sortable-type='numeric' id='rm_3' style='display: none;'>Return - 3 mo (%)</th><th data-sortable-type='numeric' id='rm_6' style='display: none;'>Return - 6 mo (%)</th><th data-sortable-type='numeric' id='ry_2' style='display: none;' >Return - 2 yrs (%)</th><th style='display: none;' >BenchMark</th><th id='nav' style='display: none;'>Nav</th><th style='display: none;' >Turnover Ratio (%)</th><th style='display: none;'>Exit Load</th><th data-sortable-type='date' style='display: none;'>Launch Date</th><th style='display: none;'>Min. Investment (in ₹)</th><th style='display: none;'>Avg. Maturity (in yrs)</th><th style='display: none;'>Mod. Duration (in yrs)</th><th style='display: none;'>Yield to Maturity (%)</th><th style='display: none;'>Benchmark Index</th><th style='display: none;'>Beta</th><th style='display: none;'>Sharpe</th><th style='display: none;'>Sortino</th><th style='display: none;'>Standard Deviation</th><th style='display: none;'>Alpha</th><th style='display: none;'>YTD (%)</th><th style='display: none;'>Fund House</th><th style='display: none;'>Fund Type</th><th>Point to Point Return</th></tr></thead>";
-	    // var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-sortable-type='numeric' data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' >Expense<br>Ratio (%)</th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'>Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th> <th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th><th style='display:none;'>Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield To Maturity (%)</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;'>Exit Load<br>(%)</th><th data-sortable-type='date' style='display:none;'  >Inception Date</th><th style='display:none;'>Min. Inv.<br>(in ₹)</th><th data-sortable-type='alpha' style='display:none;'>Benchmark Index</th><th style='display:none;'>Fund House</th> <th style='display:none;'> Nav </th> <th>Fund Type</th><th style='display:none;'><center> No. of<br>Stocks</center></th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>10 yrs</th><th data-sortable-type='numeric'>Point to Point Return</th><th style='display:none'>classification</th></tr></thead>";
-       var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span>Funds</span></th><th>Category</th><th data-sortable-type='numeric' data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' >Expense<br>Ratio (%)</th><th>Exit Load<br>(%)</th><th style='display:none;'>Fund Type</th><th data-sortable-type='date' style='display:none;'  >Inception Date</th><th data-sortable-type='alpha' style='display:none;'>Benchmark Index</th><th style='display:none;'> Nav </th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'>Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>10 yrs</th><th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th> <th style='display:none;'><center> No. of<br>Stocks</center></th><th style='display:none;'>Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield To Maturity (%)</th> <th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th data-sortable-type='numeric'>Point to Point Return</th><th style='display:none'>classification</th><th style='display:none'>Exit_load_Remarks</th></tr></thead>";
+		var scheme_name = data1.schemedata[i].s_name;
+		var scheme_classification = data1.schemedata[i].classification;	
+			
+		var rr , rr_ico;	
+		rr = data1.schemedata[i].rupeevest_rating;
+			if(rr == 5){
+				rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
+			}
+			else if (rr == 4){
+				rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
+			}
+			else if (rr == 3){
+				rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"	
+			}
+			else if (rr == 2){
+				rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"	
+			}
+			else if (rr == 1){
+				rr_ico = "<span class = 'glyphicon glyphicon-star'></span>"
+			}
+			else if (rr == "Unrated"){
+				rr_ico = "Unrated"
+			}
+			else {
+				rr_ico = "-";	
+			}
+		var scheme_year1;
+	        if( data1.schemedata[i].returns_1year==null || data1.schemedata[i].returns_1year=='undefined')
+	      	{
+	            scheme_year1="-";
+	      	}
+	      	else
+	      	{
+	      		scheme_year1=data1.schemedata[i].returns_1year.toFixed(2)+"%";
+	      	} 
+		var scheme_year3;
 
-      //var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' > Expense<br>Ratio (%)</th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'> Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'> Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'> Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th> <th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th><th >Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield to Maturity (%)</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;'>Exit Load<br>(%)</th><th data-sortable-type='date' style='display:none;'>Inception Date</th><th style='display:none;'>Min. Inv.<br>(in ₹)</th><th style='display:none;'>Benchmark Index</th><th style='display:none;'>Fund House</th> <th style='display:none;'>Nav</th> <th>Fund Type</th><th data-sortable-type='numeric'>Point to Point Return</th><th style='display:none'>classification</th></tr></thead>";
-
-	}
-	else
-	{
-	// alert("ss");
-	// var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-name='rup_rating'>Rupeevest Rating</th><th data-sortable-type='numeric' data-name='aum'>AUM (in ₹ cr)</th><th data-sortable-type='numeric'>Return - 1 yr (%)</th data-sortable-type='numeric'><th>Return - 3 yrs (%)</th><th data-sortable-type='numeric'>Return - 5 yrs (%)</th><th data-sortable-type='numeric'>Expense Ratio (%)</th><th>Highest Sector Allocation</th><th data-sortable-type='numeric' id='rm_1' style='display: none;'>Return - 1mo (%)</th><th data-sortable-type='numeric' id='rm_3' style='display: none;'>Return - 3 mo (%)</th><th data-sortable-type='numeric' id='rm_6' style='display: none;'>Return - 6 mo (%)</th><th data-sortable-type='numeric' id='ry_2' style='display: none;' >Return - 2 yrs (%)</th><th style='display: none;' >BenchMark</th><th id='nav' style='display: none;'>Nav</th><th style='display: none;' >Turnover Ratio (%)</th><th style='display: none;'>Exit Load</th><th data-sortable-type='date' style='display: none;'>Launch Date</th><th style='display: none;'>Min. Investment (in ₹)</th><th style='display: none;'>Avg. Maturity (in yrs)</th><th style='display: none;'>Mod. Duration (in yrs)</th><th style='display: none;'>Yield to Maturity (%)</th><th style='display: none;'>Benchmark Index</th><th style='display: none;'>Beta</th><th style='display: none;'>Sharpe</th><th style='display: none;'>Sortino</th><th style='display: none;'>Standard Deviation</th><th style='display: none;'>Alpha</th><th style='display: none;'>YTD (%)</th><th style='display: none;'>Fund House</th><th style='display: none;'>Fund Type</th></tr></thead>";
-	// var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-name='rup_rating'>Rupeevest Rating</th><th data-sortable-type='numeric'>AUM</th><th> Expense Ratio (%)</th><th style='display:none;'> Exit Load (%)</th><th> Fund Type</th><th style='display:none;'> Launch Date </th><th style='display:none;'>  Min. Investment (in ₹) </th><th style='display:none;'>  Benchmark Index </th><th style='display:none;'>  Fund House </th> <th style='display:none;'> Nav </th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'> Return (1 mo) </th><th style='display:none;' data-sortable-type='numeric'> Return (3 mo) </th><th style='display:none;' data-sortable-type='numeric'>  Return (6 mo) </th><th data-sortable-type='numeric'> Return (1 yr) </th><th style='display:none;' data-sortable-type='numeric'> Return (2 yrs) </th><th data-sortable-type='numeric'> Return (3 yrs) </th><th data-sortable-type='numeric'> Return (5 yrs) </th><th style='display:none;' data-sortable-type='numeric'>  Turnover Ratio (%) </th><th > Highest Sector</th><th style='display:none;' data-sortable-type='numeric'> Average Maturity (in years) </th><th style='display:none;' data-sortable-type='numeric'> Modified Duration (in years) </th><th style='display:none;' data-sortable-type='numeric'> Yield To Maturity (%) </th><th style='display:none;' data-sortable-type='numeric'> Beta </th><th style='display:none;' data-sortable-type='numeric'> Sharpe </th><th style='display:none;' data-sortable-type='numeric'> Sortino </th><th style='display:none;' data-sortable-type='numeric'> Standard Deviation </th><th style='display:none;' data-sortable-type='numeric'> Alpha </th></tr></thead>";
-	// var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-sortable-type='numeric' data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' >Expense<br>Ratio (%)</th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'>Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th> <th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th><th style='display:none;'>Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield To Maturity (%)</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;'>Exit Load<br>(%)</th><th data-sortable-type='date' style='display:none;'>Inception Date</th><th style='display:none;'>Min. Inv.<br>(in ₹)</th><th data-sortable-type='alpha' style='display:none;'>Benchmark Index</th><th style='display:none;'>Fund House</th> <th style='display:none;'> Nav </th> <th>Fund Type</th><th style='display:none;'> <center>No. of<br>Stocks</center></th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>10 yrs</th><th style='display:none'>classification</th></tr></thead>";
-	  	var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span>Funds</span></th><th>Category</th><th data-sortable-type='numeric' data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' >Expense<br>Ratio (%)</th><th>Exit Load<br>(%)</th><th style='display:none;'>Fund Type</th><th data-sortable-type='date' style='display:none;'  >Inception Date</th><th data-sortable-type='alpha' style='display:none;'>Benchmark Index</th><th style='display:none;'> Nav </th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'>Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>10 yrs</th><th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th> <th style='display:none;'><center> No. of<br>Stocks</center></th><th style='display:none;'>Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield To Maturity (%)</th> <th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none'>classification</th><th style='display:none'>Exit_load_Remarks</th></tr></thead>";
-	  //var th = tbl+"<thead><tr class='bg-color'><th></th><th id='fundTh'><span onclick ='fund_th()'>Funds</span></th><th>Category</th><th data-name='rup_rating'>Rupeevest<br>Rating</th><th data-sortable-type='numeric'>AUM<br>(in ₹ cr)</th><th data-sortable-type='numeric' > Expense<br>Ratio (%)</th><th style='display:none;' data-sortable-type='numeric'> YTD Return </th><th style='display:none;' data-sortable-type='numeric'> Return (%)<br>1 mo</th><th style='display:none;' data-sortable-type='numeric'> Return (%)<br>3 mo</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>6 mo</th><th data-sortable-type='numeric'> Return (%)<br>1 yr</th><th style='display:none;' data-sortable-type='numeric'>Return (%)<br>2 yrs</th><th data-sortable-type='numeric'>Return (%)<br>3 yrs</th><th data-sortable-type='numeric'>Return (%)<br>5 yrs</th> <th style='display:none;' data-sortable-type='numeric'>Turnover Ratio (%)</th><th >Highest Sector</th><th style='display:none;' data-sortable-type='numeric'>Avg. Maturity<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Mod. Duration<br>(in yrs)</th><th style='display:none;' data-sortable-type='numeric'>Yield to Maturity (%)</th><th style='display:none;' data-sortable-type='numeric'>Beta</th><th style='display:none;' data-sortable-type='numeric'>Sharpe</th><th style='display:none;' data-sortable-type='numeric'>Sortino</th><th style='display:none;' data-sortable-type='numeric'>Standard Deviation</th><th style='display:none;' data-sortable-type='numeric'>Alpha</th><th style='display:none;'>Exit Load<br>(%)</th><th data-sortable-type='date' style='display:none;'>Inception Date</th><th style='display:none;'>Min. Inv.<br>(in ₹)</th><th style='display:none;'>Benchmark Index</th><th style='display:none;'>Fund House</th> <th style='display:none;'>Nav</th> <th>Fund Type</th><th style='display:none'>classification</th></tr></thead>";
-	}
-
-
-	if(data1!="")
-	{
-	$("#snapshottable_div").addClass("d_none");
-	for(var i =0;i <= data1.schemedata.length-1;i++)
-	{
-	var scheme_data = data1.schemedata[i];
-
-	var classification = scheme_data.classification;    // newly taken for classificaton {to use in hover function }
-
-	var scheme_code = scheme_data.schemecode;
-	var scheme_name = scheme_data.s_name;
-	
-	var fund_manager = scheme_data.fund_manager;
-	var category = scheme_data.remarks1;
-
-	var scheme_year1;
-            if( scheme_data.returns_1year==null || scheme_data.returns_1year=='undefined')
+            if( data1.schemedata[i].returns_3year==null || data1.schemedata[i].returns_3year=='undefined')
               {
-                scheme_year1="-";
+               	scheme_year3="-";    	
               }
               else
               {
-              	scheme_year1=scheme_data.returns_1year.toFixed(2);
+              	scheme_year3=data1.schemedata[i].returns_3year.toFixed(2)+"%";   
               }
-
-        var scheme_year2;
-            if(scheme_data.returns_2year==null || scheme_data.returns_2year=='undefined')
-              {
-                   scheme_year2="-"; 	
-              }
-              else
-              {
-              	 scheme_year2=scheme_data.returns_2year.toFixed(2);   
-              }      
-
-	var scheme_year3;
-
-            if( scheme_data.returns_3year==null || scheme_data.returns_3year=='undefined')
-              {
-               scheme_year3="-";    	
-              }
-              else
-              {
-              	scheme_year3=scheme_data.returns_3year.toFixed(2);   
-              }
-
         var scheme_year5;
-            if( scheme_data.returns_5year==null  || scheme_data.returns_5year=='undefined')
+            if( data1.schemedata[i].returns_5year==null  || data1.schemedata[i].returns_5year=='undefined')
               {
-                 scheme_year5="-";   	
+             	scheme_year5="-";   	
               }
             else
               {
-  	scheme_year5=scheme_data.returns_5year.toFixed(2); 
-              }   
-
-          var scheme_year10;
-            if( scheme_data.returns_10year==null  || scheme_data.returns_10year=='undefined')
+  				scheme_year5=data1.schemedata[i].returns_5year.toFixed(2)+"%"; 
+              } 
+      	var scheme_year10;
+            if( data1.schemedata[i].returns_10year==null  || data1.schemedata[i].returns_10year=='undefined')
               {
                  scheme_year10="-";   	
               }
             else
               {
-  	scheme_year10=scheme_data.returns_10year.toFixed(2); 
-              }           
+				scheme_year10=data1.schemedata[i].returns_10year.toFixed(2)+"%"; 
+              } 
+		 	
+
+		card1 = card1 + "<div class='card'><div class='card-header text-left'><h2>"+scheme_name+"</h2></div><div class='card-content'><div class='card-content-inner'><div class='row'><div class='col-66 text-left'><h4>Category- <span>"+scheme_classification+"</span></h4></div><div class='col-33 text-center'><h4>Rating</h4><h4>"+rr_ico+"</h4></div></div><div class='row text-center'><div class='col-25'><h4>1 Year</h4><h4>"+scheme_year1+"</h4></div><div class='col-25'><h4>3 Year</h4><h4>"+scheme_year3+"</h4></div><div class='col-25'><h4>5 Year</h4><h4>"+scheme_year5+"</h4></div><div class='col-25'><h4>10 Year</h4><h4>"+scheme_year10+"</h4></div></div></div></div></div>"
+
+    	$("#scr_datacard").html(card1);
 	
-	var scheme_aum_total;
-
-	if(scheme_data.aumtotal==null || scheme_data.aumtotal=='undefined')
-	{
-           scheme_aum_total = "-";
 	}
-	else
-	{
-	scheme_aum_total = commaSeparateNumber((parseFloat(scheme_data.aumtotal)).toFixed(2));
-	}
-	
-        var exratio ;
-
-        if(scheme_data.expenceratio==null || scheme_data.expenceratio=='undefined')
-        {
-        	exratio = "-";
-        	
-        }
-        else
-        {
-        	exratio = scheme_data.expenceratio.toFixed(2);
-        }
-	
-	var rr = scheme_data.rupeevest_rating;   
-
-
-        var returns_1month;
-             if( scheme_data.returns_1month==null || scheme_data.returns_1month=='undefined')
-             {
-                returns_1month = "-";
-             }
-             else
-             {
-             	returns_1month = scheme_data.returns_1month.toFixed(2);
-             }
-
-        var returns_3month;
-             if( scheme_data.returns_3month==null || scheme_data.returns_3month=='undefined')
-             {
-                returns_3month = "-";
-             }
-             else
-             {
-             	returns_3month = scheme_data.returns_3month.toFixed(2);
-             }
-
-        var returns_6month;
-             if(scheme_data.returns_6month==null || scheme_data.returns_6month=='undefined')
-             {
-                returns_6month = "-";
-             }
-             else
-             {
-               returns_6month = scheme_data.returns_6month.toFixed(2);
-             }                 
-
-         var avg_maturity="-";
-              if((scheme_data.avg_maturity!=0) && ( scheme_data.avg_maturity!=null))
-              {
-                  avg_maturity = scheme_data.avg_maturity.toFixed(2);
-
-                  // console.log("Average MAt->"+scheme_data.avg_maturity)
-              }
-
-	 var modified_duration="-";
-	    if((scheme_data.mod_duration!=0) && (scheme_data.mod_duration!=null) )
-	    {
-	    	 modified_duration=scheme_data.mod_duration.toFixed(2);
-
-	    	 // console.log("Modified Duration->"+scheme_data.mod_duration)
-	    }
-
-	 var ytm ="-"
-	  if((scheme_data.ytm!=0) && (scheme_data.ytm!=null))
-	  {
-                 ytm=scheme_data.ytm.toFixed(2);
-                 
-                 // console.log("Ytm->"+scheme_data.ytm)
-	  }
-        
-        var Fund_House=scheme_data.fund_house; 
-        var ytd_returns=scheme_data.ytd_returns;
-  
-        var turnover_ratio;
-
-        if(scheme_data.turnover_ratio==null || scheme_data.turnover_ratio=='undefined')
-        {
-        	turnover_ratio = "-";
-        }
-        else
-        {
-        	turnover_ratio = scheme_data.turnover_ratio;
-        }
-
-	var exitload;
-
-	if(scheme_data.exitload==null || scheme_data.exitload=='undefined' || scheme_data.exitload==0)
-	{
-	exitload="-";
-	} 
-	else
-	{
-          exitload = scheme_data.exitload.toFixed(2);
-	}
-	var exitload_remarks;
-
-	if(scheme_data.exitload_remarks==null || scheme_data.exitload_remarks=='undefined')
-	{
-	exitload_remarks="-";
-	} 
-	else
-	{
-          exitload_remarks = scheme_data.exitload_remarks;
-	}
-
-	
-	var navrs = scheme_data.navrs.toFixed(2);
-        
-
-        // var inception_date = scheme_data.inception_date;
-
-        var inception_date = "-";
-        if(scheme_data.inception_date!=null)
-        {
-        	// console.log("TIME0000000000------------------------------------------------")
-            // var date = new Date(scheme_data.inception_date);	
-            // console.log(moment(scheme_data.inception_date).format('DD-MMM-YY'));
-            inception_date= moment(scheme_data.inception_date).format('DD-MMM-YY');
-
-              // console.log("date date date date")
-             // console.log(date.format('MMM D, YYYY') );
-             
-             // inception_date = date;
-
-             // inception_date = DateFormat.format(date, "dd-MMM-yy")
-
-            // inception_date =  date.getDate() + '/' + (date.getMonth() + 1)+ '/' +  date.getFullYear();
-        }
-	   
-	var minimum_investment;
-        
-        if(scheme_data.minimum_investment==null || scheme_data.minimum_investment=='undefined')
-        {
-        	minimum_investment = "-";
-        }
-        else
-        {
-            minimum_investment = commaSeparateNumber(scheme_data.minimum_investment);
-        }
-
-	var betax_returns;
-
-	if(scheme_data.betax_returns==null || scheme_data.betax_returns=='undefined' || scheme_data.betax_returns==0)
-	{
-           betax_returns = "-";
-	}
-	else
-	{
-           betax_returns = scheme_data.betax_returns.toFixed(2);
-	}
-
-	var alphax_returns;
-	 if(scheme_data.alphax_returns==null || scheme_data.alphax_returns=='undefined' || scheme_data.alphax_returns==0)
-	 {
-	 	alphax_returns ="-";
-	 }
-	 else
-	 {
-              alphax_returns = scheme_data.alphax_returns.toFixed(2);
-	 }
-
-	 var sotinox_returns;
-
-	 if(scheme_data.sotinox_returns ==null || scheme_data.sotinox_returns=='undefined' || scheme_data.sotinox_returns == 0)
-	 {
-	 	sotinox_returns ="-";
-	 }
-	 else
-	 {
-	    sotinox_returns = scheme_data.sotinox_returns.toFixed(2);	
-	 }
-	 
- 	var sharpex_returns;
-
- 	if(scheme_data.sharpex_returns ==null || scheme_data.sharpex_returns=='undefined' || scheme_data.sharpex_returns==0)
- 	{
- 	sharpex_returns = "-";
- 	}
- 	else
- 	{
- 	sharpex_returns = scheme_data.sharpex_returns.toFixed(2);
- 	}
-
-	
-
-        var Fund_Type=scheme_data.type_code;
-
-           if(Fund_Type=="1")
-           {
-             Fund_Type="Open Ended";      
-           }  
-           else if(Fund_Type=="2")
-           {
-             Fund_Type="Closed Ended";      
-           }
-           else
-           {
-             Fund_Type="Interval"; 
-           } 
-
-        var Fund_Benchmark_Index=scheme_data.index_name;
-
-	var sdx_returns;
-
-	   if( scheme_data.assdx_returns==null || scheme_data.assdx_returns =='undefined' || scheme_data.assdx_returns==0 )
-              {
-                sdx_returns ="-";	  
-              }
-              else
-              {
-              	sdx_returns = scheme_data.assdx_returns.toFixed(2);
-              }
-	
-
-	var portfolio_attributes = scheme_data.portfolio_attributes;
-	var cost_factor = scheme_data.cost_factor;
-	var risk = scheme_data.risk;
-	var consistency_of_return = scheme_data.consistency_of_return;
-
-	var total_return = scheme_data.total_return;
-	var high_sec_alloc;
-
-                
-
-                var now = moment(new Date()); //todays date
-	var end = moment(scheme_data.inception_date); // another date
-	var duration = moment.duration(now.diff(end));
-	var days = duration.asDays();
-
-	       if( days < 365 )
-	       {
-	       	sdx_returns = "-";
-	betax_returns = "-";
-	sharpex_returns = "-";
-	alphax_returns = "-";
-	sotinox_returns = "-";
-                   
-	       }
-
-	// <td>"+returns_1month+"</td><td>"+returns_3month+"</td><td>"+returns_6month+"</td><td>"+scheme_year2+"</td><td>"+scheme_year10+"</td><td>"+navrs+"</td>
-
-	if(scheme_data.highest_sector)
-	{
-	high_sec_alloc = scheme_data.highest_sector;
-	}
-	else
-	{
-	high_sec_alloc = "NA";
-	}
-
-
-	var rr , rr_ico;
-	if (scheme_data.rupeevest_rating)
-	{
-	rr = scheme_data.rupeevest_rating;
-	if(rr == 5){
-	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
-	}
-	else if (rr == 4){
-	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
-	}
-	else if (rr == 3){
-	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"	
-	}
-	else if (rr == 2){
-	rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"	
-	}
-	else if (rr == 1){
-	rr_ico = "<span class = 'glyphicon glyphicon-star'></span>"
-	}
-	else if (rr == "Unrated"){
-	rr_ico = "Unrated"
-	}
-	}
-	else
-	{
-	rr = "-";
-	}
-
-
-     var no_of_securities="-";
-       
-      
-       	 no_of_securities=scheme_data.no_of_stocks;
-       
-         if (no_of_securities==null)
-         {
-         	 no_of_securities="-";
-         }
-
-	if(i == 0)
-	{
-	if (data1.ptp_returns!=null)
-	{
-	var returns = data1.ptp_returns[i].ptp_return;
-	
-	var days=data1.no_days.split('/');
-	if (days[0]>365 && returns!="-")
-	{
-	var power=(365/days[0]);
-	
-	var returns=((Math.pow((1+(returns/100)), power)-1)*100).toFixed(2);
-	}
-	// tblData = th + "<tbody><tr><td><input id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a id="+scheme_code+" href='#' onclick='setvalue(this.id)'>"+scheme_name+"</a><br>"+fund_manager+"</td><td>"+category+"</td><td data-name = 'rup_rating'>"+rr+"</td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+scheme_year1+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td>"+exratio+"</td><td>"+high_sec_alloc+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td style='display: none;'>"+scheme_year2+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+navrs+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+Fund_Type+"</td><td>"+returns+"</td></tr>";
-                   
-                   // tblData = th + "<tbody><tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td> <td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+navrs+"</td><td >"+Fund_Type+"</td><td style='display: none;'>"+no_of_securities+"</td><td style='display: none;'>"+scheme_year10+"</td><td>"+returns+"</td><td class='fund_category' style='display:none'>"+classification+"</td></tr>";
-                 tblData = th + "<tbody><tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td><span class='exitload_remarks' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+exitload+"</span></td><td style='display: none;'>"+Fund_Type+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+navrs+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+scheme_year10+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+no_of_securities+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+alphax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td>"+returns+"</td><td class='fund_category' style='display:none'>"+classification+"</td><td style='display:none'>"+exitload_remarks+"</td></tr>";
-
-                
-	}
-	else 
-	{
-	 // tblData = th + "<tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td> <td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+navrs+"</td><td >"+Fund_Type+"</td><td style='display: none;'>"+no_of_securities+"</td><td style='display: none;'>"+scheme_year10+"</td><td class='fund_category' style='display:none'>"+classification+"</td></tr>";
-	tblData = th + "<tbody><tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td><span class='exitload_remarks' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+exitload+"</span></td><td style='display: none;'>"+Fund_Type+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+navrs+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+scheme_year10+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+no_of_securities+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+alphax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td class='fund_category' style='display:none'>"+classification+"</td><td style='display:none'>"+exitload_remarks+"</td></tr>";
-
-	} 
-	 }         
-	else
-	{
-	   /*tblData = tblData + "<tr><td><inputid="+scheme_code+"type='checkbox'name='chkCompare'/></td><td><a id="+scheme_code+"href='#'onclick='setvalue(this.id)'>"+scheme_name+"</a></td><td>"+rr+"</td><td data-name= 'aum' style='display:block;'>"+scheme_aum_total+"</td><td data-name= 'retyr1' style='display:block;'>"+scheme_year1+"</td><td data-name= 'retyr3' style='display:block;'>"+scheme_year3+"</td><td data-name= 'retyr5' style='display:block;'>"+scheme_year5+"</td><td data-name= 'exratio' style='display:block;'>"+exratio+"</td><td data-name= 'retmth1' style='display:block;'>"+returns_1month+"</td><td data-name= 'retmth3' style='display:block;'>"+returns_3month+"</td><td data-name= 'tnratio' style='display:block;'>"+turnover_ratio+"</td><td data-name= 'exload' style='display:block;'>"+exitload+"</td><td data-name= 'navrs' style='display:block;'>"+navrs+"</td><td data-name= 'indate' style='display:block;'>"+inception_date+"</td><td data-name= 'mininv' style='display:block;'>"+minimum_investment+"</td><td data-name= 'betax' style='display:block;'>"+betax_returns+"</td><td data-name= 'alphax' style='display:block;'>"+alphax_returns+"</td><td data-name= 'sotionox' style='display:block;'>"+sotinox_returns+"</td><td data-name= 'sharpex' style='display:block;'>"+sharpex_returns+"</td><td data-name= 'sdx' style='display:block;'>"+sdx_returns+"</td><td data-name= 'portattr' style='display:block;'>"+portfolio_attributes+"</td><td data-name= 'costfctr' style='display:block;'>"+cost_factor+"</td><td data-name= 'risk' style='display:block;'>"+risk+"</td><td data-name= 'ctrn' style='display:block;'>"+consistency_of_return+"</td><td data-name= 'trtn' style='display:block;'>"+total_return+"</td></tr>";*/
-
-	   if (data1.ptp_returns!=null)
-	{
-	var returns = data1.ptp_returns[i].ptp_return;
-	
-	var days=data1.no_days.split('/');
-	if (days[0]>365 && returns!="-")
-	{
-	var power=(365/days[0]);
-	
-	var returns=((Math.pow((1+(returns/100)), power)-1)*100).toFixed(2);
-	}
-	// tblData = tblData + "<tr><td><input id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a id="+scheme_code+" href='#' onclick='setvalue(this.id)'>"+scheme_name+"</a><br>"+fund_manager+"</td><td>"+category+"</td><td data-name = 'rup_rating'>"+rr+"</td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+scheme_year1+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td>"+exratio+"</td><td>"+high_sec_alloc+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td style='display: none;'>"+scheme_year2+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+navrs+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+Fund_Type+"</td><td>"+returns+"</td></tr>";
-	// tblData = tblData + "<tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td> <td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+navrs+"</td><td >"+Fund_Type+"</td><td style='display: none;'>"+no_of_securities+"</td><td style='display: none;'>"+scheme_year10+"</td><td>"+returns+"</td><td class='fund_category' style='display:none'>"+classification+"</td></tr>";
-	tblData = tblData + "<tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td><span class='exitload_remarks' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+exitload+"</span></td><td style='display: none;'>"+Fund_Type+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+navrs+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+scheme_year10+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+no_of_securities+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+alphax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td>"+returns+"</td><td class='fund_category' style='display:none'>"+classification+"</td><td style='display:none'>"+exitload_remarks+"</td></tr>";
-
-	}
-	else 
-	{
-	// tblData = tblData + "<tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td style='display: none;'>"+ytd_returns+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td style='display: none;'>"+alphax_returns+"</td> <td style='display: none;'>"+exitload+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+minimum_investment+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+Fund_House+"</td><td style='display: none;'>"+navrs+"</td><td >"+Fund_Type+"</td><td style='display: none;'>"+no_of_securities+"</td><td style='display: none;'>"+scheme_year10+"</td><td class='fund_category' style='display:none'>"+classification+"</td></tr>";
-	tblData = tblData + "<tr><td><input class='CompCheckBox' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true' id="+scheme_code+" type='checkbox' name='chkCompare' /></td><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+scheme_name+"</a><br><span class='fnd_manager'>"+fund_manager+"</span></td><td><span class='FundCategory' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+category+"</span></td><td data-name = 'rup_rating'><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td data-name= 'aum'>"+scheme_aum_total+"</td><td>"+exratio+"</td><td><span class='exitload_remarks' data-container='body' data-placement='bottom' data-toggle='popover' data-trigger='hover' data-html='true'>"+exitload+"</span></td><td style='display: none;'>"+Fund_Type+"</td><td style='display: none;'>"+inception_date+"</td><td style='display: none;'>"+Fund_Benchmark_Index+"</td><td style='display: none;'>"+navrs+"</td><td style='display: none;'>"+returns_1month+"</td><td style='display: none;'>"+returns_3month+"</td><td style='display: none;'>"+returns_6month+"</td><td>"+scheme_year1+"</td><td style='display: none;'>"+scheme_year2+"</td><td>"+scheme_year3+"</td><td>"+scheme_year5+"</td><td style='display: none;'>"+scheme_year10+"</td><td style='display: none;'>"+turnover_ratio+"</td><td style='display: none;'>"+no_of_securities+"</td><td style='display: none;'>"+high_sec_alloc+"</td><td style='display: none;'>"+avg_maturity+"</td><td style='display: none;'>"+modified_duration+"</td><td style='display: none;'>"+ytm+"</td><td style='display: none;'>"+alphax_returns+"</td><td style='display: none;'>"+sharpex_returns+"</td><td style='display: none;'>"+sotinox_returns+"</td><td style='display: none;'>"+betax_returns+"</td><td style='display: none;'>"+sdx_returns+"</td><td class='fund_category' style='display:none'>"+classification+"</td><td style='display:none'>"+exitload_remarks+"</td></tr>";
-	}
-	}
-
-	}
-	// $("#snapshotTabletblData").html("");
-	// $("#snapshotTabletblData").html(tblData);
-	tblData = tblData +"</tbody></table>";
-	$("#screener_table_div").html(tblData);
-	 $("#total_res").html(data1.schemedata.length +" out of "+data1.total_count[0].count);
-	 tbldata="";
-	// Sortable.init();
-
-    $( ".FundCategory").hover(function(){
-
-        $("[data-toggle=popover]").popover();
-        // debugger;
-        var res = (this.parentElement.parentElement.childNodes[this.parentElement.parentElement.childElementCount-2].innerHTML);         
-        $(this).attr('data-content', res);
-    
-    });
-
-    $( ".exitload_remarks").hover(function(){
-
-        $("[data-toggle=popover]").popover();
-         // debugger;
-        var res = (this.parentElement.parentElement.children[this.parentElement.parentElement.childElementCount-1].innerHTML);         
-        $(this).attr('data-content', res);
-    
-    });
-
-    $( ".CompCheckBox").hover(function(){
-
-        $("[data-toggle=popover]").popover();
-        
-        $(this).attr('data-content', 'Select to compare');
-    
-    });
-
-	get_selected_item();
-	}
-	else
-	{
-	$("#snapshottable_div").removeClass("d_none");
-	$("#snapshottable_div").show();
-	}
-
-
-	
+     	
 }
-
-
 
 
 
