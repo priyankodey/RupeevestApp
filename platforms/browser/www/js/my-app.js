@@ -661,273 +661,334 @@ if(page.name==='FAQs'){
     });
 }
     
-/******************************* FAQs END ****************************/
+/****************************************** FAQs END **************************************/
+
+/******************************* Fund Details / Overview START ****************************/
     
 if(page.name === 'FundDetails')
+{
+  var query = $$.parseUrlQuery(page.url);
+  var scheme_code=query.scheme_code;
+  $$.get(curr_ip+'app_services/get_fund_info', {schemecode: +scheme_code},function (data) 
+  {
+    var scheme_data = JSON.parse(data);
+    console.log(scheme_data);
+    var scheme_item = scheme_data.schemedata[0];
+    var min_sip_inv = "-";
+    if(scheme_data.sip_min_investment[0]!=undefined)
     {
-        var query = $$.parseUrlQuery(page.url);
-        var scheme_code=query.scheme_code;
-        $$.get(curr_ip+'app_services/get_fund_info', {schemecode: +scheme_code},function (data) 
-        {
-            var scheme_data = JSON.parse(data);
-            console.log(scheme_data);
-            var scheme_item = scheme_data.schemedata[0];
-            var min_sip_inv = "-"
-            if(scheme_data.sip_min_investment[0]!=undefined)
-            {
-             if(scheme_data.sip_min_investment[0].sipmininvest!=null || scheme_data.sip_min_investment[0].sipmininvest!='')
-                 {
-                            min_sip_inv = scheme_data.sip_min_investment[0].sipmininvest;
-                            min_sip_inv = commaSeparateNumber(min_sip_inv);
-                  }
-            }
-            var s_name = scheme_item.s_name;
-            var fund_manager = scheme_item.fund_manager;
-            var navdate = "Nav as on " + moment(scheme_item.navdate).format('DD-MMM-YY');
-            var navrs = parseFloat(scheme_item.navrs).toFixed(2);
-            if (typeof scheme_item.navchange === 'undefined' || scheme_item.navchange === null)
-             {
-                var navchange = "-" ;
-             }
-             else
-             {
-                var navchange = parseFloat(scheme_item.navchange) + "%";    
-             }
+      if(scheme_data.sip_min_investment[0].sipmininvest!=null || scheme_data.sip_min_investment[0].sipmininvest!='')
+      {
+        min_sip_inv = scheme_data.sip_min_investment[0].sipmininvest;
+        min_sip_inv = commaSeparateNumber(min_sip_inv);
+      }
+    }
+    var s_name = scheme_item.s_name;
+    var fund_manager = scheme_item.fund_manager;
+    var navdate = "Nav as on " + moment(scheme_item.navdate).format('DD-MMM-YY');
+    var navrs = parseFloat(scheme_item.navrs).toFixed(2);
 
-             var inception_date = moment(scheme_item.inception_date).format('DD-MMM-YY');
-            var inception_return;
-            
-            if(scheme_item.inception_return==null || scheme_item.inception_return=="undefined")
-            {
-                inception_return = "-";
-            }
-            else
-            {
-                inception_return = scheme_item.inception_return;
-                inception_return =inception_return+" %";
-            }
-            
+    if (typeof scheme_item.navchange === 'undefined' || scheme_item.navchange === null)
+    {
+      var navchange = "-" ;
+    }
+    else
+    {
+      var navchange = parseFloat(scheme_item.navchange) + "%";    
+    }
 
-            var exitload;
-           
-            if(scheme_item.exitload==null || scheme_item.exitload=="undefined")
-            {
-                exitload = "-";
-            }
-            else
-            {
-                exitload = scheme_item.exitload;
-                exitload=exitload+" %";
-            }
+    var inception_date = moment(scheme_item.inception_date).format('DD-MMM-YY');
+    var inception_return;    
+    if(scheme_item.inception_return==null || scheme_item.inception_return=="undefined")
+    {
+      inception_return = "-";
+    }
+    else
+    {
+      inception_return = scheme_item.inception_return;
+      inception_return =inception_return+" %";
+    }    
 
-            
-            var expenceratio;
-             
-            if(scheme_item.expenceratio==null || scheme_item.expenceratio=="undefined") 
-            {
-                 expenceratio = "-";
-            }
-            else
-            {
-                expenceratio = scheme_item.expenceratio;
-                expenceratio = expenceratio+" %";
-            }
+    var exitload;   
+    if(scheme_item.exitload==null || scheme_item.exitload=="undefined")
+    {
+      exitload = "-";
+    }
+    else
+    {
+      exitload = scheme_item.exitload;
+      exitload=exitload+" %";
+    }
+      
+    var expenceratio;     
+    if(scheme_item.expenceratio==null || scheme_item.expenceratio=="undefined") 
+    {
+      expenceratio = "-";
+    }
+    else
+    {
+      expenceratio = scheme_item.expenceratio;
+      expenceratio = expenceratio+" %";
+    }
 
-
-            var turnover_ratio;
-            
-
-            if (parseInt(scheme_item.turnover_ratio)==0 || scheme_item.turnover_ratio==null || scheme_item.turnover_ratio=='undefined')
-              {
-                    turnover_ratio = "-";
-              }
-              else
-              {
-                 turnover_ratio = scheme_item.turnover_ratio+" %";      
-              }
-            
-            var minimum_investment;
-           
-             if(scheme_item.minimum_investment==0 || scheme_item.minimum_investment==null ||  scheme_item.minimum_investment=='undefined' )
-             {
-                 minimum_investment = "-";
-             }
-             else
-             {
-                minimum_investment = scheme_item.minimum_investment;
-                minimum_investment = commaSeparateNumber(minimum_investment);
-             }
-                
-            var lockperiod;
-
-           if(scheme_item.lockperiod==null)
-           {
-              lockperiod="-"; 
-           }
-           else
-           {
-             if(parseInt(scheme_item.lockperiod) > 0)
-             {
-                lockperiod = scheme_item.lockperiod+" Years";
-             }
-             else
-             {
-                lockperiod = scheme_item.lockperiod;
-             }
-             
-           }
-                var redemption_period = scheme_item.redemption_period;
-                
-                var aumtotal;
-
-                if(scheme_item.aumtotal==null || scheme_item.aumtotal=='undefined')
-                {
-                    aumtotal = "-";
-                }
-                else
-                {
-                    aumtotal = (parseFloat(scheme_item.aumtotal)).toFixed(1);
-                    aumtotal = commaSeparateNumber(aumtotal);
-                }
-                
-                var aumdate;
-             
-               // alert(scheme_item.aumdate);
-                if(aumtotal=="-")
-                {
-                    aumdate = "AUM Not Available";
-                }
-                else
-                {
-                    aumdate = "AUM as on "+ moment(scheme_item.aumdate).format('DD-MMM-YY');
-                }
-
-                var portfolio_attributes = scheme_item.portfolio_attributes;
-                var cost_factor = scheme_item.cost_factor;
-                var risk = scheme_item.risk;
-                var consistency_of_return = scheme_item.consistency_of_return;
-                var total_return = scheme_item.total_return;
-                var fund_house = scheme_item.fund_house;
-                var index_name = scheme_item.index_name;
-                var classification = scheme_item.classification;
-                var navrs_gp = scheme_item.navrs_gp;
-                var type = scheme_item.type;   
-
-                 if(type=="Open ended scheme")
-                  {
-                        type="Open Ended";
-                  }
-                  else if(type=="Close ended scheme")
-                  {
-                        type="Closed Ended";
-                  }
-                  else
-                  {
-                       type="Interval Fund";
-                  }
-              
-
-                var rating = scheme_item.rupeevest_rating;
-                var exitloadremarks = scheme_item.exitload_remarks;
-        var rr , rr_ico;
-        if (rating)
-        {
-            rr = rating;
-            if(rr == 5){
-                rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
-            }
-            else if (rr == 4){
-                rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
-            }
-            else if (rr == 3){
-                rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"             
-            }
-            else if (rr == 2){
-                rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>" 
-            }
-            else if (rr == 1){
-                rr_ico = "<span class = 'glyphicon glyphicon-star'></span>"
-            }
-            else if (rr == "Unrated"){
-                rr_ico = "Unrated"
-            }
-        }
-        else
-        {
-            rr = "-";
-        }
-
-
-                $("#s_name").html(s_name);
-                $("#rv_rating").html("<span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span>");
-                $("#fund_manager").html(fund_manager);
-                $("#navrs").html(navrs);
-
-                $("#navchange").html(navchange);
-                
-
-                
-
-                if(parseFloat(scheme_item.navchange)>=0)
-                {
-                        
-                        $("#navchange").css("color", "#6d9f00");
-
-                }
-                else
-                {     
-                        $("#navchange").css("color", "#ff0000");
-                }
-                $("#navdate").html(navdate);
-                $("#inception_date").html(inception_date);
-                $("#inception_return").html(inception_return);
-                $("#exitload").html(exitload);
-
-                $("#expenceratio").html(expenceratio);
-
-                $("#turnover_ratio").html(turnover_ratio);
-                $("#minimum_investment").html(" &#8377; "+minimum_investment+" / "+min_sip_inv);
-                $("#index_name").html(index_name);
-                $("#lockperiod").html(lockperiod);
-                $("#redemption_period").html(redemption_period);
-                $("#portfolio_attributes").html(portfolio_attributes);
-                $("#cost_factor").html(cost_factor);
-                $("#risk").html(risk);
-                $("#consistency_of_return").html(consistency_of_return);
-                $("#total_return").html(total_return);
-                $("#aumtotal").html(aumtotal);
-                $("#aumdate").html(aumdate);
-                $("#fund_house").html(fund_house);
-                // $("#index_name").html(index_name);
-                $("#classification").html(classification);
-                $("#growth").html(navrs_gp);
-                $("#type").html(type);
-                $("#exitload-modal").html(exitloadremarks);
-
-                // get_growth_plan(schemecode);
-                var val_1=get_return_data(scheme_code);
-                var val_2=test_graph(s_name,scheme_code);
-                var val_3=asect_alloc(scheme_code);
-                var val_4=get_portfolio_holdings(scheme_code);
-                // port_avgcap();
-                var val_5=get_hold_asset(scheme_code);
-
-
-                 var val_6=get_status(scheme_code);
-
-                if (val_1=='True' && val_2=='True' && val_3=='True' && val_4=='True' && val_5=='True' && val_6=='True')
-                {
-                  $("#FundDetails .container").css('display','block');
-                  $("#FundDetails .fa.fa-spinner.fa-pulse").css('display','none');
-                }
-
-
-        });
+    var turnover_ratio;
+    if (parseInt(scheme_item.turnover_ratio)==0 || scheme_item.turnover_ratio==null || scheme_item.turnover_ratio=='undefined')
+    {
+      turnover_ratio = "-";
+    }
+    else
+    {
+      turnover_ratio = scheme_item.turnover_ratio+" %";      
+    }
+    
+    var minimum_investment;   
+    if(scheme_item.minimum_investment==0 || scheme_item.minimum_investment==null ||  scheme_item.minimum_investment=='undefined' )
+    {
+      minimum_investment = "-";
+    }
+     else
+    {
+      minimum_investment = scheme_item.minimum_investment;
+      minimum_investment = commaSeparateNumber(minimum_investment);
+    }
         
+    var lockperiod;
+    if(scheme_item.lockperiod==null)
+    {
+      lockperiod="-"; 
+    }
+    else
+    {
+      if(parseInt(scheme_item.lockperiod) > 0)
+      {
+        lockperiod = scheme_item.lockperiod+" Years";
+      }
+      else
+      {
+        lockperiod = scheme_item.lockperiod;
+      }     
+    }
+    var redemption_period = scheme_item.redemption_period;    
+    var aumtotal;
+    if(scheme_item.aumtotal==null || scheme_item.aumtotal=='undefined')
+    {
+      aumtotal = "-";
+    }
+    else
+    {
+      aumtotal = (parseFloat(scheme_item.aumtotal)).toFixed(1);
+      aumtotal = commaSeparateNumber(aumtotal);
+    }
+    
+    var aumdate; 
+    if(aumtotal=="-")
+    {
+      aumdate = "AUM Not Available";
+    }
+    else
+    {
+      aumdate = "AUM as on "+ moment(scheme_item.aumdate).format('DD-MMM-YY');
+    }
+
+    var portfolio_attributes = scheme_item.portfolio_attributes;
+    var cost_factor = scheme_item.cost_factor;
+    var risk = scheme_item.risk;
+    var consistency_of_return = scheme_item.consistency_of_return;
+    var total_return = scheme_item.total_return;
+    var fund_house = scheme_item.fund_house;
+    var index_name = scheme_item.index_name;
+    var classification = scheme_item.classification;
+    var navrs_gp = scheme_item.navrs_gp;
+    var type = scheme_item.type;   
+
+    if(type=="Open ended scheme")
+    {
+      type="Open Ended";
+    }
+    else if(type=="Close ended scheme")
+    {
+      type="Closed Ended";
+    }
+    else
+    {
+      type="Interval Fund";
+    }        
+
+    var rating = scheme_item.rupeevest_rating;
+    var exitloadremarks = scheme_item.exitload_remarks;
+    var rr , rr_ico;
+    if (rating)
+    {
+      rr = rating;
+      if(rr == 5){
+          rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
+      }
+      else if (rr == 4){
+          rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"
+      }
+      else if (rr == 3){
+          rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>"             
+      }
+      else if (rr == 2){
+          rr_ico = "<span class = 'glyphicon glyphicon-star'></span><span class = 'glyphicon glyphicon-star'></span>" 
+      }
+      else if (rr == 1){
+          rr_ico = "<span class = 'glyphicon glyphicon-star'></span>"
+      }
+      else if (rr == "Unrated"){
+          rr_ico = "Unrated"
+      }
+    }
+    else
+    {
+        rr = "-";
     }
 
 
+    $("#s_name").html(s_name);
+    $("#rv_rating").html("<span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span>");
+    $("#fund_manager").html(fund_manager);
+    $("#navrs").html(navrs);
+    $("#navchange").html(navchange);
+    if(parseFloat(scheme_item.navchange)>=0)
+    {            
+      $("#navchange").css("color", "#6d9f00");
+    }
+    else
+    {     
+      $("#navchange").css("color", "#ff0000");
+    }
+    $("#navdate").html(navdate);
+    $("#inception_date").html(inception_date);
+    $("#inception_return").html(inception_return);
+    $("#exitload").html(exitload);
+    $("#expenceratio").html(expenceratio);
+    $("#turnover_ratio").html(turnover_ratio);
+    $("#minimum_investment").html(" &#8377; "+minimum_investment+" / "+min_sip_inv);
+    $("#index_name").html(index_name);
+    $("#lockperiod").html(lockperiod);
+    $("#redemption_period").html(redemption_period);
+    $("#portfolio_attributes").html(portfolio_attributes);
+    $("#cost_factor").html(cost_factor);
+    $("#risk").html(risk);
+    $("#consistency_of_return").html(consistency_of_return);
+    $("#total_return").html(total_return);
+    $("#aumtotal").html(aumtotal);
+    $("#aumdate").html(aumdate);
+    $("#fund_house").html(fund_house);
+    $("#classification").html(classification);
+    $("#growth").html(navrs_gp);
+    $("#type").html(type);
+    $("#exitload-modal").html(exitloadremarks);
+
+    get_return_data(scheme_code);                 // Return (%)
+    //test_graph(s_name,scheme_code);             // NAV Movement 
+    asect_alloc(scheme_code);                     // Asset allocation 
+    get_peer_comparision(scheme_code);            // peer comparison
+    get_portfolio_holdings(scheme_code);          // portfolio holding
+    get_hold_asset(scheme_code);                  // All Equity Debt chart table    
+    get_status(scheme_code);                      // Status of open/close subscription
+
+    // if (val_1=='True' && val_2=='True' && val_3=='True' && val_4=='True' && val_5=='True' && val_6=='True')
+    // {
+    //   $("#FundDetailsID .container").css('display','block');
+    //   $("#FundDetailsID .fa.fa-spinner.fa-pulse").css('display','none');
+    // }
     
+
+
+    // Click on 1 Year in Return Table     
+
+      $( "#FundDetailsID #return" ).on( "click", ".chng_return", function() {
+    //$( document ).delegate("#FundDetailsID #return .chng_return", "click", function() {
+      if($('#FundDetailsID #return .chng_return').html()==="3 Year"){
+        console.log("remove 3 Year");
+        console.log("show 5 Year");
+        console.log("----------------------");
+        $('#FundDetailsID #return .chng_return').html("5 Year");
+        $("#FundDetailsID #return tbody tr td:nth-child(4)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(5)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(7)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(6)").show();
+      }
+      else if($('#FundDetailsID #return .chng_return').html()==="5 Year"){
+        console.log("remove 5 Year");
+        console.log("show 10 Year");
+        console.log("----------------------");
+        $('#FundDetailsID #return .chng_return').html("10 Year");
+        $("#FundDetailsID #return tbody tr td:nth-child(4)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(5)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(6)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(7)").show();
+      }
+      else if($('#FundDetailsID #return .chng_return').html()==="10 Year"){
+        console.log("remove 10 Year");
+        console.log("show 1 Year");
+        console.log("----------------------");
+        $('#FundDetailsID #return .chng_return').html("1 Year");
+        $("#FundDetailsID #return tbody tr td:nth-child(5)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(6)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(7)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(4)").show();
+      }
+      else if($('#FundDetailsID #return .chng_return').html()==="1 Year"){
+        console.log("remove 1 Year");
+        console.log("show 3 Year");
+        console.log("----------------------");
+        $('#FundDetailsID #return .chng_return').html("3 Year");
+        $("#FundDetailsID #return tbody tr td:nth-child(4)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(6)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(7)").hide();
+        $("#FundDetailsID #return tbody tr td:nth-child(5)").show();
+      }      
+
+    });
+
+
+    // Click on 1 Year in Peer Comparison Table
+    
+      $( "#FundDetailsID #peertabl" ).on( "click", ".chng_peercomp", function() {
+    
+      if($('#FundDetailsID #peertabl .chng_peercomp').html()==="3&nbsp;Year"){
+        console.log("remove 3 Year");
+        console.log("show 5 Year");
+        console.log("----------------------");
+        $('#FundDetailsID #peertabl .chng_peercomp').html("5&nbsp;Year");
+        $("#FundDetailsID #peertabl tbody tr td:nth-child(6)").hide();
+        $("#FundDetailsID #peertabl tbody tr td:nth-child(7)").hide();
+        $("#FundDetailsID #peertabl tbody tr td:nth-child(8)").show();
+      }
+      else if($('#FundDetailsID #peertabl .chng_peercomp').html()==="5&nbsp;Year"){
+        console.log("remove 5 Year");
+        console.log("show 1 Year");
+        console.log("----------------------");
+        $('#FundDetailsID #peertabl .chng_peercomp').html("1&nbsp;Year");
+        $("#FundDetailsID #peertabl tbody tr td:nth-child(7)").hide();
+        $("#FundDetailsID #peertabl tbody tr td:nth-child(8)").hide();
+        $("#FundDetailsID #peertabl tbody tr td:nth-child(6)").show();
+      }
+      else if($('#FundDetailsID #peertabl .chng_peercomp').html()==="1&nbsp;Year"){
+        console.log("remove 1 Year");
+        console.log("show 3 Year");
+        console.log("----------------------");
+        $('#FundDetailsID #peertabl .chng_peercomp').html("3&nbsp;Year");
+        $("#FundDetailsID #peertabl tbody tr td:nth-child(6)").hide();
+        $("#FundDetailsID #peertabl tbody tr td:nth-child(8)").hide();
+        $("#FundDetailsID #peertabl tbody tr td:nth-child(7)").show();
+      }      
+
+    });
+
+
+
+  });
+
+
+        
+}
+
+
+/*************************** Fund Details / Overview END ************************/   
 
 /*********************** MF Home / Top Rated MF START *****************************/
 

@@ -1,258 +1,213 @@
-<div  data-page="FundDetails" class="page" id="FundDetails">
-    <div class="page-content"> 
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-	<div class="container d_none">
-        <!-- <span class="preloader preloader-blue"></span> -->
-        <div class="row ">
-            <div class="col-xs-12 HeadTop">
-                <h1 id="s_name">Fund Name</h1><span id="rv_rating">Fund star</span>
-            </div>            
-        </div>
-
-
-        <div class="row">
-            <div class="col-xs-6">
-                <span id="classification"></span>
-            </div>
-            <div class="col-xs-6 text-right">
-                <span>Plan: </span><span>Regular</span>
+<div  data-page="FundDetails" class="page" id="FundDetailsID">
+    <div class="page-content">
+    	<div class="container">
+            <div class="row ">
+                <div class="col-xs-12 HeadTop">
+                    <h1 id="s_name">Fund Name</h1><span id="rv_rating"><span class = 'glyphicon glyphicon-star'></span></span>
+                </div>            
             </div>
 
-            <div class="col-xs-12">
-                <span>Status: </span><span id="status"></span>   
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-6 ov_top_nav">
-              <h2 id="navrs"></h2><h4 id="navchange"></h4>
-              <h6 id="navdate"></h6>
-            </div>
-
-            <div class="col-xs-6 text-right">
-                <button class="btn btn-RV">Invest Now</button>
-            </div>
-
-            <div class="col-xs-12 ov_top_nav">
-              <h2 id="aumtotal"></h2><h4>(Cr.)</h4>
-              <h6 id="aumdate"></h6>
-            </div>
-
-            <div class="col-xs-12">
-                <span>Fund House: </span><span id="fund_house" ></span> 
-
-            </div>
-        </div>
-
-        <div class="row top_1">
-            <div class="col-xs-6 pad_right">
-                <table class="table table-responsive table-striped table-condensed">
-                    <thead>
-                        <tr><td class="breadcrumb_3">Expense Ratio</td></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td id="expenceratio"></td></tr>
-                    </tbody>
-
-                </table>
-            </div>
-            <div class="col-xs-6 pad_left">
-                <table class="table table-responsive table-striped table-condensed">
-                    <thead>
-                        <tr><td class="breadcrumb_3">Turnover Ratio</td></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td id="turnover_ratio"></td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-6 pad_right">
-                <table class="table table-responsive table-striped table-condensed">
-                    <thead>
-                        <tr><td class="breadcrumb_3">Exit Load</td></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td id="exitload"></td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-6 pad_left">
-                <table class="table table-responsive table-striped table-condensed">
-                    <thead>
-                        <tr><td class="breadcrumb_3">Lock-in Period</td></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td id="lockperiod"></td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-6 pad_right">
-                <table class="table table-responsive table-striped table-condensed">
-                    <thead>
-                        <tr><td class="breadcrumb_3">Inception Date</td></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td id="inception_date"></td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-6 pad_left">
-                <table class="table table-responsive table-striped table-condensed">
-                    <thead>
-                        <tr><td class="breadcrumb_3">Fund Type</td></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td id="type"></td></tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="col-xs-6 pad_right">
-                <table class="table table-responsive table-striped table-condensed">
-                    <thead>
-                        <tr><td class="breadcrumb_3">Min. Inv. Lumpsum / SIP</td></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td id="minimum_investment"></td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-6 pad_left">
-                <table class="table table-responsive table-striped table-condensed">
-                    <thead>
-                        <tr><td class="breadcrumb_3">Return since Inception</td></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td id="inception_return"></td></tr>
-                    </tbody>
-                </table>
-            </div>
-            
-        </div>
-
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="breadcrumb_4">
-                    <h4>Return (%)</h4>
-                    <div class="area_wrap">
-                    <table class="table table-responsive table-striped table-condensed" id="return"></table>
-                    </div>
-                </div>               
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="breadcrumb_4">
-                    <h4>NAV MOVEMENT</h4>
-                    <div id="container-0"></div>
+            <div class="row">
+                <div class="col-xs-7">
+                    <span id="classification"></span>
+                </div>
+                <div class="col-xs-5 text-right">
+                    <span>Plan: </span><span>Regular</span>
+                </div>
+                <div class="col-xs-12">
+                    <span>Status: </span><span id="status"></span>   
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="breadcrumb_4">
-                    <h4>Asset Allocation (%)</h4>
-                    <div class="area_wrap">
-                        <table class="table table-responsive table-striped table-condensed" id="asset_alloc_table"></table>
+            <div class="row">
+                <div class="col-xs-6 ov_top_nav">
+                  <h2 id="navrs"></h2><h4 id="navchange"></h4>
+                  <h6 id="navdate"></h6>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <button class="btn btn-RV">Invest Now</button>
+                </div>
+                <div class="col-xs-12 ov_top_nav">
+                  <h2 id="aumtotal"></h2><h4>(Cr.)</h4>
+                  <h6 id="aumdate"></h6>
+                </div>
+                <div class="col-xs-12">
+                    <span>Fund House: </span><span id="fund_house" ></span> 
+                </div>
+            </div>
+
+            <div class="row top_1">
+                <div class="col-xs-6 pad_right">
+                    <table class="table table-responsive table-striped table-condensed">
+                        <thead>
+                            <tr><td class="breadcrumb_3">Expense Ratio</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td id="expenceratio"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-6 pad_left">
+                    <table class="table table-responsive table-striped table-condensed">
+                        <thead>
+                            <tr><td class="breadcrumb_3">Turnover Ratio</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td id="turnover_ratio"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-6 pad_right">
+                    <table class="table table-responsive table-striped table-condensed">
+                        <thead>
+                            <tr><td class="breadcrumb_3">Exit Load</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td id="exitload"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-6 pad_left">
+                    <table class="table table-responsive table-striped table-condensed">
+                        <thead>
+                            <tr><td class="breadcrumb_3">Lock-in Period</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td id="lockperiod"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-6 pad_right">
+                    <table class="table table-responsive table-striped table-condensed">
+                        <thead>
+                            <tr><td class="breadcrumb_3">Inception Date</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td id="inception_date"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-6 pad_left">
+                    <table class="table table-responsive table-striped table-condensed">
+                        <thead>
+                            <tr><td class="breadcrumb_3">Fund Type</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td id="type"></td></tr>
+                        </tbody>
+                    </table>
+                </div>            
+                <div class="col-xs-6 pad_right">
+                    <table class="table table-responsive table-striped table-condensed">
+                        <thead>
+                            <tr><td class="breadcrumb_3">Min. Inv. Lumpsum / SIP</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td id="minimum_investment"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-6 pad_left">
+                    <table class="table table-responsive table-striped table-condensed">
+                        <thead>
+                            <tr><td class="breadcrumb_3">Return since Inception</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td id="inception_return"></td></tr>
+                        </tbody>
+                    </table>
+                </div>            
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcrumb_4">
+                        <h4>Return (%)</h4>                    
+                        <table class="table table-striped table-condensed AutoLayoutTable" id="return">
+                            <!-- <div class="preloader"></div> -->
+                        </table>                    
+                    </div>               
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcrumb_4">
+                        <h4>NAV MOVEMENT</h4>
+                        <div id="container-0"></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="breadcrumb_4">
-                    <h4>Peer Comparison</h4>
-                    <div class="area_wrap">
-                        <table class="table table-responsive table-striped table-condensed" id="peertabl"></table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="breadcrumb_4 breadcrumb_bgr">
-                    <div id="container-01"></div>
-                </div>
-            </div>
-        </div>
-        
-   
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="pagination">
-                    <div class="postings">
-                        <div class="breadcrumb_4">
-                            <h4>Portfolio Holdings</h4>
-                            <div class="area_wrap">
-                                <table class="table table-responsive table-striped table-condensed" id="portfolio_holdings"></table>
-                            </div>
-                             <div id="pages" class="portfolioPagination">
-                                      <span id="prev" class="previous"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Previous</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                      <span id="next" class="next">Next&nbsp;&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></span>
-                                   </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcrumb_4">
+                        <h4>Asset Allocation (%)</h4>
+                        <div id="container-7" class="text-center">
+                            <div class="preloader"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-        </div>
-
-
-<!-- portfolio_table -->
-
-
-        <div class="row">
-            <div class="col-xs-12">
-                <!-- <h4>Portfolio Holdings</h4> -->
-                <div class="area_wrap breadcrumb_4">
-                    <table class="table table-responsive table-striped table-condensed" id="portfolio_table"></table>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcrumb_4">
+                        <h4>Peer Comparison</h4>
+                        <div class="area_wrap">
+                            <table class="table table-striped table-condensed AutoLayoutTable" id="peertabl"></table>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-        </div>
-
-
-        <div class="row">
-            <div class="col-xs-12">
-                <!-- <h4>Portfolio Holdings</h4> -->
-                <div class="area_wrap breadcrumb_4 d_none">
-                    <table class="table table-responsive table-striped table-condensed" id="conval"></table>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="pagination">
+                        <div class="postings">
+                            <div class="breadcrumb_4">
+                                <h4>Portfolio Holdings</h4>
+                                <div class="area_wrap">
+                                    <table class="table table-striped table-condensed AutoLayoutTable" id="portfolio_holdings"></table>
+                                </div>
+                                <div id="pages" class="portfolioPagination">
+                                    <span id="prev" class="previous"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Previous</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span id="next" class="next">Next&nbsp;&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-        </div>
-
-
-        
-
-        <!-- <div class="row">
-            <div class="col-xs-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Panel Heading</div>
-                    <div class="panel-body">Panel Content</div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcrumb_4 breadcrumb_bgr">
+                        <div id="container-01" class="text-center">
+                            <div class="preloader"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>  
+            </div>
             
-            <div class="col-xs-6">
+            <!-- portfolio_table -->
 
+            <div class="row">
+                <div class="col-xs-12">               
+                    <div class="area_wrap breadcrumb_4">
+                        <table class="table table-striped table-condensed AutoLayoutTable" id="portfolio_table"></table>
+                    </div>
+                </div>
             </div>
-        </div> -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="area_wrap breadcrumb_4 d_none">
+                        <table class="table table-striped table-condensed AutoLayoutTable" id="conval"></table>
+                    </div>
+                </div>
+            </div>      
 
-    </div>
-
-
-       <!-- <div id="FundDetails_chart" style="min-width: 300px; height: 300px; margin: 1em"></div> -->
-
-<!-- <div id="schemename">aaaaaaaaaaaaaa</div> -->
+        </div>
    </div>
 </div>
         

@@ -715,7 +715,7 @@ function get_peer_comparision(schemecode)
     	var peer_comparision = JSON.parse(peer_comparision_ajax);
     	// console.log(peer_comparision);
 		var pc_data;
-		var th = "<thead class='breadcrumb_3'><tr><th rowspan='2'>Fund</th><th rowspan='2'>Rupeevest<br>Rating</th><th rowspan='2'>AUM (in Cr)</th><th rowspan='2'>Expense (%)</th><th class='peertabl_mon' colspan='4'>Return (%)</th></tr><tr><th>6 Mo</th><th>1 Yr</th><th>3 Yr</th><th>5 Yr</th></tr></thead>";
+		var th = "<thead class='breadcrumb_3'><tr><th rowspan='2'>Fund</th><th rowspan='2'>Rupeevest<br>Rating</th><th rowspan='2'>AUM&nbsp;(in&nbsp;Cr)</th><th rowspan='2'>Expense (%)</th><th class='peertabl_mon' colspan='4'>Return (%)</th></tr><tr><th>6 Mo</th><th class='chng_peercomp'>1&nbsp;Year</th><th class='chng_peercomp'>3&nbsp;Year</th><th class='chng_peercomp'>5&nbsp;Year</th></tr></thead>";
 		for(var i =0;i <= peer_comparision.peer_comparision.length-1;i++)
 		{
 		var pc_data = peer_comparision.peer_comparision[i];
@@ -807,11 +807,11 @@ function get_peer_comparision(schemecode)
 
 		if(i == 0)
 		{
-		tblData = th + "<tr><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '> "+s_name+"</a></td><td><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td>"+aumtotal+"</td><td>"+expenceratio+"</td><td>"+returns_6month+"</td><td>"+returns_1year+"</td><td>"+returns_3year+"</td><td>"+returns_5year+"</td></tr>";
+		tblData = th + "<tr><td><a target='_blank' id="+scheme_code+" href='FundDetails.html?scheme_code="+scheme_code+"' '> "+s_name+"</a></td><td><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td>"+aumtotal+"</td><td>"+expenceratio+"</td><td>"+returns_6month+"</td><td>"+returns_1year+"</td><td>"+returns_3year+"</td><td>"+returns_5year+"</td></tr>";
 		}
 		else
 		{
-		tblData = tblData + "<tr><td><a target='_blank' id="+scheme_code+" href='/Mutual-Funds-India/"+scheme_code+"' '>"+s_name+"</a></td><td><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td>"+aumtotal+"</td><td>"+expenceratio+"</td><td>"+returns_6month+"</td><td>"+returns_1year+"</td><td>"+returns_3year+"</td><td>"+returns_5year+"</td></tr>";
+		tblData = tblData + "<tr><td><a target='_blank' id="+scheme_code+" href='FundDetails.html?scheme_code="+scheme_code+"' '>"+s_name+"</a></td><td><span class='text-hide'>"+rr+"</span><span>"+rr_ico+"</span></td><td>"+aumtotal+"</td><td>"+expenceratio+"</td><td>"+returns_6month+"</td><td>"+returns_1year+"</td><td>"+returns_3year+"</td><td>"+returns_5year+"</td></tr>";
 		}
 		  }
 		$("#peertabl").html("");
@@ -822,672 +822,6 @@ function get_peer_comparision(schemecode)
    	});
 }
 
-// function get_return_data(schemecode)
-// {
-// 	var tbldata;
-// 	$.ajax({
-// 	type:'GET',
-// 	url: '/functionalities/get_return_data',
-// 	data :{schemecode:schemecode},
-// 	datatype:'json',
-// 	success:function(returns_data, textStatus, jqXHR) {
-// 	console.log(returns_data);
-// 	var mf_data;
-// 	var tblData;
-// 	var th = "<thead><tr><th></th><th>1 Month</th><th>3 Month</th><th>6 Month</th><th>1 Year</th><th>3 Year</th><th>5 Year</th></tr></thead>";
-// 	for(var i =0;i <= returns_data.returns_data.length-1;i++)
-// 	{
-// 	mf_data = returns_data.returns_data[i];
-// 	var scheme_name = mf_data.s_name;
-// 	    if(scheme_name==null)
-// 	    {
-// 	    	scheme_name="-";
-// 	    }
-// 	var monthret_1 = mf_data.returns_1month;
-// 	if(monthret_1==null)
-// 	    {
-// 	    	monthret_1="-";
-// 	    }
-// 	    else
-// 	    {
-// 	    	monthret_1=monthret_1.toFixed(2);
-// 	    }
-// 	var monthret_3 = mf_data.returns_3month;
-// 	   if(monthret_3==null)
-// 	    {
-// 	    	monthret_3="-";
-// 	    }
-// 	    else
-// 	    {
-// 	    	monthret_3=monthret_3.toFixed(2);
-// 	    }
-// 	 var monthret_6 = mf_data.returns_6month;
-// 	    if(monthret_6==null)
-// 	    {
-// 	    	monthret_6="-";
-// 	    }
-// 	    else
-// 	    {
-// 	    	monthret_6=monthret_6.toFixed(2);
-// 	    }
-
-// 	var yrret_1 = mf_data.returns_1year;
-// 	if(yrret_1==null)
-// 	    {
-// 	    	yrret_1="-";
-// 	    }
-// 	    else
-// 	    {
-// 	    	yrret_1=yrret_1.toFixed(2);
-// 	    }
-// 	var yearret_3 = mf_data.returns_3year;
-// 	  if(yearret_3==null)
-// 	    {
-// 	    	yearret_3="-";
-// 	    }
-// 	     else
-// 	    {
-// 	    	yearret_3=yearret_3.toFixed(2);
-// 	    }
-// 	var yearret_5 = mf_data.returns_5year;
-// 	  if(yearret_5==null)
-// 	    {
-// 	    	yearret_5="-";
-// 	    }
-// 	    else
-// 	    {
-// 	    	yearret_5=yearret_5.toFixed(2);
-// 	    }
-
-
-// 	var fund = "Fund"; 
-// 	  if(fund==null)
-// 	    {
-// 	    	fund="-";
-// 	    }
-// 	// var ytd = mf_data.ytd_returns;
-// 	var index_name = mf_data.index_name; 
-// 	 if(index_name==null)
-// 	    {
-// 	    	index_name="-";
-// 	    }
-
-// 	var category_Average = "category Average";
-
-// 	var Rank =  "Rank Within category";
-// 	var Number_fund = " Number Of funds in category";
-// 	// var rank_ytd = mf_data.rank_ytd;
-// 	var rank_1month = mf_data.rank_1month;
-// 	  if(rank_1month==null)
-// 	    {
-// 	    	rank_1month="-";
-// 	    }
-
-	  
-// 	var rank_3month = mf_data.rank_3month; 
-// 	   if(rank_3month==null)
-// 	    {
-// 	    	rank_3month="-";
-// 	    }
-	 
-// 	 var rank_6month = mf_data.rank_6month;
-// 	    if(rank_6month==null)
-// 	    {
-// 	    	rank_6month="-";
-// 	    }
-	  
-
-// 	var rank_1year = mf_data.rank_1year;
-// 	   if(rank_1year==null)
-// 	    {
-// 	    	rank_1year="-";
-// 	    }
-	
-
-// 	var rank_3year = mf_data.rank_3year; 
-
-// 	    if(rank_3year==null)
-// 	    {
-// 	    	rank_3year="-";
-// 	    }
-	
-
-
-// 	var rank_5year = mf_data.rank_5year; 
-
-// 	   if(rank_5year==null)
-// 	    {
-// 	    	rank_5year="-";
-// 	    }
-
-// 	// var funds_num_ytd = mf_data.funds_num_ytd;
-// 	var funds_num_month1 = mf_data.funds_num_month1; 
-// 	    if(funds_num_month1==null)
-// 	    {
-// 	    	funds_num_month1="-";
-// 	    }
-// 	var funds_num_month3 = mf_data.funds_num_month3; 
-//                     if(funds_num_month3==null)
-// 	    {
-// 	    	funds_num_month3="-";
-// 	    }
-
-// 	 var funds_num_month6 = mf_data.funds_num_month6; 
-//                      if(funds_num_month6==null)
-// 	    {
-// 	    	funds_num_month6="-";
-// 	    }
-
-
-// 	var funds_num_year1 = mf_data.funds_num_year1; 
- 	
-//  	if(funds_num_year1==null)
-// 	    {
-// 	    	funds_num_year1="-";
-// 	    }
-
-
-// 	var funds_num_year3 = mf_data.funds_num_year3; 
- 	
-//  	if(funds_num_year3==null)
-// 	    {
-// 	    	funds_num_year3="-";
-// 	    }
-
-// 	var funds_num_year5 = mf_data.funds_num_year5; 
-
-// 	    if(funds_num_year5==null)
-// 	    {
-// 	    	funds_num_year5="-";
-// 	    }
-
-// 	// var ytd_avg = mf_data.ytd_avg;
-// 	var avg_month1 = mf_data.avg_month1; 
-                     
-//                    if(avg_month1==null)
-// 	    {
-// 	    	avg_month1="-";
-// 	    }
-// 	    else
-// 	    {
-// 	    	avg_month1 = avg_month1.toFixed(2);
-// 	    }
-
-
-// 	var avg_month3 = mf_data.avg_month3; 
-  	  
-//   	  if(avg_month3==null)
-// 	        {
-// 	    	avg_month3="-";
-// 	        }
-// 	         else
-// 	        {
-// 	    	 avg_month3 = avg_month3.toFixed(2);
-// 	        }
-
-
-// 	 var avg_month6 = mf_data.avg_month6;
-
-// 	       if(avg_month6==null)
-// 	        {
-// 	    	avg_month6="-";
-// 	        }
-// 	        else
-// 	        {
-// 	    	 avg_month6 = avg_month6.toFixed(2);
-// 	        }
-
-// 	var avg_year1 = mf_data.avg_year1; 
-
-// 	        if(avg_year1==null)
-// 	        {
-// 	    	avg_year1="-";
-// 	        }
-// 	        else
-// 	        {
-// 	    	 avg_year1 = avg_year1.toFixed(2);
-// 	        }
-
-// 	var avg_year3 = mf_data.avg_year3; 
-
-// 	        if(avg_year3==null)
-// 	        {
-// 	    	avg_year3="-";
-// 	        }
-// 	        else
-// 	        {
-// 	    	 avg_year3 = avg_year3.toFixed(2);
-// 	        }
-
-// 	var avg_year5 = mf_data.avg_year5; 
-
-// 	         if(avg_year5==null)
-// 	        {
-// 	    	avg_year5="-";
-// 	        }
-// 	        else
-// 	        {
-// 	    	 avg_year5 = avg_year5.toFixed(2);
-// 	        }
-
-// 	// var ytdret = mf_data.ytdret;
-// 	 var monthret_1_bm = mf_data.monthret_1; 
-// 	       if(monthret_1_bm==null)
-// 	        {
-// 	    	monthret_1_bm="-";
-// 	        }
-// 	        else
-// 	        {
-// 	    	 monthret_1_bm = monthret_1_bm.toFixed(2);
-// 	        }
-
-// 	 var monthret_3_bm = mf_data.monthret_3; 
-// 	       if(monthret_3_bm==null)
-// 	        {
-// 	    	monthret_3_bm="-";
-// 	        }
-// 	        else
-// 	        {
-// 	    	 monthret_3_bm = monthret_3_bm.toFixed(2);
-// 	        }
-
-//                  var monthret_6_bm = mf_data.monthret_6; 
-
-//                        if(monthret_6_bm==null)
-// 	        {
-// 	    	monthret_6_bm="-";
-// 	        }
-// 	        else
-// 	        {
-// 	    	 monthret_6_bm = monthret_6_bm.toFixed(2);
-// 	        }
-
-// 	var yrret_1_bm = mf_data.yrret_1; 
- 	
-//  	  if(yrret_1_bm==null)
-// 	        {
-// 	    	yrret_1_bm="-";
-// 	        }
-// 	       else
-// 	        {
-// 	    	 yrret_1_bm = yrret_1_bm.toFixed(2);
-// 	        }
-
-// 	var yrret_3 = mf_data.yrret_3; 
- 	
-//  	if(yrret_3==null)
-// 	        {
-// 	    	yrret_3="-";
-// 	        }
-// 	        else
-// 	        {
-// 	    	 yrret_3 = yrret_3.toFixed(2);
-// 	        }
-
-
-// 	var yrret_5 = mf_data.yrret_5;
-
-// 	       	if(yrret_5==null)
-// 	        {
-// 	    	yrret_5="-";
-// 	        }
-// 	        else
-// 	        {
-// 	    	 yrret_5 = yrret_5.toFixed(2);
-// 	        }
-// 	// "<td>"+monthret_6+"</td><td>"+monthret_6_bm+"</td><td>"+avg_month6+"</td><td>"+rank_6month+"</td><td>"+funds_num_month6+"</td>"
-// 	if(i == 0)
-// 	{
-// 	tblData = th + "<tr><td>"+fund+"</td><td>"+monthret_1+"</td><td>"+monthret_3+"</td><td>"+monthret_6+"</td><td>"+yrret_1+"</td><td>"+yearret_3+"</td><td>"+yearret_5+"</td></tr>";
-// 	tblData = tblData + "<tr><td>"+index_name+"</td><td>"+monthret_1_bm+"</td><td>"+monthret_3_bm+"</td><td>"+monthret_6_bm+"</td><td>"+yrret_1_bm+"</td><td>"+yrret_3+"</td><td>"+yrret_5+"</td></tr>";
-// 	tblData = tblData + "<tr><td>"+category_Average+"</td><td>"+avg_month1+"</td><td>"+avg_month3+"</td><td>"+avg_month6+"</td><td>"+avg_year1+"</td><td>"+avg_year3+"</td><td>"+avg_year5+"</td></tr>";
-// 	tblData = tblData + "<tr><td>"+Rank+"</td><td>"+rank_1month+"</td><td>"+rank_3month+"</td><td>"+rank_6month+"</td><td>"+rank_1year+"</td><td>"+rank_3year+"</td><td>"+rank_5year+"</td></tr>";
-// 	tblData = tblData + "<tr><td>"+Number_fund+"</td><td>"+funds_num_month1+"</td><td>"+funds_num_month3+"</td><td>"+funds_num_month6+"</td><td>"+funds_num_year1+"</td><td>"+funds_num_year3+"</td><td>"+funds_num_year5+"</td></tr>";
-// 	}
-// 	else{
-//                    // tblData = tblData + "<tr><td>"+fund+"</td><td>"+ytd+"</td><td>"+monthret_1+"</td><td>"+monthret_3+"</td><td>"+yrret_1+"</td><td>"+yearret_3+"</td><td>"+yearret_5+"</td></tr><tr></tr>";
-
-// 	}
-// 	}
-
-// 	$("#return").html("");
-// 	$("#return").html(tblData);
-// 	tbldata="";
-// 	},
-// 	error:function(jqXHR, textStatus, errorThrown) {
-// 	// alert("AJAX Error:" + textStatus);
-// 	}
-//   })
-// }
-
-// function get_risk_measures(schemecode)
-// {
-// 	var tblData="";
-// 	$.ajax({
-// 	type:'GET',
-// 	url: '/functionalities/get_risk_measures',
-// 	datatype:'json',
-// 	data :{schemecode:schemecode},
-// 	success:function(risk_data, textStatus, jqXHR) {
-// 	console.log(risk_data);
-// 	var rm_data="";
-	
-// 	var th = "<thead><tr><th></th><th>Std Dev</th><th>Beta</th><th>Sharpe</th><th>Sortino</th><th>Alpha</th></tr></thead><tbody>";
-            
-
-// 	for(var i =0;i <= risk_data.risk_data.length-1;i++)
-// 	{
-// 	rm_data = risk_data.risk_data[i];
-// 	// var scheme_name = rm_data.s_name;
-// 	 var sdx_returns;
-
-// 	 if(rm_data.sdx_returns==null || rm_data.sdx_returns=='undefined' || rm_data.sdx_returns==0)
-// 	 {
-//                     sdx_returns="-";
-// 	 }
-// 	 else
-// 	 {
-//  	 sdx_returns = parseFloat(rm_data.sdx_returns);
-// 	     sdx_returns = sdx_returns.toFixed(2);
-// 	 }
-	
-// 	var sharpex_returns;
-
-// 	 if(rm_data.sharpex_returns==null || rm_data.sharpex_returns=='undefined' || rm_data.sharpex_returns==0)
-// 	 {
-//                    sharpex_returns="-";
-// 	 }
-// 	 else
-// 	 {
-//                     sharpex_returns = parseFloat(rm_data.sharpex_returns);
-// 	    sharpex_returns =sharpex_returns.toFixed(2);
-// 	 }
-                 
-	   
-//                 var sotinox_returns ;
-
-//                 if(rm_data.sotinox_returns==null || rm_data.sotinox_returns=='undefined' || rm_data.sotinox_returns==0)
-//                 {
-//                 	sotinox_returns="-";
-//                 }
-//                 else
-//                 {
-//                 	sotinox_returns = parseFloat(rm_data.sotinox_returns);
-// 	    sotinox_returns = sotinox_returns.toFixed(2);
-//                 }
-	    
-//  	var betax_returns;
-
-//  	if(rm_data.betax_returns==null || rm_data.betax_returns=='undefined' || rm_data.betax_returns==0)
-//  	{
-//  	betax_returns="-";
-//  	}
-//  	else
-//  	{
-//  	betax_returns = parseFloat(rm_data.betax_returns);
-// 	    betax_returns = betax_returns.toFixed(2);
-//  	}
-// 	var alphax_returns;
-
-// 	if(rm_data.alphax_returns==null || rm_data.alphax_returns=='undefined' || rm_data.alphax_returns==0)
-// 	{
-// 	alphax_returns="-";
-// 	}
-// 	else
-// 	{
-// 	 alphax_returns = parseFloat(rm_data.alphax_returns);
-// 	     alphax_returns = alphax_returns.toFixed(2);
-// 	}    
-
-	   
-
-// 	// var treynorx_returns = parseFloat(rm_data.treynorx_returns);
-// 	//     treynorx_returns = treynorx_returns.toFixed(2);
-
-// 	var fund = "Fund";
-// 	var index_name = rm_data.index_name;
-// 	var category_Average = "category Average";
-// 	var Rank =  "Rank Within category";
-// 	var Number_fund = " Number Of funds in category";
-	 
-// 	var sdy_returns;
-	
-// 	if(rm_data.sdy_returns==null || rm_data.sdy_returns=='undefined' || rm_data.sdy_returns==0)
-// 	{
-// 	sdy_returns="-";
-// 	} 
-// 	else
-// 	{
-// 	sdy_returns = parseFloat(rm_data.sdy_returns);
-// 	    sdy_returns =sdy_returns.toFixed(2);
-// 	}
-
-	 
-//  	 var sharpey_returns;
-
-//  	 if(rm_data.sharpey_returns==null || rm_data.sharpey_returns=='undefined' || rm_data.sharpey_returns==0)
-//  	 {
-//  	 	sharpey_returns="-";
-//  	 }
-//  	 else
-//  	 {
-//  	 	sharpey_returns = parseFloat(rm_data.sharpey_returns);
-// 	    sharpey_returns=sharpey_returns.toFixed(2);
-//  	 }
-	 
-//  	 var sotinoy_returns;
-
-//  	 if(rm_data.sotinoy_returns==null || rm_data.sotinoy_returns=='undefined'|| rm_data.sotinoy_returns==0)
-//  	 {
-//  	 	sotinoy_returns="-";
-//  	 }
-//  	 else
-//  	 {
-//  	 	sotinoy_returns = parseFloat(rm_data.sotinoy_returns);
-// 	    sotinoy_returns=sotinoy_returns.toFixed(2);
-//  	 }
-
-	 
-//  	 var betay_returns;
-
-//  	 if(rm_data.betay_returns==null || rm_data.betay_returns=='undefined'|| rm_data.betay_returns==0)
-//  	 {
-//  	 	 betay_returns = "-";
-	
-//  	 }
-//  	 else
-//  	 {
-//  	 	 betay_returns = parseFloat(rm_data.betay_returns);
-// 	     betay_returns=betay_returns.toFixed(2);
-//  	 }
-	
-//                  var alphay_returns;
-//                  if(rm_data.alphay_returns==null || rm_data.alphay_returns=='undefined' || rm_data.alphay_returns==0)
-//                  {
-//                      alphay_returns = "-";
-//                  }
-//                  else
-//                  {
-//                  	 alphay_returns = parseFloat(rm_data.alphay_returns);
-// 	     alphay_returns = alphay_returns.toFixed(2);
-//                  }
-	
-
-// 	// var treynory_returns = parseFloat(rm_data.treynory_returns);
-// 	//  treynory_returns=treynory_returns.toFixed(2);
-                
-//                  var rank_sd;
-//                  if(rm_data.rank_sd==null || rm_data.rank_sd=='undefined' || rm_data.rank_sd==0)
-//                  {
-//                    rank_sd="-";
-//                  }
-//                  else
-//                  {
-//                    rank_sd = rm_data.rank_sd;	
-//                  }
-	 
-// 	var rank_sharpe;
-
-// 	if(rm_data.rank_sharpe==null || rm_data.rank_sharpe=='undefined' || rm_data.rank_sharpe==0)
-// 	{
-// 	    rank_sharpe='-';
-// 	}
-// 	else
-// 	{
-//   	rank_sharpe = rm_data.rank_sharpe;
-// 	}
-// 	var rank_sotino;
-
-// 	 if(rm_data.rank_sotino==null || rm_data.rank_sotino=='undefined' || rm_data.rank_sotino==0)
-// 	 {
-// 	 	rank_sotino="-";
-// 	 }
-// 	 else
-// 	 {
-// 	 	rank_sotino = rm_data.rank_sotino;
-// 	 }
-	
-// 	var rank_beta;
-// 	if(rm_data.rank_beta==null || rm_data.rank_beta=='undefined' || rm_data.rank_beta==0)
-// 	{
-// 	rank_beta ="-";
-// 	}
-// 	else
-// 	{
-// 	  rank_beta = rm_data.rank_beta;	
-// 	}
-	
-// 	var rank_alpha;
-
-// 	if(rm_data.rank_alpha==null || rm_data.rank_alpha=='undefined' || rm_data.rank_alpha==0)
-// 	{
-// 	  rank_alpha="-";
-// 	}
-// 	else
-// 	{
-// 	  rank_alpha = rm_data.rank_alpha;	
-// 	}
-	
-// 	// var rank_treynor = rm_data.rank_treynor;
-               
-//                 var avg_std_dev;
-
-//                 if(rm_data.avg_std_dev==null || rm_data.avg_std_dev=='undefined'|| rm_data.avg_std_dev==0)
-//                 {
-//                 	avg_std_dev="-";
-//                 }
-//                 else
-//                 {
-//                    avg_std_dev = parseFloat(rm_data.avg_std_dev);
-// 	avg_std_dev = avg_std_dev.toFixed(2);	
-//                 }
-	
-//  	var avg_sharpe;
-//  	if(rm_data.avg_sharpe==null || rm_data.avg_sharpe=='undefined' || rm_data.avg_sharpe==0)
-//  	{
-//  	avg_sharpe = "-";
-//  	}
-//  	else
-//  	{
-//  	avg_sharpe = parseFloat(rm_data.avg_sharpe);
-// 	avg_sharpe = avg_sharpe.toFixed(2);
-//  	}
-	    
-//  	 var avg_sotino;
-//  	 if(rm_data.avg_sotino==null || rm_data.avg_sotino=='undefined' || rm_data.avg_sotino==0)
-//  	 {
-//  	avg_sotino = "-";
-//  	 }
-//  	 else
-//  	 {
-//  	avg_sotino = parseFloat(rm_data.avg_sotino);
-// 	avg_sotino=avg_sotino.toFixed(2);
-//  	 } 
-	    
-//  	var avg_beta;
-
-//  	if(rm_data.avg_beta==null || rm_data.avg_beta=='undefined' || rm_data.avg_beta==0)
-//  	{
-//  	    avg_beta ="-";	
-//  	}	
-//  	else
-//  	{
-//  	avg_beta = parseFloat(rm_data.avg_beta);
-// 	avg_beta=avg_beta.toFixed(2);
-//  	}
-	    
-//  	  if(rm_data.avg_alpha==null || rm_data.avg_alpha=='undefined' || rm_data.avg_alpha==0)
-//  	  {
-//  	  	avg_alpha = "-";
-//  	  }
-//  	  else
-//  	  {
-//  	avg_alpha = parseFloat(rm_data.avg_alpha);
-// 	avg_alpha=avg_alpha.toFixed(2);
-//  	  }
-	    
-
-// 	// var avg_treyno = parseFloat(rm_data.avg_treyno);
-// 	// 	avg_treyno=avg_treyno.toFixed(2);
-
-// 	var avg_t = rm_data.no_of_funds_total;
-// 	var avg_ta = rm_data.no_of_funds_total;
-// 	var avg_tb = rm_data.no_of_funds_total;
-// 	var avg_tc = rm_data.no_of_funds_total;
-// 	var avg_td = rm_data.no_of_funds_total;
-// 	// var avg_te = rm_data.no_of_funds_total;
-               
-//                  // var inception_date = new Date(rm_data.incept_date);
-         
-//                  // var currdate = new Date();
-
-//                  // alert("D1->"+inception_date+"  D2-->"+currdate);
-//                  //moment( )c
-
-//                   	var now = moment(new Date()); //todays date
-// 	var end = moment(rm_data.incept_date); // another date
-// 	var duration = moment.duration(now.diff(end));
-// 	var days = duration.asDays();
-        
-//                    if( days <365)
-//                    {
-// 	                     tblData=th + "<tr><td>"+fund+"</td><td>"+"-"+"</td><td>"+"-"+"</td><td>"+"-"+"</td><td>"+"-"+"</td><td>"+"-"+"</td></tr>";
-// 	// tblData = tblData + "<tr><td>"+index_name+"</td><td>"+sdy_returns+"</td><td>"+sharpey_returns+"</td><td>"+sotinoy_returns+"</td><td>"+betay_returns+"</td><td>"+alphay_returns+"</td><td>"+treynory_returns+"</td></tr>";
-// 	tblData = tblData + "<tr><td>"+category_Average+"</td><td>"+avg_std_dev+"</td><td>"+avg_beta+"</td><td>"+avg_sharpe+"</td><td>"+avg_sotino+"</td><td>"+avg_alpha+"</td></tr>";
-// 	tblData = tblData + "<tr><td>"+Rank+"</td><td>"+"-"+"</td><td>"+"-"+"</td><td>"+"-"+"</td><td>"+"-"+"</td><td>"+"-"+"</td></tr>";
-// 	tblData = tblData + "<tr><td>"+Number_fund+"</td><td>"+avg_t+"</td><td>"+avg_tc+"</td><td>"+avg_ta+"</td><td>"+avg_tb+"</td><td>"+avg_td+"</td></tr>";
-//                    }
-//                    else
-//                    {
-//                         	if(i == 0)
-// 	{
-// 	tblData=th + "<tr><td>"+fund+"</td><td>"+sdx_returns+"</td><td>"+betax_returns+"</td><td>"+sharpex_returns+"</td><td>"+sotinox_returns+"</td><td>"+alphax_returns+"</td></tr>";
-// 	// tblData = tblData + "<tr><td>"+index_name+"</td><td>"+sdy_returns+"</td><td>"+sharpey_returns+"</td><td>"+sotinoy_returns+"</td><td>"+betay_returns+"</td><td>"+alphay_returns+"</td><td>"+treynory_returns+"</td></tr>";
-// 	tblData = tblData + "<tr><td>"+category_Average+"</td><td>"+avg_std_dev+"</td><td>"+avg_beta+"</td><td>"+avg_sharpe+"</td><td>"+avg_sotino+"</td><td>"+avg_alpha+"</td></tr>";
-// 	tblData = tblData + "<tr><td>"+Rank+"</td><td>"+rank_sd+"</td><td>"+rank_beta+"</td><td>"+rank_sharpe+"</td><td>"+rank_sotino+"</td><td>"+rank_alpha+"</td></tr>";
-// 	tblData = tblData + "<tr><td>"+Number_fund+"</td><td>"+avg_t+"</td><td>"+avg_tc+"</td><td>"+avg_ta+"</td><td>"+avg_tb+"</td><td>"+avg_td+"</td></tr>";
-// 	}else
-// 	{
-//                          	/*tblData = tblData + "<tr class='active'><td>Category Average</td><td colspan='2'></td><td></td><td></td><td></td><td></td><td colspan='2'></td><td colspan='2'></td></tr><tr><td>Rank Within Category</td><td colspan='2'></td><td></td><td></td><td></td><td></td><td colspan='2'></td><td colspan='2'></td></tr><tr class=active><td>Number of funds in category</td><td colspan='2'></td><td></td><td></td><td></td><td></td><td colspan='2'></td><td colspan='2'></td></tr><tr><td>As on April XYZ</td><td colspan='2'></td><td></td><td></td><td></td><td></td><td colspan='2'></td><td colspan='2'></td></tr>";*/
-// 	        }
-//                    }
-//                    // alert(days);
-
-//                  // var inception_date=
-
-	
-// 	}
-
-// 	tblData = tblData + "</tbody>"
-// 	$("#riskmeasure").html("");
-// 	$("#riskmeasure").html(tblData);
-// 	tblData="";
-// 	},
-// 	error:function(jqXHR, textStatus, errorThrown) {
-// 	// alert("AJAX Error:" + textStatus);
-// 	}
-//   })
-// }
 
 
 function get_return_data(schemecode)
@@ -1501,7 +835,7 @@ function get_return_data(schemecode)
 		 // console.log("++++++++++++++++++++++++++++++++")
 		 // console.log(returns_data_ajax);
 		 //  console.log("++++++++++++++++++++++++++++++++")
-		var th = "<thead class='breadcrumb_3'><tr><th></th><th>3 Month</th><th>6 Month</th><th>1 Year</th><th>3 Year</th><th>5 Year</th><th>10 Year</th></tr></thead>";
+		var th = "<thead class='breadcrumb_3'><tr><th></th><th>3 Month</th><th>6 Month</th><th class='chng_return'>1 Year</th><th class='chng_return'>3 Year</th><th class='chng_return'>5 Year</th><th class='chng_return'>10 Year</th></tr></thead>";
 		for(var i =0;i <= returns_data.returns_data.length-1;i++)
 		{
 			mf_data = returns_data.returns_data[i];
@@ -2156,7 +1490,7 @@ function get_portfolio_holdings(schemecode)
 		var portfolio_holdings = JSON.parse(portfolio_holdings_ajax);
 		// console.log(portfolio_holdings.portfolio_holdings.length);
 		var tblData="";
-		var th = "<thead class='border-top breadcrumb_3'><tr><th>Security Name</th><th>Weight (%)</th></tr></thead>";
+		var th = "<thead class='border-top breadcrumb_3'><tr><th>Security Name</th><th>Weight&nbsp;(%)</th></tr></thead>";
 		   
 	    if(portfolio_holdings.portfolio_holdings.length > 0)
 	    {
@@ -2210,138 +1544,6 @@ function get_portfolio_holdings(schemecode)
 	return "True";
 }
 
-// function get_hold_asset()
-// {
-
-// 	$.ajax({
-// 	type:'GET',
-// 	url: '/home/get_holding_asset',
-// 	datatype:'json',
-// 	success:function(sectordata, textStatus, jqXHR) {
-// 	 console.log(sectordata);
-// 	 var tblData="";
-// 	 var tblData1 ="";
-// 	 var th = ""; 
-// 	 var th1 = ""; 
-
-// 	 var classification = sectordata.classification;
-      
-
-// 	 if(classification == "Equity")
-// 	 {
-
-// 	 	th = "<thead><tr><th>Company</th><th>Industry</th><th>Sector</th><th>Assets %</th><th>Previous Quarter %</th></tr></thead>";
-// 	 	for(var i =0;i <= sectordata.hold.length-1;i++)
-// 	 {
-// 	var item1 = sectordata.hold[i];
-// 	var scheme_code = item1.schemecode;
-// 	var company = item1.compname;
-// 	var sector = item1.sect_name;
-// 	var rv_sector = item1.rv_sect_name;
-// 	var holdpercentage = item1.holdpercentage;
-// 	var previous_quarter  = item1.prev_holdperc;
-// 	            if(i == 0)
-// 	               {
-// 	                tblData = th + "<tr><td>"+company+"</td><td>"+sector+"</td><td>"+rv_sector+"</td><td>"+holdpercentage+"</td><td>"+previous_quarter+"</td></tr>";
-// 	                      }
-// 	              else
-// 	              {
-// 	               tblData = tblData + "<tr><td>"+company+"</td><td>"+sector+"</td><td>"+rv_sector+"</td><td>"+holdpercentage+"</td><td>"+previous_quarter+"</td></tr>";
-// 	                }
-// 	 }
-// 	 $("#holding_table").html("");
-// 	             $("#holding_table").html(tblData);
-
-// 	 }
-
-// 	 else if(classification == "Debt")
-// 	 {
-
-// 	 	th = "<thead><tr><th>Company</th><th>Asset Type</th><th>Rating</th><th>Assets %</th></tr></thead>";
-// 	 	for(var i =0;i <= sectordata.hold.length-1;i++)
-// 	 {
-// 	var item1 = sectordata.hold[i];
-// 	var scheme_code = item1.schemecode;
-// 	var company = item1.compname;
-// 	var asect_type = item1.asect_type;
-// 	var rating = item1.rating;
-// 	var holdpercentage = item1.holdpercentage;
-// 	            if(i == 0)
-// 	               {
-// 	                tblData = th + "<tr><td>"+company+"</td><td>"+asect_type+"</td><td>"+rating+"</td><td>"+holdpercentage+"</td></tr>";
-// 	                      }
-// 	              else
-// 	              {
-// 	               tblData = tblData + "<tr><td>"+company+"</td><td>"+asect_type+"</td><td>"+rating+"</td><td>"+holdpercentage+"</td></tr>";
-// 	                }
-// 	 }
-// 	 $("#holding_table").html("");
-// 	             $("#holding_table").html(tblData);
-// 	 }
-
-// 	 else if(classification == "Hybrid")
-// 	 {
-              
-// 	            th = "<thead><tr><th>Company</th><th>Industry</th><th>Sector</th><th>Assets %</th><th>Previous Quarter %</th></tr></thead>";
-// 	 	for(var i =0;i <= sectordata.hold_eq.length-1;i++)
-// 	 {
-// 	var item1 = sectordata.hold_eq[i];
-// 	var scheme_code = item1.schemecode;
-// 	var company = item1.compname;
-// 	var sector = item1.sect_name;
-// 	var rv_sector = item1.rv_sect_name;
-// 	var holdpercentage = item1.holdpercentage;
-// 	var previous_quarter  = item1.prev_holdperc;
-// 	            if(i == 0)
-// 	               {
-// 	                tblData = th + "<tr><td>"+company+"</td><td>"+sector+"</td><td>"+rv_sector+"</td><td>"+holdpercentage+"</td><td>"+previous_quarter+"</td></tr>";
-// 	                      }
-// 	              else
-// 	              {
-// 	               tblData = tblData + "<tr><td>"+company+"</td><td>"+sector+"</td><td>"+rv_sector+"</td><td>"+holdpercentage+"</td><td>"+previous_quarter+"</td></tr>";
-// 	                }
-// 	 }
-// 	 $("#holding_table").html("");
-// 	             $("#holding_table").html(tblData);
-//   //debt -part
-
-
-
-
-// 	  	th1 = "<thead><tr><th>Company</th><th>Asset Type</th><th>Rating</th><th>Assets %</th></tr></thead>";
-// 	 	for(var i =0;i <= sectordata.hold_debt.length-1;i++)
-// 	 {
-// 	var item1 = sectordata.hold_debt[i];
-// 	var scheme_code = item1.schemecode;
-// 	var company = item1.compname;
-// 	var asect_type = item1.asect_type;
-// 	var rating = item1.rating;
-// 	var holdpercentage = item1.holdpercentage;
-// 	            if(i == 0)
-// 	               {
-// 	                tblData1 = th1 + "<tr><td>"+company+"</td><td>"+asect_type+"</td><td>"+rating+"</td><td>"+holdpercentage+"</td></tr>";
-// 	                      }
-// 	              else
-// 	              {
-// 	               tblData1 = tblData1 + "<tr><td>"+company+"</td><td>"+asect_type+"</td><td>"+rating+"</td><td>"+holdpercentage+"</td></tr>";
-// 	                }
-// 	 }
-// 	 $("#holding_table-1").html("");
-// 	             $("#holding_table-1").html(tblData1);
-
-
-
-
-
-// 	 }
- 
-// 	},
-// 	 error:function(jqXHR, textStatus, errorThrown) {
-// 	   alert("AJAX Error:" + textStatus);
-// 	 }
-//  })
-// }
-
 
 function get_hold_asset(schemecode)
 {
@@ -2349,8 +1551,8 @@ function get_hold_asset(schemecode)
 
      $$.get(curr_ip+'home/get_holding_asset',{schemecode: +schemecode},function (sectordata_ajax) 
     {
-    	var sectordata=JSON.parse(sectordata_ajax);
-    	var tblData_eq="";
+	 var sectordata=JSON.parse(sectordata_ajax);
+	 var tblData_eq="";
 	 var tblData_db="";
 	 var tblData="";
 	 var tblData1 ="";
@@ -2745,22 +1947,15 @@ function stock_data()
 
 function port_avgcap()
 {
-	// console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-	// // $$.get(curr_ip+'functionalities/get_protfolio_avgmarketcap', function (sectordata) {
- // //       console.log(sectordata);
- // //    });
-	// console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+	
 	$.ajax({
 	type:'GET',
 	url: '/functionalities/get_protfolio_avgmarketcap',
 	datatype:'json',
 	success:function(sectordata, textStatus, jqXHR) {
-	// console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-	// console.log(sectordata);
-	// console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+	
 	var tblData="";
 	var th = "<thead><tr><th>Portfolio Market Cap</th><th>Fund</th><th>Category Average</th></tr></thead>";
-
 
 	for(var i =0;i <= sectordata.market.length-1;i++)
 	{
@@ -2769,14 +1964,14 @@ function port_avgcap()
 	var portfolio_marketcap = item1.portfolio_marketcap;
 	var fund = item1.fund;
 	var category_avg = item1.category_avg;
-            if(i == 0)
-            {
-                tblData = th + "<tr><td>"+portfolio_marketcap+"</td><td>"+fund+"</td><td>"+category_avg+"</td></tr>";
-                      }
-            else
-            {
-               tblData = tblData + "<tr><td>"+portfolio_marketcap+"</td><td>"+fund+"</td><td>"+category_avg+"</td></tr>";
-            }
+	    if(i == 0)
+	    {
+	        tblData = th + "<tr><td>"+portfolio_marketcap+"</td><td>"+fund+"</td><td>"+category_avg+"</td></tr>";
+	              }
+	    else
+	    {
+	       tblData = tblData + "<tr><td>"+portfolio_marketcap+"</td><td>"+fund+"</td><td>"+category_avg+"</td></tr>";
+	    }
 	}
 	$("#portfolio_table").html("");
         $("#portfolio_table").html(tblData);
@@ -2801,7 +1996,7 @@ function concentration_values(schemecode,table_id)
 	success:function(scheme_data,textStatus, jqXHR) {
 	  console.log(scheme_data);
 	  var tblData3=""; 
-	var th = "<CAPTION class='portcap'><h4 class='d_inline'>Portfolio Summary</h4><h6 class='d_inline'>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th colspan='2'>Concentration &amp; Valuation </th></tr></thead>";
+	var th = "<CAPTION class='portcap'><h4 class='d_inline_b'>Portfolio Summary</h4><h6 class='d_inline'>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th colspan='2'>Concentration &amp; Valuation </th></tr></thead>";
 
 	  for(var i =0;i <= scheme_data.concen_value.length-1;i++)
 	  {
@@ -3304,7 +2499,7 @@ function get_portfolio_markettable(schemecode,table_id)
 	success:function(port_cap, textStatus, jqXHR) {
 	console.log(port_cap);
 	var tbldata2="";
-	var th = "<CAPTION class='portcap'><h4 class='d_inline'>Portfolio Market Cap</h4><h6 class='d_inline'>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th></th><th>Fund</th><th>Category Avg.</th></tr></thead>";
+	var th = "<CAPTION class='portcap'><h4 class='d_inline_b'>Portfolio Market Cap</h4><h6 class='d_inline'>&nbsp;&nbsp;(as on "+univ_as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th></th><th>Fund</th><th>Category&nbsp;Avg.</th></tr></thead>";
 	for(var i =0;i <= port_cap.cap_values.length-1;i++)
 	{
 	var item1 = port_cap.cap_values[i];
@@ -3323,13 +2518,6 @@ function get_portfolio_markettable(schemecode,table_id)
 	}
 	}
 	
-	// $("#lcap").html(lcap);
-	// $("#mcap").html(mcap);
-	// $("#scap").html(scap);
-	// $("#ppmcap").html(ppmcap);
-	// $("#portfolio_table").html("");
-	// $("#portfolio_table").html(tblData2);
-	// $("#portfolio_table").css("display","table");
 	$("#"+table_id).html("");
 	$("#"+table_id).html(tblData2);
 	$("#"+table_id).css("display","table");
@@ -3413,7 +2601,7 @@ function port_characteristics(schemecode,table_id)
           var as_on_date = moment(data.as_on_date).format('DD-MMM-YY'); 
 
 	  var tblData4="";
-	  var th = "<CAPTION class='portcap'><h4 class='d_inline'>Debt Profile</h4><h6>&nbsp;&nbsp;(as on "+as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th></th><th>Fund</th><th>1 Year High</th><th>1 Year Low</th><th>Cat. Avg.</th></tr></thead>";
+	  var th = "<CAPTION class='portcap'><h4 class='d_inline_b'>Debt Profile</h4><h6 class='d_inline'>&nbsp;&nbsp;(as on "+as_on_date+")</h6></CAPTION><thead class='breadcrumb_3'><tr><th></th><th>Fund</th><th class='d_none'>1 Year High</th><th class='d_none'>1 Year Low</th><th>Cat. Avg.</th></tr></thead>";
 	
 	 var max_avg_maturity;
 	 var min_avg_maturity;	
@@ -3600,7 +2788,7 @@ function port_characteristics(schemecode,table_id)
              	}
              	
              	
-             	tblData4 = th + "<tbody><tr><td>Number of Securities</td><td>"+data.security_count+"</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Modified Duration (yrs)</td><td>"+modified_dur+"</td><td>"+max_modified_duration+"</td><td>"+min_modified_duration+"</td><td>"+modified_dur_avg+"</td></tr><tr><td>Average Maturity (yrs)</td><td>"+avg_mat+"</td><td>"+max_avg_maturity+"</td><td>"+min_avg_maturity+"</td><td>"+avg_avg_mat+"</td></tr><tr><td>Yield to Maturity (%)</td><td>"+ytm+"</td><td>"+max_ytm+"</td><td>"+min_ytm+"</td><td>"+ytm_avg+"</td></tr></tbody>"	 // alert(data.avg_mat);
+             	tblData4 = th + "<tbody><tr><td>Number of Securities</td><td>"+data.security_count+"</td><td class='d_none'>-</td><td class='d_none'>-</td><td>-</td></tr><tr><td>Modified Duration (yrs)</td><td>"+modified_dur+"</td><td class='d_none'>"+max_modified_duration+"</td><td class='d_none'>"+min_modified_duration+"</td><td>"+modified_dur_avg+"</td></tr><tr><td>Average Maturity (yrs)</td><td>"+avg_mat+"</td><td class='d_none'>"+max_avg_maturity+"</td><td class='d_none'>"+min_avg_maturity+"</td><td>"+avg_avg_mat+"</td></tr><tr><td>Yield to Maturity (%)</td><td>"+ytm+"</td><td class='d_none'>"+max_ytm+"</td><td class='d_none'>"+min_ytm+"</td><td>"+ytm_avg+"</td></tr></tbody>"	 // alert(data.avg_mat);
      
              	// $('#portfolio_characteristics').html("");
              	 // $('#portfolio_characteristics').html(tblData4);
@@ -3610,35 +2798,11 @@ function port_characteristics(schemecode,table_id)
              	$('#'+table_id).html("");
              	$('#'+table_id).html(tblData4);
 
-         // $("#avg_mat").html(data.avg_mat);
-         
-         // $("#modified_dur").html(data.modified_dur);
-         
-         // $("#ytm").html(data.ytm); 
-
-         
-           
-         // $("#avg_mat_avg").html(data.avg_avg_mat);
-         
-         // $("#modified_dur_avg").html(data.modified_dur_avg);
-
-         // $("#ytm_avg").html(data.ytm_avg); 
+          
  
          
         
-         // $("#no_of_secu").html(data.security_count);                 
- 
-	// for(var i =0;i <= avg_allcap.avg_allcap.length-1;i++)
-	// {
-	// 	var item1 = avg_allcap.avg_allcap[i];
-	// 	var avg_lcap = item1.lcap_avg;
-	// 	var avg_mcap = item1.mcap_avg;
-	// 	var avg_scap = item1.scap_avg;
-
-	// 	$("#lcapavg").html(avg_lcap);
-	// 	$("#mcapavg").html(avg_mcap);
-	// 	$("#scapavg").html(avg_scap);
-	// }
+         
 	},
 	error:function(jqXHR, textStatus, errorThrown) {
 	  // alert("AJAX Error:" + textStatus);

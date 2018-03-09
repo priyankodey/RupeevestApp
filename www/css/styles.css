@@ -112,6 +112,14 @@ hr {
 .page {    
   background: #fff;
 }
+.AutoLayoutTable {
+  table-layout: auto;
+  width: 100%;    
+}
+.FixedLayoutTable {
+  table-layout: fixed;
+  width: 100%;    
+}
 
 /* *************************************** 
                 Navbar
@@ -605,200 +613,190 @@ hr {
                             Overview 
 *********************************************************************/
 
-#FundDetails .glyphicon.glyphicon-star{
+#FundDetailsID .glyphicon.glyphicon-star{
   color: #fff;
 }
-#FundDetails #navdate,#FundDetails #aumdate{
+#FundDetailsID #navdate,#FundDetailsID #aumdate{
   font-style: italic;
   color: #787979;
 }
-#FundDetails #s_name{
+#FundDetailsID #s_name{
   margin-bottom: 5px;
 }
-#FundDetails .top_1{
+#FundDetailsID #rv_rating {
+  color: #fff;
+}
+#FundDetailsID .top_1{
   margin-top: 1em;
 }
-#FundDetails .pagination{
+#FundDetailsID .pagination{
   display: block;
+  margin: 0;
 }
-#FundDetails #pages{
+#FundDetailsID #pages{
   text-align: center;
 }
-#FundDetails .ov_top_nav h2{
+#FundDetailsID .ov_top_nav h2{
   display: inline;
   margin-right: 10px;
 }
-#FundDetails .ov_top_nav h4{
+#FundDetailsID .ov_top_nav h4{
   display: inline;
 }
-#FundDetails .ov_top_nav h6{
+#FundDetailsID .ov_top_nav h6{
   margin-top: 0px;
 }
-#FundDetails table#return th:nth-child(2),#FundDetails table#return td:nth-child(2){
+#FundDetailsID #return .chng_return, #FundDetailsID #peertabl .chng_peercomp {
+  position: relative;
+}
+#FundDetailsID #return .chng_return:after, #FundDetailsID #peertabl .chng_peercomp:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0; 
+  height: 0; 
+  display: block;
+  border-left: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-top: 15px solid #17406B;
+}
+#FundDetailsID table#return th:nth-child(2),#FundDetailsID table#return td:nth-child(2),
+#FundDetailsID table#return th:nth-child(3),#FundDetailsID table#return td:nth-child(3),
+#FundDetailsID table#return th:nth-child(5),#FundDetailsID table#return td:nth-child(5),
+#FundDetailsID table#return th:nth-child(6),#FundDetailsID table#return td:nth-child(6),
+#FundDetailsID table#return th:nth-child(7),#FundDetailsID table#return td:nth-child(7){
   display: none;
 }
-#FundDetails table#return th:nth-child(3),#FundDetails table#return td:nth-child(3){
-  display: none;
-}
-#FundDetails table#return th:first-child{
-  min-width: 16em;
-}
-#FundDetails table#return th:nth-child(n+2){
-  min-width: 6em;
-}
-#FundDetails table#return td:nth-child(n+2){
+#FundDetailsID table#return tr th:nth-child(n+2){
   text-align: right;
-  padding-right: 2.5em;
+  padding-right: 1em;
 }
-#FundDetails table#peertabl tr th:nth-child(1){
-  min-width: 12em;
+#FundDetailsID table#return tr td:nth-child(n+2){
+  text-align: right;
+  padding-right: 1.5em;
 }
-#FundDetails table#peertabl tr:nth-child(1) th:nth-child(2),#FundDetails table#peertabl tr td:nth-child(2){
+#FundDetailsID #container-7 {
+  height: 175px;
+}
+#FundDetailsID table#peertabl tr:nth-child(1) th:nth-child(2),
+#FundDetailsID table#peertabl tr td:nth-child(2),
+#FundDetailsID table#peertabl tr:nth-child(1) th:nth-child(4),
+#FundDetailsID table#peertabl tr td:nth-child(4),
+#FundDetailsID table#peertabl tr:nth-child(1) th:nth-child(5){
   display: none;
 }
-#FundDetails table#peertabl tr:nth-child(2) th:nth-child(1),#FundDetails table#peertabl tr td:nth-child(5){
+#FundDetailsID table#peertabl tr:nth-child(2) th:nth-child(1),
+#FundDetailsID table#peertabl tr td:nth-child(5),
+#FundDetailsID table#peertabl tr:nth-child(2) th:nth-child(3),
+#FundDetailsID table#peertabl tr td:nth-child(7),
+#FundDetailsID table#peertabl tr:nth-child(2) th:nth-child(4),
+#FundDetailsID table#peertabl tr td:nth-child(8){
   display: none;
 }
-#FundDetails table#peertabl tr:nth-child(1) th:nth-child(3){
-  min-width: 8em;
+#FundDetailsID table#peertabl tr:nth-child(1) th:nth-child(3){
+  text-align: right;
+  padding-right: 1em;
 }
-#FundDetails table#peertabl tr:nth-child(1) th:nth-child(4){
-  min-width: 9em;
-}
-#FundDetails table#peertabl tr:nth-child(1) th:nth-child(5){
-  text-align: center;
-}
-#FundDetails table#peertabl tr td:nth-child(3){
+#FundDetailsID table#peertabl tr td:nth-child(3){
   text-align: right;
   padding-right: 2em;
 }
-#FundDetails table#peertabl tr td:nth-child(4){
+#FundDetailsID table#peertabl tr:nth-child(2) th:nth-child(2){
   text-align: right;
-  padding-right: 4em;
+  padding-right: 0.5em;
 }
-#FundDetails table#peertabl tr td:nth-child(6){
+#FundDetailsID table#peertabl tr td:nth-child(6),
+#FundDetailsID table#peertabl tr td:nth-child(7),
+#FundDetailsID table#peertabl tr td:nth-child(8){
   text-align: right;
-  padding-right: 1.2em;
+  padding-right: 1em;
 }
-#FundDetails table#peertabl tr td:nth-child(7){
-  text-align: right;
-  padding-right: 1.2em;
-}
-#FundDetails table#peertabl tr td:nth-child(8){
-  text-align: right;
-  padding-right: 1.2em;
-}
-#FundDetails table#portfolio_holdings{
+#FundDetailsID table#portfolio_holdings{
   height: 10em;
   overflow-y: auto; 
 }
-#FundDetails .breadcrumb_2 {
+#FundDetailsID .breadcrumb_3 {
   margin-bottom: 15px;
-  border: 1px solid #17396B;
-  background: linear-gradient(to top, rgba(18,51,86,1), rgba(38,89,149,1));
+  border: 1px solid #c0c1c1;
+  background: #a2d2f7;
 }
-#FundDetails .breadcrumb_3 {
-  margin-bottom: 15px;
-  border: 1px solid #17396B;
-  background: linear-gradient(to bottom, rgba(18,51,86,1), rgba(38,89,149,1));
-  color:#fff;
-}
-#FundDetails .breadcrumb_4 {
-  border: 2px solid #17396B;
-  border-radius: 10px;
+#FundDetailsID .breadcrumb_4 {
+  border-radius: 2px;
   margin-bottom: 1em;
+  padding: 1px 0px;
+  box-shadow: 1px 1px 15px rgba(0,0,0,.3);
 }
-#FundDetails .breadcrumb_bgr{
-  background: #fff;
-}
-#FundDetails .breadcrumb_4 h4{
-  margin-left: 0.5em;
-}
-#FundDetails .pad_left{
+#FundDetailsID .breadcrumb_4 h4{
   padding-left: 5px;
 }
-#FundDetails .pad_right{
+#FundDetailsID .breadcrumb_bgr{
+  background: #fff;
+}
+#FundDetailsID .pad_left{
+  padding-left: 5px;
+}
+#FundDetailsID .pad_right{
   padding-right: 5px;
 }
-#FundDetails #portfolio_holdings th:nth-child(2){
+#FundDetailsID #portfolio_holdings th:nth-child(2){
   text-align: right;
-  padding-right: 2em;
-  /* width: 35%; */
-  min-width: 10em;
 }
-#FundDetails #portfolio_holdings td:nth-child(1),#FundDetails #portfolio_holdings th:nth-child(1){
-  width: 80%;
+#FundDetailsID #portfolio_holdings td:nth-child(1),#FundDetailsID #portfolio_holdings th:nth-child(1){
   overflow-x: auto;
   white-space: nowrap;
   max-width: 180px;
 }
-#FundDetails #portfolio_holdings td:nth-child(2){
+#FundDetailsID #portfolio_holdings td:nth-child(2){
   width: 25%;
   text-align: right;
   padding-right: 2em;
 }
-#FundDetails #portfolio_table th:nth-child(n+2){
-  text-align: center;
+#FundDetailsID #portfolio_table th:nth-child(2){
+  text-align: right;
+  padding-right: 1.5em;
 }
-#FundDetails #portfolio_table th:nth-child(3){
-  min-width: 9em;
-}
-#FundDetails #portfolio_table th:nth-child(4){
-  min-width: 8em;
-}
-#FundDetails #portfolio_table th:nth-child(5){
-  min-width: 6em;
-}
-#FundDetails #portfolio_table td:nth-child(1){
-  min-width: 8em;
-}
-#FundDetails #portfolio_table td:nth-child(2){
+#FundDetailsID #portfolio_table th:nth-child(3){
   text-align: right;
   padding-right: 1em;
 }
-#FundDetails #portfolio_table td:nth-child(3){
-  text-align: right;
-  padding-right: 2em;
-}
-#FundDetails #portfolio_table td:nth-child(4){
-  text-align: right;
-  padding-right: 2em;
-}
-#FundDetails #portfolio_table td:nth-child(5){
-  text-align: right;
-  padding-right: 2em;
-}
-#FundDetails #portfolio_table .portcap{
-  text-align: left;
-  margin-top: 1em;
-}
-#FundDetails #portfolio_table .portcap h6{
-  font-style: italic;
-  margin-top: 2px;
-}
-#FundDetails #conval .portcap{
-  text-align: left;
-  margin-top: 1em;
-}
-#FundDetails #conval .portcap h6{
-  font-style: italic;
-  margin-top: 2px;
-}
-#FundDetails #conval td:nth-child(2){
-  text-align: right;
-  padding-right: 2em;
-}
-#FundDetails #asset_alloc_table th:nth-child(2),#FundDetails #asset_alloc_table td:nth-child(2){
+#FundDetailsID #portfolio_table th:nth-child(5){
   text-align: right;
   padding-right: 1em;
 }
-#FundDetails .pad_right table td,#FundDetails .pad_left table td{
+#FundDetailsID #portfolio_table td:nth-child(2){
+  text-align: right;
+  padding-right: 1em;
+}
+#FundDetailsID #portfolio_table td:nth-child(3){
+  text-align: right;
+  padding-right: 2em;
+}
+#FundDetailsID #portfolio_table td:nth-child(5){
+  text-align: right;
+  padding-right: 2em;
+}
+#FundDetailsID #portfolio_table .portcap, #FundDetailsID #conval .portcap {
+  text-align: left;
+}
+#FundDetailsID #portfolio_table .portcap h6, #FundDetailsID #conval .portcap h6 {
+  font-style: italic;
+}
+#FundDetailsID #conval td:nth-child(2){
+  text-align: right;
+  padding-right: 2em;
+}
+#FundDetailsID #asset_alloc_table th:nth-child(2),#FundDetailsID #asset_alloc_table td:nth-child(2){
+  text-align: right;
+  padding-right: 1em;
+}
+#FundDetailsID .pad_right table td,#FundDetailsID .pad_left table td{
   text-align: center;
 }
-#FundDetails #container-0{
+#FundDetailsID #container-0{
   margin-bottom: 1em;
 }
-#FundDetails #container-01{
+#FundDetailsID #container-01{
   margin-top: 1em;
   margin-bottom: 1em;
 }
