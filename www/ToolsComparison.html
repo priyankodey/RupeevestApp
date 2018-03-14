@@ -6,47 +6,28 @@
                     <h1>Mutual Fund Comparison</h1>
                 </div>                
             </div>
-            <div class="row search_area">
-            <div class="col-xs-9">
-              <div class="input-group">
-                <input type="text" class="form-control" id="srch-term" placeholder="Add upto 4 funds for Comparison">
-                <span class="input-group-btn">
-                  <span class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                </span>                 
-              </div>
-              
-            </div>
-            <div class="col-xs-3">
-                <button class="btn btn-primary add_button" id="add_btn_search" onclick="add_scheme()" >Add</button>
-            </div>
-            </div> 
 
-            <div class="area_wrap_mob">
-         <div id="comparison_fund">
-        <div class="row" >
-            <div class="mob_mf_com col-xs-2 col-sm-2">                 
-                <div class="list-group">
-                  <div class="list-group-item">
-                    <h2>Comparison of selected funds based on various parameters</h2>
-                  </div>
-                </div>                
+             <div class="row">
+              <div class="col-xs-12">
+                <input type="text" id="srch-term" class="form-control ui-autocomplete-input">
+              </div>
             </div>
-            <div class="col-xs-10 col-sm-10">
-              <div class="row comparison_outer">
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_0" style="display:none;">
-                  <div class="comparison_fund_outer">
+
+            <div class="row">
+              <div class="col-xs-6 ">
+                <div class="comparison_fund_outer fund_head_0 d_none">
                       <div class="comparison_fund_inner_top ct1">
                           <div class="glyphicon glyphicon-remove-circle close_image">
                             <input type="hidden" id="scheme_code_0">
                           </div>
                           <div class="">
-                                <span id="s_name_0"></span> 
+                                <span id="s_name_0">Add fund to comparison</span> 
                           </div>                       
                       </div>
                       <div class="comparison_fund_inner_bottom">
                           <div id="fund_manager_0"></div>
                           <span id="classification_0"></span> <!-- | <span id="index_name_0"></span> -->
-                          <div>AUM: ₹ <span id="aumtotal_0"></span> (cr.)</div>
+                          <div>AUM: ₹ <span id="aumtotal_0">-</span> (cr.)</div>
                          
                           <div id="five_0" style="display : none;"><span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></span>
                            </div>
@@ -62,16 +43,17 @@
                            </div>
 
                       </div>
-                  </div>                  
-                </div>
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_1" style="display:none;">
-                  <div class="comparison_fund_outer">
+                  </div>     
+                  <!-- <button class="btn btn-primary btn-block">Remove</button> -->
+              </div>
+              <div class="col-xs-6">
+                <div class="comparison_fund_outer fund_head_1 d_none">
                       <div class="comparison_fund_inner_top ct2">
                           <div class="glyphicon glyphicon-remove-circle close_image">
                              <input type="hidden" id="scheme_code_1">
                           </div>
                             <div class="">
-                           <span id="s_name_1"></span>                          
+                           <span id="s_name_1"> Add fund to comparison</span>                          
                             </div> 
                       </div>
                       <div class="comparison_fund_inner_bottom">
@@ -91,471 +73,348 @@
                            <div id="unrated_1" style="display : none;">Unrated
                            </div>
                       </div>
-                  </div>                  
-                </div>
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_2" style="display:none;">
-                  <div class="comparison_fund_outer">
-                      <div class="comparison_fund_inner_top ct3">
-                          <div class="glyphicon glyphicon-remove-circle close_image">
-                             <input type="hidden" id="scheme_code_2">
-                          </div>
-                          <div class="">
-                             <span id="s_name_2"></span>                          
-                          </div> 
-                      </div>
-                      <div class="comparison_fund_inner_bottom">
-                          <div id="fund_manager_2">P</div>
-                          <span  id="classification_2"></span> <!-- | <span id="index_name_2"></span> -->
-                          <div>AUM: ₹ <span id="aumtotal_2"></span> (cr.)</div>
-                           <div id="five_2" style="display : none;"><span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></span>
-                           </div>
-                           <div id="four_2" style="display : none;"><span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></span>
-                           </div>
-                           <div id="three_2" style="display : none;"><span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></span>
-                           </div>
-                           <div id="two_2" style="display : none;"><span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></span>
-                           </div>
-                           <div id="one_2" style="display : none;"><span><span class="glyphicon glyphicon-star"></span></span>
-                           </div>
-                           <div id="unrated_2" style="display : none;">Unrated
-                           </div>
-                      </div>
-                  </div>                  
-                </div>
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_3" style="display:none;">
-                  <div class="comparison_fund_outer">
-                      <div class="comparison_fund_inner_top ct4">
-                          <div class="glyphicon glyphicon-remove-circle close_image">
-                             <input type="hidden" id="scheme_code_3">
-                          </div>
-                          <div class="">
-                              <span id="s_name_3"></span>   
-                          </div>                        
-                      </div>
-                      <div class="comparison_fund_inner_bottom">
-                          <div id="fund_manager_3"></div>
-                          <span  id="classification_3"></span> <!-- | <span id="index_name_3"></span> -->
-                          <div>AUM: ₹ <span  id="aumtotal_3"></span> (cr.)</div>
-                           <div id="five_3" style="display : none;"><span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></span>
-                           </div>
-                           <div id="four_3" style="display : none;"><span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></span>
-                           </div>
-                           <div id="three_3" style="display : none;"><span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></span>
-                           </div>
-                           <div id="two_3" style="display : none;"><span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></span>
-                           </div>
-                           <div id="one_3" style="display : none;"><span><span class="glyphicon glyphicon-star"></span></span>
-                           </div>
-                           <div id="unrated_3" style="display : none;">Unrated
-                           </div>
-                      </div>
-                  </div>                  
-                </div>
-              </div>                
-            </div>
-        </div>
-        </div>
-        <div class="row" id="comparison_basic">
-            <div class="col-xs-12 col-sm-12">
-              <div class="comparison_head">
-                <span>BASIC DETAILS</span>
+                  </div> 
+                  <!-- <button class="btn btn-primary btn-block">Remove</button> -->
               </div>
             </div>
-            <div class="col-xs-2 col-sm-2 comparison_bodyP1">
-                <ul class="list-group">
-                  <li class="list-group-item">Expense Ratio (%)</li>
-                  <li class="list-group-item">Exit Load (%)</li>
-                  <li class="list-group-item">Lock-in Period (Years)</li>
-                  <li class="list-group-item">Inception Date</li>
-                  <li class="list-group-item">Min. Investment (in ₹)</li>
-                </ul>                       
+            <div class="row">
+<!--               <button class="btn btn-primary btn-block">Add new fund</button> -->
             </div>
-            <div class="col-xs-10 col-sm-10 comparison_bodyP2">
-              <div class="row">
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_0" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="basic_expense_ratio_0"></li>
-                    <li class="list-group-item" id="basic_exit_load_0"></li>
-                    <li class="list-group-item" id="basic_lock_in_period_0"></li>
-                    <li class="list-group-item" id="basic_launch_date_0"></li>
-                    <li class="list-group-item" id="basic_min_inv_0"></li>
-                  </ul>  
-                </div>
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_1" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="basic_expense_ratio_1"></li>
-                    <li class="list-group-item" id="basic_exit_load_1"></li>
-                    <li class="list-group-item" id="basic_lock_in_period_1"></li>
-                    <li class="list-group-item" id="basic_launch_date_1"></li>
-                    <li class="list-group-item" id="basic_min_inv_1"></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_2" style="display:none;">
-                  <ul class="list-group ">
-                    <li class="list-group-item" id="basic_expense_ratio_2"></li>
-                    <li class="list-group-item" id="basic_exit_load_2"></li>
-                    <li class="list-group-item" id="basic_lock_in_period_2"></li>
-                    <li class="list-group-item" id="basic_launch_date_2"></li>
-                    <li class="list-group-item" id="basic_min_inv_2"></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_3" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="basic_expense_ratio_3"></li>
-                    <li class="list-group-item" id="basic_exit_load_3"></li>
-                    <li class="list-group-item" id="basic_lock_in_period_3"></li>
-                    <li class="list-group-item" id="basic_launch_date_3"></li>
-                    <li class="list-group-item" id="basic_min_inv_3"></li>
-                  </ul>  
-                </div>                 
-              </div>                                     
-            </div>
-        </div>
-
-        <div class="row" id="comparison_return">
-            <div class="col-xs-12 col-sm-12">
-              <div class="comparison_head">
-                <span>RETURN (%)</span>
-              </div>
-            </div>
-            <div class="col-xs-2 col-sm-2 comparison_bodyP1">
-                <ul class="list-group">
-                  <li class="list-group-item">6 mo</li>
-                  <li class="list-group-item">1 yr</li>
-                  <li class="list-group-item">2 yr</li>
-                  <li class="list-group-item">3 yr</li>
-                  <li class="list-group-item">5 yr</li>
-                  <li class="list-group-item">10 yr</li>
-                </ul>                       
-            </div>
-            <div class="col-xs-10 col-sm-10 comparison_bodyP2">
-              <div class="row">
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_0" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="return_6m_0"></li>
-                    <li class="list-group-item" id="return_1y_0"></li>
-                    <li class="list-group-item" id="return_2y_0"></li>
-                    <li class="list-group-item" id="return_3y_0"></li>
-                    <li class="list-group-item" id="return_5y_0"></li>
-                    <li class="list-group-item" id="return_10y_0"></li>
-                  </ul>  
-                </div>
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_1" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="return_6m_1"></li>
-                    <li class="list-group-item" id="return_1y_1"></li>
-                    <li class="list-group-item" id="return_2y_1"></li>
-                    <li class="list-group-item" id="return_3y_1"></li>
-                    <li class="list-group-item" id="return_5y_1"></li>
-                    <li class="list-group-item" id="return_10y_1"></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_2" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="return_6m_2"></li>
-                    <li class="list-group-item" id="return_1y_2"></li>
-                    <li class="list-group-item" id="return_2y_2"></li>
-                    <li class="list-group-item" id="return_3y_2"></li>
-                    <li class="list-group-item" id="return_5y_2"></li>
-                    <li class="list-group-item" id="return_10y_2"></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_3" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="return_6m_3"></li>
-                    <li class="list-group-item" id="return_1y_3"></li>
-                    <li class="list-group-item" id="return_2y_3"></li>
-                    <li class="list-group-item" id="return_3y_3"></li>
-                    <li class="list-group-item" id="return_5y_3"></li>
-                    <li class="list-group-item" id="return_10y_3"></li>
-                  </ul>  
-                </div>                 
-              </div>                                     
-            </div>
-        </div>
-
-        <div class="row" id="comparison_performance_measures">
-            <div class="col-xs-12 col-sm-12">
-              <div class="comparison_head">
-                <span>MF RATIOS</span>
-              </div>
-            </div>
-            <div class="col-xs-2 col-sm-2 comparison_bodyP1">
-                <ul class="list-group">
-                  <li class="list-group-item">Standard Deviation</li>
-                  <li class="list-group-item">Beta</li>
-                  <li class="list-group-item">Sharpe</li>
-                  <li class="list-group-item">Sortino</li>
-                  <li class="list-group-item">Alpha</li>
-                </ul>                       
-            </div>
-            <div class="col-xs-10 col-sm-10 comparison_bodyP2">
-              <div class="row">
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_0" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="performance_stand_dev_0"></li>
-                    <li class="list-group-item" id="performance_beta_0"></li>
-                    <li class="list-group-item" id="performance_sharpe_0"></li>
-                    <li class="list-group-item" id="performance_sortino_0"></li>
-                    <li class="list-group-item" id="performance_alpha_0"></li>
-                  </ul>  
-                </div>
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_1" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="performance_stand_dev_1"></li>
-                    <li class="list-group-item" id="performance_beta_1"></li>
-                    <li class="list-group-item" id="performance_sharpe_1"></li>
-                    <li class="list-group-item" id="performance_sortino_1"></li>
-                    <li class="list-group-item" id="performance_alpha_1"></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_2" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="performance_stand_dev_2"></li>
-                    <li class="list-group-item" id="performance_beta_2"></li>
-                    <li class="list-group-item" id="performance_sharpe_2"></li>
-                    <li class="list-group-item" id="performance_sortino_2"></li>
-                    <li class="list-group-item" id="performance_alpha_2"></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_3" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="performance_stand_dev_3"></li>
-                    <li class="list-group-item" id="performance_beta_3"></li>
-                    <li class="list-group-item" id="performance_sharpe_3"></li>
-                    <li class="list-group-item" id="performance_sortino_3"></li>
-                    <li class="list-group-item" id="performance_alpha_3"></li>
-                  </ul>  
-                </div>                 
-              </div>                                     
-            </div>
-        </div>
-
-        <div class="row" id="comparison_portfolio_attributes">
-            <div class="col-xs-12 col-sm-12">
-              <div class="comparison_head">
-                <span>PORTFOLIO ATTRIBUTES</span>
-              </div>
-            </div>
-            <div class="col-xs-2 col-sm-2 comparison_bodyP1">
-                <ul class="list-group">
-                  <li class="list-group-item">Portfolio P/B Ratio</li>
-                  <li class="list-group-item">Portfolio P/E Ratio</li>
-                  <li class="list-group-item">Turnover Ratio (%)</li>
-                  <li class="list-group-item">Avg. Maturity (in yrs)</li>
-                  <li class="list-group-item">Mod. Duration (in yrs)</li>
-                  <li class="list-group-item">Yield to Maturity (%)</li>                  
-                </ul>                       
-            </div>
-            <div class="col-xs-10 col-sm-10 comparison_bodyP2">
-              <div class="row">
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_0" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="port_attr_pb_ratio_0"></li>
-                    <li class="list-group-item" id="port_attr_pe_ratio_0"></li>
-                    <li class="list-group-item" id="port_attr_turnover_ratio_0"></li>
-                    <li class="list-group-item" id="port_attr_avg_maturity_0"></li>
-                    <li class="list-group-item" id="port_attr_mod_dur_0"></li>
-                    <li class="list-group-item" id="port_attr_yield_maturity_0"></li>
-                  </ul>  
-                </div>
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_1" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="port_attr_pb_ratio_1"></li>
-                    <li class="list-group-item" id="port_attr_pe_ratio_1"></li>
-                    <li class="list-group-item" id="port_attr_turnover_ratio_1"></li>
-                    <li class="list-group-item" id="port_attr_avg_maturity_1"></li>
-                    <li class="list-group-item" id="port_attr_mod_dur_1"></li>
-                    <li class="list-group-item" id="port_attr_yield_maturity_1"></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_2" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="port_attr_pb_ratio_2"></li>
-                    <li class="list-group-item" id="port_attr_pe_ratio_2"></li>
-                    <li class="list-group-item" id="port_attr_turnover_ratio_2"></li>
-                    <li class="list-group-item" id="port_attr_avg_maturity_2"></li>
-                    <li class="list-group-item" id="port_attr_mod_dur_2"></li>
-                    <li class="list-group-item" id="port_attr_yield_maturity_2"></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_3" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="port_attr_pb_ratio_3"></li>
-                    <li class="list-group-item" id="port_attr_pe_ratio_3"></li>
-                    <li class="list-group-item" id="port_attr_turnover_ratio_3"></li>
-                    <li class="list-group-item" id="port_attr_avg_maturity_3"></li>
-                    <li class="list-group-item" id="port_attr_mod_dur_3"></li>
-                    <li class="list-group-item" id="port_attr_yield_maturity_3"></li>
-                  </ul>  
-                </div>                 
-              </div>                                     
-            </div>
-        </div>
-
-        <div class="row" id="comparison_portfolio_market">
-            <div class="col-xs-12 col-sm-12">
-              <div class="comparison_head">
-                <span>PORTFOLIO MARKET CAP</span>
-              </div>
-            </div>
-            <div class="col-xs-2 col-sm-2 comparison_bodyP1">
-                <ul class="list-group">
-                  <li class="list-group-item">Avg. Market Cap (₹ cr)</li>
-                  <li class="list-group-item">Large (%)</li>
-                  <li class="list-group-item">Mid (%)</li>
-                  <li class="list-group-item">Small (%)</li>                                
-                </ul>                       
-            </div>
-            <div class="col-xs-10 col-sm-10 comparison_bodyP2">
-              <div class="row">
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_0" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="port_market_avg_cap_0"></li>
-                    <li class="list-group-item" id="port_market_large_0"></li>
-                    <li class="list-group-item" id="port_market_mid_0"></li>
-                    <li class="list-group-item" id="port_market_small_0"></li>
-                  </ul>  
-                </div>
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_1" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="port_market_avg_cap_1"></li>
-                    <li class="list-group-item" id="port_market_large_1"></li>
-                    <li class="list-group-item" id="port_market_mid_1"></li>
-                    <li class="list-group-item" id="port_market_small_1"></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_2" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="port_market_avg_cap_2"></li>
-                    <li class="list-group-item" id="port_market_large_2"></li>
-                    <li class="list-group-item" id="port_market_mid_2"></li>
-                    <li class="list-group-item" id="port_market_small_2"></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_3" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="port_market_avg_cap_3"></li>
-                    <li class="list-group-item" id="port_market_large_3"></li>
-                    <li class="list-group-item" id="port_market_mid_3"></li>
-                    <li class="list-group-item" id="port_market_small_3"></li>
-                  </ul>  
-                </div>                 
-              </div>                                     
-            </div>
-        </div>                 
-        <div class="row" id="comparison_top_10_holdings">
-            <div class="col-xs-12 col-sm-12">
-              <div class="comparison_head">
-                <span>TOP 10 HOLDINGS (%)</span>
-              </div>
-            </div>
-            <div class="col-xs-2 col-sm-2 comparison_bodyP1">
-                <ul class="list-group">
-                  <li class="list-group-item">Holding 1</li>
-                  <li class="list-group-item">Holding 2</li>
-                  <li class="list-group-item">Holding 3</li>
-                  <li class="list-group-item">Holding 4</li> 
-                  <li class="list-group-item">Holding 5</li>  
-                  <li class="list-group-item">Holding 6</li>  
-                  <li class="list-group-item">Holding 7</li>  
-                  <li class="list-group-item">Holding 8</li>  
-                  <li class="list-group-item">Holding 9</li>  
-                  <li class="list-group-item">Holding 10</li>                                 
-                </ul>                       
-            </div>
-            <div class="col-xs-10 col-sm-10 comparison_bodyP2">
-              <div class="row">
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_0" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" ><div class="comp_holding" id="comp1_hold0"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp1_percent0"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp2_hold0"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp2_percent0"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp3_hold0"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp3_percent0"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp4_hold0"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp4_percent0"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp5_hold0"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp5_percent0"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp6_hold0"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp6_percent0"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp7_hold0"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp7_percent0"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp8_hold0"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp8_percent0"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp9_hold0"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp9_percent0"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp10_hold0"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp10_percent0"></div></li>
-                  </ul>  
-                </div>
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_1" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" ><div class="comp_holding" id="comp1_hold1"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp1_percent1"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp2_hold1"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp2_percent1"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp3_hold1"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp3_percent1"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp4_hold1"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp4_percent1"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp5_hold1"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp5_percent1"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp6_hold1"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp6_percent1"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp7_hold1"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp7_percent1"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp8_hold1"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp8_percent1"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp9_hold1"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp9_percent1"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp10_hold1"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp10_percent1"></div></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_2" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" ><div class="comp_holding" id="comp1_hold2"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp1_percent2"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp2_hold2"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp2_percent2"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp3_hold2"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp3_percent2"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp4_hold2"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp4_percent2"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp5_hold2"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp5_percent2"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp6_hold2"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp6_percent2"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp7_hold2"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp7_percent2"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp8_hold2"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp8_percent2"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp9_hold2"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp9_percent2"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp10_hold2"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp10_percent2"></div></li>
-                  </ul>  
-                </div> 
-                <div class="mob_mf_com col-xs-3 col-sm-3 col_3" style="display:none;">
-                  <ul class="list-group">
-                    <li class="list-group-item" ><div class="comp_holding" id="comp1_hold3"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp1_percent3"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp2_hold3"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp2_hold3percent3"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp3_hold3"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp3_percent3"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp4_hold3"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp4_percent3"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp5_hold3"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp5_percent3"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp6_hold3"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp6_percent3"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp7_hold3"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp7_percent3"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp8_hold3"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp8_percent3"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp9_hold3"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp9_percent3"></div></li>
-                    <li class="list-group-item" ><div class="comp_holding" id="comp10_hold3"></div><div class="comp_bar"></div><div class="comp_percentage" id="comp10_percent3"></div></li>
-                  </ul> 
-                  <!-- <ul class="list-group">
-                    <li class="list-group-item" id="comp1_hold_percent_3"></li>
-                    <li class="list-group-item" id="comp2_hold_percent_3"></li>
-                    <li class="list-group-item" id="comp3_hold_percent_3"></li>
-                    <li class="list-group-item" id="comp4_hold_percent_3"></li>
-                    <li class="list-group-item" id="comp5_hold_percent_3"></li>
-                    <li class="list-group-item" id="comp6_hold_percent_3"></li>
-                    <li class="list-group-item" id="comp7_hold_percent_3"></li>
-                    <li class="list-group-item" id="comp8_hold_percent_3"></li>
-                    <li class="list-group-item" id="comp9_hold_percent_3"></li>
-                    <li class="list-group-item" id="comp10_hold_percent_3"></li>
-                  </ul>  --> 
-                </div>                 
-              </div>                                     
-            </div>
-        </div>   
-        <div class="row" id="comparison_Chart">
-          <div class="col-xs-12 col-sm-12">
-            <div class="comparison_head">
-              <span>NAV MOVEMENT</span>
-            </div>
-          </div>
-          <div class="col-xs-2 col-sm-2 comparison_bodyP1">
-               <ul class="list-group">
-                  <li class="list-group-item">Historical performance of all the selected funds</li>
-               </ul>  
-          </div>
-          <div class="col-xs-10 col-sm-10 comparison_bodyP2">
-              <div id="compare_chart" style="min-width: 110px; height: 400px;">          
-              </div>
-          </div>
-       </div>
+           
 
 
-        </div>
+
+            <div class="breadcrumb">
+              <div class="row">
+                <div class="col-xs-12 text-center">
+                  <span>BASIC DETAILS</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center color_white">
+                  <span id="basic_expense_ratio_0">-</span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Expense Ratio (%)</span>
+                </div>
+                <div class="col-xs-3 text-center color_white">
+                  <span id="basic_expense_ratio_1">-</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="basic_exit_load_0">-</span>
+                </div>
+                <div class="col-xs-6 text-center color_white">
+                  <span>Exit Load (%)</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="basic_exit_load_1">-</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center color_white">
+                  <span id="basic_lock_in_period_0">-</span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Lock-in Period (Years)</span>
+                </div>
+                <div class="col-xs-3 text-center color_white">
+                  <span id="basic_lock_in_period_1">-</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="basic_launch_date_0">-</span>
+                </div>
+                <div class="col-xs-6 text-center color_white">
+                  <span>Inception Date</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="basic_launch_date_1">-</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center color_white">
+                  <span id="basic_min_inv_0">-</span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Min. Investment (in ₹)</span>
+                </div>
+                <div class="col-xs-3 text-center color_white">
+                  <span id="basic_min_inv_1">-</span>
+                </div>
+              </div>
+            </div>
+            <div class="breadcrumb">
+              <div class="row">
+                <div class="col-xs-12 text-center">
+                  <span>RETURN (%)</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="return_6m_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>6 mo</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="return_6m_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="return_1y_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>1 yr</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="return_1y_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="return_2y_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>2 yr</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="return_2y_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="return_3y_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>3 yr</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="return_3y_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="return_5y_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>5 yr</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="return_5y_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="return_10y_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>10 yr</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="return_10y_1"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="breadcrumb">
+              <div class="row">
+                <div class="col-xs-12 text-center">
+                  <span>MF RATIOS</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="performance_stand_dev_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Standard Deviation</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="performance_stand_dev_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="performance_beta_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Beta</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="performance_beta_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="performance_sharpe_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Sharpe</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="performance_sharpe_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="performance_sortino_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Sortino</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="performance_sortino_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="performance_alpha_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Alpha</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="performance_alpha_1"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="breadcrumb">
+              <div class="row">
+                <div class="col-xs-12 text-center">
+                  <span>PORTFOLIO ATTRIBUTES</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_pb_ratio_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Portfolio P/B Ratio</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_pb_ratio_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_pe_ratio_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Portfolio P/E Ratio</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_pe_ratio_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_turnover_ratio_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Turnover Ratio (%)</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_turnover_ratio_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_avg_maturity_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Avg. Maturity (in yrs)</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_avg_maturity_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_mod_dur_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Mod. Duration (in yrs)</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_mod_dur_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_yield_maturity_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Yield to Maturity (%)</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="port_attr_yield_maturity_0"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="breadcrumb">
+              <div class="row">
+                <div class="col-xs-12 text-center">
+                  <span>PORTFOLIO MARKET CAP</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4 text-center">
+                  <span id="port_market_avg_cap_0"></span>
+                </div>
+                <div class="col-xs-4 text-center">
+                  <span>Avg. Market Cap (₹ cr)</span>
+                </div>
+                <div class="col-xs-4 text-center">
+                  <span id="port_market_avg_cap_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="port_market_large_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Large (%)</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="port_market_large_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="port_market_mid_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Mid (%)</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="port_market_mid_1"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 text-center">
+                  <span id="port_market_small_0"></span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>Small (%)</span>
+                </div>
+                <div class="col-xs-3 text-center">
+                  <span id="port_market_small_1"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div id="compare_chart" style="min-width: 110px; height: 400px; ">
+              </div>
+
+            </div>
 
 
 

@@ -1,159 +1,165 @@
 <div data-page="ToolsSIPReturn" class="page" id="sip_return">
-    <div class="page-content">                
-        <div class="container">
-            <div class="row HeadTop">
-                <div class="col-xs-12">
-                    <h1>Mutual Fund SIP Return</h1>
-                </div>                
+  <div class="page-content">                
+    <div class="container">
+      <div class="row HeadTop">
+          <div class="col-xs-12">
+              <h1>Mutual Fund SIP Return</h1>
+          </div>                
+      </div>
+      <div class="row">
+          <div class="col-xs-12 ">                  
+              <p>You can choose from over 2,000 mutual funds to check out actual SIP returns for various time periods.</p>
+          </div>
+      </div>
+      <div class="row">            
+          <div class="col-xs-12 search-button rupeevest-search-button">
+              <div class="input-group latest-search-button">
+                  <input type="text" id ="fund_names_sip" class="form-control" placeholder="Search mutual funds here...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" id="fund_click"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </span>
+              </div>
+          </div>
+      </div>
+
+      <input type="hidden" id="full_url">
+      <input type="hidden" id="schemecode_selected">
+      <input type="hidden" id="fund_name_rec">
+      <input type="hidden" id="fund_name_actual">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="d_none" id="container-head">                       
+           
+            <div class="row FundCat">
+               <div class="col-xs-12">
+                <h4><span>Fund Name - </span>
+                <span id="fund_name"></span></h4>
+               </div>
+               <div class="col-xs-12">
+                <h4><span>Category - </span>
+                <span id="fund_category"></span></h4>
+               </div>  
             </div>
+
             <div class="row">
-                <div class="col-xs-12 ">                  
-                    <p>You can choose from over 2,000 mutual funds to check out actual SIP returns for various time periods.</p>
-                </div>
+              <div class="col-xs-12">
+                <button class="btn btn-RV pull-right" id="SubmitSipRet">Submit</button>
+              </div>
             </div>
-            <div class="row">            
-                  <div class="col-xs-12 col-sm-6 search-button rupeevest-search-button">
-                      <div class="input-group latest-search-button">
-                          <input type="text" id ="fund_names_sip" class="form-control " placeholder="Search mutual funds here...">
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" type="button" id="fund_click"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                            </span>
-                      </div>
-                  </div>
-            </div>
-
-            <input type="hidden" id="full_url">
-            <input type="hidden" id="schemecode_selected">
-            <input type="hidden" id="fund_name_rec">
-            <input type="hidden" id="fund_name_actual">
 
             <div class="row">
-                <div class="col-lg-12">
-
-                  <div class="d_none" id="container-head">                       
-                   
-                  <div class="row FundCat">
-                     <div class="col-sm-6">
-                      <span>Fund Name - </span>
-                      <span id="fund_name"></span>
-                     </div>
-                     <div class="col-sm-6">
-                      <span>Category - </span>
-                      <span id="fund_category"></span>
-                     </div>  
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-9">
-                      <div class="sip_chart">
-                      <div id="container-sip-heading" >
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <div class="input-group">
-                              <span class="input-group-addon">Amount : </span>
-                              <input type="text" class="form-control" name="amount" id="amt" value=1,000 >
-                            </div>
-                          </div>
-                          <div class="col-sm-3">
-                            <div class="input-group">
-                              <span class="input-group-addon">Frequency : </span>
-                              <select id="frequency" class="form-control">
-                                <option value="weekly">Weekly</option>
-                                <option value="fortnight">FortNightly</option>
-                                <option value="monthly" selected>Monthly</option>
-                                <option value="quarterly">Quarterly</option>
-                                <option value="daily">HalfYearly</option>
-                                <option value="Annually">Annually</option>
-                              </select>
-                            </div>                       
-                          </div>
-                          <div class="col-sm-3">                         
-                                                     
-                            <div class="input-group">
-                              <span class="input-group-addon">Start Date : </span>
-                              <input type="text" name="start_date" id="from_date" class="form-control" >
-                            </div>
-                          </div>
-                          <div class="col-sm-3">                     
-                            <div class="input-group">
-                              <span class="input-group-addon">End Date : </span>
-                              <input type="text" name="end_date" id="to_date" class="form-control">
-                            </div>
-                          </div>
+              <div class="col-xs-12">                
+                <div class="sip_chart">
+                  <div id="container-sip-heading">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class = "list-block">
+                          <ul>
+                             <li>
+                                <div class = "item-content">
+                                   <div class = "item-inner">
+                                      <div class = "item-title label">Amount</div>
+                                      <div class = "item-input">
+                                         <input type="text" name="amount" placeholder ="Enter amount" id="amt" value=1,000 >
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li>
+                                <div class = "item-content">
+                                   <div class = "item-inner">
+                                      <div class = "item-title label">Frequency</div>
+                                      <div class = "item-input">
+                                          <select id="frequency">
+                                            <option value="weekly">Weekly</option>
+                                            <option value="fortnight">FortNightly</option>
+                                            <option value="monthly" selected>Monthly</option>
+                                            <option value="quarterly">Quarterly</option>
+                                            <option value="daily">HalfYearly</option>
+                                            <option value="Annually">Annually</option>
+                                          </select>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li>
+                                <div class = "item-content">
+                                   <div class = "item-inner">
+                                      <div class = "item-title label">Start Date</div>
+                                      <div class = "item-input">
+                                         <input type = "text" name="start_date" id="from_date" placeholder = "Start Date" value="">
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li>
+                                <div class = "item-content">
+                                   <div class = "item-inner">
+                                      <div class = "item-title label">End Date</div>
+                                      <div class = "item-input">
+                                         <input type = "text" name="end_date" id="to_date" placeholder = "End Date" value="">
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>                                
+                          </ul>
                         </div>
                       </div>
-                       
-                      <div id="container-sip" style="height: 350px; min-width: 110px; padding-right: 0.3em;"></div>
-
-                      </div>
+                    </div>                       
+                   
+                    <div id="container-sip" class="text-center" style="height: 250px; min-width: 110px; padding-right: 0.3em;">
+                        <div class="preloader"></div>
                     </div>
-                    <div class="col-lg-3">
-                      <div class="sip_ret_table">
-                          <table class="table table-bordered table-condensed table-striped">
-                            <thead>
-                              <tr>
-                                <th colspan="2">SIP Return</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>                    
-                                <td>Amount Invested</td>
-                                <td>₹ <span id="amt_invstd"></span></td>
-                              </tr>
-                              <tr>
-                                <td>Current Value</td>
-                                <td>₹ <span id="currnt_val"></span></td>
-                              </tr>
-                              <tr>
-                                <td>Number Of Installments</td>
-                                <td><span id="no_inv"></span></td>
-                              </tr>
-                              <tr>
-                                <td> <span id="" class="XIRRhover" data-container="body" data-placement="bottom" data-toggle="popover" data-html="true"><span>XIRR</span>
-                                  <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></span>
-                                </td>
-                                <td><span id="xirr"></span> %</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                      </div>
-                        <!-- <span style="font-weight: bold;">Amount Invested:</span><span id="amt_invstd"></span><br>
-                        <span style="font-weight: bold;">Current Value:</span> <span id="currnt_val"></span><br>
-                        <span style="font-weight: bold;">Number Of Installments:</span> <span id="no_inv"></span><br>
-                        <span style="font-weight: bold;">Absolute Return:</span> <span id="abs_ret"></span><br>
-                        <span style="font-weight: bold;">XIRR:</span> <span id="xirr"></span><br> -->
-                      
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="sip_ret_table">
+                        <table class="table table-bordered table-condensed table-striped">
+                          <thead>
+                            <tr>
+                              <th colspan="2">SIP Return</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>                    
+                              <td>Amount Invested</td>
+                              <td>₹ <span id="amt_invstd"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Current Value</td>
+                              <td>₹ <span id="currnt_val"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Number Of Installments</td>
+                              <td><span id="no_inv"></span></td>
+                            </tr>
+                            <tr>
+                              <td> <span id="" class="XIRRhover" data-container="body" data-placement="bottom" data-toggle="popover" data-html="true"><span>XIRR</span>
+                                <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></span>
+                              </td>
+                              <td><span id="xirr"></span> %</td>
+                            </tr>
+                          </tbody>
+                        </table>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 pad_top4">
+                <p>Please use our <a href="/Mutual-Fund-Calculator/Sip-Calculator">SIP Calculator</a> to calculate future value at various rates of return.</p>
+              </div>
+            </div>
 
-
-
-                  <div class="row">
-                    <div class="col-sm-12 pad_top4">
-                      <p>Please use our <a href="/Mutual-Fund-Calculator/Sip-Calculator">SIP Calculator</a> to calculate future value at various rates of return.</p>
-                    </div>
-                  </div>
-
-                    </div>
-                </div>  
-                
-            </div> 
-
-            <!-- <div class="row">
-                <div class="col-xs-12">
-
-
-
-
-
-                            
-
-
-                </div>                
-            </div>  -->
-
-        </div> 
-    </div>
+          </div>           
+        </div>      
+      </div>
+    </div> 
+  </div>
 </div>
             
         

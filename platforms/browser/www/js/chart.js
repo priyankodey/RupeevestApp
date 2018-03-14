@@ -3689,7 +3689,7 @@ function test_graph_sip(scheme_name,schemecode,container_id,amount,frequency,sta
         start_date_GBL = start_date;
         end_date_GBL = end_date;
 
-        console.log(schemecode);
+    console.log(schemecode);
     console.log(amount);
     console.log(frequency);
     console.log(start_date);
@@ -3709,7 +3709,7 @@ function test_graph_sip(scheme_name,schemecode,container_id,amount,frequency,sta
          // {
           // console.log(data);
             var data = JSON.parse(data);
-
+console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
             console.log(data);
              var i;
              var navrs1=[];

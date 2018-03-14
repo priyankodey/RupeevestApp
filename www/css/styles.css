@@ -120,10 +120,18 @@ hr {
   table-layout: fixed;
   width: 100%;    
 }
+.label {    
+  padding: initial;
+  font-size: initial;
+  font-weight: initial;    
+  color: initial;
+  text-align: left;   
+  border-radius: 0;
+}
 
-/* *************************************** 
+/**************************************** 
                 Navbar
-  **************************************** */
+**************************************** */
 #RVNavbar .navbar {
   margin-bottom: 0;
   border: 0;
@@ -818,31 +826,31 @@ hr {
   margin: 5px 0;
 }
 
-/**************************************
-           MF Comparison
-***************************************/
+/***************************************************************
+                           MF Comparison
+****************************************************************/
 
-#rv_comparison #comparison_fund .list-group h2{
+#rv_comparison #comparison_fund .list-group h2 {
   font-style: normal;
-    font-weight: 400;
-    margin: 10px 0;
-    font-size: 14px;
-    letter-spacing: 0;
-    line-height: 24px;
-    color: #5f6469;
+  font-weight: 400;
+  margin: 10px 0;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 24px;
+  color: #5f6469;
 }
 #rv_comparison .area_wrap_mob {
-    overflow-x: auto;
+  overflow-x: auto;
 }
 #rv_comparison #comparison_fund {
-    width: 100em;
+  width: 100em;
 }
 /*#rv_comparison .mob_mf_com {
     min-width: 10em;
     max-width: 15em;
 }*/
 #rv_comparison #comparison_basic {
-    min-width: 100em;
+  min-width: 100em;
 }
 #rv_comparison #comparison_return{
   min-width: 100em;
@@ -864,16 +872,30 @@ hr {
 }
 #rv_comparison .comp_holding{
   white-space: nowrap;
-    overflow-x: auto;
+  overflow-x: auto;
 }
 #rv_comparison .glyphicon-remove-circle{
   float: right;
 }
+#rv_comparison .breadcrumb{
+  margin-bottom: 1em;
+}
 
 
-/**************************************
-      Stocks Held By Mutual Funds 
-***************************************/
+/**************************************************************
+                   Mutual Fund SIP Return
+***************************************************************/
+
+#sip_return .list-block {
+  margin: 10px 0;
+}
+#sip_return .input-group-btn .btn {
+  padding: 5px 12px;
+}
+
+/*************************************************************
+                 Stocks Held By Mutual Funds 
+**************************************************************/
 #rv_stock .StocksTabs{
   margin-bottom: 10px;
 }

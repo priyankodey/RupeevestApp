@@ -6,7 +6,7 @@ var myApp = new Framework7({pushState: true,});
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
-var curr_ip='http://192.168.1.17:3000/'
+var curr_ip='http://192.168.1.13:3000/'
 
 var RVNav="";
 RVNav ="<div class='navbar'><div class='navbar-inner'><div class='left'><a href='#' class='link icon-only open-panel'><i class='icon icon-bars'></i></a></div><div class='center'><span id='navbar_info_span'><a href='index.html'><img src='img/icons/logo.png' alt='RupeeVest'></a></span><input type='text' id='fund_names' class='form-control ui-autocomplete-input' placeholder='Search mutual funds here...' autocomplete='off'></div><div class='right'><a href='#' class='' id='navbar_search_btn'><i class='fa fa-search' aria-hidden='true'></i></a><a href='#' class='' id='navbar_close_btn'><i class='fa fa-times' aria-hidden='true'></i></a></div></div></div>"
@@ -55,8 +55,8 @@ $$(document).on('deviceready', function() {
 
    var interval = setInterval(function () { myFunction(); }, 1000);
 
-    $$.get('http://192.168.1.17:3000/functionalities/get_user_info', {iin: 5011179660},function (data) {
-       });
+    // $$.get('http://192.168.1.13:3000/functionalities/get_user_info', {iin: 5011179660},function (data) {
+    //    });
 
             $$('#fund_names').hide();
             $$('#navbar_close_btn').hide();
@@ -1086,270 +1086,675 @@ if(page.name==='OfferMutualFund')
 
 /************* ToolsComparison / MF Comparison START ******************* */ 
 
-    if(page.name==='ToolsComparison'){
+if(page.name==='ToolsComparison')
+{
+    var array_id=[];
+    var array_id1=[];
+    var color_arr=['#2d94e7','#85c953','#a55fa9','#00C78C'];
+    var query = $$.parseUrlQuery(page.url);
+    console.log(page.url);
+    var scheme_codes=query.scheme_codes;
+    console.log(scheme_codes);
+    var id="";
+    if(scheme_codes==null)
+    {
+      
 
-
-        //  add_id_array();
-        // compare_value();
-        // add_fundname_search();
-
-        var array_id=[];
-        var color_arr=['#2d94e7','#85c953','#a55fa9','#00C78C'];
-
-        var query = $$.parseUrlQuery(page.url);
-        var scheme_codes=query.scheme_codes;
-
-
-        var id=scheme_codes.split(',');
-         var array_id1=[]
-         for(var t=0;t<id.length;t++)
-         {
-            array_id1.push(id[t]);
-            array_id.push(id[t]);
-         }
-        console.log(array_id);
+       $$.get(curr_ip+'app_services/comparison',function (data) 
+        {
+          var myObjdata = JSON.parse(data);
+          //console.log(myObjdata.s_code.split('-'));
+          schemecode_array=myObjdata.s_code.split('-');
+          for (var i=0;i<schemecode_array.length;i++){
+            console.log(schemecode_array[i]);
+            array_id.push(schemecode_array[i]);
+            array_id1.push(schemecode_array[i]);
+             $(".fund_head_"+i).removeClass("d_none");
+          }
           generate_chart(array_id1,color_arr);
-         compare_value(array_id);
-        // add_fundname_search();
-        // console.log(scheme_name)
-        // fundname_search();
+          compare_value(array_id);
+          add_fundname_search();
 
-        add_fundname_search();
-        $("#srch-term").autocomplete({
+        });
+        
+    }
+    else
+    {
+      id=scheme_codes.split(',');
+      for(var t=0;t<id.length;t++)
+      {
+        array_id1.push(id[t]);
+        array_id.push(id[t]);
+        $(".fund_head_"+t).removeClass("d_none");
+      }
+      generate_chart(array_id1,color_arr);
+      compare_value(array_id);
+      add_fundname_search();
 
-                select: function (a, b) 
-                {
-                    console.log("aaa");
-                    console.log(b.item.value)
-                  $(this).val(b.item.value);
-                    $("#add_btn_search").click();
-                    //array_id.pop();
-
-                    //array_id.push("1131")
-                    // console.log(array_id)
-                    // console.log(array_id[1])
-                    // console.log(map[b.item.value])
-
-                    $$.post(curr_ip+'/home/index_search',{schemename: b.item.value},function (data) {
-                    var scheme_code=JSON.parse(data);
-
-                    // if(myApp.getCurrentView().activePage.name==='FundDetails'){
-                    //     mainView.router.reloadPage('FundDetails.html?scheme_code='+scheme_code_new.schemecode);
-                    // }
-                    // else{
-                    //     mainView.router.loadPage('FundDetails.html?scheme_code='+scheme_code_new.schemecode);
-                    // }
-                    array_id.push(scheme_code.schemecode);
-                    mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]+','+array_id[1]);
-                });                   
-
-                }
-           });  
-
- 
-
- // $(".comparison_fund_inner_top.ct1 .close_image").click(function() {
- //     array_id.shift();
- //      mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]);
- // })
- // $(".comparison_fund_inner_top.ct2 .close_image").click(function() {
- //     array_id.pop();
- //      mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]);
- // })
-
-     $(".col_0").css("display", "none");
-     $(".col_1").css("display", "none");
-     $(".col_2").css("display", "none");
-     $(".col_3").css("display", "none");
-
-         $(".close_image").click(function(){
-            $("."+this.parentElement.parentElement.parentElement.className.replace(/(mob_mf_com col-xs-3 col-sm-3| )/g, "")).hide();
-            
-
-            
-            if(this.parentElement.parentElement.parentElement.className.replace(/(mob_mf_com col-xs-3 col-sm-3| )/g, "")=="col_0")
-            {   
-
-
-                 var a = parseInt(array_id.indexOf($('#scheme_code_0').text()));
-                 array_id.splice(a,1);
-                 color_arr.splice(a,1);
-
-
-            }
-            else if(this.parentElement.parentElement.parentElement.className.replace(/(mob_mf_com col-xs-3 col-sm-3| )/g, "")=="col_1")
-            {
-              
-
-                  var a = parseInt(array_id.indexOf($('#scheme_code_1').text()));
-                  array_id.splice(a,1);  
-                  color_arr.splice(a,1);
-
-              
-            }
-            else if(this.parentElement.parentElement.parentElement.className.replace(/(mob_mf_com col-xs-3 col-sm-3| )/g, "")=="col_2")
-            {
-              
-
-                  var a = parseInt(array_id.indexOf($('#scheme_code_2').text()));
-                  array_id.splice(a,1);  
-                  color_arr.splice(a,1);
-
-              
-              
-            }
-            else if(this.parentElement.parentElement.parentElement.className.replace(/(mob_mf_com col-xs-3 col-sm-3| )/g, "")=="col_3")
-            {
-
-
-
-                   var a = parseInt(array_id.indexOf($('#scheme_code_3').text()));
-                   array_id.splice(a,1);  
-                   color_arr.splice(a,1); 
-              
-            }
-                
-                if(array_id.length>0)
-                {
-                  generate_chart(array_id,color_arr);
-
-                }
-                else
-                {
-
-                   $("#compare_chart").empty();                      
-                }
-
-         });
-
-         
-   
-
+     
+      
 
     }
+
+
+    $("#srch-term").autocomplete({
+
+            select: function (a, b) 
+            {
+                console.log("aaa");
+                console.log(b.item.value)
+              $(this).val(b.item.value);
+                $("#add_btn_search").click();
+                $$.post(curr_ip+'/home/index_search',{schemename: b.item.value},function (data) {
+                var scheme_code=JSON.parse(data);
+                console.log(array_id.length)
+                if (array_id.length>1) {
+                  myApp.alert("You can add only 2 funds");                      
+                }
+                else if (array_id[0]==scheme_code.schemecode)
+                {
+                    myApp.alert("You have already added that fund")
+                }
+                else{
+                  array_id.push(scheme_code.schemecode);
+                  if (array_id[1]!=undefined) {
+                    mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]+','+array_id[1]);
+                  } 
+                  else{
+                    mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]);
+                  };
+                  
+                }
+                
+            });                   
+
+            }
+       });
+
+      $(".comparison_fund_inner_top.ct1 .close_image").click(function() 
+       {
+          array_id.splice(0, 1);
+          if (array_id[0]!=undefined) 
+          {
+            mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]);
+          } 
+          else
+          {
+            mainView.router.reloadPage('ToolsComparison.html');
+          };
+        })
+       $(".comparison_fund_inner_top.ct2 .close_image").click(function() {
+           array_id.pop();
+            mainView.router.reloadPage('ToolsComparison.html?scheme_codes='+array_id[0]);
+       })
+
+       $(".close_image").click(function(){ 
+            if(array_id.length>0)
+            {
+              generate_chart(array_id,color_arr);
+            }
+            else
+            {
+               $("#compare_chart").empty();                      
+            }
+     });
+          
+}
 
 /************* ToolsComparison / MF Comparison END ******************** */ 
 
 /*********************** SIP Return START ***********************************/
 
+// if(page.name==='ToolsSIPReturn')
+// {    
+  // $$.get(curr_ip+'app_services/sip_return_page', function (data) 
+  // {
+  //     var data = JSON.parse(data);
+  //     console.log(data);
+  //     $("#full_url").val(data.full_url);
+  //     $("#schemecode_selected").val(data.selected_schemecode);
+  //     $("#fund_name_rec").val(data.fund_name_rec);
+  //     $("#fund_name_actual").val(data.fund_name);           
+
+           
+  //     var endDate = new Date();
+  //     var startDate = new Date("1999-02-01");
+  //     startDate = moment(startDate).format('YYYY-MM-DD');
+  //     endDate = moment(endDate).format('YYYY-MM-DD');         
+
+  //     $("#from_date").val(startDate);
+  //     $("#to_date").val(endDate);                  
+
+  //     fundname_search_sip_return();
+
+  //     var url = $('#full_url').val();
+                    
+  //     if(url=="ERROR")
+  //     {              
+  //        // window.history.pushState('','','/Mutual-Fund-Calculator/Sip-Return/');
+  //     }
+  //     if(url!="NONE" && url!="ERROR")
+  //     {                         
+  //         $('#full_url').val("NONE"); 
+  //         var schemecode =  $('#schemecode_selected').val();
+
+  //         var amount = $('#amt').val();
+  //             amount = amount.replace(/,/g, '');
+
+  //         var startDate = new Date($('#from_date').val());
+  //         var endDate = new Date($('#to_date').val());
+  //         console.log(startDate);
+  //             startDate = moment(startDate).format('YYYY-MM-DD');
+  //             endDate = moment(endDate).format('YYYY-MM-DD');
+  //             console.log("//////////////////////");
+  //         console.log(startDate);
+
+  //         var frequency = $('#frequency :selected').text();
+  //         var fund_name = $('#fund_name_rec').val();
+  //             fund_name = fund_name.replace(/-/g,' ');
+
+  //         test_graph_sip(fund_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
+           
+  //         $('#container-head').show();
+
+  //         $('#fund_names_sip').val($("#fund_name_actual").val().replace(/-/g,' '));
+  //             // window.history.pushState('','',url);                     
+  //     }
+
+  //     $("#frequency").change(function() 
+  //     {                      
+  //         if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+  //         {
+  //             var scheme_name = $('#fund_names_sip').val();
+  //                 scheme_name = scheme_name.replace(/-/g,' ');
+  //             var schemecode =  $('#schemecode_selected').val();
+  //             var frequency = $('#frequency :selected').text();
+  //             var amount = $('#amt').val();
+  //                 amount = amount.replace(/,/g, '');
+  //             var startDate = new Date($('#from_date').val());
+  //             var endDate = new Date($('#to_date').val());
+  //                 startDate = moment(startDate).format('YYYY-MM-DD');
+  //                 endDate = moment(endDate).format('YYYY-MM-DD');
+
+  //             test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+  //         }
+  //     });  
+
+
+  //     $('#amt').focusout(function() 
+  //     {
+  //         if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+  //         {
+  //             var scheme_name = $('#fund_names_sip').val();
+  //                 scheme_name = scheme_name.replace(/-/g,' ');
+  //                  console.log("----------------------------------------------");
+  //                 console.log(scheme_name);
+  //             var schemecode = map[scheme_name];
+  //             var frequency = $('#frequency :selected').text();
+  //             var amount = $('#amt').val();
+  //                 amount = amount.replace(/,/g, '');
+  //             var startDate = new Date($('#from_date').val());
+  //             var endDate = new Date($('#to_date').val());
+  //                 startDate = moment(startDate).format('YYYY-MM-DD');
+  //                 endDate = moment(endDate).format('YYYY-MM-DD');
+
+  //             test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+  //         }
+  //     });
+
+
+  //     $('#amt').keydown(function(e) 
+  //     {   
+  //         if (e.keyCode == 13) 
+  //         {                
+  //             if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+  //             {
+  //                 var scheme_name = $('#fund_names_sip').val();
+  //                     scheme_name = scheme_name.replace(/-/g,' ');
+  //                 var schemecode = map[scheme_name];
+  //                 var frequency = $('#frequency :selected').text();
+  //                 var amount = $('#amt').val();
+  //                     amount = amount.replace(/,/g, '');
+  //                 var startDate = new Date($('#from_date').val());
+  //                 var endDate = new Date($('#to_date').val());
+  //                     startDate = moment(startDate).format('YYYY-MM-DD');
+  //                     endDate = moment(endDate).format('YYYY-MM-DD');
+
+  //                 test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+  //             }
+  //         }
+  //     });  
+
+        
+
+
+  //     var inner_flag=0;
+  //     var from_date=0;
+  //     var to_date=0;
+  //     var choosedate ;
+  //     var sec_flag_sts=0;
+
+  //     $('#from_date').datepicker({
+  //         format: 'dd-M-yyyy',                
+  //         endDate: '-1d',
+  //         autoclose: true       
+  //     }).on('changeDate', function(e) {
+
+  //         var startDate = new Date($('#from_date').val());
+  //         var endDate = new Date($('#to_date').val());
+  //         var myDate = new Date();
+  //         if(startDate > endDate)
+  //         {
+  //             myDate.setFullYear(myDate.getFullYear() - 1);
+  //             swal("start date can not tbe greater than End date");
+  //             $("#from_date").datepicker("update", myDate);
+  //         }
+  //         else
+  //         {
+  //             if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+  //             {
+  //                 var scheme_name = $('#fund_names_sip').val();
+  //                     scheme_name = scheme_name.replace(/-/g,' ');
+  //                 var schemecode = map[scheme_name];
+  //                 var frequency = $('#frequency :selected').text();
+  //                 var amount = $('#amt').val();
+  //                     amount = amount.replace(/,/g, '');
+  //                 var startDate = new Date($('#from_date').val());
+  //                 var endDate = new Date($('#to_date').val());
+  //                     startDate = moment(startDate).format('YYYY-MM-DD');
+  //                     endDate = moment(endDate).format('YYYY-MM-DD');
+                     
+  //                     test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+  //             }
+
+  //             $('#to_date').datepicker('remove');
+  //             inner_flag=1
+  //             sec_flag_sts=1;
+  //             $('#to_date').datepicker({
+  //               format: 'dd-M-yyyy',                          
+  //               startDate: new Date($('#from_date').val()),
+  //               endDate: new Date(),
+  //               autoclose: true
+  //             }).on('changeDate', function(e) {
+  //                 if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+  //                 {
+  //                     var scheme_name = $('#fund_names_sip').val();
+  //                         scheme_name = scheme_name.replace(/-/g,' ');
+  //                     var schemecode = map[scheme_name];
+  //                     var frequency = $('#frequency :selected').text();
+  //                     var amount = $('#amt').val();
+  //                         amount = amount.replace(/,/g, '');
+  //                     var startDate = new Date($('#from_date').val());
+  //                     var endDate = new Date($('#to_date').val());
+  //                         startDate = moment(startDate).format('YYYY-MM-DD');
+  //                         endDate = moment(endDate).format('YYYY-MM-DD');                            
+  //                     if(inner_flag==1)
+  //                     {
+  //                         test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
+  //                         inner_flag=0;                                
+  //                     }
+  //                     else
+  //                     {
+  //                         test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);                                 
+  //                     }                              
+  //                 }
+  //             });
+  //         }
+  //     });
+
+  //     $('#to_date').datepicker({
+  //         format: 'dd-M-yyyy',             
+  //         startDate: new Date($('#from_date').val()),
+  //         endDate: new Date(),
+  //         autoclose: true
+  //     }).on('changeDate', function(e) {
+
+  //         if(sec_flag_sts!=1)
+  //         {
+  //            if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+  //             {
+  //                 var scheme_name = $('#fund_names_sip').val();
+  //                     scheme_name = scheme_name.replace(/-/g,' ');                            
+  //                 var schemecode = map[scheme_name];
+  //                 var frequency = $('#frequency :selected').text();
+  //                 var amount = $('#amt').val();
+  //                     amount = amount.replace(/,/g, '');
+  //                 var startDate = new Date($('#from_date').val());
+  //                 var endDate = new Date($('#to_date').val());
+  //                     startDate = moment(startDate).format('YYYY-MM-DD');
+  //                     endDate = moment(endDate).format('YYYY-MM-DD');
+                 
+  //                 if(inner_flag==1)
+  //                 {                     
+  //                     inner_flag=0;                   
+  //                 }
+  //                 else
+  //                 {
+  //                     test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);                     
+  //                 }
+  //             }
+  //         }
+
+  //     });
+
+
+  //     function setvalue_asset_temp( fund_mgr , consnt)
+  //     {
+  //         fund_mgr = fund_mgr.replace(/_/g,' ');
+          
+  //         $.ajax({
+  //             type:'post',
+  //             url: curr_ip+'home/set_asset_class',
+  //             data :{selection:fund_mgr,condition:consnt},
+  //             datatype:'json',
+  //             success:function(data) { 
+  //                 window.open('/Mutual-Funds-India/Screener','_blank')     
+  //             },
+  //             async: false,
+  //             error:function(jqXHR, textStatus, errorThrown) {        
+  //             }
+  //         })
+  //     }
+
+  //     $('#amt').keyup(function(event) {               
+  //         $('#amt').val($('#amt').val().replace(/\D/g, "")
+  //         .replace(/\B(?=(\d\d)+\d$)/g, ","));
+  //     });
+
+  //     $("[data-toggle=popover]").popover();
+
+  //     $( ".XIRRhover").hover(function(){
+  //         $('.XIRRhover').attr('data-content', 'XIRR or Extended Internal Rate of Return is a way of calculating the annualized return for a series of cash flows occurring at various intervals throughout the investment period.');
+  //         $(".XIRRhover").popover('toggle');
+  //     });
+
+  //     $('#sip_return').on('click', function (e) {
+  //         $('[data-toggle="popover"]').each(function () {
+  //             if(!$(this).is(e.target) &&
+  //                     $(this).has(e.target).length === 0 &&
+  //                     $('.popover').has(e.target).length === 0) {
+  //                 $(this).popover('hide');
+  //             }
+  //         });
+  //     });
+  // });
+
+
+// }
+
+
 if(page.name==='ToolsSIPReturn')
-{
-    
-    $$.get(curr_ip+'app_services/sip_return_page', function (data) 
-    {
-        var data = JSON.parse(data);
-console.log(data);
-        $("#full_url").val(data.full_url);
-        $("#schemecode_selected").val(data.selected_schemecode);
-        $("#fund_name_rec").val(data.fund_name_rec);
-        $("#fund_name_actual").val(data.fund_name);
+{ 
+
+  console.log("Entered SIP Return");
+
+  function getYesterdaysDate() {
+      var date = new Date();
+      date.setDate(date.getDate()-1);
+      return (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();    
+  }
+
+  function getFiveYearsAgoDate () {
+       var date = new Date();
+      date.setDate(date.getDate()-1);
+      return (date.getMonth()+1) + '/' + date.getDate() + '/' + (date.getFullYear()-5);  
+  }
+
+  $("#from_date").val(getFiveYearsAgoDate());
+  $("#to_date").val(getYesterdaysDate());
+
+  
+  $$.get(curr_ip+'app_services/sip_return', function (data) 
+  {
+      console.log("Inside Ajax");
+      var data = JSON.parse(data);
+      console.log(data);      
+
+      var schemecode = data.selected_schemcode;
+      var scheme_name = data.actual_fund_name.replace(/-/g,' ');
+      
+      $('#fund_names_sip').val(scheme_name);
+      $('#full_url').val(data.full_url);
+      $('#schemecode_selected').val(data.selected_schemcode);
+      $('#fund_name_rec').val(data.fund_name);
+      $('#fund_name_actual').val(data.actual_fund_name);
+
+      var startDate = new Date(a+" GMT");
+      var endDate = new Date(b+" GMT");
+          startDate = moment(startDate).format('YYYY-MM-DD');
+          endDate = moment(endDate).format('YYYY-MM-DD');
+          console.log("+++++++++++++++++++++++++++++++");
+          console.log(startDate); 
+          console.log(endDate); 
+          console.log("+++++++++++++++++++++++++++++++");
+      test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+
+    //debugger;
+ });
+      function commaSeparateNumber(val){
+        while (/(\d)(?=(\d\d)+\d$)/g.test(val.toString())){
+          val = val.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
+        }
+        return val;
+      }    
+
+
+      fundname_search_sip_return();
+      
+      $('#amt').keyup(function(event) {
+   
+        $('#amt').val($('#amt').val().replace(/\D/g, "")
+          .replace(/\B(?=(\d\d)+\d$)/g, ","));
+      });
+
+
+
+      $("[data-toggle=popover]").popover();
+
+      $( ".XIRRhover").hover(function(){
+        $('.XIRRhover').attr('data-content', 'XIRR or Extended Internal Rate of Return is a way of calculating the annualized return for a series of cash flows occurring at various intervals throughout the investment period.');
+        $(".XIRRhover").popover('toggle');
+      });
+
+
+      $('#sip_return').on('click', function (e) {
+          $('[data-toggle="popover"]').each(function () {
+              if(!$(this).is(e.target) &&
+                      $(this).has(e.target).length === 0 &&
+                      $('.popover').has(e.target).length === 0) {
+                  $(this).popover('hide');
+              }
+          });
+      });
+
+
+      var url = $('#full_url').val();
               
 
-             
-        var endDate = new Date();
-        var startDate = new Date("1999-02-01");
-        startDate = moment(startDate).format('YYYY-MM-DD');
-        endDate = moment(endDate).format('YYYY-MM-DD');         
 
-        $("#from_date").val(startDate);
-        $("#to_date").val(endDate);                  
+      $("#fund_names_sip").autocomplete({
+        select: function (a, b) 
+        {
+            $(this).val(b.item.value); 
+               
+            $('#container-head').show();
+            //debugger;
 
-        fundname_search_sip_return();
-
-        var url = $('#full_url').val();
-                      
-        if(url=="ERROR")
-        {              
-           // window.history.pushState('','','/Mutual-Fund-Calculator/Sip-Return/');
-        }
-        if(url!="NONE" && url!="ERROR")
-        {                         
-            $('#full_url').val("NONE"); 
-            var schemecode =  $('#schemecode_selected').val();
-
-            var amount = $('#amt').val();
-                amount = amount.replace(/,/g, '');
-
-            var startDate = new Date($('#from_date').val());
-            var endDate = new Date($('#to_date').val());
-                startDate = moment(startDate).format('YYYY-MM-DD');
-                endDate = moment(endDate).format('YYYY-MM-DD');
+            var scheme_name = $('#fund_names_sip').val();
+                scheme_name = scheme_name.replace(/-/g,' ');
+                // debugger;
+            var schemecode = map_sip[scheme_name];
 
             var frequency = $('#frequency :selected').text();
-            var fund_name = $('#fund_name_rec').val();
-                fund_name = fund_name.replace(/-/g,' ');
-
-            test_graph_sip(fund_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
-             
-            $('#container-head').show();
-
-            $('#fund_names_sip').val($("#fund_name_actual").val().replace(/-/g,' '));
-                // window.history.pushState('','',url);                     
-        }
-
-        $("#frequency").change(function() 
-        {                      
-            if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-            {
-                var scheme_name = $('#fund_names_sip').val();
-                    scheme_name = scheme_name.replace(/-/g,' ');
-                var schemecode =  $('#schemecode_selected').val();
-                var frequency = $('#frequency :selected').text();
-                var amount = $('#amt').val();
-                    amount = amount.replace(/,/g, '');
-                var startDate = new Date($('#from_date').val());
-                var endDate = new Date($('#to_date').val());
-                    startDate = moment(startDate).format('YYYY-MM-DD');
-                    endDate = moment(endDate).format('YYYY-MM-DD');
-
+            var amount = $('#amt').val();
+                amount=amount.replace(/,/g, '');
+                //$('#amt').html(commaSeparateNumber(amount));                
+                a=$('#from_date').val().replace(/-/g," ");
+                b=$('#to_date').val().replace(/-/g," ");
+            var startDate = new Date(a+" GMT");
+            var endDate = new Date(b+" GMT");
+                startDate = moment(startDate).format('YYYY-MM-DD');
+                endDate = moment(endDate).format('YYYY-MM-DD');
+                                        
+            var scheme_name1 = $('#fund_names_sip').val();
+            var url_fund_name;
+                url_fund_name = scheme_name1.replace(/&/g,'');
+                url_fund_name = url_fund_name.replace(/-/g,' ');
+                url_fund_name = url_fund_name.replace(/'/g,'');
+                url_fund_name = url_fund_name.replace("[",'(');
+                url_fund_name = url_fund_name.replace("]",')');
+                url_fund_name = url_fund_name.replace("<",'LT');
+                url_fund_name = url_fund_name.replace(">",'Gt');
+                url_fund_name = url_fund_name.replace("/",'');
+                url_fund_name = url_fund_name.replace("‘",'');
+                url_fund_name = url_fund_name.replace("'",'');
+                url_fund_name = url_fund_name.replace("%",'');  // added 29.08.2017
+                url_fund_name = url_fund_name.replace(/\./g,"");
+                url_fund_name = url_fund_name.replace(/ *\([^)]*\) */g, "")
+                
+                url_fund_name = url_fund_name.trim().replace(/ /g,'-');
+                      
                 test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
-            }
-        });  
 
+        }  
 
-        $('#amt').focusout(function() 
-        {
-            if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-            {
-                var scheme_name = $('#fund_names_sip').val();
-                    scheme_name = scheme_name.replace(/-/g,' ');
-                var schemecode = map[scheme_name];
-                var frequency = $('#frequency :selected').text();
-                var amount = $('#amt').val();
-                    amount = amount.replace(/,/g, '');
-                var startDate = new Date($('#from_date').val());
-                var endDate = new Date($('#to_date').val());
-                    startDate = moment(startDate).format('YYYY-MM-DD');
-                    endDate = moment(endDate).format('YYYY-MM-DD');
+      });
 
-                test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
-            }
-        });
-
-
-        $('#amt').keydown(function(e) 
-        {   
-            if (e.keyCode == 13) 
-            {                
-                if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-                {
-                    var scheme_name = $('#fund_names_sip').val();
-                        scheme_name = scheme_name.replace(/-/g,' ');
-                    var schemecode = map[scheme_name];
-                    var frequency = $('#frequency :selected').text();
-                    var amount = $('#amt').val();
-                        amount = amount.replace(/,/g, '');
-                    var startDate = new Date($('#from_date').val());
-                    var endDate = new Date($('#to_date').val());
-                        startDate = moment(startDate).format('YYYY-MM-DD');
-                        endDate = moment(endDate).format('YYYY-MM-DD');
-
-                    test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
-                }
-            }
-        });  
-
+      if(url=="ERROR")
+      {
           
+           // window.history.pushState('','','/Mutual-Fund-Calculator/Sip-Return/');
+      }
+      if(url!="NONE" && url!="ERROR")
+      {
+            
+          $('#full_url').val("NONE"); 
+          var schemecode =  $('#schemecode_selected').val();
+          var amount = $('#amt').val();
+              amount=amount.replace(/,/g, '');
+              a=$('#from_date').val().replace(/-/g," ");
+              b=$('#to_date').val().replace(/-/g," ");
+          var startDate = new Date(a+" GMT");
+          var endDate = new Date(b+" GMT");
+              startDate = moment(startDate).format('YYYY-MM-DD');
+              endDate = moment(endDate).format('YYYY-MM-DD');
+
+          var frequency = $('#frequency :selected').text();
+          var fund_name = $('#fund_name_rec').val();
+              fund_name=fund_name.replace(/-/g,' ');
+
+          test_graph_sip(fund_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
+             
+          $('#container-head').show();                            
+          $('#fund_names_sip').val($("#fund_name_actual").val().replace(/-/g,' '));
+          // window.history.pushState('','',url);
+      }
+
+
+      $("#frequency").change(function() 
+      {
+          // alert( $('option:selected', this).text() );
+
+          if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+          {
+              var scheme_name = $('#fund_names_sip').val();
+                  scheme_name = scheme_name.replace(/-/g,' ');
+              var schemecode = map_sip[scheme_name];
+              var frequency = $('#frequency :selected').text();
+              var amount = $('#amt').val();
+                  amount=amount.replace(/,/g, '');
+                  a=$('#from_date').val().replace(/-/g," ");
+                  b=$('#to_date').val().replace(/-/g," ");
+              var startDate = new Date(a+" GMT");
+              var endDate = new Date(b+" GMT");
+                  startDate = moment(startDate).format('YYYY-MM-DD');
+                  endDate = moment(endDate).format('YYYY-MM-DD');
+
+              //test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+          }
+              
+      });
+
+              
+      $('#amt').focusout(function() 
+      {
+          if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+          {
+              var scheme_name = $('#fund_names_sip').val();
+                  scheme_name = scheme_name.replace(/-/g,' ');
+              var schemecode = map_sip[scheme_name];
+              var frequency = $('#frequency :selected').text();
+              var amount = $('#amt').val();
+                  amount=amount.replace(/,/g, '');
+                  a=$('#from_date').val().replace(/-/g," ");
+                  b=$('#to_date').val().replace(/-/g," ");
+              var startDate = new Date(a+" GMT");
+              var endDate = new Date(b+" GMT");
+                  startDate = moment(startDate).format('YYYY-MM-DD');
+                  endDate = moment(endDate).format('YYYY-MM-DD');
+
+              //test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+          }              
+
+      });
+
+      $('#amt').keydown(function(e) 
+      {   
+          if (e.keyCode == 13) 
+          {
+            
+            if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+            {
+                var scheme_name = $('#fund_names_sip').val();
+                    scheme_name = scheme_name.replace(/-/g,' ');
+                var schemecode = map_sip[scheme_name];
+                var frequency = $('#frequency :selected').text();
+                var amount = $('#amt').val();
+                    amount=amount.replace(/,/g, '');
+                    a=$('#from_date').val().replace(/-/g," ");
+                    b=$('#to_date').val().replace(/-/g," ");
+                var startDate = new Date(a+" GMT");
+                var endDate = new Date(b+" GMT");
+                    startDate = moment(startDate).format('YYYY-MM-DD');
+                    endDate = moment(endDate).format('YYYY-MM-DD');
+
+               // test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+            } 
+
+          }
+      });
+
+
+      $$(document).on('click', '#SubmitSipRet', function(e){ 
+          var scheme_name = $('#fund_names_sip').val();
+              scheme_name = scheme_name.replace(/-/g,' ');
+          var schemecode = map_sip[scheme_name];
+          var frequency = $('#frequency :selected').text();
+          var amount = $('#amt').val();
+              amount=amount.replace(/,/g, '');
+              a=$('#from_date').val().replace(/-/g," ");
+              b=$('#to_date').val().replace(/-/g," ");
+          var startDate = new Date(a+" GMT");
+          var endDate = new Date(b+" GMT");
+              startDate = moment(startDate).format('YYYY-MM-DD');
+              endDate = moment(endDate).format('YYYY-MM-DD');
+            
+            //var myDate = new Date();
+            if(startDate > endDate)
+            {
+              //myDate.setFullYear(myDate.getFullYear() - 1);
+              alert("Start date can not be greater than End date");
+              //$("#from_date").datepicker("update", myDate);
+            }
+
+          test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+
+      });
+
+            
+          
+
+       
 
 
         var inner_flag=0;
@@ -1358,152 +1763,322 @@ console.log(data);
         var choosedate ;
         var sec_flag_sts=0;
 
+
+// $$(document).on('click', '.FromDatePickerDone', function(e){  });
         $('#from_date').datepicker({
-            format: 'dd-M-yyyy',                
-            endDate: '-1d',
-            autoclose: true       
+            format: 'dd MM, yyyy',
+            //startDate: new Date(),
+            // endDate: getYesterdaysDate(),
+            // disabled: {
+            //   // from: today,
+            //   to: getYesterdaysDate()
+            // },
+            //autoclose: true       
         }).on('changeDate', function(e) {
 
-            var startDate = new Date($('#from_date').val());
-            var endDate = new Date($('#to_date').val());
-            var myDate = new Date();
-            if(startDate > endDate)
-            {
-                myDate.setFullYear(myDate.getFullYear() - 1);
-                swal("start date can not tbe greater than End date");
-                $("#from_date").datepicker("update", myDate);
-            }
-            else
-            {
-                if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-                {
-                    var scheme_name = $('#fund_names_sip').val();
-                        scheme_name = scheme_name.replace(/-/g,' ');
-                    var schemecode = map[scheme_name];
-                    var frequency = $('#frequency :selected').text();
-                    var amount = $('#amt').val();
-                        amount = amount.replace(/,/g, '');
-                    var startDate = new Date($('#from_date').val());
-                    var endDate = new Date($('#to_date').val());
-                        startDate = moment(startDate).format('YYYY-MM-DD');
-                        endDate = moment(endDate).format('YYYY-MM-DD');
-                       
-                        test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
-                }
+          console.log("inside from date");
 
-                $('#to_date').datepicker('remove');
-                inner_flag=1
-                sec_flag_sts=1;
-                $('#to_date').datepicker({
-                  format: 'dd-M-yyyy',                          
-                  startDate: new Date($('#from_date').val()),
-                  endDate: new Date(),
-                  autoclose: true
-                }).on('changeDate', function(e) {
-                    if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-                    {
-                        var scheme_name = $('#fund_names_sip').val();
-                            scheme_name = scheme_name.replace(/-/g,' ');
-                        var schemecode = map[scheme_name];
-                        var frequency = $('#frequency :selected').text();
-                        var amount = $('#amt').val();
-                            amount = amount.replace(/,/g, '');
-                        var startDate = new Date($('#from_date').val());
-                        var endDate = new Date($('#to_date').val());
-                            startDate = moment(startDate).format('YYYY-MM-DD');
-                            endDate = moment(endDate).format('YYYY-MM-DD');                            
-                        if(inner_flag==1)
-                        {
-                            test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
-                            inner_flag=0;                                
-                        }
-                        else
-                        {
-                            test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);                                 
-                        }                              
-                    }
-                });
-            }
-        });
+            // a=$('#from_date').val().replace(/-/g," ");
+            // b=$('#to_date').val().replace(/-/g," ");
+            // var startDate = new Date(a+" GMT");
+            // var endDate = new Date(b+" GMT");
+            // var myDate = new Date();
+            // if(startDate > endDate)
+            // {
+            //   myDate.setFullYear(myDate.getFullYear() - 1);
+            //   swal("start date can not tbe greater than End date");
+            //   $("#from_date").datepicker("update", myDate);
+            // }
+            // else
+            // {
+            //   if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+            //   {
+            //     var scheme_name = $('#fund_names_sip').val();
+            //         scheme_name = scheme_name.replace(/-/g,' ');
+            //     var schemecode = map_sip[scheme_name];
+            //     var frequency = $('#frequency :selected').text();
+            //     var amount = $('#amt').val();
+            //         amount=amount.replace(/,/g, '');
+            //         a=$('#from_date').val().replace(/-/g," ");
+            //         b=$('#to_date').val().replace(/-/g," ");
+            //     var startDate = new Date(a+" GMT");
+            //     var endDate = new Date(b+" GMT");
+            //         startDate = moment(startDate).format('YYYY-MM-DD');
+            //         endDate = moment(endDate).format('YYYY-MM-DD');
+                      
+            //         test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+            //   }
 
-        $('#to_date').datepicker({
-            format: 'dd-M-yyyy',             
-            startDate: new Date($('#from_date').val()),
-            endDate: new Date(),
-            autoclose: true
-        }).on('changeDate', function(e) {
+            //   $('#to_date').datepicker('remove');
 
-            if(sec_flag_sts!=1)
-            {
-               if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-                {
-                    var scheme_name = $('#fund_names_sip').val();
-                        scheme_name = scheme_name.replace(/-/g,' ');                            
-                    var schemecode = map[scheme_name];
-                    var frequency = $('#frequency :selected').text();
-                    var amount = $('#amt').val();
-                        amount = amount.replace(/,/g, '');
-                    var startDate = new Date($('#from_date').val());
-                    var endDate = new Date($('#to_date').val());
-                        startDate = moment(startDate).format('YYYY-MM-DD');
-                        endDate = moment(endDate).format('YYYY-MM-DD');
-                   
-                    if(inner_flag==1)
-                    {                     
-                        inner_flag=0;                   
-                    }
-                    else
-                    {
-                        test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);                     
-                    }
-                }
-            }
+            //   inner_flag=1
+            //   sec_flag_sts=1;
+
+            //   $('#to_date').datepicker({
+            //   format: 'MM dd, yyyy',
+            //   // startDate: '0d',
+            //   // endDate: '0d',  
+            //   startDate: new Date($('#from_date').val()),
+            //   endDate: new Date(),
+            //   autoclose: true
+
+            //   }).on('changeDate', function(e) {
+            //       if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+            //       {
+            //           var scheme_name = $('#fund_names_sip').val();
+            //               scheme_name = scheme_name.replace(/-/g,' ');                        
+
+            //           var schemecode = map_sip[scheme_name];
+
+            //           var frequency = $('#frequency :selected').text();
+            //           var amount = $('#amt').val();
+            //               amount=amount.replace(/,/g, '');
+            //               a=$('#from_date').val().replace(/-/g," ");
+            //               b=$('#to_date').val().replace(/-/g," ");
+            //           var startDate = new Date(a+" GMT");
+            //           var endDate = new Date(b+" GMT");
+            //               startDate = moment(startDate).format('YYYY-MM-DD');
+            //               endDate = moment(endDate).format('YYYY-MM-DD');
+
+                    
+            //           if(inner_flag==1)
+            //           {
+            //             test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
+            //             inner_flag=0;                         
+            //           }
+            //           else
+            //           {
+            //             test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);                        
+            //           }                      
+            //       }
+
+            //     });
+            // }
 
         });
 
+      $('#to_date').datepicker({
+          format: 'dd MM, yyyy',
+          // startDate: '0d',
+          // endDate: '0d',  
+          // startDate: new Date($('#from_date').val()),
+          // endDate: new Date(),
+          // autoclose: true
 
-        function setvalue_asset_temp( fund_mgr , consnt)
-        {
-            fund_mgr = fund_mgr.replace(/_/g,' ');
+      }).on('changeDate', function(e) {
+
+          // if(sec_flag_sts!=1)
+          // {
+          //     if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
+          //     {
+          //       var scheme_name = $('#fund_names_sip').val();
+          //       scheme_name = scheme_name.replace(/-/g,' ');
+          //       // scheme_name = scheme_name.replace(/-/g,' ');
+          //       // scheme_name = scheme_name.replace(/&/g,'');
+          //       // scheme_name = scheme_name.replace(/'/g,'');
+          //       // scheme_name = scheme_name.replace("[",'(');
+          //       // scheme_name = scheme_name.replace("]",')');
+          //       // scheme_name = scheme_name.replace("<",'LT');
+          //       // scheme_name = scheme_name.replace(">",'Gt');
+          //       // scheme_name = scheme_name.replace("/",'');
+          //       // scheme_name = scheme_name.replace("‘",'');
+          //       // scheme_name = scheme_name.replace("'",'');
+          //       // scheme_name = scheme_name.replace("%",'');  // added 29.08.2017
+          //       var schemecode = map_sip[scheme_name];
+          //       var frequency = $('#frequency :selected').text();
+          //       var amount = $('#amt').val();
+          //           amount=amount.replace(/,/g, '');
+          //           a=$('#from_date').val().replace(/-/g," ");
+          //           b=$('#to_date').val().replace(/-/g," ");
+          //       var startDate = new Date(a+" GMT");
+          //       var endDate = new Date(b+" GMT");
+          //           startDate = moment(startDate).format('YYYY-MM-DD');
+          //           endDate = moment(endDate).format('YYYY-MM-DD');
+                         
+          //       if(inner_flag==1)
+          //       {
+          //         // test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
+          //         inner_flag=0;
+          //         // console.log("To-date change-function----11"); 
+          //       }
+          //       else
+          //       {
+          //         test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
+          //         // console.log("To-date change-function=----ELSE"); 
+          //       }
+          //     }
+          // }                
+
+        });
+
+
+
+
+
+  // $('#from_date')
+  // .datepicker({
+  //     format: 'dd/mm/yyyy',
+  //      endDate : '+0d',
+  //     autoclose : true
+  // })
+  // .on('changeDate', function(e) {
+  //         // Revalidate the date field
+  //         $('#loginForm').formValidation('revalidateField', 'dob_doi_j1');
+  //     }); 
+  //  $('#to_date')
+  // .datepicker({
+  //     format: 'dd/mm/yyyy',
+  //      endDate : '+0d',
+  //     autoclose : true
+  // })
+  // .on('changeDate', function(e) {
+  //         // Revalidate the date field
+  //         $('#loginForm').formValidation('revalidateField', 'dob_doi_j2');
+  // });
+  
+
+//---------------------------- from_date Date picker ---------------------------------------
+// var date = new Date();
+//    locale = "en-us";
+//    month = date.toLocaleString(locale, { month: "long" });
+// console.log(month);
+
+
+   var todayFD = new Date();
+   //debugger;
+   var pickerInline = myApp.picker ({
+      input: '#from_date',            
+      toolbarTemplate:
+         '<div class = "toolbar">' +
+            '<div class = "toolbar-inner">' +
+               '<div class = "left">' +
+                  '<a href = "#" class = "link close-picker" id="FromDatePickerCancel"></a>' +
+               '</div>' +
+               
+               '<div class = "right">' +
+                  '<a href = "#" class="link close-picker" id="FromDatePickerDone">Done</a>' +
+               '</div>' +
+            '</div>' +
+         '</div>',
+      rotateEffect: true,
+      value: [            
+         todayFD.getMonth(),
+         todayFD.getDate(), 
+         todayFD.getFullYear()
+      ],  
+      onChange: function (picker, values, displayValues) {
+         // var daysInMonth = new Date(picker.value[2], picker.value[0]*1 + 1, 0).getDate();               
+         // if (values[1] > daysInMonth) {
+         //    picker.cols[1].setValue(daysInMonth);
+         // }
+      },            
+      formatValue: function (p, values, displayValues) {
+               return values[1] + ' ' + displayValues[0] + ', ' + values[2];
+      },
+      cols: [
+         {
+            values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+            displayValues: ('January February March April May June July August September October November December').split(' '),
+            textAlign: 'left'
+         },               
+         {
+            values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+         },                             
+         {
+            values: (function () {
+               var arr = [];
+               for (var i = 1980; i <= todayFD.getFullYear(); i++) { arr.push(i); }
+               return arr;
+            })(),
+         },
+         {
+            divider: true,
+            content: '  '
+         }
+      ]
+      //, 
+      // onOpen: function (picker) { 
+      //     picker.container.find('#FromDatePickerCancel').on('click', function () {                                   
+      //      $("#from_date").val('');                 
+      //     });
+      // }
+
+   });               
+
+//---------------------------------------------------------------------------------------------
+
+//---------------------------- to_date Date picker ---------------------------------------
+
+   var todayTD = new Date();
+   var pickerInline1 = myApp.picker ({
+      input: '#to_date',
+      toolbarTemplate:
+         '<div class = "toolbar">' +
+            '<div class = "toolbar-inner">' +
+               '<div class = "left">' +
+                  '<a href = "#" class = "link close-picker" id="ToDatePickerCancel"></a>' +
+               '</div>' +
+               
+               '<div class = "right">' +
+                  '<a href = "#" class="link close-picker" id="ToDatePickerDone">Done</a>' +
+               '</div>' +
+            '</div>' +
+         '</div>',
+      rotateEffect: true,
+      value: [            
+         todayTD.getMonth(),
+         todayTD.getDate(), 
+         todayTD.getFullYear()
+      ],            
+      onChange: function (picker, values, displayValues) {
+         // var daysInMonth = new Date(picker.value[2], picker.value[0]*1 + 1, 0).getDate();               
+         // if (values[1] > daysInMonth) {
+         //    picker.cols[1].setValue(daysInMonth);
+         // }
+      },            
+      formatValue: function (p, values, displayValues) {
+         return values[1] + ' ' + displayValues[0] + ', ' + values[2];
+      },            
+      cols: [
+         {
+            values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+            displayValues: ('January February March April May June July August September October November December').split(' '),
+            textAlign: 'left'
+         },
+         {
+            values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+         },
+         {
+            values: (function () {
+               var arr = [];
+               for (var i = 1980; i <= todayTD.getFullYear(); i++) { arr.push(i); }
+               return arr;
+            })(),
+         },
+         {
+            divider: true,
+            content: '  '
+         },
+      ]
+      // ,
+      // onOpen: function (picker) { 
+      //     picker.container.find('#ToDatePickerCancel').on('click', function () {                                   
+      //      $("#to_date").val('');                 
+      //     });
+      // }
+
+   });             
+
+//---------------------------------------------------------------------------------------------
+
+
             
-            $.ajax({
-                type:'post',
-                url: curr_ip+'home/set_asset_class',
-                data :{selection:fund_mgr,condition:consnt},
-                datatype:'json',
-                success:function(data) { 
-                    window.open('/Mutual-Funds-India/Screener','_blank')     
-                },
-                async: false,
-                error:function(jqXHR, textStatus, errorThrown) {        
-                }
-            })
-        }
-
-        $('#amt').keyup(function(event) {               
-            $('#amt').val($('#amt').val().replace(/\D/g, "")
-            .replace(/\B(?=(\d\d)+\d$)/g, ","));
-        });
-
-        $("[data-toggle=popover]").popover();
-
-        $( ".XIRRhover").hover(function(){
-            $('.XIRRhover').attr('data-content', 'XIRR or Extended Internal Rate of Return is a way of calculating the annualized return for a series of cash flows occurring at various intervals throughout the investment period.');
-            $(".XIRRhover").popover('toggle');
-        });
-
-        $('#sip_return').on('click', function (e) {
-            $('[data-toggle="popover"]').each(function () {
-                if(!$(this).is(e.target) &&
-                        $(this).has(e.target).length === 0 &&
-                        $('.popover').has(e.target).length === 0) {
-                    $(this).popover('hide');
-                }
-            });
-        });
-    });
 
 
+
+
+
+  
 }
 
 /*********************** SIP Return END ***********************************/
