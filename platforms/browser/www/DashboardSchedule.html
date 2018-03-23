@@ -5,13 +5,13 @@
                 <div class="col-xs-12">                    
                     <div class="swiper-container swiper-DSchedule">
                         <!-- <div class="swiper-pagination"></div> -->
-                        <div class="swiper-wrapper">
-                          <a href="DashboardIndex.html" class="swiper-slide item-link"><span class="fa fa-home" aria-hidden="true"></span></a>
-                          <a href="DashboardProfile.html" class="swiper-slide item-link"><span class="fa fa-user" aria-hidden="true"></span></a>
-                          <a href="DashboardTransStatus.html" class="swiper-slide item-link"><span class="fa fa-list-ul" aria-hidden="true"></span></a>
-                          <a href="DashboardSavedPort.html" class="swiper-slide item-link"><span class="fa fa-bookmark" aria-hidden="true"></span></a>
-                          <a href="DashboardSchedule.html" class="swiper-slide item-link dashactive"><span class="fa fa-truck" aria-hidden="true"></span></a>
-                          <a href="" class="swiper-slide"><span class="fa fa-microchip" aria-hidden="true"></span></a>
+                        <div class="swiper-wrapper text-center">
+                          <a href="DashboardIndex.html" class="swiper-slide item-link"><span class="fa fa-home" aria-hidden="true"></span>Dashboard</a>
+                          <a href="DashboardProfile.html" class="swiper-slide item-link"><span class="fa fa-user" aria-hidden="true"></span>Profile</a>
+                          <a href="DashboardTransStatus.html" class="swiper-slide item-link"><span class="fa fa-list-ul" aria-hidden="true"></span>Transactions</a>
+                          <a href="DashboardSavedPort.html" class="swiper-slide item-link"><span class="fa fa-bookmark" aria-hidden="true"></span>Portfolio</a>
+                          <a href="DashboardSchedule.html" class="swiper-slide item-link dashactive"><span class="fa fa-truck" aria-hidden="true"></span>Pickup</a>
+                          <a href="InvestInvestorDetails.html" class="swiper-slide item-link"><span class="fa fa-microchip" aria-hidden="true"></span>Invest</a>
                           <a href="" class="swiper-slide"><span class="fa fa-bath" aria-hidden="true"></span></a>
                           <a href="" class="swiper-slide"><span class="fa fa-meetup" aria-hidden="true"></span></a>
 
@@ -24,13 +24,194 @@
                     <h1>Schedule a Pickup</h1>                    
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12">
+                  <!-- <div class = "content-block-title">Dropdown With All Values</div> -->
+                  <div class = "list-block">
+                    <ul>
+                       <li class = "item-content">                          
+                          <div class = "item-input">
+                             <!-- <input type = "text" placeholder = "Select an investor" id = "ClientAll"> -->
+                             <select id="client_name" name="client_name"> 
+                                <option value="" selected>Select</option>
+                              </select>
+                          </div>
+                       </li>
+                    </ul>
+                  </div>                  
+                </div>
+            </div>
 
-            
+            <div class="row" id="fedex_desc">
+              <div class="col-xs-12">
+                  <p>You can schedule a pickup when all your documents are ready. You just need to select an investor from the above tab. We currently have this facility free of charge for pick-ups within India.</p>
+                  <p>Steps to be taken once the documents are ready:-</p>
+                  <ul>
+                    <li>You need to select a suitable date for the documents to be picked up from your place and schedule a pick up. Please let us know in case you face any difficulty while doing so.</li>
+                    <li>Once the pick-up has been scheduled, we will send you a confirmation email with all the details.</li>
+                  </ul>
+              </div>
+            </div>
+            <div class="row" id="nri_investor" style="display:none;">
+                <div class="col-xs-12">
+                    <p><strong>For overseas pickup, please contact care@rupeevest.com. </strong></p>
+                </div>
+            </div>
 
-            
+            <div class="row">
+              <div id="c_personal_info_form" >
+                <input type="hidden" name="cl_id" id="cl_id" />
+                <div class="col-xs-12" id ="info" style="display:none;">
+                    <div class = "list-block">
+                      <ul>
+                        <li>
+                            <div class = "item-content">
+                                <div class = "item-inner">
+                                    <div class = "item-title">Name</div>
+                                    <div class = "item-input">                                      
+                                        <input type="text" name="name" id="name">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class = "item-content">
+                               <div class = "item-inner">
+                                  <div class = "item-title">Address 1</div>
+                                  <div class = "item-input">                                   
+                                     <input type="text" name="addr1" id="addr1"/>
+                                  </div>
+                               </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class = "item-content">
+                               <div class = "item-inner">
+                                  <div class = "item-title">Address 2</div>
+                                  <div class = "item-input">                                   
+                                     <input type="text" name="addr2" id="addr2"/>
+                                     <h6>Address should not contain city name, state name and postal code and should not exceed 35 characters</h6>
+                                  </div>
+                               </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class = "item-content">
+                               <div class = "item-inner">
+                                  <div class = "item-title">Pincode</div>
+                                  <div class = "item-input">                                   
+                                     <input type="text" name="pincode" id="pincode">
+                                  </div>
+                               </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class = "item-content">
+                               <div class = "item-inner">
+                                  <div class = "item-title">City</div>
+                                  <div class = "item-input">                                   
+                                     <input type="text" name="city" id="city">
+                                  </div>
+                               </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class = "item-content">
+                               <div class = "item-inner">
+                                  <div class = "item-title">State</div>
+                                  <div class = "item-input">                                   
+                                     <input type="text" name="state" id="state">
+                                  </div>
+                               </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class = "item-content">
+                               <div class = "item-inner">
+                                  <div class = "item-title">Country</div>
+                                  <div class = "item-input">                                   
+                                     <input type="text" name="country" id="country">
+                                  </div>
+                               </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class = "item-content">
+                               <div class = "item-inner">
+                                  <div class = "item-title">Mobile No</div>
+                                  <div class = "item-input">                                   
+                                     <input type="text" name="mobile_no" id="mobile_no">
+                                  </div>
+                               </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class = "item-content">
+                               <div class = "item-inner">
+                                  <div class = "item-title">Email ID</div>
+                                  <div class = "item-input">                                   
+                                     <input type="text" name="email" id="email">
+                                  </div>
+                               </div>
+                            </div>
+                        </li>                          
+                      </ul>
+                    </div>
+                
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <button type="button" id="date_availability" class="btn btn-RV">Check for date availability</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                        <div id ="q_info">                                     
+                            <div class="row">                              
+                                <div class = "col-xs-12">
+                                    <h4>Pick-up date available:</h4>
+                                    <span id="date"></span>                
+                                    <input type="hidden" name="pickup_time" id="pickup_time">
+                                    <input type="hidden" name="cust_tansid" id="cust_tansid">                       
+                                    <div id="time">
+                                        <h5>Your package should get ready before</h5>                                      
+                                        <div class = "chip">
+                                            <div class = "chip-media bg-RV"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i></div>
+                                            <div class = "chip-label">                                              
+                                              <input type="text" name="cut_off_time" id="cut_off_time" readonly >
+                                            </div>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            </div>                      
+                        </div>
+                        <div id="no_of_pieces">                                    
+                            <div class="row">                          
+                                <div class = "col-xs-12">
+                                    <h5>Number of forms in a package:</h5>  
+                                     <div class = "chip">
+                                       <div class = "chip-media bg-RV">1</div>
+                                       <div class = "chip-label"><input type="text" name="no_pieces" id="no_pieces" placeholder="Enter number"></div>
+                                    </div>
+                                </div>
+                            </div>      
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="button" id="submit_btn" class="btn btn-RV">Create a Pickup</button>
+                                    <h6 id="wait">Please Wait.... Your request for pickup is being processed</h6>
+                                </div>
+                            </div>
+                        </div>                  
+                    </div>
+                  </div>
+                </div>
 
-            
-
+                <div class="col-xs-12"> 
+                    <div id="cancel_pickup">
+                     
+                    </div>
+                </div>
+              </div>
+            </div>
         </section>
     </div>
 </div>

@@ -20,63 +20,63 @@
                       
                       <div class="tabs">
                         
-                        <div id="StockHeldMF" class="page-content tab active">                          
-                            
-                            <div class="breadcrumb">
-                                <div class="row">                                    
-                                    <div class="col-sm-12 "> 
-                  
-                <!-- <div class="row">
-                  <div class="col-xs-12">  -->
-                    <div class="search_area">
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="srch_fund" placeholder="Search For Stocks Here">
-                        <span class="input-group-btn">
-                          <span class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                        </span>
-                      </div>
+          <div id="StockHeldMF" class="page-content tab active"> 
+            <div class="row">                                    
+                <div class="col-xs-12 ">
+                
+                  <div class="search_area">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="srch_fund" placeholder="Search For Stocks Here">
+                      <span class="input-group-btn">
+                        <span class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+                      </span>
                     </div>
-                 <!--  </div>
-                </ --><!-- div>  --> 
+                  </div>
                   
                  <!--  <input type="hidden" id="company_name_param" value=<%= @selected_comp_name %>>
                   <input type="hidden" id="company_fincode_param" value=<%= @selected_fin_code %>> -->
 
-                 <div id="main_content_div" style="display:none;">
-                    <div class="pad_top_bot1">
-                       <p class="d_inline">Stock Name: <strong><span type="text" id="comp_name"></span></strong></p><h6 class="d_inline"><em> (As on <span id="date_as_on"></span>)</em></h6>
-                    </div>
+                  <div id="main_content_div" style="display:none;">                    
+                    <p class="d_inline_b">Stock Name: <strong><span type="text" id="comp_name"></span></strong></p><h6 class="d_inline"><em> (As on <span id="date_as_on"></span>)</em></h6>                    
                     <div class="row">
-                     <div class="col-lg-8 stock_summary_table">
-            <div class="area_wrap">
-                          <table id="stock_summary" class="table table-bordered table-striped table-condensed sortable-theme-bootstrap" data-sortable >
-                            <thead><tr><th rowspan='2'>Sector</th><th rowspan='2'>No. of Funds</th><th colspan='4'>No. of Shares</th></tr><th><span id="mon_1_head"></span></th><th><span id="mon_2_head"></span></th><th><span id="mon_3_head"></span></th><th><span id="mon_4_head"></span></th><tr></tr></thead><tbody><tr><td><span id="sec_tor"></span></td><td><span id="n_o_f"></span></td><td><span id="no_o_s_m1"></span><span id="tot_monval_1" class="no_image"></span></td><td><span id="no_o_s_m2"></span><span id="tot_monval_2" class="no_image"></span></td><td><span id="no_o_s_m3"></span><span id="tot_monval_3" class="no_image"></span></td><td><span id="no_o_s_m4"></span></td></tr></tbody>
-                          </table>
-            </div>
-                      </div>
-                      <!-- <div class="col-sm-2 text-right share">
+                     <div class="col-xs-12 stock_summary_table">
                         <div class="">
-                            <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="ShareDropdownStock" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                              Share
-                              <span class="icon-share"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="ShareDropdownStock">
-                              <li><div id="shareBtnfb1" class="btn btn-info btn-xs btn-block"><span class="icon-facebook"></span><span> Facebook</span></div></li>
-
-                              <li><div id="ShareBtnTwitter" class="btn btn-success btn-xs btn-block twitter popup"><span class="icon-twitter"></span><span> Twitter</span></div></li>
-                              
-                              <li><div id="sharelinkedin" class="btn btn-danger btn-xs btn-block"><span class="icon-linkedin"></span><span> LinkedIn</span></div></li>
-                              
-                            </ul>
-                          </div>
-                      </div> -->
-
-                      <div class="col-sm-12">
+                          <table id="stock_summary" class="table table-bordered table-striped table-condensed FixedLayoutTable">
+                            <thead>
+                              <tr>
+                                <th rowspan='2'>Sector</th>
+                                <th rowspan='2'>No. of Funds</th>
+                                <th><span id="mon_1_head" class="StockChngMonth"></span></th>
+                                <th><span id="mon_2_head"></span></th>
+                                <th><span id="mon_3_head"></span></th>
+                                <th><span id="mon_4_head"></span></th>
+                                
+                              </tr>
+                              <tr>
+                                <th>No. of Shares</th>
+                                <th>No. of Shares</th>
+                                <th>No. of Shares</th>
+                                <th>No. of Shares</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td><span id="sec_tor"></span></td>
+                                  <td><span id="n_o_f"></span></td>
+                                  <td><span class="pull-right"><span id="no_o_s_m1"></span><span id="tot_monval_1" class="no_image"></span></span></td>
+                                  <td><span class="pull-right"><span id="no_o_s_m2"></span><span id="tot_monval_2" class="no_image"></span></span></td>
+                                  <td><span class="pull-right"><span id="no_o_s_m3"></span><span id="tot_monval_3" class="no_image"></span></span></td>
+                                  <td><span class="pull-right"><span id="no_o_s_m4"></span></span></td>
+                                </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div> 
+                      <div class="col-xs-12">
                         <h6><em><span class="incr"></span> <span class="decr"></span> indicates an increase or decrease in shareholding as compared to last month</em></h6>
                         <h6><em>Note: Shareholding has been adjusted for outstanding derivative positions as on month end date, if any.</em></h6>
                       </div>
-                    </div>
-                    
+                    </div>                    
 
                     <input type="hidden" id="load_info" value="not_loaded">
                       
@@ -84,106 +84,52 @@
 
                     </div>     
                         
-                </div>
-                 <div class="row" id="msg" style="display:none;">
-                        <div class="col-xs-12">
-                              <p>No Mutual Fund Holding found in this stock.</p>                 
-                        </div>
+                  </div>
+                  <div class="row" id="msg" style="display:none;">
+                      <div class="col-xs-12">
+                          <p>No Mutual Fund Holding found in this stock.</p>                 
+                      </div>
                   </div>
 
-
                 </div>
+            </div>
+          </div>
 
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- Tab 2 -->
-                        <div id="StocksAttractingFundManagers" class="page-content tab">
-                            
-                            <div class="breadcrumb">
-                                <!-- <div class="row"> -->
-                                    <!-- <div class="col-sm-12"> -->
-
-                                        <div class="row">
-                                          <div class="col-sm-12">
-                                             <p>Below is a list of stocks which have witnessed net mutual fund buying for the month of <span id="stock_att_month_yr"></span>. Along with the number of stocks which have seen net inflow, one can also see the approximate buy value for the month.</p>
-                                          </div>
-                                        </div>
-
-                                        <div class="row hidden">
-                                          <div class="col-md-6"> 
-                                           <table id="stock_price_heading" class="table table-bordered table-striped table-condensed sortable-theme-bootstrap">
-                                             <thead><tr><th>No. of Stocks</th><th>Total Incremental Buy Value</th></tr></thead>
-                                             <tbody><tr><td><center><span id="tot_count_all"></span></center></td><td><span>₹ </span><span id="tot_price_all"></span><span> cr.</span></td></tr></tbody>
-                                           </table>
-                                          </div> 
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-sm-12">
-                                            <button id="download_spc" class="btn btn-default btn-xs pull-right">Download</button>
-                                          </div>
-                                        </div>
-                                          
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                              <div class="data-table">
-                                                <table id="stock_price_compare" class="table table-bordered table-striped table-condensed sortable-theme-bootstrap" data-sortable>
-                                                </table>
-                                              </div>
-                                                <h6><em>Note: Shareholding has been adjusted for outstanding derivative positions as on month end date, if any.</em></h6>
-                                            </div>
-                                        </div>
-
-                                    <!-- </div>   -->                                  
-                                <!-- </div> -->
-                            </div>
-                            
-                        </div>
-                        <!-- Tab 3 -->
-                        <div id="StocksSeeingSellingPressure" class="page-content tab">
-                            
-                            <div class="breadcrumb">
-                               <!--  <div class="row">
-                                    <div class="col-sm-12"> -->
-
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <p>Below is a list of stocks which have witnessed net mutual fund selling for the month of <span id="stock_att_month_yr_1"></span>. Along with the number of stocks which have seen net outflow, one can also see the approximate sell value for the month.</p>                     
-                      </div>
+          <!-- Tab 2 -->
+          <div id="StocksAttractingFundManagers" class="page-content tab">
+              <div class="row">
+                <div class="col-xs-12">
+                   <p>Below is a list of stocks which have witnessed net mutual fund buying for the month of <span id="stock_att_month_yr"></span>. Along with the number of stocks which have seen net inflow, one can also see the approximate buy value for the month.</p>
+                </div>
+              </div>              
+              <div class="row">
+                  <div class="col-xs-12">
+                    <div class="">
+                      <table id="stock_price_compare" class="table table-bordered table-striped table-condensed FixedLayoutTable">
+                      </table>
                     </div>
+                      <h6><em>Note: Shareholding has been adjusted for outstanding derivative positions as on month end date, if any.</em></h6>
+                  </div>
+              </div>        
+          </div>
 
-                     <div class="row hidden">
-                        <div class="col-md-6"> 
-                         <table id="stock_price_heading_1" class="table table-bordered table-striped table-condensed sortable-theme-bootstrap">
-                           <thead><tr><th>No. of Stocks</th><th>Total Incremental Buy Value</th></tr></thead>
-                           <tbody><tr><td><center><span id="tot_count_all_1"></span></center></td><td><span>₹ </span><span id="tot_price_all_1"></span><span> cr.</span></td></tr></tbody>
-                         </table>
-                        </div> 
+          <!-- Tab 3 -->
+          <div id="StocksSeeingSellingPressure" class="page-content tab">
+              <div class="row">
+                <div class="col-xs-12">
+                  <p>Below is a list of stocks which have witnessed net mutual fund selling for the month of <span id="stock_att_month_yr_1"></span>. Along with the number of stocks which have seen net outflow, one can also see the approximate sell value for the month.</p>                     
+                </div>
+              </div>    
+              <div class="row">
+                  <div class="col-xs-12">
+                      <table id="stock_price_compare_1" class="table table-bordered table-striped table-condensed FixedLayoutTable">
+                      </table>
+                      <h6><em>Note: Shareholding has been adjusted for outstanding derivative positions as on month end date, if any.</em></h6>
+                  </div>
+              </div>
+          </div>
                       </div>
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <button id="download_spc_1" class="btn btn-default btn-xs pull-right">Download</button>
-                        </div>
-                      </div>
-                        
-                      <div class="row">
-                          <div class="col-md-12">
-                              <table id="stock_price_compare_1" class="table table-bordered table-striped table-condensed sortable-theme-bootstrap" data-sortable>
-                              </table>
-                              <h6><em>Note: Shareholding has been adjusted for outstanding derivative positions as on month end date, if any.</em></h6>
-                          </div>
-                      </div>
-
-                                 <!--  </div>                                   
-                                </div> -->
-                              </div>
-
-                        </div>
-                      </div>
-                    </div>
-                
+                    </div>                
 
                 </div>                
             </div>                     

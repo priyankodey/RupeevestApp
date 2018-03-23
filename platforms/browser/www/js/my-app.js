@@ -210,7 +210,7 @@ if(page.name === 'DashboardIndex') {
     var mySwiper3 = myApp.swiper('.swiper-DIndex', {
       pagination:'.swiper-DIndex .swiper-pagination',
       spaceBetween: 10,
-      slidesPerView: 5
+      slidesPerView: 4
     });
     $$.get(curr_ip+'app_services/dashboard', function (client_data_ajax) {
       //console.log(client_data_ajax);
@@ -332,7 +332,7 @@ if(page.name === 'DashboardProfile') {
     var mySwiper3 = myApp.swiper('.swiper-DProfile', {
       pagination:'.swiper-DProfile .swiper-pagination',
       spaceBetween: 10,
-      slidesPerView: 5
+      slidesPerView: 4
     });
 
 
@@ -527,7 +527,7 @@ if(page.name === 'DashboardTransStatus') {
     var mySwiper3 = myApp.swiper('.swiper-DTrans', {
       pagination:'.swiper-DTrans .swiper-pagination',
       spaceBetween: 10,
-      slidesPerView: 5
+      slidesPerView: 4
     });
 
      $$.get(curr_ip+'app_services/investor_profile', function (client_data_ajax) {
@@ -608,7 +608,7 @@ if(page.name === 'DashboardSavedPort') {
     var mySwiper3 = myApp.swiper('.swiper-DPort', {
       pagination:'.swiper-DPort .swiper-pagination',
       spaceBetween: 10,
-      slidesPerView: 5
+      slidesPerView: 4
     });
 }
 
@@ -618,15 +618,462 @@ if(page.name === 'DashboardSavedPort') {
 
 if(page.name === 'DashboardSchedule') {
     
-    // 3 Slides Per View, 10px Between
-    var mySwiper3 = myApp.swiper('.swiper-DSchedule', {
-      pagination:'.swiper-DSchedule .swiper-pagination',
-      spaceBetween: 10,
-      slidesPerView: 5
-    });
+  // 3 Slides Per View, 10px Between
+  var mySwiper3 = myApp.swiper('.swiper-DSchedule', {
+    pagination:'.swiper-DSchedule .swiper-pagination',
+    spaceBetween: 10,
+    slidesPerView: 4
+  });
+
+  $$.get(curr_ip+'app_services/fedex_form', function (Scheduledata) 
+  {
+
+      $('#submit_btn').prop( "disabled", true ); 
+      $("#info").hide();
+      $("#no_of_pieces").hide();
+      $("#wait1").hide();
+
+
+      var schedule_data = JSON.parse(Scheduledata);
+      console.log(schedule_data);
+
+      for (var j = 0; j< schedule_data.clients.length ; j++) {
+
+        investor_name = schedule_data.clients[j].inv_name;
+        console.log(investor_name);
+        $("#client_name").append("<option value = "+schedule_data.clients[j].id+">"+investor_name+"</option>");
+
+      }
+
+
+
+ $('#client_name').change(function()   ///for normal transaction 
+ {
+var id=$('#client_name').val();
+if(id=="")
+{
+$("#fedex_desc").show();
+ $('#info').hide();
+ }
+ else
+  $("#fedex_desc").hide();
+$("#no_of_pieces").hide();
+$("#addr1").val("");
+$("#addr2").val("");
+
+ $('#date_availability').prop( "disabled", false ); 
+
+var id=$('#client_name').val();
+
+$("#result_submit").hide();
+ 
+$("#cl_id").val(id);
+
+    $('.form-group').find('small.help-block').hide();
+   
+     $('.form-group').find('i.form-control-feedback').hide();
+     $('.form-group').removeClass('has-error has-feedback');
+ 
+      
+    if (id.length!=0)
+    {  
+         $.ajax({
+         type: 'GET',
+         url: curr_ip+'dashboards/client_populate',
+         dataType: 'json',
+         data: { 'id' : id},
+         success: function(data)
+           {         
+               var i=0;
+               var row="";               
+               console.log(data);               
+
+              if( data.details.tax_status!="21" && data.details.tax_status!="26" && data.details.tax_status!="27" && data.details.tax_status!="11"&& data.details.tax_status!="28" )
+              {
+                $("#nri_investor").hide();
+             $("#count").val(data.cancel.length);
+             console.log(data.cancel[0].name)
+             if(data.cancel=="no")
+             {
+                $("#cancel_pickup").hide();
+               $('#info').show();
+             }
+            else
+            {
+              $('#info').hide();
+              $("#cancel_pickup").show();
+               // $("#sel_fund_list").empty();
+                $("#cancel_pickup").empty();
+            //   $('#c_name').val(data.cancel[i].name);
+            // $('#c_addr').val(data.cancel[i].addr1);
+            // $('#c_city').val(data.cancel[i].city);
+            // $('#c_state').val(data.cancel[i].state);
+            // $('#c_pincode').val(data.cancel[i].pincode);
+            // $('#c_pick_up_date').val(data.cancel[i].pickup_time.slice(0,10));
+            // $('#cli_id').val(data.cancel[i].id);
+              
+                    for(i=0;i<data.cancel.length;i++)
+                    {
+                      row=row+"<div class = 'list-block'><ul><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>Name</div><div class = 'item-input'> <input type='text' name='c_name' id='c_name' class='form-control' value='"+data.cancel[i].name+"' readonly></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>Address 1</div><div class = 'item-input'> <input type='text' name='c_addr' id='c_addr' class='form-control' value='"+data.cancel[i].addr1+"' readonly></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>Address 2</div><div class = 'item-input'> <input type='text' name='c_addr2' id='c_addr2' class='form-control' value='"+data.cancel[i].addr2+"' readonly><h6>Address should not contain city name, state name and postal code and should not exceed 35 characters</h6></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>Pincode</div><div class = 'item-input'> <input type='text' name='c_pincode' id='c_pincode' class='form-control' value='"+data.cancel[i].pincode+"' readonly></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>City</div><div class = 'item-input'> <input type='text' name='c_city' id='c_city' class='form-control' value='"+data.cancel[i].city+"' readonly></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>State</div><div class = 'item-input'> <input type='text' name='c_state' id='c_state' class='form-control' value='"+data.cancel[i].state+"' readonly></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>Pick-up Date:</div><div class = 'item-input'> <input type='text' name='c_pick_up_date' id='c_pick_up_date' class='form-control' value='"+data.cancel[i].pickup_time.slice(0,10)+"' readonly> <input type='hidden' name='cli_id' id='cli_id' class='form-control' value='"+data.cancel[i].id+"' readonly></div></div></div></li></ul><div class='row'><div class='col-xs-12'> <button type='button' id='cancel' class='btn btn-RV cancel'>Cancel Pick Up</button><h6 id='can'>Please Wait.... Your request for cancelling the pickup is being processed</h6></div></div><div class='row'><div class='col-xs-12'><div id='c_confirm'></div></div></div></div>"
+                    }
+            
+                    $("#cancel_pickup").append(row);
+                    $("#can").hide();
+            
+                    cancel_date=data.cancel[0].pickup_time;
+                }
+           
+                $("#q_info").hide();
+                $('#time_info').hide();
+                
+                
+                $('#name').val(data.details.inv_name);
+                
+                $('#city').val(data.details.city);
+                $('#state').val(data.state.STATE_NAME);
+                $('#pincode').val(data.details.pincode);
+                $('#country').val(data.country.COUNTRY_NAME);
+                $('#mobile_no').val(data.details.mobile_no);
+                $('#email').val(data.details.email);
+            
+              }
+              else
+              {
+                $("#nri_investor").show();
+                $("#cancel_pickup").hide();
+                $('#info').hide();
+              }
+           }
+         });
+      }
+   });
+
+
+
+
+
+$('#date_availability').click(function() {
+    address=$("#addr1").val();
+    address1=$("#addr2").val();
+    pincode=$("#pincode").val();
+    city=$("#city").val();
+    state=$("#state").val();
+    mobile_no=$("#mobile_no").val();
+    email=$("#email").val();
+    country=$("#country").val();
+    name=$("#name").val();
+    if (name=="")
+      myApp.alert("Please enter your name",'');
+    else if(address=="")
+      myApp.alert("Please enter your address",'');
+    else if(address.length>35)
+      myApp.alert("Address1 should not exceed 35 characters",'');
+    else if(address1.length>35)
+      myApp.alert("Address2 should not exceed 35 characters",'');
+    else if(city=="")
+      myApp.alert("Please enter your city",'');
+    else if(state=="")
+      myApp.alert("Please enter your state",'');
+    else if(pincode=="")
+      myApp.alert("Please enter your pincode",'');
+    else if(country=="")
+      myApp.alert("Please enter your country",'');
+    else if(mobile_no=="")
+      myApp.alert("Please enter your mobile_no",'');
+    else if(email=="")
+      myApp.alert("Please enter your email",'');
+    
+    else
+    {
+      $('#addr1 .validtor').removeClass('has-error has-feedback');
+      $('#addr2 .validtor').removeClass('has-error has-feedback');
+      $('#pincode .validtor').removeClass('has-error has-feedback');
+      $('#city .validtor').removeClass('has-error has-feedback');
+      $('#state .validtor').removeClass('has-error has-feedback');
+      $('#mobile_no .validtor').removeClass('has-error has-feedback');
+      $('#email .validtor').removeClass('has-error has-feedback');
+      $('#country .validtor').removeClass('has-error has-feedback');
+      $('#name .validtor').removeClass('has-error has-feedback');
+      $("#wait1").show();
+      $('#date_availability').prop( "disabled", true ); 
+      var addr=$("#addr1").val()+"@"+$("#pincode").val()
+
+      $.ajax({
+              url: curr_ip+"dashboards/fedex_pickup_availability",
+              dataType: "text",
+              type: 'GET',
+              data: {
+                   'addr' : addr
+              },
+              success: function(data) {
+                                   
+                  console.log(data);
+                        if (data!="Pickup is not available in this pincode." && data !="Fedex server not reachable. Please Try after Some Time")
+                        {
+                            var i;
+                            result=data;
+                            $("#wait1").hide();
+                            $('#q_info').show();
+                            $('#no_of_pieces').hide();
+                            $("#time").hide();
+                            $("#date").empty();
+                            var array_frequencies = data.split("/");
+                            console.log(array_frequencies[0])
+                            var d = new Date(); // for now
+                            d.getHours(); // => 9
+                            console.log( d.getHours());
+                            var t=array_frequencies[1].split(':')
+                            console.log(t[0])
+                            // d.getMinutes(); // =>  30
+                            // d.getSeconds()    
+                            var tras_freq = "<div class = 'list-block'><ul><li class = 'item-content'><div class = 'item-input'><select id='date_avail' name='date_avail'>"
+                            tras_freq=tras_freq+"<option>Select</option>"
+                            if(d.getHours()<(t[0]-2))
+                            {
+                              for (i=0;i<array_frequencies.length-10;i=i+2)
+                              {
+
+                               tras_freq=tras_freq+"<option value="+array_frequencies[i]+">"+moment(array_frequencies[i]).format('DD-MMM-YY')+"</option>"
+                              }
+                             tras_freq=tras_freq+"</select></div></li></ul></div>"
+                           }
+                           else
+                           {
+                            for (i=2;i<array_frequencies.length-10;i=i+2)
+                              {
+                               tras_freq=tras_freq+"<option value="+array_frequencies[i]+">"+moment(array_frequencies[i]).format('DD-MMM-YY')+"</option>"
+                              }
+                             tras_freq=tras_freq+"</select></div></li></ul></div>"
+                           }
+                           
+                             $("#date").append(tras_freq)
+                            
+                            // $.each(array_frequencies, function( index, value ) 
+                            // {
+                            //   console.log(value);
+                            // })
+                             $("#cust_tansid").val(array_frequencies[array_frequencies.length-1])
+                              // $('#submit_btn').prop( "disabled", true ); 
+                            }
+                            else
+                              {
+                              $("#wait1").hide();
+                              myApp.alert(data,'');
+                              $('#date_availability').prop( "disabled", false ); 
+                            }
+                  // console.log(data);
+                  
+                  
+              }
+          });
+    }
+});
+
+$("#date").change(function()   ///for normal transaction 
+{
+  // alert("dsadsd");
+  var date=$("#date_avail").val();
+   // alert(date);
+   var date1=date+"/"+$('#client_name').val()
+   
+  // d1=date.split('/')
+  $("#pickup_time").val(date)
+  // alert(result)
+  var array_frequencies = result.split("/");
+  for (var i=0;i<array_frequencies.length;i++)
+  {
+    if(array_frequencies[i]==date)
+    {
+      var time=array_frequencies[i+1]
+      var t=time.split(":")
+      a=parseInt(t[0])-2
+      
+      $("#cut_off_time").val(a.toString()+":"+t[1]+":"+t[2]);
+      // alert(time);
+       $.ajax({
+                    url: curr_ip+"dashboards/cross_check",
+                    dataType: "text",
+                    type: 'GET',
+                    data: {
+                         'date1' : date1
+                    },
+                    success: function(data) {
+                       
+                        console.log(data);
+                        if (data=="yes")
+                          {
+                            myApp.alert("You have already done a schedule on that day. Choose another date",'');
+                        // $('#submit_btn').prop( "disabled", true ); 
+                      }
+                      else
+                        { $("#time").show(); 
+                          $('#no_of_pieces').show();
+                          $("#wait").hide();
+                         $('#submit_btn').prop( "disabled", false ); 
+                        }}});
+      return
+    }
+  }
+  // $("#cut_off__time").val(d1[1])
+  // $('#time_info').show();
+});
+
+$("#cancel_pickup").on('click','.cancel',function(){
+       // debugger;
+  // var id= $(this.parentElement.parentElement.parentElement.parentElement.childNodes[7]).val();
+  var id=$("#cli_id").val();
+// $('#cancel').click(function() {
+  // var cancel_info=$(this.parentElement.parentElement.parentElement.parentElement.childNodes[9].children[0].children[0].children[0]);
+  // cancel_info=cancel_info.empty();
+  // var submit=$(this.parentElement.children[0]);
+  // var can_req=$(this.parentElement.children[1]);
+  // alert(cancel_info);
+  $("#can").show();
+  // var id=$('#cl_id').val()+"/"+cancel_date;
+  console.log(id);
+  // console.log($('#c_pick_up_date').val());
+   $("#cancel").prop( "disabled", true ); 
+  $.ajax({
+                    url: curr_ip+"dashboards/fedex_cancel_pickup",
+                    dataType: "text",
+                    type: 'GET',
+                    data: {
+                         'id' : id
+                    },
+                    success: function(data) {
+                       
+                        console.log(data);
+                        if (data=="Cancelled")
+                          {
+                            // cancel_info.append("Successfully cancelled the pickup");
+                            $("#info").show();
+                            $("#result_submit").show();
+                            $("#result_submit").text("Successfully cancelled the pickup");
+                            myApp.alert("Successfully cancelled the pickup",'');
+                            $("#cancel_pickup").hide();
+                            $("#q_info").hide();
+                            $("#no_of_pieces").hide();
+                            $('#time_info').hide();
+                            $('#date_availability').prop( "disabled", false ); 
+                        // submit.prop( "disabled", true ); 
+                      }
+                        else
+                        {
+                          $("#can").text(data);
+                          $("#cancel_pickup").show();
+                          $("#info").hide();
+                          $("#q_info").hide();
+                          $("#no_of_pieces").hide();
+                          $('#time_info').hide();
+                        }
+                      }
+                        //   cancel_info.append(data);
+                        // can_req.hide();
+                        
+                      });
+});
+
+ $('#submit_btn').click(function() {
+  
+   // $("#form3").submit
+   no_pieces=$("#no_pieces").val();
+   if (no_pieces =="")
+   {
+      myApp.alert("Please enter the number of forms in a package",'');
+   }
+   else
+   {
+     $("#wait").show();
+     $('#submit_btn').prop( "disabled", true ); 
+     $.ajax({
+                    url: curr_ip+"dashboards/fedex_create_pickup",
+                    dataType: "text",
+                    type: 'GET',
+                    data: {
+                         'name' : $("#name").val(), 'mobile_no':$("#mobile_no").val(), 'email':$("#email").val(), 'addr1':$("#addr1").val(), 'addr2':$("#addr2").val(), 'city': $("#city").val(), 'state':$("#state").val(), 'pincode':$("#pincode").val(), 'country':$("#country").val(), 'pickup_time':$("#pickup_time").val(), 'cut_off_time':$("#cut_off_time").val(), 'cl_id':$("#cl_id").val(), 'no_pieces':$("#no_pieces").val(), 'cust_tansid': $("#cust_tansid").val()
+                    },
+                    success: function(data) 
+                    {
+                       
+                        console.log(data);
+                        if(data=="Your Pick up has been suceessfully scheduled and an airway bill has been sent to your mail")
+                        {
+                          var result="Your Pick up has been successfully scheduled. An email has been sent to your registered email id with all the details."
+                          var id=$('#client_name').val();
+                          myApp.alert(result,'');
+                          $.ajax({
+                             type: 'GET',
+                             url: curr_ip+'dashboards/client_populate',
+                             dataType: 'json',
+                             data: { 'id' : id},
+                             success: function(data)
+                             {
+                                 var i=0;
+                                 var row="";
+                                 console.log(data);
+                                 $("#count").val(data.cancel.length);
+                                 console.log(data.cancel[0].name)
+                                 if(data.cancel=="no")
+                                    $("#cancel_pickup").hide();
+                                 else
+                                 {
+                                    $("#cancel_pickup").show();
+                                    $("#cancel_pickup").empty();
+                        
+                                    for(i=0;i<data.cancel.length;i++)
+                                    {
+                                     row=row+"<div class = 'list-block'><ul><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>Name</div><div class = 'item-input'> <input type='text' name='c_name' id='c_name' class='form-control' value='"+data.cancel[i].name+"' readonly></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>Address 1</div><div class = 'item-input'> <input type='text' name='c_addr' id='c_addr' class='form-control' value='"+data.cancel[i].addr1+"' readonly></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>Address 2</div><div class = 'item-input'> <input type='text' name='c_addr2' id='c_addr2' class='form-control' value='"+data.cancel[i].addr2+"' readonly><h6>Address should not contain city name, state name and postal code and should not exceed 35 characters</h6></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>Pincode</div><div class = 'item-input'> <input type='text' name='c_pincode' id='c_pincode' class='form-control' value='"+data.cancel[i].pincode+"' readonly></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>City</div><div class = 'item-input'> <input type='text' name='c_city' id='c_city' class='form-control' value='"+data.cancel[i].city+"' readonly></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>State</div><div class = 'item-input'> <input type='text' name='c_state' id='c_state' class='form-control' value='"+data.cancel[i].state+"' readonly></div></div></div></li><li><div class = 'item-content'><div class = 'item-inner'><div class = 'item-title'>Pick-up Date:</div><div class = 'item-input'> <input type='text' name='c_pick_up_date' id='c_pick_up_date' class='form-control' value='"+data.cancel[i].pickup_time.slice(0,10)+"' readonly> <input type='hidden' name='cli_id' id='cli_id' class='form-control' value='"+data.cancel[i].id+"' readonly></div></div></div></li></ul><div class='row'><div class='col-xs-12'> <button type='button' id='cancel' class='btn btn-RV cancel'>Cancel Pick Up</button><h6 id='can'>Please Wait.... Your request for cancelling the pickup is being processed</h6></div></div><div class='row'><div class='col-xs-12'><div id='c_confirm'></div></div></div></div>"
+                                  }
+                           
+                                  $("#cancel_pickup").append(row);
+                                 
+                                      $("#can").hide();
+                                 
+                                  
+                                  cancel_date=data.cancel[0].pickup_time;
+                               }
+                               // $("#result_submit").show();
+                               // $('#result_submit').text(result);
+                               // alert(result);
+                                $('#info').hide();
+                                $("#q_info").hide();
+                                $('#time_info').hide();
+                             }
+                          })
+                        }
+                  }
+});
+}
+});
+
+
+
+
+
+
+   
+
+
+  });
+
+
 }
 
 /************************* Schedule a pickup END ***************************/
+
+/************************* Investor Details START ***************************/
+
+if(page.name === 'InvestInvestorDetails') {
+    
+    // 3 Slides Per View, 10px Between
+    var mySwiper3 = myApp.swiper('.swiper-DInvest', {
+      pagination:'.swiper-DInvest .swiper-pagination',
+      spaceBetween: 10,
+      slidesPerView: 4
+    });
+}
+
+/************************* Investor Details END ***************************/
 
 /***************************** About Us START ***************************/
 if (page.name === 'about') {
@@ -1097,8 +1544,7 @@ if(page.name==='ToolsComparison')
     console.log(scheme_codes);
     var id="";
     if(scheme_codes==null)
-    {
-      
+    {      
 
        $$.get(curr_ip+'app_services/comparison',function (data) 
         {
@@ -1130,12 +1576,7 @@ if(page.name==='ToolsComparison')
       generate_chart(array_id1,color_arr);
       compare_value(array_id);
       add_fundname_search();
-
-     
-      
-
     }
-
 
     $("#srch-term").autocomplete({
 
@@ -1149,11 +1590,11 @@ if(page.name==='ToolsComparison')
                 var scheme_code=JSON.parse(data);
                 console.log(array_id.length)
                 if (array_id.length>1) {
-                  myApp.alert("You can add only 2 funds");                      
+                  myApp.alert("You can add only 2 funds",'');                      
                 }
                 else if (array_id[0]==scheme_code.schemecode)
                 {
-                    myApp.alert("You have already added that fund")
+                    myApp.alert("You have already added that fund",'')
                 }
                 else{
                   array_id.push(scheme_code.schemecode);
@@ -1205,288 +1646,8 @@ if(page.name==='ToolsComparison')
 
 /*********************** SIP Return START ***********************************/
 
-// if(page.name==='ToolsSIPReturn')
-// {    
-  // $$.get(curr_ip+'app_services/sip_return_page', function (data) 
-  // {
-  //     var data = JSON.parse(data);
-  //     console.log(data);
-  //     $("#full_url").val(data.full_url);
-  //     $("#schemecode_selected").val(data.selected_schemecode);
-  //     $("#fund_name_rec").val(data.fund_name_rec);
-  //     $("#fund_name_actual").val(data.fund_name);           
-
-           
-  //     var endDate = new Date();
-  //     var startDate = new Date("1999-02-01");
-  //     startDate = moment(startDate).format('YYYY-MM-DD');
-  //     endDate = moment(endDate).format('YYYY-MM-DD');         
-
-  //     $("#from_date").val(startDate);
-  //     $("#to_date").val(endDate);                  
-
-  //     fundname_search_sip_return();
-
-  //     var url = $('#full_url').val();
-                    
-  //     if(url=="ERROR")
-  //     {              
-  //        // window.history.pushState('','','/Mutual-Fund-Calculator/Sip-Return/');
-  //     }
-  //     if(url!="NONE" && url!="ERROR")
-  //     {                         
-  //         $('#full_url').val("NONE"); 
-  //         var schemecode =  $('#schemecode_selected').val();
-
-  //         var amount = $('#amt').val();
-  //             amount = amount.replace(/,/g, '');
-
-  //         var startDate = new Date($('#from_date').val());
-  //         var endDate = new Date($('#to_date').val());
-  //         console.log(startDate);
-  //             startDate = moment(startDate).format('YYYY-MM-DD');
-  //             endDate = moment(endDate).format('YYYY-MM-DD');
-  //             console.log("//////////////////////");
-  //         console.log(startDate);
-
-  //         var frequency = $('#frequency :selected').text();
-  //         var fund_name = $('#fund_name_rec').val();
-  //             fund_name = fund_name.replace(/-/g,' ');
-
-  //         test_graph_sip(fund_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
-           
-  //         $('#container-head').show();
-
-  //         $('#fund_names_sip').val($("#fund_name_actual").val().replace(/-/g,' '));
-  //             // window.history.pushState('','',url);                     
-  //     }
-
-  //     $("#frequency").change(function() 
-  //     {                      
-  //         if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-  //         {
-  //             var scheme_name = $('#fund_names_sip').val();
-  //                 scheme_name = scheme_name.replace(/-/g,' ');
-  //             var schemecode =  $('#schemecode_selected').val();
-  //             var frequency = $('#frequency :selected').text();
-  //             var amount = $('#amt').val();
-  //                 amount = amount.replace(/,/g, '');
-  //             var startDate = new Date($('#from_date').val());
-  //             var endDate = new Date($('#to_date').val());
-  //                 startDate = moment(startDate).format('YYYY-MM-DD');
-  //                 endDate = moment(endDate).format('YYYY-MM-DD');
-
-  //             test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
-  //         }
-  //     });  
-
-
-  //     $('#amt').focusout(function() 
-  //     {
-  //         if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-  //         {
-  //             var scheme_name = $('#fund_names_sip').val();
-  //                 scheme_name = scheme_name.replace(/-/g,' ');
-  //                  console.log("----------------------------------------------");
-  //                 console.log(scheme_name);
-  //             var schemecode = map[scheme_name];
-  //             var frequency = $('#frequency :selected').text();
-  //             var amount = $('#amt').val();
-  //                 amount = amount.replace(/,/g, '');
-  //             var startDate = new Date($('#from_date').val());
-  //             var endDate = new Date($('#to_date').val());
-  //                 startDate = moment(startDate).format('YYYY-MM-DD');
-  //                 endDate = moment(endDate).format('YYYY-MM-DD');
-
-  //             test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
-  //         }
-  //     });
-
-
-  //     $('#amt').keydown(function(e) 
-  //     {   
-  //         if (e.keyCode == 13) 
-  //         {                
-  //             if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-  //             {
-  //                 var scheme_name = $('#fund_names_sip').val();
-  //                     scheme_name = scheme_name.replace(/-/g,' ');
-  //                 var schemecode = map[scheme_name];
-  //                 var frequency = $('#frequency :selected').text();
-  //                 var amount = $('#amt').val();
-  //                     amount = amount.replace(/,/g, '');
-  //                 var startDate = new Date($('#from_date').val());
-  //                 var endDate = new Date($('#to_date').val());
-  //                     startDate = moment(startDate).format('YYYY-MM-DD');
-  //                     endDate = moment(endDate).format('YYYY-MM-DD');
-
-  //                 test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
-  //             }
-  //         }
-  //     });  
-
-        
-
-
-  //     var inner_flag=0;
-  //     var from_date=0;
-  //     var to_date=0;
-  //     var choosedate ;
-  //     var sec_flag_sts=0;
-
-  //     $('#from_date').datepicker({
-  //         format: 'dd-M-yyyy',                
-  //         endDate: '-1d',
-  //         autoclose: true       
-  //     }).on('changeDate', function(e) {
-
-  //         var startDate = new Date($('#from_date').val());
-  //         var endDate = new Date($('#to_date').val());
-  //         var myDate = new Date();
-  //         if(startDate > endDate)
-  //         {
-  //             myDate.setFullYear(myDate.getFullYear() - 1);
-  //             swal("start date can not tbe greater than End date");
-  //             $("#from_date").datepicker("update", myDate);
-  //         }
-  //         else
-  //         {
-  //             if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-  //             {
-  //                 var scheme_name = $('#fund_names_sip').val();
-  //                     scheme_name = scheme_name.replace(/-/g,' ');
-  //                 var schemecode = map[scheme_name];
-  //                 var frequency = $('#frequency :selected').text();
-  //                 var amount = $('#amt').val();
-  //                     amount = amount.replace(/,/g, '');
-  //                 var startDate = new Date($('#from_date').val());
-  //                 var endDate = new Date($('#to_date').val());
-  //                     startDate = moment(startDate).format('YYYY-MM-DD');
-  //                     endDate = moment(endDate).format('YYYY-MM-DD');
-                     
-  //                     test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
-  //             }
-
-  //             $('#to_date').datepicker('remove');
-  //             inner_flag=1
-  //             sec_flag_sts=1;
-  //             $('#to_date').datepicker({
-  //               format: 'dd-M-yyyy',                          
-  //               startDate: new Date($('#from_date').val()),
-  //               endDate: new Date(),
-  //               autoclose: true
-  //             }).on('changeDate', function(e) {
-  //                 if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-  //                 {
-  //                     var scheme_name = $('#fund_names_sip').val();
-  //                         scheme_name = scheme_name.replace(/-/g,' ');
-  //                     var schemecode = map[scheme_name];
-  //                     var frequency = $('#frequency :selected').text();
-  //                     var amount = $('#amt').val();
-  //                         amount = amount.replace(/,/g, '');
-  //                     var startDate = new Date($('#from_date').val());
-  //                     var endDate = new Date($('#to_date').val());
-  //                         startDate = moment(startDate).format('YYYY-MM-DD');
-  //                         endDate = moment(endDate).format('YYYY-MM-DD');                            
-  //                     if(inner_flag==1)
-  //                     {
-  //                         test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
-  //                         inner_flag=0;                                
-  //                     }
-  //                     else
-  //                     {
-  //                         test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);                                 
-  //                     }                              
-  //                 }
-  //             });
-  //         }
-  //     });
-
-  //     $('#to_date').datepicker({
-  //         format: 'dd-M-yyyy',             
-  //         startDate: new Date($('#from_date').val()),
-  //         endDate: new Date(),
-  //         autoclose: true
-  //     }).on('changeDate', function(e) {
-
-  //         if(sec_flag_sts!=1)
-  //         {
-  //            if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-  //             {
-  //                 var scheme_name = $('#fund_names_sip').val();
-  //                     scheme_name = scheme_name.replace(/-/g,' ');                            
-  //                 var schemecode = map[scheme_name];
-  //                 var frequency = $('#frequency :selected').text();
-  //                 var amount = $('#amt').val();
-  //                     amount = amount.replace(/,/g, '');
-  //                 var startDate = new Date($('#from_date').val());
-  //                 var endDate = new Date($('#to_date').val());
-  //                     startDate = moment(startDate).format('YYYY-MM-DD');
-  //                     endDate = moment(endDate).format('YYYY-MM-DD');
-                 
-  //                 if(inner_flag==1)
-  //                 {                     
-  //                     inner_flag=0;                   
-  //                 }
-  //                 else
-  //                 {
-  //                     test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);                     
-  //                 }
-  //             }
-  //         }
-
-  //     });
-
-
-  //     function setvalue_asset_temp( fund_mgr , consnt)
-  //     {
-  //         fund_mgr = fund_mgr.replace(/_/g,' ');
-          
-  //         $.ajax({
-  //             type:'post',
-  //             url: curr_ip+'home/set_asset_class',
-  //             data :{selection:fund_mgr,condition:consnt},
-  //             datatype:'json',
-  //             success:function(data) { 
-  //                 window.open('/Mutual-Funds-India/Screener','_blank')     
-  //             },
-  //             async: false,
-  //             error:function(jqXHR, textStatus, errorThrown) {        
-  //             }
-  //         })
-  //     }
-
-  //     $('#amt').keyup(function(event) {               
-  //         $('#amt').val($('#amt').val().replace(/\D/g, "")
-  //         .replace(/\B(?=(\d\d)+\d$)/g, ","));
-  //     });
-
-  //     $("[data-toggle=popover]").popover();
-
-  //     $( ".XIRRhover").hover(function(){
-  //         $('.XIRRhover').attr('data-content', 'XIRR or Extended Internal Rate of Return is a way of calculating the annualized return for a series of cash flows occurring at various intervals throughout the investment period.');
-  //         $(".XIRRhover").popover('toggle');
-  //     });
-
-  //     $('#sip_return').on('click', function (e) {
-  //         $('[data-toggle="popover"]').each(function () {
-  //             if(!$(this).is(e.target) &&
-  //                     $(this).has(e.target).length === 0 &&
-  //                     $('.popover').has(e.target).length === 0) {
-  //                 $(this).popover('hide');
-  //             }
-  //         });
-  //     });
-  // });
-
-
-// }
-
-
 if(page.name==='ToolsSIPReturn')
 { 
-
-  console.log("Entered SIP Return");
 
   function getYesterdaysDate() {
       var date = new Date();
@@ -1531,12 +1692,12 @@ if(page.name==='ToolsSIPReturn')
 
     //debugger;
  });
-      function commaSeparateNumber(val){
-        while (/(\d)(?=(\d\d)+\d$)/g.test(val.toString())){
-          val = val.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
-        }
-        return val;
-      }    
+      // function commaSeparateNumber(val){
+      //   while (/(\d)(?=(\d\d)+\d$)/g.test(val.toString())){
+      //     val = val.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
+      //   }
+      //   return val;
+      // }    
 
 
       fundname_search_sip_return();
@@ -1751,201 +1912,25 @@ if(page.name==='ToolsSIPReturn')
 
       });
 
-            
-          
 
-       
+      var inner_flag=0;
+      var from_date=0;
+      var to_date=0;
+      var choosedate ;
+      var sec_flag_sts=0;
 
-
-        var inner_flag=0;
-        var from_date=0;
-        var to_date=0;
-        var choosedate ;
-        var sec_flag_sts=0;
-
-
-// $$(document).on('click', '.FromDatePickerDone', function(e){  });
-        $('#from_date').datepicker({
-            format: 'dd MM, yyyy',
-            //startDate: new Date(),
-            // endDate: getYesterdaysDate(),
-            // disabled: {
-            //   // from: today,
-            //   to: getYesterdaysDate()
-            // },
-            //autoclose: true       
-        }).on('changeDate', function(e) {
-
-          console.log("inside from date");
-
-            // a=$('#from_date').val().replace(/-/g," ");
-            // b=$('#to_date').val().replace(/-/g," ");
-            // var startDate = new Date(a+" GMT");
-            // var endDate = new Date(b+" GMT");
-            // var myDate = new Date();
-            // if(startDate > endDate)
-            // {
-            //   myDate.setFullYear(myDate.getFullYear() - 1);
-            //   swal("start date can not tbe greater than End date");
-            //   $("#from_date").datepicker("update", myDate);
-            // }
-            // else
-            // {
-            //   if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-            //   {
-            //     var scheme_name = $('#fund_names_sip').val();
-            //         scheme_name = scheme_name.replace(/-/g,' ');
-            //     var schemecode = map_sip[scheme_name];
-            //     var frequency = $('#frequency :selected').text();
-            //     var amount = $('#amt').val();
-            //         amount=amount.replace(/,/g, '');
-            //         a=$('#from_date').val().replace(/-/g," ");
-            //         b=$('#to_date').val().replace(/-/g," ");
-            //     var startDate = new Date(a+" GMT");
-            //     var endDate = new Date(b+" GMT");
-            //         startDate = moment(startDate).format('YYYY-MM-DD');
-            //         endDate = moment(endDate).format('YYYY-MM-DD');
-                      
-            //         test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
-            //   }
-
-            //   $('#to_date').datepicker('remove');
-
-            //   inner_flag=1
-            //   sec_flag_sts=1;
-
-            //   $('#to_date').datepicker({
-            //   format: 'MM dd, yyyy',
-            //   // startDate: '0d',
-            //   // endDate: '0d',  
-            //   startDate: new Date($('#from_date').val()),
-            //   endDate: new Date(),
-            //   autoclose: true
-
-            //   }).on('changeDate', function(e) {
-            //       if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-            //       {
-            //           var scheme_name = $('#fund_names_sip').val();
-            //               scheme_name = scheme_name.replace(/-/g,' ');                        
-
-            //           var schemecode = map_sip[scheme_name];
-
-            //           var frequency = $('#frequency :selected').text();
-            //           var amount = $('#amt').val();
-            //               amount=amount.replace(/,/g, '');
-            //               a=$('#from_date').val().replace(/-/g," ");
-            //               b=$('#to_date').val().replace(/-/g," ");
-            //           var startDate = new Date(a+" GMT");
-            //           var endDate = new Date(b+" GMT");
-            //               startDate = moment(startDate).format('YYYY-MM-DD');
-            //               endDate = moment(endDate).format('YYYY-MM-DD');
-
-                    
-            //           if(inner_flag==1)
-            //           {
-            //             test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
-            //             inner_flag=0;                         
-            //           }
-            //           else
-            //           {
-            //             test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);                        
-            //           }                      
-            //       }
-
-            //     });
-            // }
-
-        });
+      $('#from_date').datepicker({
+          format: 'dd MM, yyyy'       
+      });
 
       $('#to_date').datepicker({
-          format: 'dd MM, yyyy',
-          // startDate: '0d',
-          // endDate: '0d',  
-          // startDate: new Date($('#from_date').val()),
-          // endDate: new Date(),
-          // autoclose: true
-
-      }).on('changeDate', function(e) {
-
-          // if(sec_flag_sts!=1)
-          // {
-          //     if($('#fund_names_sip').val()!='' && $('#fund_names_sip').val()!='undefined')
-          //     {
-          //       var scheme_name = $('#fund_names_sip').val();
-          //       scheme_name = scheme_name.replace(/-/g,' ');
-          //       // scheme_name = scheme_name.replace(/-/g,' ');
-          //       // scheme_name = scheme_name.replace(/&/g,'');
-          //       // scheme_name = scheme_name.replace(/'/g,'');
-          //       // scheme_name = scheme_name.replace("[",'(');
-          //       // scheme_name = scheme_name.replace("]",')');
-          //       // scheme_name = scheme_name.replace("<",'LT');
-          //       // scheme_name = scheme_name.replace(">",'Gt');
-          //       // scheme_name = scheme_name.replace("/",'');
-          //       // scheme_name = scheme_name.replace("‘",'');
-          //       // scheme_name = scheme_name.replace("'",'');
-          //       // scheme_name = scheme_name.replace("%",'');  // added 29.08.2017
-          //       var schemecode = map_sip[scheme_name];
-          //       var frequency = $('#frequency :selected').text();
-          //       var amount = $('#amt').val();
-          //           amount=amount.replace(/,/g, '');
-          //           a=$('#from_date').val().replace(/-/g," ");
-          //           b=$('#to_date').val().replace(/-/g," ");
-          //       var startDate = new Date(a+" GMT");
-          //       var endDate = new Date(b+" GMT");
-          //           startDate = moment(startDate).format('YYYY-MM-DD');
-          //           endDate = moment(endDate).format('YYYY-MM-DD');
-                         
-          //       if(inner_flag==1)
-          //       {
-          //         // test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);  
-          //         inner_flag=0;
-          //         // console.log("To-date change-function----11"); 
-          //       }
-          //       else
-          //       {
-          //         test_graph_sip(scheme_name,schemecode,"container-sip",amount,frequency,startDate,endDate);
-          //         // console.log("To-date change-function=----ELSE"); 
-          //       }
-          //     }
-          // }                
-
-        });
-
-
-
-
-
-  // $('#from_date')
-  // .datepicker({
-  //     format: 'dd/mm/yyyy',
-  //      endDate : '+0d',
-  //     autoclose : true
-  // })
-  // .on('changeDate', function(e) {
-  //         // Revalidate the date field
-  //         $('#loginForm').formValidation('revalidateField', 'dob_doi_j1');
-  //     }); 
-  //  $('#to_date')
-  // .datepicker({
-  //     format: 'dd/mm/yyyy',
-  //      endDate : '+0d',
-  //     autoclose : true
-  // })
-  // .on('changeDate', function(e) {
-  //         // Revalidate the date field
-  //         $('#loginForm').formValidation('revalidateField', 'dob_doi_j2');
-  // });
-  
+          format: 'dd MM, yyyy'
+      });
+ 
 
 //---------------------------- from_date Date picker ---------------------------------------
-// var date = new Date();
-//    locale = "en-us";
-//    month = date.toLocaleString(locale, { month: "long" });
-// console.log(month);
-
 
    var todayFD = new Date();
-   //debugger;
    var pickerInline = myApp.picker ({
       input: '#from_date',            
       toolbarTemplate:
@@ -2071,741 +2056,803 @@ if(page.name==='ToolsSIPReturn')
 
 //---------------------------------------------------------------------------------------------
 
-
-            
-
-
-
-
-
   
 }
 
 /*********************** SIP Return END ***********************************/
 
 /*********************** Stocks Held START *********************************/
-    if(page.name==='ToolsStocksHeld')
-    {
-         var global_date_hldr="";
+if(page.name==='ToolsStocksHeld')
+{
+    var global_date_hldr="";
     var stock_name =[];
-    var map = {};
-  
-
-    $( document ).ready(function() {
-  
-        if($('#load_info').val()=="not_loaded")
-        {
-       
-          Load_stock_data_autocomplete();
-          Load_stock_data_autocomplete_1();
-
-          $('#load_info').val("loaded");
-     
-        } 
-
-    // if($('#company_fincode_param').val()!='' && $('#company_fincode_param').val()!='undefined' )
-    // {
-    //      // var fincode = map[$('#company_name_param').val()] ;
-    //      var fincode = $('#company_fincode_param').val();
-         
-       
-
-    //     load_stock_data(fincode);
-    //     $('#main_content_div').attr("style","display:block;");
-    // }
-
+    var map = {};    
     
-    //  if($('#company_fincode_param').val()!='' && $('#company_fincode_param').val()!='undefined' )
-    // {
-    //      // var fincode = map[$('#company_name_param').val()] ;
-    //      var fincode = $('#company_fincode_param').val();
-         
-       
-    //     if(fincode!="error")
-    //     {
-    //         $('#msg').attr("style","display:none;");
-    //        load_stock_data(fincode);
-    //       $('#main_content_div').attr("style","display:block;");
-    //     }
-    //     else
-    //     {
-    //        $('#msg').attr("style","display:block;");
-    //        window.history.pushState('','','/Mutual-Fund-Holdings');
-    //     }
-          
-    // }
-
-
-        $("#srch_fund").autocomplete({
+    if($('#load_info').val()=="not_loaded")
+    {   
+      Load_stock_data_autocomplete();
+      Load_stock_data_autocomplete_1();
+      $('#load_info').val("loaded");
+    } 
+    
+    $("#srch_fund").autocomplete({
      select: function (a, b) {
         $(this).val(b.item.value);
         // $("#fund_click").click();
-
         // console.log($(this).val(b.item.value));
-        
-       
-
         var fincode = map[$('#srch_fund').val()] ;
-         
-
-    
-
         load_stock_data(fincode);
         $('#main_content_div').attr("style","display:block;");
-
-    }
+      }
          // $('#fund_names').change(function()
-});
+    });
         
 
-       // swal($('#fin_code').val());
-       // load_stock_data($('#fin_code').val());
-         
-
-    });   //end of document-ready
-
-
-        function Load_stock_data_autocomplete()
-   { 
+    function Load_stock_data_autocomplete()
+    { 
       
-       $$.get(curr_ip+'app_services/get_search_data_stock',function (data) 
-       
-               {    
-                var myObj = JSON.parse(data);
-                // console.log(data);
-                     stock_name = [];
-                     map = {};
+      $$.get(curr_ip+'app_services/get_search_data_stock',function (data)       
+      {    
+          var myObj = JSON.parse(data);                    
+          stock_name = [];
+          map = {};
 
-                    for (var i=0; i< myObj.stock_data_search.length ; i++)
-                    {                        
-                         stock_name.push(myObj.stock_data_search[i].stock_search);
-                         map[myObj.stock_data_search[i].stock_search] = myObj.stock_data_search[i].fincode;
-                    }
-                
-                    $("#srch_fund").autocomplete({
-                        maxResults: 10,
-                        source: stock_name
-                    });
+          for (var i=0; i< myObj.stock_data_search.length ; i++)
+          {                        
+              stock_name.push(myObj.stock_data_search[i].stock_search);
+              map[myObj.stock_data_search[i].stock_search] = myObj.stock_data_search[i].fincode;
+          }
+      
+          $("#srch_fund").autocomplete({
+              maxResults: 10,
+              source: stock_name
+          });
 
-
-
-            $.ui.autocomplete.filter = function (array, term) {
-                var matcher = new RegExp("(^| )" + $.ui.autocomplete.escapeRegex(term), "i");
-                return $.grep(array, function (value) {
-                    return matcher.test(value.label || value.value || value);
-                });
-              };
-
-             
+          $.ui.autocomplete.filter = function (array, term) {
+            var matcher = new RegExp("(^| )" + $.ui.autocomplete.escapeRegex(term), "i");
+            return $.grep(array, function (value) {
+                return matcher.test(value.label || value.value || value);
+            });
+          };            
                
        });
     }
 
 
-function load_stock_data(fincode_tmp)
-   { 
-    var tblData;
+    function load_stock_data(fincode_tmp)
+    { 
+      var tblData;
       var mnth_1_cls="";
       var mnth_2_cls="";
       var mnth_3_cls="";
       var mnth_4_cls="";
-$$.get(curr_ip+'app_services/get_stock_detail',{fin_code:fincode_tmp},function (data) 
-     
-             {    
-               // data.month_name_4
 
- var data = JSON.parse(data);
+      $$.get(curr_ip+'app_services/get_stock_detail',{fin_code:fincode_tmp},function (data)      
+      {    
+        // data.month_name_4
 
-               console.log(data);
-                  
-               if(data.stock_data.length>0)
-               {
-                $("#msg").hide();
-                            var mnth_1 = 0;
-                            var mnth_2 = 0;
-                            var mnth_3 = 0;
-                            var mnth_4 = 0;
+        var data = JSON.parse(data);
 
-                              var mnth_1_chk = 0;
-                              var mnth_2_chk = 0;
-                              var mnth_3_chk = 0;
-                              var mnth_4_chk = 0;
+        console.log(data);
+            
+        if(data.stock_data.length>0)
+        {
+          $("#msg").hide();
+          var mnth_1 = 0;
+          var mnth_2 = 0;
+          var mnth_3 = 0;
+          var mnth_4 = 0;
+
+          var mnth_1_chk = 0;
+          var mnth_2_chk = 0;
+          var mnth_3_chk = 0;
+          var mnth_4_chk = 0;
+
+          var table2mon_1 = data.month_name_1;
+          var table2mon_2 = data.month_name_2;
+          var table2mon_3 = data.month_name_3;
+          var table2mon_4 = data.month_name_4;
+
+          var th = "<table id='stock_ret_data' class='table table-bordered table-striped table-condensed FixedLayoutTable'> <thead><tr><th rowspan='2'>Fund Name</th ><th rowspan='2' >Fund Manager</th><th rowspan='2' class='perc_aum'>AUM (in ₹ cr)<h6><em>As on "+table2mon_1+"</em></h6></th><th rowspan='2'>% of AUM<h6><em>As on "+table2mon_1+"</em></h6></th><th colspan='1' class='StockChngMonths'>"+data.month_name_1+"</th><th colspan='1'>"+data.month_name_2+"</th><th colspan='1'>"+data.month_name_3+"</th><th colspan='1'>"+data.month_name_4+"</th></tr><tr><th>No. of Shares</th><th>No. of Shares</th><th>No. of Shares</th><th>No. of Shares</th></tr></thead>";
+           
+          $('#mon_1_head').text(data.month_name_1);
+          $('#mon_2_head').text(data.month_name_2);
+          $('#mon_3_head').text(data.month_name_3);
+          $('#mon_4_head').text(data.month_name_4);    
+               
+          var temp_stock;
           
-                           var th = "<table id='stock_ret_data' class='table table-bordered table-striped table-condensed sortable-theme-bootstrap' data-sortable> <thead><tr><th rowspan='2'>Fund Name</th ><th rowspan='2' >Fund Manager</th><th colspan='3'>"+data.month_name_1+"</th><th colspan='1'>"+data.month_name_2+"</th><th colspan='1'>"+data.month_name_3+"</th><th colspan='1'>"+data.month_name_4+"</th></tr><tr><th>AUM (in ₹ cr)</th><th>% of AUM</th><th>No. of Shares</th><th>No. of Shares</th><th>No. of Shares</th><th>No. of Shares</th></tr></thead>";
-                           
-                          $('#mon_1_head').text(data.month_name_1);
-                          $('#mon_2_head').text(data.month_name_2);
-                          $('#mon_3_head').text(data.month_name_3);
-                          $('#mon_4_head').text(data.month_name_4);    
-                 
+          $('#comp_name').text(data.comp_data[0].compname);
+          $('#date_as_on').text(moment(data.first_month_end).format('DD-MMM-YY'));
+          $('#srch_fund').val(data.comp_data[0].compname);
+          // console.log(data.stock_data);
+           
+          var sect_name = data.stock_data[0].rv_sect_name;
+          
+          var nw_comp_name = data.comp_data[0].compname;
+              nw_comp_name = nw_comp_name.replace( / /g,'-');
+              nw_comp_name = nw_comp_name.replace( '.','');
+              nw_comp_name = nw_comp_name.replace( '&','And');
 
+          var no_of_stock = data.stock_data.length;
+          var mnth_1_total=0,mnth_2_total=0,mnth_3_total=0,mnth_4_total=0; 
 
-                          var temp_stock;
-                          
-                          $('#comp_name').text(data.comp_data[0].compname);
-                          $('#date_as_on').text(moment(data.first_month_end).format('DD-MMM-YY'));
-                            $('#srch_fund').val(data.comp_data[0].compname);
-                            // console.log(data.stock_data);
-                           
-                          var sect_name = data.stock_data[0].rv_sect_name;
-                          
-                          var nw_comp_name = data.comp_data[0].compname;
-                              nw_comp_name = nw_comp_name.replace( / /g,'-');
-                              nw_comp_name = nw_comp_name.replace( '.','');
-                              nw_comp_name = nw_comp_name.replace( '&','And');
+          // window.history.pushState('','','/Mutual-Fund-Holdings/'+nw_comp_name+'/'+fincode_tmp+'');
 
-                          var no_of_stock = data.stock_data.length;
-                          var mnth_1_total=0,mnth_2_total=0,mnth_3_total=0,mnth_4_total=0; 
+          for(var i=0; i<data.stock_data.length ; i++)
+          {
+            mnth_1 = 0;
+            mnth_2 = 0;
+            mnth_3 = 0;
+            mnth_4 = 0;
 
-                             // window.history.pushState('','','/Mutual-Fund-Holdings/'+nw_comp_name+'/'+fincode_tmp+'');
+            mnth_1_chk = 0;
+            mnth_2_chk = 0;
+            mnth_3_chk = 0;
+            mnth_4_chk = 0;
 
+            temp_stock = data.stock_data[i];
+          
+            var schemecode = temp_stock.schemecode;
+            var fund_manager = temp_stock.fund_mgr1;                            
+            var fund_manager_1 = fund_manager.replace(' ','_');                            
+            var s_name = temp_stock.s_name;
+            var fincode = temp_stock.fincode;               
+            var compname = temp_stock.compname;                             
+            var aum = temp_stock.aum;
+              
+            if(aum!=null && aum!='' && aum!='undefined')
+            {
+              aum = aum.toFixed(2);
+              aum =  commaSeparateNumber(aum);
+            } 
+              mnth_1 = temp_stock.month_name_1;
 
-
-                          for(var i=0; i<data.stock_data.length ; i++)
-                          {
-                            mnth_1 = 0;
-                            mnth_2 = 0;
-                            mnth_3 = 0;
-                            mnth_4 = 0;
-
-                              mnth_1_chk = 0;
-                              mnth_2_chk = 0;
-                              mnth_3_chk = 0;
-                              mnth_4_chk = 0;
-
-                             temp_stock = data.stock_data[i];
-                            
-                             var schemecode = temp_stock.schemecode;
-                             var fund_manager = temp_stock.fund_mgr1;
-                            
-                             var fund_manager_1 = fund_manager.replace(' ','_');
-                            
-                             var s_name = temp_stock.s_name;
-                             var fincode = temp_stock.fincode;               
-                             var compname = temp_stock.compname;
-                             
-                             var aum = temp_stock.aum;
-                              
-                             if(aum!=null && aum!='' && aum!='undefined')
-                             {
-                               aum = aum.toFixed(2);
-                               aum =  commaSeparateNumber(aum);
-                             } 
-
-                             mnth_1 = temp_stock.month_name_1;
-                            
-                             if(mnth_1==null)
-                             {
-                              mnth_1=0;
-                             }
-                             else
-                             {
-                              mnth_1_total = mnth_1_total + mnth_1;
-                              mnth_1_chk = mnth_1;
-                              mnth_1 = commaSeparateNumber(mnth_1);
-                              
-                             }
-
-                             mnth_2 = temp_stock.month_name_2;
-                            
-                             if(mnth_2==null)
-                             {
-                              mnth_2=0;
-                             }
-                             else
-                             {
-                              mnth_2_total = mnth_2_total + mnth_2;
-                              mnth_2_chk = mnth_2;
-                              mnth_2 = commaSeparateNumber(mnth_2);
-                             
-                             }
-                             mnth_3 = temp_stock.month_name_3;
-                             
-                             if(mnth_3==null)
-                             {
-                              mnth_3=0;
-                             }
-                             else
-                             {
-                               mnth_3_total = mnth_3_total + mnth_3;
-                                mnth_3_chk = mnth_3;
-                               mnth_3 = commaSeparateNumber(mnth_3);
-                              
-                             }
-                             mnth_4 = temp_stock.month_name_4;
-                             
-                             if(mnth_4==null)
-                             {
-                              mnth_4=0;
-                             }
-                             else
-                             {
-                               mnth_4_total = mnth_4_total + mnth_4;
-                                mnth_4_chk = mnth_4;
-                               mnth_4 = commaSeparateNumber(mnth_4);
-                              
-                             }
-
-                             var prcnt_aum = temp_stock.percent_aum;
-                            
-                             
-
-                              if(prcnt_aum!=null && prcnt_aum!='' && prcnt_aum!='undefined')
-                             {
-                               prcnt_aum = prcnt_aum.toFixed(2);
-                             }
-                             else
-                             {
-                              prcnt_aum="-";
-                             } 
-
-                              mnth_1_cls="no_sign";
-                              mnth_2_cls="no_sign";
-                              mnth_3_cls="no_sign";
-                              mnth_4_cls="nochange";
+            if(mnth_1==null)
+            {
+              mnth_1=0;
+            }
+            else
+            {
+              mnth_1_total = mnth_1_total + mnth_1;
+              mnth_1_chk = mnth_1;
+              mnth_1 = commaSeparateNumber(mnth_1);              
+            }
+              mnth_2 = temp_stock.month_name_2;
+            
+            if(mnth_2==null)
+            {
+              mnth_2=0;
+            }
+            else
+            {
+              mnth_2_total = mnth_2_total + mnth_2;
+              mnth_2_chk = mnth_2;
+              mnth_2 = commaSeparateNumber(mnth_2);             
+            }
+              mnth_3 = temp_stock.month_name_3;
              
+            if(mnth_3==null)
+            {
+              mnth_3=0;
+            }
+            else
+            {
+              mnth_3_total = mnth_3_total + mnth_3;
+              mnth_3_chk = mnth_3;
+              mnth_3 = commaSeparateNumber(mnth_3);              
+            }
+              mnth_4 = temp_stock.month_name_4;
+             
+            if(mnth_4==null)
+            {
+              mnth_4=0;
+            }
+            else
+            {
+              mnth_4_total = mnth_4_total + mnth_4;
+              mnth_4_chk = mnth_4;
+              mnth_4 = commaSeparateNumber(mnth_4);              
+            }
 
-                                if(mnth_4_chk=="-" && mnth_3!="-" )
-                                 {
-                                   mnth_3_cls="incr";
-                                 }
-                               else if(mnth_3_chk > mnth_4_chk && mnth_3!="-")
-                                 {
-                                    mnth_3_cls="incr";
-                                 }
-                                 else if(mnth_3_chk < mnth_4_chk && mnth_3!="-")
-                                 {
-                                    mnth_3_cls="decr";
-                                 }
-                                 else
-                                 {
-                                    mnth_3_cls="nochange";
-                                 }
-                           
-                               if(mnth_3_chk=="-" && mnth_2!="-")
-                                 {
-                                   mnth_2_cls="incr";
-                                 }
-                                 else if(mnth_2_chk > mnth_3_chk && mnth_2!="-")
-                                 {
-                                    mnth_2_cls="incr";
-                                 }
-                                 else if(mnth_2_chk < mnth_3_chk && mnth_2!="-")
-                                 {
-                                    mnth_2_cls="decr";
-                                 }
-                                 else
-                                 {
-                                    mnth_2_cls="nochange";
-                                 }
-                         
-                                if(mnth_2_chk=="-" && mnth_1!="-")
-                                {
-                                   mnth_1_cls="incr";
-                                }
-                                else if(mnth_1_chk > mnth_2_chk && mnth_1!="-")
-                                 {
-                                    mnth_1_cls="incr";
-                                 }
-                                else if(mnth_1_chk < mnth_2_chk && mnth_1!="-" )
-                                 {
-                                    mnth_1_cls="decr";
-                                 }
-                                else
-                                 {
-                                    mnth_1_cls="nochange";
-                                 }
-                             
+              var prcnt_aum = temp_stock.percent_aum;                         
 
-                                  
+            if(prcnt_aum!=null && prcnt_aum!='' && prcnt_aum!='undefined')
+            {
+              prcnt_aum = prcnt_aum.toFixed(2);
+            }
+            else
+            {
+              prcnt_aum="-";
+            } 
 
+              mnth_1_cls="no_sign";
+              mnth_2_cls="no_sign";
+              mnth_3_cls="no_sign";
+              mnth_4_cls="nochange";
 
+            if(mnth_4_chk=="-" && mnth_3!="-" )
+            {
+              mnth_3_cls="incr";
+            }
+            else if(mnth_3_chk > mnth_4_chk && mnth_3!="-")
+            {
+              mnth_3_cls="incr";
+            }
+            else if(mnth_3_chk < mnth_4_chk && mnth_3!="-")
+            {
+              mnth_3_cls="decr";
+            }
+            else
+            {
+              mnth_3_cls="nochange";
+            }
+           
+            if(mnth_3_chk=="-" && mnth_2!="-")
+            {
+              mnth_2_cls="incr";
+            }
+            else if(mnth_2_chk > mnth_3_chk && mnth_2!="-")
+            {
+              mnth_2_cls="incr";
+            }
+            else if(mnth_2_chk < mnth_3_chk && mnth_2!="-")
+            {
+              mnth_2_cls="decr";
+            }
+            else
+            {
+              mnth_2_cls="nochange";
+            }
+     
+            if(mnth_2_chk=="-" && mnth_1!="-")
+            {
+              mnth_1_cls="incr";
+            }
+            else if(mnth_1_chk > mnth_2_chk && mnth_1!="-")
+            {
+              mnth_1_cls="incr";
+            }
+            else if(mnth_1_chk < mnth_2_chk && mnth_1!="-" )
+            {
+              mnth_1_cls="decr";
+            }
+            else
+            {
+              mnth_1_cls="nochange";
+            }                           
 
-                             if(i==0)
-                             {
-
-                         
-
-
-
-                              tblData = th + "<tbody><tr>"+"<td>"+"<a target = '_blank' href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"+"</td>"+"<td>"+"<span id='fund_manager' onclick=setvalue_asset_temp('"+fund_manager_1+"','fund_manager')>"+fund_manager+"</span>"+"</td><td>"+aum+"</td>"+"<td>"+prcnt_aum+"</td>"+"<td>"+"<span>"+mnth_1+"</span><span id='mon_1' class='"+mnth_1_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_2+"</span><span id='mon_2' class='"+mnth_2_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_3+"</span><span id='mon_3' class='"+mnth_3_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_4+"</span><span id='mon_4' class='"+mnth_4_cls+"'></span>"+"</td></tr>"
-                     
-
-                              
-
-                             }
-                             else
-                             {
-                            
-                              tblData = tblData + "<tr>"+"<td>"+"<a target = '_blank' href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"+"</td>"+"<td>"+"<span id='fund_manager' onclick=setvalue_asset_temp('"+fund_manager_1+"','fund_manager')>"+fund_manager+"</span>"+"</td><td>"+aum+"</td>"+"<td>"+prcnt_aum+"</td>"+"<td>"+"<span>"+mnth_1+"</span><span id='mon_1' class='"+mnth_1_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_2+"</span> <span id='mon_2' class='"+mnth_2_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_3+"</span><span id='mon_3' class='"+mnth_3_cls+"'></span>"+"</td>"+"<td>"+"<span>"+mnth_4+"</span><span id='mon_4' class='"+mnth_4_cls+"'></span>"+"</td></tr>"
-                             }
-                          }
+              
+            if(i==0)
+            {
+              tblData = th + "<tbody><tr>"+"<td>"+"<a target = '_blank' href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"+"</td>"+"<td>"+"<span id='fund_manager' onclick=setvalue_asset_temp('"+fund_manager_1+"','fund_manager')>"+fund_manager+"</span>"+"</td><td>"+aum+"</td>"+"<td>"+prcnt_aum+"</td>"+"<td>"+"<span class='pull-right'><span>"+mnth_1+"</span><span id='mon_1' class='"+mnth_1_cls+"'></span></span>"+"</td>"+"<td>"+"<span class='pull-right'><span>"+mnth_2+"</span><span id='mon_2' class='"+mnth_2_cls+"'></span></span>"+"</td>"+"<td>"+"<span class='pull-right'><span>"+mnth_3+"</span><span id='mon_3' class='"+mnth_3_cls+"'></span></span>"+"</td>"+"<td>"+"<span class='pull-right'><span>"+mnth_4+"</span><span id='mon_4' class='"+mnth_4_cls+"'></span></span>"+"</td></tr>"
+            }
+            else
+            {          
+              tblData = tblData + "<tr>"+"<td>"+"<a target = '_blank' href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"+"</td>"+"<td>"+"<span id='fund_manager' onclick=setvalue_asset_temp('"+fund_manager_1+"','fund_manager')>"+fund_manager+"</span>"+"</td><td>"+aum+"</td>"+"<td>"+prcnt_aum+"</td>"+"<td>"+"<span class='pull-right'><span>"+mnth_1+"</span><span id='mon_1' class='"+mnth_1_cls+"'></span></span>"+"</td>"+"<td>"+"<span class='pull-right'><span>"+mnth_2+"</span> <span id='mon_2' class='"+mnth_2_cls+"'></span></span>"+"</td>"+"<td>"+"<span class='pull-right'><span>"+mnth_3+"</span><span id='mon_3' class='"+mnth_3_cls+"'></span></span>"+"</td>"+"<td>"+"<span class='pull-right'><span>"+mnth_4+"</span><span id='mon_4' class='"+mnth_4_cls+"'></span></span>"+"</td></tr>"
+            }
+          }
                          
                      
                           
-                       tblData = tblData+"</tbody></table>"
+            tblData = tblData+"</tbody></table>"
                       
                        
 
-                        $('#stoct_ret_div').html("");
-                        $('#stoct_ret_div').html(tblData); 
-
-                        $('#stock_ret_data').DataTable({
-                    "paging": false,
-                    "ordering": true,
-                    "info": true,
-                    "searching": true,"order": [[ 4, "desc" ]]
-                });
+            $('#stoct_ret_div').html("");
+            $('#stoct_ret_div').html(tblData); 
+            // $('#stock_ret_data').DataTable({
+            //   "paging": false,
+            //   "ordering": true,
+            //   "info": true,
+            //   "searching": true,"order": [[ 4, "desc" ]]
+            // });
                                 
                        
-                        if(mnth_4_chk=="-" && mnth_3!="-" )
-                                 {
-                                   mnth_3_cls="incr";
-                                 }
-                               else if(mnth_3_chk > mnth_4_chk && mnth_3!="-")
-                                 {
-                                    mnth_3_cls="incr";
-                                 }
-                                 else if(mnth_3_chk < mnth_4_chk && mnth_3!="-")
-                                 {
-                                    mnth_3_cls="decr";
-                                 }
-                                 else
-                                 {
-                                    mnth_3_cls="nochange";
-                                 }
+            if(mnth_4_chk=="-" && mnth_3!="-" )
+            {
+             mnth_3_cls="incr";
+            }
+            else if(mnth_3_chk > mnth_4_chk && mnth_3!="-")
+            {
+              mnth_3_cls="incr";
+            }
+            else if(mnth_3_chk < mnth_4_chk && mnth_3!="-")
+            {
+              mnth_3_cls="decr";
+            }
+            else
+            {
+              mnth_3_cls="nochange";
+            }
 
 
-                       var mnth_1_total_tmp=0,mnth_2_total_tmp=0,mnth_3_total_tmp=0,mnth_4_total_tmp=0;
+              var mnth_1_total_tmp=0,mnth_2_total_tmp=0,mnth_3_total_tmp=0,mnth_4_total_tmp=0;                      
 
-                      
-
-                        mnth_1_total_tmp = data.mnth_1_sum[0].sum_mnth_1;
-                        if(mnth_1_total_tmp==null)
-                        {
-                          mnth_1_total_tmp=0;
-                        }
-                        mnth_2_total_tmp = data.mnth_2_sum[0].sum_mnth_2;
-                        if(mnth_2_total_tmp==null)
-                        {
-                          mnth_2_total_tmp=0;
-                        }
-                        mnth_3_total_tmp = data.mnth_3_sum[0].sum_mnth_3;
-                          if(mnth_3_total_tmp==null)
-                        {
-                          mnth_3_total_tmp=0;
-                        }
-                        mnth_4_total_tmp = data.mnth_4_sum[0].sum_mnth_4;
-
-                          if(mnth_4_total_tmp==null)
-                        {
-                          mnth_4_total_tmp=0;
-                        }
-
-                        mnth_1_total = data.mnth_1_sum[0].sum_mnth_1;
-                          if(mnth_1_total==null)
-                          {
-                            mnth_1_total=0;
-                          }
-                        mnth_2_total = data.mnth_2_sum[0].sum_mnth_2;
-                          if(mnth_2_total==null)
-                          {
-                            mnth_2_total=0;
-                          }
-                        mnth_3_total = data.mnth_3_sum[0].sum_mnth_3;
-                         if(mnth_3_total==null)
-                          {
-                            mnth_3_total=0;
-                          }
-                        mnth_4_total = data.mnth_4_sum[0].sum_mnth_4;
-                        if(mnth_4_total==null)
-                          {
-                            mnth_4_total=0;
-                            }
+              mnth_1_total_tmp = data.mnth_1_sum[0].sum_mnth_1;
+            if(mnth_1_total_tmp==null)
+            {
+              mnth_1_total_tmp=0;
+            }
+              mnth_2_total_tmp = data.mnth_2_sum[0].sum_mnth_2;
+            if(mnth_2_total_tmp==null)
+            {
+              mnth_2_total_tmp=0;
+            }
+              mnth_3_total_tmp = data.mnth_3_sum[0].sum_mnth_3;
+            if(mnth_3_total_tmp==null)
+            {
+              mnth_3_total_tmp=0;
+            }
+              mnth_4_total_tmp = data.mnth_4_sum[0].sum_mnth_4;
+            if(mnth_4_total_tmp==null)
+            {
+              mnth_4_total_tmp=0;
+            }
+              mnth_1_total = data.mnth_1_sum[0].sum_mnth_1;
+            if(mnth_1_total==null)
+            {
+              mnth_1_total=0;
+            }
+              mnth_2_total = data.mnth_2_sum[0].sum_mnth_2;
+            if(mnth_2_total==null)
+            {
+              mnth_2_total=0;
+            }
+              mnth_3_total = data.mnth_3_sum[0].sum_mnth_3;
+            if(mnth_3_total==null)
+            {
+              mnth_3_total=0;
+            }
+              mnth_4_total = data.mnth_4_sum[0].sum_mnth_4;
+            if(mnth_4_total==null)
+            {
+              mnth_4_total=0;
+            }
 
                         
 
-                        if(mnth_3_total_tmp >  mnth_4_total_tmp)
-                        {
-                            $('#tot_monval_3').attr('class','incr');
-                        }
-                        else if(mnth_3_total_tmp <  mnth_4_total_tmp)
-                        {
-                            $('#tot_monval_3').attr('class','decr');
-                        }
-                        else
-                        {
-                            $('#tot_monval_3').attr('class','nochange');  
-                        }
+            if(mnth_3_total_tmp >  mnth_4_total_tmp)
+            {
+                $('#tot_monval_3').attr('class','incr');
+            }
+            else if(mnth_3_total_tmp <  mnth_4_total_tmp)
+            {
+                $('#tot_monval_3').attr('class','decr');
+            }
+            else
+            {
+                $('#tot_monval_3').attr('class','nochange');  
+            }
 
 
-                         if(mnth_2_total_tmp >  mnth_3_total_tmp)
-                        {
-                            $('#tot_monval_2').attr('class','incr');
-                        }
-                        else if(mnth_2_total_tmp <  mnth_3_total_tmp)
-                        {
-                            $('#tot_monval_2').attr('class','decr');
-                        }
-                        else
-                        {
-                            $('#tot_monval_2').attr('class','nochange');  
-                        }  
+            if(mnth_2_total_tmp >  mnth_3_total_tmp)
+            {
+                $('#tot_monval_2').attr('class','incr');
+            }
+            else if(mnth_2_total_tmp <  mnth_3_total_tmp)
+            {
+                $('#tot_monval_2').attr('class','decr');
+            }
+            else
+            {
+                $('#tot_monval_2').attr('class','nochange');  
+            }  
 
-                         if(mnth_1_total_tmp >  mnth_2_total_tmp)
-                        {
-                            $('#tot_monval_1').attr('class','incr');
-                        }
-                        else if(mnth_1_total_tmp <  mnth_2_total_tmp)
-                        {
-                            $('#tot_monval_1').attr('class','decr');
-                        }
-                        else
-                        {
-                            $('#tot_monval_1').attr('class','nochange');  
-                        }  
+            if(mnth_1_total_tmp >  mnth_2_total_tmp)
+            {
+                $('#tot_monval_1').attr('class','incr');
+            }
+            else if(mnth_1_total_tmp <  mnth_2_total_tmp)
+            {
+                $('#tot_monval_1').attr('class','decr');
+            }
+            else
+            {
+                $('#tot_monval_1').attr('class','nochange');  
+            }  
 
-                        mnth_1_total = commaSeparateNumber(mnth_1_total);
-                        mnth_2_total = commaSeparateNumber(mnth_2_total);
-                        mnth_3_total = commaSeparateNumber(mnth_3_total);
-                        mnth_4_total = commaSeparateNumber(mnth_4_total);
-
-                        
-                        $('#sec_tor').text(sect_name);
-                        $('#n_o_f').text(no_of_stock);
-                      
-
-
-                        $('#no_o_s_m1').text(mnth_1_total);
-                        $('#no_o_s_m2').text(mnth_2_total);
-                        $('#no_o_s_m3').text(mnth_3_total);
-                        $('#no_o_s_m4').text(mnth_4_total);
-
-               }
-               else
-               {
-                 $("#msg").show();
-              
-                 $('#main_content_div').attr("style","display:none;");
-               }
-
-         
-             });
-   }
-
-
-function Load_stock_data_autocomplete_1()
-   { 
-       $$.get(curr_ip+'app_services/get_compare_data_stock',function (data) 
-     
-             {    
-               // data.month_name_4
-
- var data = JSON.parse(data);
-
-
-
-        
-                 
-                // console.log(data)
-                 //id = stock_price_compare
-                var th ="<thead><tr><th>Stock Name</th><th>Sector</th><th>Classification</th><th>Month</th><th>Net Qty Bought</th><th>Approx. Buy Value<br>(In ₹ cr)</th></tr></thead><tbody>";
-                     
-                 var stock_name="";
-                 var classification="";
-                 var no_of_share_change=0;
-                 var price_of_share_change=0;     
-                 var tb=" ";
-                 var rv_sector=" ";
-                 var fincode=0;
-                 
-                  var day = new Date(data.stock_compare_data[0].day);
-
-                          var mon_1 = moment(day).format('MMMM-YYYY');
-
-                          
-                          global_date_hldr = moment(day).format('MMM-YY');
-                          $('#stock_att_month_yr').text(global_date_hldr); // set month in this tab
-                          $('#stock_att_month_yr_1').text(global_date_hldr); // set month in this tab
-
-                          // var year_1 = moment(day).format('YYYY');
-                          // var date2 = new Date(); 
-                          // date2 = date2.setMonth(day.getMonth()-1);
-                          // var mon_2 = moment(date2).format('MMMM');
-                  
-                  var tot_count=0;
-                  var total_price=0; 
+                mnth_1_total = commaSeparateNumber(mnth_1_total);
+                mnth_2_total = commaSeparateNumber(mnth_2_total);
+                mnth_3_total = commaSeparateNumber(mnth_3_total);
+                mnth_4_total = commaSeparateNumber(mnth_4_total);
 
                 
-                  tot_count = data.stock_compare_data.length;
+                $('#sec_tor').text(sect_name);
+                $('#n_o_f').text(no_of_stock);
+              
+
+
+                $('#no_o_s_m1').text(mnth_1_total);
+                $('#no_o_s_m2').text(mnth_2_total);
+                $('#no_o_s_m3').text(mnth_3_total);
+                $('#no_o_s_m4').text(mnth_4_total);
+
+            }
+            else
+            {
+             $("#msg").show();
+
+             $('#main_content_div').attr("style","display:none;");
+            }
+
+
+
+             // Click on Change in column for StockHeldMF 1st table      
+
+            var table1mon_1 = $("#mon_1_head").html();
+            var table1mon_2 = $("#mon_2_head").html();
+            var table1mon_3 = $("#mon_3_head").html();
+            var table1mon_4 = $("#mon_4_head").html();
+            // console.log(table1mon_1);
+            // console.log(table1mon_2);
+            // console.log(table1mon_3);
+            // console.log(table1mon_4);
+
+            $( "#rv_stock #stock_summary" ).on( "click", ".StockChngMonth", function() {
+          
+              if($('#rv_stock #stock_summary .StockChngMonth').html()=== table1mon_1 ){                
+                
+                $('#rv_stock #stock_summary .StockChngMonth').html(table1mon_2);
+                $("#rv_stock #stock_summary tbody tr td:nth-child(3)").hide();            
+                $("#rv_stock #stock_summary tbody tr td:nth-child(5)").hide();
+                $("#rv_stock #stock_summary tbody tr td:nth-child(6)").hide();            
+                $("#rv_stock #stock_summary tbody tr td:nth-child(4)").show();
+              }
+              else if($('#rv_stock #stock_summary .StockChngMonth').html()=== table1mon_2 ){                
+                
+                $('#rv_stock #stock_summary .StockChngMonth').html(table1mon_3);
+                $("#rv_stock #stock_summary tbody tr td:nth-child(3)").hide();            
+                $("#rv_stock #stock_summary tbody tr td:nth-child(4)").hide();
+                $("#rv_stock #stock_summary tbody tr td:nth-child(6)").hide();            
+                $("#rv_stock #stock_summary tbody tr td:nth-child(5)").show();
+              }
+              else if($('#rv_stock #stock_summary .StockChngMonth').html()=== table1mon_3 ){                
+                
+                $('#rv_stock #stock_summary .StockChngMonth').html(table1mon_4);
+                $("#rv_stock #stock_summary tbody tr td:nth-child(3)").hide();            
+                $("#rv_stock #stock_summary tbody tr td:nth-child(4)").hide();
+                $("#rv_stock #stock_summary tbody tr td:nth-child(5)").hide();            
+                $("#rv_stock #stock_summary tbody tr td:nth-child(6)").show();
+              }
+              else if($('#rv_stock #stock_summary .StockChngMonth').html()=== table1mon_4 ){                
+                
+                $('#rv_stock #stock_summary .StockChngMonth').html(table1mon_1);
+                $("#rv_stock #stock_summary tbody tr td:nth-child(4)").hide();            
+                $("#rv_stock #stock_summary tbody tr td:nth-child(5)").hide();
+                $("#rv_stock #stock_summary tbody tr td:nth-child(6)").hide();            
+                $("#rv_stock #stock_summary tbody tr td:nth-child(3)").show();
+              }            
+
+            });
+
+            // Click on Change in column for StockHeldMF 2nd table  (AUM change)
+          
+            $( "#rv_stock #stock_ret_data" ).on( "click", ".perc_aum", function() {
+          
+              if($('#rv_stock #stock_ret_data .perc_aum').html()==="AUM (in ₹ cr)<h6><em>As on "+table2mon_1+"</em></h6>"){
+                
+                $('#rv_stock #stock_ret_data .perc_aum').html("% of AUM<h6><em>As on "+table2mon_1+"</em></h6>");
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(3)").hide();            
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(4)").show();
+              }
+              else if($('#rv_stock #stock_ret_data .perc_aum').html()==="% of AUM<h6><em>As on "+table2mon_1+"</em></h6>"){
+                
+                $('#rv_stock #stock_ret_data .perc_aum').html("AUM (in ₹ cr)<h6><em>As on "+table2mon_1+"</em></h6>");
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(4)").hide();            
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(3)").show();
+              }              
+
+            });
+
+            // Click on Change in column for StockHeldMF 2nd table (Month change)  
+
+            
+            
+            $( "#rv_stock #stock_ret_data" ).on( "click", ".StockChngMonths", function() {
+          
+              if($('#rv_stock #stock_ret_data .StockChngMonths').html()=== table2mon_1 ){                
+                
+                $('#rv_stock #stock_ret_data .StockChngMonths').html(table2mon_2);
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(5)").hide();            
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(7)").hide();
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(8)").hide();            
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(6)").show();
+              }
+              else if($('#rv_stock #stock_ret_data .StockChngMonths').html()=== table2mon_2 ){                
+                
+                $('#rv_stock #stock_ret_data .StockChngMonths').html(table2mon_3);
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(5)").hide();            
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(6)").hide();
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(8)").hide();            
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(7)").show();
+              }
+              else if($('#rv_stock #stock_ret_data .StockChngMonths').html()=== table2mon_3 ){                
+                
+                $('#rv_stock #stock_ret_data .StockChngMonths').html(table2mon_4);
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(5)").hide();            
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(6)").hide();
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(7)").hide();            
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(8)").show();
+              }
+              else if($('#rv_stock #stock_ret_data .StockChngMonths').html()=== table2mon_4 ){                
+                
+                $('#rv_stock #stock_ret_data .StockChngMonths').html(table2mon_1);
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(6)").hide();            
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(7)").hide();
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(8)").hide();            
+                $("#rv_stock #stock_ret_data tbody tr td:nth-child(5)").show();
+              }            
+
+            });
+
+
+
+
+          });
+    }
+
+
+    function Load_stock_data_autocomplete_1()
+    { 
+      $$.get(curr_ip+'app_services/get_compare_data_stock',function (data)
+      {    
+        // data.month_name_4
+
+        var data = JSON.parse(data);        
+                 
+        // console.log(data)
+        //id = stock_price_compare
+        var th ="<thead><tr><th>Stock Name</th><th class='sec_classific'>Sector</th><th>Classification</th><th>Month</th><th class='qty_val_change'>Net Qty Bought</th><th>Approx. Buy Value (In ₹ cr)</th></tr></thead><tbody>";
                      
-                  console.log(data);
-
-
-                   for (var i=0; i< tot_count ; i++)
-                   {
-                          stock_name=" ";
-                          classification=" ";
-                          no_of_share_change=0;
-                          price_of_share_change=0;  
-                          rv_sector=" "; 
-                          fincode=0;
-                         
+        var stock_name="";
+        var classification="";
+        var no_of_share_change=0;
+        var price_of_share_change=0;     
+        var tb=" ";
+        var rv_sector=" ";
+        var fincode=0;
+        var day = new Date(data.stock_compare_data[0].day);
+        var mon_1 = moment(day).format('MMMM-YYYY');
                           
-                         
+        global_date_hldr = moment(day).format('MMM-YY');
+        $('#stock_att_month_yr').text(global_date_hldr); // set month in this tab
+        $('#stock_att_month_yr_1').text(global_date_hldr); // set month in this tab
 
-                          stock_name=data.stock_compare_data[i].compname;
-                          classification=data.stock_compare_data[i].classification;
-                          rv_sector = data.stock_compare_data[i].rv_sect_name;
-                          fincode = data.stock_compare_data[i].fincode;
+        // var year_1 = moment(day).format('YYYY');
+        // var date2 = new Date(); 
+        // date2 = date2.setMonth(day.getMonth()-1);
+        // var mon_2 = moment(date2).format('MMMM');
+                  
+        var tot_count=0;
+        var total_price=0; 
+      
+        tot_count = data.stock_compare_data.length;           
+        console.log(data);
 
-                            if(classification=="M")
-                            {
-                              classification="Mid-Cap";
-                            }
-                            else if(classification=="L")
-                            {
-                              classification="Large-Cap";
-                            }
-                            else if(classification=="S")
-                            {
-                              classification="Small-Cap";
-                            }
+        for (var i=0; i< tot_count ; i++)
+        {
+          stock_name=" ";
+          classification=" ";
+          no_of_share_change=0;
+          price_of_share_change=0;  
+          rv_sector=" "; 
+          fincode=0;
 
-                          no_of_share_change=data.stock_compare_data[i].no_of_share_change;
-                          price_of_share_change= (data.stock_compare_data[i].price_of_share_change/10000000).toFixed(2);
+          stock_name=data.stock_compare_data[i].compname;
+          classification=data.stock_compare_data[i].classification;
+          rv_sector = data.stock_compare_data[i].rv_sect_name;
+          fincode = data.stock_compare_data[i].fincode;
 
-                          // no_of_share_change=data.stock_compare_data[i].no_of_share_change; 
+          if(classification=="M")
+          {
+            classification="Mid-Cap";
+          }
+          else if(classification=="L")
+          {
+            classification="Large-Cap";
+          }
+          else if(classification=="S")
+          {
+            classification="Small-Cap";
+          }
 
-                          total_price = parseFloat(total_price) + parseFloat(price_of_share_change);
+          no_of_share_change=data.stock_compare_data[i].no_of_share_change;
+          price_of_share_change= (data.stock_compare_data[i].price_of_share_change/10000000).toFixed(2);
+
+          // no_of_share_change=data.stock_compare_data[i].no_of_share_change; 
+
+          total_price = parseFloat(total_price) + parseFloat(price_of_share_change);
 
                         
 
-                          // var day=data.stock_compare_data[i].day;
-                           // "<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"
-                           // "<a href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"
+          // var day=data.stock_compare_data[i].day;
+          // "<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"
+          // "<a href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"
 
-                          if(i==0)
-                          {
-                 tb = th + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
-                          }
-                          else
-                          {
-                             tb = tb + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
-                          }
-
+          if(i==0)
+          {
+            tb = th + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
+          }
+          else
+          {
+            tb = tb + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
+          }
                        
-                   }
-                         tb=tb+"</tbody>"
+        }
+        tb=tb+"</tbody>"
 
-                   $('#stock_price_compare').html(tb);
+        $('#stock_price_compare').html(tb);
 
-                    $('#stock_price_compare').DataTable({
-                    "paging": false,
-                    "ordering": true,
-                    "info": true,
-                    "searching": true,"order": [[ 5, "desc" ]]
-                });
+        // $('#stock_price_compare').DataTable({
+        //     "paging": false,
+        //     "ordering": true,
+        //     "info": true,
+        //     "searching": true,"order": [[ 5, "desc" ]]
+        // });
 
 
-                    $('#tot_price_all').text(commaSeparateNumber(total_price.toFixed(2)));
-                    $('#tot_count_all').text(tot_count);
+        $('#tot_price_all').text(commaSeparateNumber(total_price.toFixed(2)));
+        $('#tot_count_all').text(tot_count);
                        
                     
-                      tot_count=0;
-                      total_price=0; 
-
-
+        tot_count=0;
+        total_price=0; 
                    
-                      var th_1 ="<thead><tr><th>Stock Name</th><th>Sector</th><th>Classification</th><th>Month</th><th>Net Qty Sold</th><th>Approx. Sell Value<br>(In ₹ cr)</th></tr></thead><tbody>";
-                    tot_count = data.stock_compare_data_1.length;
+        var th_1 ="<thead><tr><th>Stock Name</th><th class='sec_classific_1'>Sector</th><th>Classification</th><th>Month</th><th class='qty_val_change_1'>Net Qty Sold</th><th>Approx. Sell Value (In ₹ cr)</th></tr></thead><tbody>";
+        tot_count = data.stock_compare_data_1.length;
                      
-                  // console.log(data);
+        // console.log(data);
 
+        for (var i=0; i< tot_count ; i++)
+        {
+          stock_name=" ";
+          classification=" ";
+          no_of_share_change=0;
+          price_of_share_change=0;  
+          rv_sector=" "; 
+          fincode=0;
 
-                   for (var i=0; i< tot_count ; i++)
-                   {
-                          stock_name=" ";
-                          classification=" ";
-                          no_of_share_change=0;
-                          price_of_share_change=0;  
-                          rv_sector=" "; 
-                          fincode=0;
-                         
-                          
-                         
+          stock_name=data.stock_compare_data_1[i].compname;
+          classification=data.stock_compare_data_1[i].classification;
+          rv_sector = data.stock_compare_data_1[i].rv_sect_name;
+          fincode = data.stock_compare_data_1[i].fincode;
 
-                          stock_name=data.stock_compare_data_1[i].compname;
-                          classification=data.stock_compare_data_1[i].classification;
-                          rv_sector = data.stock_compare_data_1[i].rv_sect_name;
-                          fincode = data.stock_compare_data_1[i].fincode;
+          if(classification=="M")
+          {
+            classification="Mid-Cap";
+          }
+          else if(classification=="L")
+          {
+            classification="Large-Cap";
+          }
+          else if(classification=="S")
+          {
+            classification="Small-Cap";
+          }
 
-                            if(classification=="M")
-                            {
-                              classification="Mid-Cap";
-                            }
-                            else if(classification=="L")
-                            {
-                              classification="Large-Cap";
-                            }
-                            else if(classification=="S")
-                            {
-                              classification="Small-Cap";
-                            }
+          no_of_share_change=Math.abs(data.stock_compare_data_1[i].no_of_share_change);
+          price_of_share_change= Math.abs((data.stock_compare_data_1[i].price_of_share_change/10000000).toFixed(2));
 
-                          no_of_share_change=Math.abs(data.stock_compare_data_1[i].no_of_share_change);
-                          price_of_share_change= Math.abs((data.stock_compare_data_1[i].price_of_share_change/10000000).toFixed(2));
+          // no_of_share_change=data.stock_compare_data[i].no_of_share_change; 
 
-                          // no_of_share_change=data.stock_compare_data[i].no_of_share_change; 
+          total_price = parseFloat(total_price) + parseFloat(price_of_share_change);
 
-                          total_price = parseFloat(total_price) + parseFloat(price_of_share_change);
+          if(price_of_share_change==0)
+          {
+            continue;
+          }
 
-                           if(price_of_share_change==0)
-                           {
-                              continue;
-                           }
+          // var day=data.stock_compare_data[i].day;
+          // "<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"
+          // "<a href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"
 
-
-
-
-                          // var day=data.stock_compare_data[i].day;
-                           // "<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"
-                           // "<a href='/Mutual-Funds-India/"+schemecode+"'>"+s_name+"</a>"
-
-                          if(i==0)
-                          {
-                 tb = th_1 + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
-                          }
-                          else
-                          {
-                             tb = tb + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
-                          }
-
+          if(i==0)
+          {
+            tb = th_1 + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
+          }
+          else
+          {
+            tb = tb + "<tr><td>"+"<a href='/Mutual-Fund-Holdings/"+fincode+"'>"+stock_name+"</a>"+"</td><td>"+rv_sector+"</td><td>"+classification+"</td><td>"+ mon_1+"</td><td>"+commaSeparateNumber(no_of_share_change)+"</td><td>"+commaSeparateNumber(price_of_share_change)+"</td></tr>";
+          }
                        
-                   }
-                         tb=tb+"</tbody>"
+        }
 
-                   $('#stock_price_compare_1').html(tb);
+        tb=tb+"</tbody>"
 
-                    $('#stock_price_compare_1').DataTable({
-                    "paging": false,
-                    "ordering": true,
-                    "info": true,
-                    "searching": true,"order": [[ 5, "desc" ]]
-                });
+        $('#stock_price_compare_1').html(tb);
+
+        // $('#stock_price_compare_1').DataTable({
+        //     "paging": false,
+        //     "ordering": true,
+        //     "info": true,
+        //     "searching": true,"order": [[ 5, "desc" ]]
+        // });
+
+        $('#tot_price_all_1').text(commaSeparateNumber(total_price.toFixed(2)));
+        $('#tot_count_all_1').text(tot_count);
 
 
-                    $('#tot_price_all_1').text(commaSeparateNumber(total_price.toFixed(2)));
-                    $('#tot_count_all_1').text(tot_count);
+      
+
+        // Click on Change in table column for StocksAttractingFundManagers  
+      
+        $( "#rv_stock #stock_price_compare" ).on( "click", ".sec_classific", function() {
+      
+          if($('#rv_stock #stock_price_compare .sec_classific').html()==="Classification"){
+            
+            $('#rv_stock #stock_price_compare .sec_classific').html("Sector");
+            $("#rv_stock #stock_price_compare tbody tr td:nth-child(3)").hide();            
+            $("#rv_stock #stock_price_compare tbody tr td:nth-child(2)").show();
+          }
+          else if($('#rv_stock #stock_price_compare .sec_classific').html()==="Sector"){
+            
+            $('#rv_stock #stock_price_compare .sec_classific').html("Classification");
+            $("#rv_stock #stock_price_compare tbody tr td:nth-child(2)").hide();            
+            $("#rv_stock #stock_price_compare tbody tr td:nth-child(3)").show();
+          }              
+
+        });
+
+        $( "#rv_stock #stock_price_compare" ).on( "click", ".qty_val_change", function() {
+      
+          if($('#rv_stock #stock_price_compare .qty_val_change').html()==="Net Qty Bought"){
+
+            $('#rv_stock #stock_price_compare .qty_val_change').html("Approx. Buy Value (In ₹ cr)");            
+            $("#rv_stock #stock_price_compare tbody tr td:nth-child(5)").hide();            
+            $("#rv_stock #stock_price_compare tbody tr td:nth-child(6)").show();
+          }
+          else if($('#rv_stock #stock_price_compare .qty_val_change').html()==="Approx. Buy Value (In ₹ cr)"){
+           
+            $('#rv_stock #stock_price_compare .qty_val_change').html("Net Qty Bought");            
+            $("#rv_stock #stock_price_compare tbody tr td:nth-child(6)").hide();            
+            $("#rv_stock #stock_price_compare tbody tr td:nth-child(5)").show();
+          }                       
+
+        });
+
+         // Click on Change in table column for StocksSeeingSellingPressure  
+      
+        $( "#rv_stock #stock_price_compare_1" ).on( "click", ".sec_classific_1", function() {
+      
+          if($('#rv_stock #stock_price_compare_1 .sec_classific_1').html()==="Classification"){
+            
+            $('#rv_stock #stock_price_compare_1 .sec_classific_1').html("Sector");
+            $("#rv_stock #stock_price_compare_1 tbody tr td:nth-child(3)").hide();            
+            $("#rv_stock #stock_price_compare_1 tbody tr td:nth-child(2)").show();
+          }
+          else if($('#rv_stock #stock_price_compare_1 .sec_classific_1').html()==="Sector"){
+            
+            $('#rv_stock #stock_price_compare_1 .sec_classific_1').html("Classification");
+            $("#rv_stock #stock_price_compare_1 tbody tr td:nth-child(2)").hide();            
+            $("#rv_stock #stock_price_compare_1 tbody tr td:nth-child(3)").show();
+          }              
+
+        });
+
+        $( "#rv_stock #stock_price_compare_1" ).on( "click", ".qty_val_change_1", function() {
+      
+          if($('#rv_stock #stock_price_compare_1 .qty_val_change_1').html()==="Net Qty Sold"){
+
+            $('#rv_stock #stock_price_compare_1 .qty_val_change_1').html("Approx. Sell Value (In ₹ cr)");            
+            $("#rv_stock #stock_price_compare_1 tbody tr td:nth-child(5)").hide();            
+            $("#rv_stock #stock_price_compare_1 tbody tr td:nth-child(6)").show();
+          }
+          else if($('#rv_stock #stock_price_compare_1 .qty_val_change_1').html()==="Approx. Sell Value (In ₹ cr)"){
+           
+            $('#rv_stock #stock_price_compare_1 .qty_val_change_1').html("Net Qty Sold");            
+            $("#rv_stock #stock_price_compare_1 tbody tr td:nth-child(6)").hide();            
+            $("#rv_stock #stock_price_compare_1 tbody tr td:nth-child(5)").show();
+          }                       
+
+        });
+
 
 
               
-              });
+    });
 
-
-
-
-   }
+  }
 
 
 
@@ -2814,7 +2861,7 @@ function Load_stock_data_autocomplete_1()
 
 
 
-    
+/*********************** Stocks Held END *********************************/   
 
 /*********************** Fixed Deposit START *********************************/
 
@@ -3302,7 +3349,7 @@ $$("#fdIndi").click(function indi() {
     $('#tab_indi_joint').attr("style", "display : inline");
     $('#indi_sing_joint_single').prop('checked', true);
     name=$("#name").val();
-    // swal(name);
+    // alert(name);
     dob=$("#dob").val();
     pan_no=$("#pan_no").val();
     mobile=$("#mobile").val();
@@ -3455,7 +3502,7 @@ $("#address_proof_div input[name='address_proof']").change(function()
 // $("#tds_content input[name='address_proof']").change(function()
 
 
-//     swal($('input:radio[name=address_proof]:checked').val());
+//     alert($('input:radio[name=address_proof]:checked').val());
 //    //tmp = $('input:radio[name=address_proof]:checked').val();
 //   //$('#other_addr_1').val(vl);
 
@@ -3482,7 +3529,7 @@ $("#tds_content input[name='tds_type']").change(function()
           
 
 
-          //swal("running--");
+          //alert("running--");
         //  $('#div_tds .help-block').attr("style", "display : none");
 
     }
@@ -3525,7 +3572,7 @@ $("#bank_details_content input[name='mat_acc_type']").change(function()
 
 
 // debugger;
-          //swal($('#account_no').val());
+          //alert($('#account_no').val());
 
           $('#bnk_ac_no_1').attr('value','');
           $('#bnk_nm_1').attr('value','');
@@ -3541,7 +3588,7 @@ $("#bank_details_content input[name='mat_acc_type']").change(function()
            //     .formValidation('resetField','ifsc')
            //     .formValidation('resetField','micr_1');
           
-            //swal($('#account_no').val());
+            //alert($('#account_no').val());
 
           // $('#bank_name').attr("value","");
           // $('#bank_branch').attr("value","");
@@ -3593,20 +3640,20 @@ $("#nom_yes_no_content input[name='nom_yes_no']").change(function()
 $('input:radio[name=ac_type_1]').click(function() { 
     
     var accnt_type = $('input:radio[name=ac_type_1]:checked').val()
-    //swal(accnt_type);      
+    //alert(accnt_type);      
 
    if (accnt_type=="Current")
    {
        $("#ac_type_Savings").prop("checked", false);  
        $("#ac_type_Current").prop("checked", true);
-       //swal("Current checked");
+       //alert("Current checked");
    }
    if(accnt_type=="Savings")
    {
        $("#ac_type_Current").prop("checked", false); 
        $("#ac_type_Savings").prop("checked", true);   
 
-       //swal("Savings checked");
+       //alert("Savings checked");
    }
 
 
@@ -3620,18 +3667,18 @@ $('#bank_name').change(function() {
   var bnm_tmp = $('#bank_name').val();
   $('#bnk_nm_1').val(bnm_tmp);
 
-   //swal("Bank Name Running...");
+   //alert("Bank Name Running...");
 });
 
 $('#account_no').change(function() { 
 
   var bnm_tmp = $('#account_no').val();
   $('#bnk_ac_no_1').val(bnm_tmp);
-   //swal("Account no Running...");
+   //alert("Account no Running...");
 });
 
 $('#bank_branch').change(function() { 
-   //swal("bank_branch Running...");
+   //alert("bank_branch Running...");
   var bnm_tmp = $('#bank_branch').val();
   $('#bnk_brnch_1').val(bnm_tmp);
 
@@ -3642,14 +3689,14 @@ $('#bnk_ifsc_code').change(function() {
 
   var bnm_tmp = $('#bnk_ifsc_code').val();
   $('#bnk_ifsc').val(bnm_tmp);
-   //swal("bank_IFSC CODE Running...");
+   //alert("bank_IFSC CODE Running...");
 });   
 
 $('#micr').change(function() { 
    
    var bnm_tmp = $('#micr').val();
    $('#micr_1').val(bnm_tmp);
-   //swal("micr Running...");
+   //alert("micr Running...");
 }); 
 
 
@@ -4210,11 +4257,11 @@ $('#micr').change(function() {
 
 $('#datePicker_nd').change(function()
 {
-   // swal("rororooro");
+   // alert("rororooro");
    var start = $('#datePicker_nd').datepicker('getDate');
     var end   = new Date();
     var days   = new Date(end - start)/1000/60/60/24/365;
-    //swal(days);
+    //alert(days);
    if (((Math.trunc(days)) < 18) && ((days) >= 0)) {
     $('#nominee_minor').show();
    }
@@ -4338,14 +4385,14 @@ function minimum_investment()
           // {
           //   if(amount<data.minimum_invest)
           //   {
-          //     swal("Amount should be greater than"+data.minimum_invest);
+          //     alert("Amount should be greater than"+data.minimum_invest);
           //   }
           // }
           // else
           // {
           //   if(amount<5000000)
           //   {
-          //     swal("Amount should be greater than 50 lakh");
+          //     alert("Amount should be greater than 50 lakh");
           //   }
           // }
         }
@@ -8110,7 +8157,7 @@ function calculate_min_invest_sip()
             $("#container").empty();
             $("#imdone").prop('disabled', true);
            
-              // swal("coming here---");
+              // alert("coming here---");
               $("#min_invest").text("-");
               $("#min_invest_sip").text("-");
 
@@ -8153,8 +8200,8 @@ function calculate_min_invest_sip()
             {            
               if(parseInt($('#weightage'+s_code[i]).html())!=0)      
             {
-              // swal($('#weightage'+s_code[i]).val());
-              // swal(min_investment[i])
+              // alert($('#weightage'+s_code[i]).val());
+              // alert(min_investment[i])
                 res[i]=parseInt(parseInt((min_investment_sip[i])*100)/parseInt($('#weightage'+s_code[i]).html()));
 
             }
@@ -8163,9 +8210,9 @@ function calculate_min_invest_sip()
               res[i]=0;
             }
           }
-            // swal(Math.max.apply(null, res));
+            // alert(Math.max.apply(null, res));
             var quo=parseInt(Math.max.apply(null, res)/500);
-            // swal(quo);
+            // alert(quo);
             // var rem=Math.max.apply(null, res) % 500;
             var rem=Math.max.apply(null, res) % 1000;
             // alert(rem);
@@ -8522,7 +8569,7 @@ if(s_code.length!=0)
          // success: function(data)
          // {
              
-             // swal(scheme_classification);
+             // alert(scheme_classification);
              var classification=[],color=[],seriesdate=[];
              var eq=0,db=0,gold=0,other=0;
              console.log(data);
@@ -8695,8 +8742,8 @@ if(s_code.length!=0)
 function nav_movement(scheme_code,weightage)
    {
     // for(var i=0;i<weightage.length;i++)
-       // swal(weightage[i]);
-      // swal(schemecode);
+       // alert(weightage[i]);
+      // alert(schemecode);
       if(s_code.length!=0)
       {
       $("#container").empty();
@@ -8727,7 +8774,7 @@ $$.get(curr_ip+'home/navgraph_combine', {schemecode:scheme_code,weightage:weight
          var navrs1=[];
             
           // var scheme_classification=data.classification[0].classification;
-         // swal(scheme_classification);
+         // alert(scheme_classification);
       // for(i=data.navdate.length-1;i>0;i--)
       // {
       //   for(j=1;j<=s_code.length;j++)
@@ -9147,7 +9194,7 @@ function get_portfolio(schemecode , weightage)
 
             var fin_code = item1.fincode;
                         var new_comp_link;
-                     // swal(fin_code);
+                     // alert(fin_code);
 
           // if(fincode_array.indexOf(fin_code)!= -1)
           // {
@@ -9361,7 +9408,7 @@ function portfolio_pagination()
   pageSize =10;
 console.log("kkkNo. of Pages -- "+$('.pagination .post').length/pageSize);
 var totalPages = $('.pagination .post').length/pageSize
-// swal(totalPages);
+// alert(totalPages);
 showPage = function(page) {
     $(".post").hide();
 
@@ -9394,7 +9441,7 @@ var page = 1;
 function prevPage() {
     //debugger;
     if (page === 1) {
-    //swal("prev");
+    //alert("prev");
         //page = Math.floor($('.pagination .post').length/pageSize);
     } else {
         page--;
@@ -9405,7 +9452,7 @@ function prevPage() {
 
 function nextPage() {
     if (page == Math.floor($('.post').length/pageSize)) {
-    //swal("last");
+    //alert("last");
         //page = 1;
     } else {
         page++;
@@ -9455,7 +9502,7 @@ var page = 1;
 function prevPaged() {
     //debugger;
     if (page === 1) {
-    //swal("prev");
+    //alert("prev");
         //page = Math.floor($('.pagination .post').length/pageSize);
     } else {
         page--;
@@ -9465,10 +9512,10 @@ function prevPaged() {
 }
 
 function nextPaged() {
-  // swal("kjkj");
+  // alert("kjkj");
   console.log(Math.floor($('.postd').length/pageSized))
     if (page == Math.floor($('.postd').length/pageSized)) {
-    //swal("last");
+    //alert("last");
         //page = 1;
     } else {
         page++;
@@ -9486,7 +9533,7 @@ function nextPaged() {
      $("#debt_port").html("");
      $("#pre_nex_eq").html("");
      $("#pre_nex_de").html("");
-  // swal(total_eq);
+  // alert(total_eq);
     if(total_eq>total_db)
     {
       
@@ -9575,7 +9622,7 @@ function nextPaged() {
       }
       if(total_db>0)
       {
-        // swal("debt");
+        // alert("debt");
         // port_characteristics(schemecode,"portfolio_table");
       }
       
@@ -9648,7 +9695,7 @@ function nextPaged() {
             $("#container").empty();
             $("#imdone").prop('disabled', true);
             console.log("kkkk");
-              // swal("coming here---");
+              // alert("coming here---");
               $("#min_invest").text("-");
               $("#min_invest_sip").text("-");
 
@@ -9728,7 +9775,7 @@ function nextPaged() {
             $("#container").empty();
             $("#imdone").prop('disabled', true);
             console.log("kkkk");
-              // swal("coming here---");
+              // alert("coming here---");
               $("#min_invest").text("-");
               $("#min_invest_sip").text("-");
 
@@ -9765,7 +9812,7 @@ function nextPaged() {
 
   function plot_equity_graph(id,sector_name,series1)
   {
-  // swal(id);
+  // alert(id);
     Highcharts.chart(id, {
       chart: {
         type: 'column'
@@ -9942,7 +9989,7 @@ $("#Lumpsum").click(function()
        var index = min_investment.indexOf("0")
         if(index>-1)
         {
-          swal("Lump Sum is not allowed in " +  map[s_code[index]]);
+          alert("Lump Sum is not allowed in " +  map[s_code[index]]);
             $("#invest").val("Invest Now");
         }
         else
@@ -9952,7 +9999,7 @@ $("#Lumpsum").click(function()
       }
       else
       {
-        swal("Please add atleast 1 fund");
+        alert("Please add atleast 1 fund");
       }
 
       
@@ -9964,7 +10011,7 @@ function invest_normal()
   {
     var weight=[];
     var url="";
-    // swal(s_code.length);
+    // alert(s_code.length);
     for(var i=0;i<s_code.length;i++)
     {
       if($('#weightage'+s_code[i]).html()!="0")
@@ -10044,7 +10091,7 @@ function invest_normal()
                   else
                     name=name+map[s_code[index1[i]]];
               }
-              swal("SIP is not allowed in " + name);
+              alert("SIP is not allowed in " + name);
               $("#invest").val("Invest Now");
 
             }
@@ -10055,7 +10102,7 @@ function invest_normal()
             }
           else
           {
-            swal("Please add atleast 1 fund");
+            alert("Please add atleast 1 fund");
           }
           
         });
@@ -10094,7 +10141,7 @@ $("#loading").show();
             $("#loading").hide();
             $("#combined_mf_check *").css('pointer-events','block');
             $('#combined_mf_check').css("opacity", "1");
-            swal("Server is under maintainence.Please try after sometime.");
+            alert("Server is under maintainence.Please try after sometime.");
           }
           else
           {

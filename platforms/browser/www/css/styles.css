@@ -128,7 +128,73 @@ hr {
   text-align: left;   
   border-radius: 0;
 }
-
+.card {
+  box-shadow: 1px 1px 15px rgba(0,0,0,.3);
+}
+.input-group-btn .btn {
+  padding: 5px 12px;
+}
+.list-block .item-content {
+  padding-left: 0;
+}
+.chip {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(0,0,0,.87);
+    background: rgba(0,0,0,.12);
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 16px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    margin: 2px 0;
+}
+.chip .chip-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex-shrink: 1;
+    -ms-flex: 0 1 auto;
+    flex-shrink: 1;
+    min-width: 0;
+}
+.chip .chip-media {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    margin-left: -12px;
+    margin-right: 5px;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
 /**************************************** 
                 Navbar
 **************************************** */
@@ -250,7 +316,9 @@ hr {
 /* *************************************** 
                    My CSS 
   **************************************** */
-
+.bg-RV {
+  background-color: #17406B
+}
 .btn:focus, .btn:active:focus, .btn.active:focus {
   outline: 0;
 }
@@ -262,24 +330,12 @@ hr {
   padding: 6px 6px;
   font-size: 12px;
   font-weight: 300;
-  border-radius: 6px;
-  
-
-/* #6d9f00    #7fb800*/
-
-    /*color: #fff;
-    margin-bottom: 15px;
-    border: 0;
-    border-bottom: 1px solid #17396B;
-    background: linear-gradient(to bottom, rgba(18,51,86,1), rgba(38,89,149,1));*/
-     /*background: linear-gradient(to bottom, #6d9f00, #7fb800);*/
-    background: linear-gradient(to bottom, rgb(109, 159, 0,1) , rgb(127, 184, 0,1));
-    -webkit-box-shadow: 0px 6px 0px #6d9f00, 0px 3px 15px rgba(0,0,0,.4);
-    -moz-box-shadow: 0px 6px 0px #6d9f00, 0px 3px 15px rgba(0,0,0,.4);
-    box-shadow: 0px 6px 0px #6d9f00, 0px 3px 15px rgba(0,0,0,.4);
-
-
-
+  /*border-radius: 6px;*/
+  min-width: 9em;
+  background: linear-gradient(to bottom, rgb(109, 159, 0,1) , rgb(127, 184, 0,1));
+  /*-webkit-box-shadow: 0px 6px 0px #6d9f00, 0px 3px 15px rgba(0,0,0,.4);
+  -moz-box-shadow: 0px 6px 0px #6d9f00, 0px 3px 15px rgba(0,0,0,.4);
+  box-shadow: 0px 6px 0px #6d9f00, 0px 3px 15px rgba(0,0,0,.4);*/
 }
 .btn-RV:focus, .btn-RV:active, .btn-RV:hover, .btn-RV:active:focus, .btn-RV.active:focus {
   color: #fff;
@@ -442,9 +498,9 @@ hr {
 
 
 
-/****************
-    About page 
-*****************/
+/***********************************************************
+                      About page 
+************************************************************/
 #why_RV h2 {
   border-bottom: 1px solid #17406B;
 }
@@ -494,9 +550,9 @@ hr {
   margin: 0;
 }
 
-/*************************
-    Dashboard Common
-**************************/
+/*******************************************************************
+                        Dashboard Common
+*******************************************************************/
 
 .DashCommon .DashTop .swiper-slide span {
   text-align:center;
@@ -519,7 +575,19 @@ hr {
   text-align: center;
   font-size: 18px;
 }
-
+.DashCommon .list-block {
+  margin: 0 0 15px;
+}
+.DashCommon .list-block {
+  margin: 0 0 15px;
+}
+.DashCommon .list-block .item-inner {
+  display: block;
+}
+.DashCommon .list-block .item-inner .item-title {
+  font-size: 12px;
+  white-space: normal;
+}
 /*---------------- Dash Index ---------------------*/
 
 #DashIndex #mf_fund_table thead tr th:nth-child(2){
@@ -550,17 +618,83 @@ hr {
 }
 #DashTrans .alert_footer{
   border-top: 1px solid #fff;
-      text-align: center;
+  text-align: center;
 }
 
+
+/*----------------- Dash Schedule ------------------*/
+
+#DashSchedule .list-block {
+  margin: 0;
+}
+#DashSchedule .btn {
+  margin-top: 10px;
+}
+#DashSchedule #q_info input {
+  border: 0;
+  background: transparent;
+  max-width: 80px;
+  text-align: center;
+}
+#DashSchedule #no_of_pieces input {
+  border: 0;
+  background: transparent;
+  max-width: 100px;
+  text-align: center;
+}
+
+/******************************************************************
+                      Investor Details - Purchase
+*******************************************************************/
+
+
+/******************************************************************
+                      Transaction - Purchase
+*******************************************************************/
+
+#InvLumpSip .LumSipTabs .button {
+  font-size: 12px;
+  padding: 0 6px;
+  color: #333;
+  border-color: #7fb800;
+}
+#InvLumpSip .LumSipTabs .button.active {
+  color: #FFF;
+  background: #7fb800;
+  border-color: #7fb800;
+}
+#InvLumpSip .list-block {
+  margin: 0 0 15px;
+}
+#InvLumpSip .list-block .item-inner {
+  display: block;
+}
+#InvLumpSip .list-block .item-inner .item-title {
+  font-size: 12px;
+  white-space: normal;
+}
+
+/******************************************************************
+                              Payment
+*******************************************************************/
+#InvPayment .list-block {
+  margin: 0 0 15px;
+}
+#InvPayment .list-block .item-inner {
+  display: block;
+}
+#InvPayment .list-block .item-inner .item-title {
+  font-size: 12px;
+  white-space: normal;
+}
 
 /******************************************************************
                             Mutual Fund Home
 *******************************************************************/
 #mfund_home .well {
-      padding: 4px;
-    border-radius: 0px;
-        margin-bottom: 5px;
+  padding: 4px;
+  border-radius: 0px;
+  margin-bottom: 5px;
 }
 #mfund_home .MFHeadTop{
   background: #eee;
@@ -889,9 +1023,6 @@ hr {
 #sip_return .list-block {
   margin: 10px 0;
 }
-#sip_return .input-group-btn .btn {
-  padding: 5px 12px;
-}
 
 /*************************************************************
                  Stocks Held By Mutual Funds 
@@ -916,10 +1047,108 @@ hr {
 #stock_price_compare_wrapper {
   overflow-x : auto;
 }
+#rv_stock .incr {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  color: green;
+  vertical-align: middle;
+  border-bottom: 7px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+#rv_stock .decr {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  color: red;
+  vertical-align: middle;
+  border-top: 7px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+#rv_stock #stock_price_compare .sec_classific, #rv_stock #stock_price_compare .qty_val_change,
+#rv_stock #stock_price_compare_1 .sec_classific_1, #rv_stock #stock_price_compare_1 .qty_val_change_1,
+#rv_stock #stock_summary thead tr:nth-child(1) th:nth-child(3),
+#rv_stock #stock_ret_data thead tr:nth-child(1) th:nth-child(3),
+#rv_stock #stock_ret_data thead tr:nth-child(1) th:nth-child(5) {
+  position: relative;
+}
+#rv_stock #stock_price_compare .sec_classific:after, #rv_stock #stock_price_compare .qty_val_change:after,
+#rv_stock #stock_price_compare_1 .sec_classific_1:after, #rv_stock #stock_price_compare_1 .qty_val_change_1:after,
+#rv_stock #stock_summary thead tr:nth-child(1) th:nth-child(3):after,
+#rv_stock #stock_ret_data thead tr:nth-child(1) th:nth-child(3):after,
+#rv_stock #stock_ret_data thead tr:nth-child(1) th:nth-child(5):after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0; 
+  height: 0; 
+  display: block;
+  border-left: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-top: 15px solid #17406B;
+}
+#rv_stock #stock_summary thead tr th {
+  text-align: center;
+}
+#rv_stock #stock_summary thead tr:nth-child(1) th:nth-child(1) {
+  text-align: left;
+}
+#rv_stock #stock_summary thead tr th span {
+  font-weight: bold;
+}
+#rv_stock #stock_summary tbody tr td:nth-child(n+2) {
+  text-align: center;
+}
+#rv_stock #stock_summary thead tr:nth-child(1) th:nth-child(n+4),
+#rv_stock #stock_summary thead tr:nth-child(2) th:nth-child(n+2),
+#rv_stock #stock_summary tbody tr td:nth-child(n+4) {
+  display: none;
+}
+#rv_stock #stock_ret_data thead tr:nth-child(1) th:nth-child(n+2),
+#rv_stock #stock_ret_data thead tr:nth-child(2) th {
+  text-align: center;
+}
+#rv_stock #stock_ret_data tbody tr td:nth-child(3),
+#rv_stock #stock_ret_data tbody tr td:nth-child(4) {
+  text-align: right;
+  padding-right: 1em;
+}
+#rv_stock #stock_ret_data thead tr:nth-child(1) th:nth-child(2),
+#rv_stock #stock_ret_data tbody tr td:nth-child(2),
+#rv_stock #stock_ret_data thead tr:nth-child(1) th:nth-child(4),
+#rv_stock #stock_ret_data tbody tr td:nth-child(4),
+#rv_stock #stock_ret_data thead tr:nth-child(1) th:nth-child(n+6),
+#rv_stock #stock_ret_data thead tr:nth-child(2) th:nth-child(n+2),
+#rv_stock #stock_ret_data tbody tr td:nth-child(n+6) {
+  display: none;
+}
+#rv_stock #stock_ret_data thead tr th h6 {
+  margin: 0;
+}
+#rv_stock #stock_price_compare thead tr th:nth-child(3),#rv_stock #stock_price_compare tbody tr td:nth-child(3),
+#rv_stock #stock_price_compare thead tr th:nth-child(4),#rv_stock #stock_price_compare tbody tr td:nth-child(4),
+#rv_stock #stock_price_compare thead tr th:nth-child(6),#rv_stock #stock_price_compare tbody tr td:nth-child(6),
+#rv_stock #stock_price_compare_1 thead tr th:nth-child(3),#rv_stock #stock_price_compare_1 tbody tr td:nth-child(3),
+#rv_stock #stock_price_compare_1 thead tr th:nth-child(4),#rv_stock #stock_price_compare_1 tbody tr td:nth-child(4),
+#rv_stock #stock_price_compare_1 thead tr th:nth-child(6),#rv_stock #stock_price_compare_1 tbody tr td:nth-child(6) {
+  display: none;
+}
+#rv_stock #stock_price_compare thead tr th:nth-child(5),#rv_stock #stock_price_compare tbody tr td:nth-child(5),
+#rv_stock #stock_price_compare tbody tr td:nth-child(6),
+#rv_stock #stock_price_compare_1 thead tr th:nth-child(5),#rv_stock #stock_price_compare_1 tbody tr td:nth-child(5),
+#rv_stock #stock_price_compare_1 tbody tr td:nth-child(6) {
+  text-align: right;
+  padding-right: 1em;
+}
 
-/******************** 
-    Fixed Deposit 
-*********************/
+/************************************************************* 
+                        Fixed Deposit 
+**************************************************************/
 
 #FixedDeposit #fd_all_list_head .breadcrumb {
   background: transparent;
@@ -947,9 +1176,9 @@ hr {
   padding-right: 0.5em;
 }
 
-/********************************* 
-    Fixed Deposit Individual
-**********************************/
+/************************************************************************ 
+                       Fixed Deposit Individual
+*************************************************************************/
 .FDCommonInd .table tr th {
   font-weight: 500;
 }   
@@ -987,7 +1216,6 @@ hr {
   font-size: 12px;
 }
 .FDCommonInd .CommFdOption .list-block .item-content {
-  padding-left: 0;
   margin: 0;
 }
 .FDCommonInd .CommFdOption .list-block .item-inner {
@@ -1010,26 +1238,20 @@ hr {
   font-size: 14px;
   white-space: normal;
 }
-.FDCommonInd .CommFdFaq .list-block .item-content {
-  padding-left: 0;
-}
 .FDCommonInd .CommFdFaq .accordion-item-content {
   font-size: 12px;
 }
 
 
-/********************************* 
-    Fixed Deposit Create Form
-**********************************/
+/************************************************************************ 
+                        Fixed Deposit Create Form
+*************************************************************************/
 #FDCreateForm .nav-tabs>li {
   text-align: center;
   width: 50%;
 }
 #FDCreateForm .list-block {
   margin: 10px 0;
-}
-#FDCreateForm .list-block .item-content {
-  padding-left: 0;
 }
 #FDCreateForm .list-block .item-inner {
   display: block;
@@ -1053,9 +1275,9 @@ hr {
   }
           
 
-/**********************************
-    Investment Solution
-***********************************/
+/***********************************************************************
+                          Investment Solution
+***********************************************************************/
 #investment_solution img {
   width: 80px;
 }
@@ -1083,9 +1305,9 @@ hr {
   margin-top: 10px;
 }
 
-/*************************************************************
-    Investment Solution - Asset Allocation based Portfolios
-**************************************************************/
+/*************************************************************************
+        Investment Solution - Asset Allocation based Portfolios
+*************************************************************************/
 #ISAssetAllocationBased img {
   width: 44px;
   margin: 3px 0;
@@ -1442,9 +1664,9 @@ hr {
   font-size: 18px;
 }
 
-/************************
-      Contact
-*************************/
+/***********************************************************************
+                                Contact
+************************************************************************/
 #Contact .HeadTop {
   margin-bottom: 0;
 }
@@ -1496,9 +1718,9 @@ hr {
   color: #dd4b39;
 }
 
-/************************
-        FAQs
-*************************/
+/******************************************************************
+                            FAQs
+*******************************************************************/
 #faq .MFHeadTop
 {
   background: #eee;
@@ -1545,9 +1767,9 @@ hr {
 }
 
 
-/************************
-        FD Calculator
-*************************/
+/****************************************************************
+                            FD Calculator
+*****************************************************************/
 
 #fd_calculator #calculate{
   margin: 0em 0;
@@ -1647,9 +1869,9 @@ hr {
 }
 
 
-/**************************
-        SIP Calculator
-***************************/
+/****************************************************************
+                            SIP Calculator
+*****************************************************************/
 
 #sip_calculator #calculate{
   margin: 0em 0;
